@@ -49,10 +49,9 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             mainImageView.thumbnailData = storyBlock?.image?.thumbnailData
             mainImageView.fadeInColor = UIColor.whiteColor()
             
-            if let image = storyBlock?.image {
-                if image.uploadProgress < 1.0 {
-                    updateProgressBar()
-                }
+            if let image = storyBlock?.image where image.uploadProgress < 1.0 {
+                uploadProgressView.progress = image.uploadProgress
+                updateProgressBar()
             }
         }
     }
@@ -60,16 +59,14 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     // MARK: Private methods
     
     private func updateProgressBar() {
-        if let image = storyBlock?.image {
-            if  image.uploadProgress < 1.0 {
-                uploadProgressView.hidden = false
-                uploadProgressView.progress = image.uploadProgress
-                runOnMainThreadAfter(delay: 0.3, task: {
-                    self.updateProgressBar()
-                })
-            } else {
-                uploadProgressView.hidden = true
-            }
+        if let image = storyBlock?.image where image.uploadProgress < 1.0 {
+            uploadProgressView.hidden = false
+            uploadProgressView.progress = image.uploadProgress
+            runOnMainThreadAfter(delay: 0.3, task: {
+                self.updateProgressBar()
+            })
+        } else {
+            uploadProgressView.hidden = true
         }
     }
     

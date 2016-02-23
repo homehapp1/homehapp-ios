@@ -53,6 +53,7 @@ class GalleryImageCell: UICollectionViewCell {
         imageView.contentMode = contentMode
         
         if image.uploadProgress < 1.0 {
+            uploadProgressView.progress = image.uploadProgress
             updateProgressBar()
         }
     }
@@ -83,9 +84,9 @@ class GalleryImageCell: UICollectionViewCell {
     // MARK: Private methods
     
     private func updateProgressBar() {
-        if image != nil && image!.uploadProgress < 1.0 {
+        if let image = image where image.uploadProgress < 1.0 {
             uploadProgressView.hidden = false
-            uploadProgressView.progress = image!.uploadProgress
+            uploadProgressView.progress = image.uploadProgress
             runOnMainThreadAfter(delay: 0.3, task: {
                 self.updateProgressBar()
             })
