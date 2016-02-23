@@ -46,14 +46,17 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
             cell.setImageMargin(imageMargin)
         }
         
-        // Add longpress for moving and closing the image
-        let gesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressed:")
-        cell.addGestureRecognizer(gesture)
         cell.deleteButton.hidden = true
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        // Disable selection when gallery in landscape mode
+        if self.view.width > self.view.height {
+            return
+        }
+        
         if selectedImage == nil {
             selectedImage = getStoryBlockImageAtIndex(indexPath.row)
         } else {
@@ -61,8 +64,6 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         }
 
         collectionView.reloadData()
-        
-        //TODO this doesnt work in landscape mode
         
         if selectedImage != nil {
             let newSize = getSizeForOpenedImage()
@@ -96,15 +97,17 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
             return
         }
         
-        if let indexPath = collectionView.indexPathForItemAtPoint(CGPointMake(collectionView.contentOffset.x + (self.view.width / 2), self.view.height/2)) {
-            currentImageIndex = indexPath.row
+        if getImageCount() != 1 {
+            if let indexPath = collectionView.indexPathForItemAtPoint(CGPointMake(collectionView.contentOffset.x + (self.view.width / 2), self.view.height/2)) {
+                currentImageIndex = indexPath.row
+            }
         }
-        
+
         if scrollView.contentOffset.x < 0 || scrollView.contentSize.width - scrollView.contentOffset.x < self.view.width {
             var backgroundAlpha : CGFloat = 1.0
             if (scrollView.contentOffset.x < 0) {
                 backgroundAlpha = (1.0 - abs(scrollView.contentOffset.x / self.view.frame.width))
-            } else {
+            } else if (scrollView.contentOffset.x > 0) {
                 backgroundAlpha = (1.0 - (scrollView.contentOffset.x - (scrollView.contentSize.width - self.view.width)) / self.view.width)
             }
             self.backgroundView.alpha = backgroundAlpha
@@ -198,8 +201,14 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         
-        // Calculate current collection view page index
-        let pageIndex = round(collectionView.contentOffset.x / collectionView.bounds.width)
+        // Calculate current collection view page index. First check if image is opened
+        var pageIndex: CGFloat = 0
+        if collectionView.contentSize.width > collectionView.bounds.width * CGFloat(getImageCount()) {
+            
+        } else {
+            pageIndex = round(collectionView.contentOffset.x / collectionView.bounds.width)
+        }
+        
 
         // Calculate content offset in the new orientation, swapping current height for width
         let contentOffsetX = collectionView.bounds.height * pageIndex
