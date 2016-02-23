@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import QvikNetwork
+import QvikSwift
 
 /**
  Displays a single video player.
@@ -24,6 +25,9 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
     @IBOutlet private weak var addVideoButton: UIButton!
     @IBOutlet private weak var volumeButton: UIButton!
     @IBOutlet private weak var fullScreenButton: UIButton!
+    
+    /// Progress indicator for video upload
+    @IBOutlet private weak var uploadProgressView: UIProgressView!
     
     /// Video URL the player was constructed with.
     var videoURL: NSURL?
@@ -55,6 +59,11 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
             fullScreenButton.alpha = 0.0
             videoView.hidden = true
             volumeButton.alpha = 0.0
+            
+            if video.uploadProgress < 1.0 {
+                uploadProgressView.progress = video.uploadProgress
+                updateProgressBar()
+            }
         }
     }
     
@@ -64,11 +73,13 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
         // Sets hidden attributes of the controls according to state
         func setControlVisibility(allVisible allVisible: Bool = false) {
             addVideoButton.hidden = !editMode
+            fullScreenButton.hidden = editMode
         }
         
         // Sets alpha attributes of the controls according to state
         func setControlAlphas() {
             addVideoButton.alpha = editMode ? 1.0 : 0.0
+            fullScreenButton.alpha = editMode ? 0.0 : 1.0
         }
         
         if !animated {
@@ -155,6 +166,31 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
         }
     }
     
+    func showLoading() {
+        playPauseImageView.image = UIImage(named: "icon_loading")
+        if playPauseImageView.layer.animationForKey(kRotationAnimationKey) == nil {
+            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
+            rotationAnimation.fromValue = 0.0
+            rotationAnimation.toValue = Float(M_PI * 2.0)
+            rotationAnimation.duration = 2.0
+            rotationAnimation.repeatCount = Float.infinity
+            playPauseImageView.layer.addAnimation(rotationAnimation, forKey: kRotationAnimationKey)
+        }
+    }
+    
+    func hideLoading() {
+        if playPauseImageView.layer.animationForKey(kRotationAnimationKey) != nil {
+            UIView.animateWithDuration(0.4, animations: {
+                self.playPauseImageView.alpha = 0.0
+                }, completion: {
+                    (value: Bool) in
+                    self.playPauseImageView.layer.removeAnimationForKey(self.kRotationAnimationKey)
+            })
+        }
+    }
+    
+    // MARK: Private methods
+    
     private func playVideo() {
         if player?.rate == 0.0 && (playerItem?.playbackLikelyToKeepUp == true || playerItem?.playbackBufferFull == true) {
             log.debug("Playing video, playback likely to keep up");
@@ -189,26 +225,15 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
         }
     }
     
-    func showLoading() {
-        playPauseImageView.image = UIImage(named: "icon_loading")
-        if playPauseImageView.layer.animationForKey(kRotationAnimationKey) == nil {
-            let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
-            rotationAnimation.fromValue = 0.0
-            rotationAnimation.toValue = Float(M_PI * 2.0)
-            rotationAnimation.duration = 2.0
-            rotationAnimation.repeatCount = Float.infinity
-            playPauseImageView.layer.addAnimation(rotationAnimation, forKey: kRotationAnimationKey)
-        }
-    }
-    
-    func hideLoading() {
-        if playPauseImageView.layer.animationForKey(kRotationAnimationKey) != nil {
-            UIView.animateWithDuration(0.4, animations: {
-                self.playPauseImageView.alpha = 0.0
-                }, completion: {
-                    (value: Bool) in
-                    self.playPauseImageView.layer.removeAnimationForKey(self.kRotationAnimationKey)
+    private func updateProgressBar() {
+        if let video = storyBlock?.video where video.uploadProgress < 1.0 {
+            uploadProgressView.hidden = false
+            uploadProgressView.progress = video.uploadProgress
+            runOnMainThreadAfter(delay: 0.3, task: {
+                self.updateProgressBar()
             })
+        } else {
+          uploadProgressView.hidden = true
         }
     }
     

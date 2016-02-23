@@ -16,6 +16,7 @@ class Video: DeletableObject {
     dynamic var url: String = ""
     dynamic var local: Bool = false // true if not yet uploaded from this device
     dynamic var thumbnailData: NSData? = nil
+    dynamic var uploadProgress: Float = 1.0 // upload progress value from 0 .... 1 when user uploads video
 
     /// Returns the thumbnail image url for this video; for Cloudinary videos, form url by replacing .mov by .jpg.
     /// For local videos, use the video asset url; this requires the thumbnail to be placed into the image cache by that url.

@@ -399,6 +399,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         let width = Int(snapshotImage.width * snapshotImage.scale)
         let height = Int(snapshotImage.height * snapshotImage.scale)
         let video = Video(url: videoAssetUrl.absoluteString, width: width, height: height, local: true)
+        video.uploadProgress = 0.0
         if let snapshotThumbnailData = imageToJpegThumbnailData(sourceImage: snapshotImage) {
             video.thumbnailData = snapshotThumbnailData
         }
@@ -430,7 +431,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             }
             log.debug("videoFilePath = \(videoFilePath)")
             
-            cloudStorage.uploadVideo(videoFilePath, progressCallback: { progress in
+            cloudStorage.uploadVideo(videoFilePath, progressCallback: {  (progress) -> Void in
+                    dataManager.performUpdates {
+                        video.uploadProgress = progress
+                    }
                 }, completionCallback: { (success, url, width, height) in
                     if success {
                         log.debug("Video upload successful; url: \(url)")

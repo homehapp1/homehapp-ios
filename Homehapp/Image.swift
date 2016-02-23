@@ -40,8 +40,7 @@ class Image: DeletableObject {
         return ["deleted"]
     }
     
-
-    
+    /// Return JSON presentation of this Image
     func toJSON() -> [String: AnyObject] {
         var imageJson: [String: AnyObject] = [
             "url": url,
@@ -61,6 +60,7 @@ class Image: DeletableObject {
         return width >= height
     }
     
+    /// Create Image object from JSON data
     static func fromJSON(imageJsonObject: AnyObject?) -> Image? {
         if let imageJson = imageJsonObject as? NSDictionary,
             width = imageJson["width"] as? Int,
