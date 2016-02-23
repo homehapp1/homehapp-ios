@@ -209,7 +209,16 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
             pageIndex = round(collectionView.contentOffset.x / collectionView.bounds.width)
         }
         
-
+        // Calculate inverse transform and translationfor the background view in case we're going 
+        // landscape since background view should always be portrait as the main home list view is
+        let backgroudImageView = self.view.subviews[0]
+        var transform = CGAffineTransformIdentity
+        if size.width > size.height {
+            let inverseTransform = CGAffineTransformInvert(coordinator.targetTransform())
+            let translation = CGAffineTransformMakeTranslation((size.width - size.height) / 2, -(size.width - size.height) / 2)
+            transform = CGAffineTransformConcat(inverseTransform, translation)
+        }
+        
         // Calculate content offset in the new orientation, swapping current height for width
         let contentOffsetX = collectionView.bounds.height * pageIndex
 
@@ -217,6 +226,7 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         
         coordinator.animateAlongsideTransition({ context in
             self.collectionView.contentOffset = CGPoint(x: contentOffsetX, y: 0)
+            backgroudImageView.transform = transform
             }) { context in
                 // Completion block
         }
