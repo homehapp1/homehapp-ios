@@ -21,7 +21,7 @@ class GalleryImageCell: UICollectionViewCell {
     @IBOutlet private weak var leadingConstraint: NSLayoutConstraint!
     @IBOutlet private weak var trailingConstraint: NSLayoutConstraint!
     
-    // Progress indicator for image upload
+    /// Progress indicator for image upload
     @IBOutlet private weak var uploadProgressView: UIProgressView!
     
     private let imageMargin: CGFloat = 3

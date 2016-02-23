@@ -54,19 +54,28 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lgQ-HO-ZUZ">
+                                        <rect key="frame" x="74" y="157.5" width="282" height="2"/>
+                                        <color key="progressTintColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="trackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </progressView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.1450980392" blue="0.39607843139999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="76T-w2-3LF" firstAttribute="top" secondItem="NJ1-rk-sTo" secondAttribute="top" constant="10" id="O7a-Ju-IBg"/>
                                     <constraint firstAttribute="trailing" secondItem="vlE-au-jVH" secondAttribute="trailing" id="Oyg-9w-qvO"/>
+                                    <constraint firstAttribute="bottom" secondItem="lgQ-HO-ZUZ" secondAttribute="bottom" constant="50" id="Pcx-FB-8ox"/>
                                     <constraint firstItem="qkZ-Da-7Iw" firstAttribute="top" secondItem="76T-w2-3LF" secondAttribute="bottom" constant="-6" id="UOz-iy-sCa"/>
+                                    <constraint firstItem="lgQ-HO-ZUZ" firstAttribute="leading" secondItem="NJ1-rk-sTo" secondAttribute="leading" constant="74" id="UYY-TR-dbR"/>
                                     <constraint firstItem="76T-w2-3LF" firstAttribute="centerY" secondItem="NJ1-rk-sTo" secondAttribute="centerY" id="Uuc-Re-XeY"/>
                                     <constraint firstAttribute="height" priority="999" constant="250" identifier="Top part height" id="W9Y-eF-9AQ"/>
                                     <constraint firstItem="vlE-au-jVH" firstAttribute="top" secondItem="NJ1-rk-sTo" secondAttribute="top" id="WEA-6O-JQy"/>
                                     <constraint firstItem="qkZ-Da-7Iw" firstAttribute="centerX" secondItem="76T-w2-3LF" secondAttribute="centerX" id="Wws-El-JKX"/>
                                     <constraint firstItem="76T-w2-3LF" firstAttribute="centerX" secondItem="NJ1-rk-sTo" secondAttribute="centerX" id="gFr-ga-Ad1"/>
                                     <constraint firstAttribute="bottom" secondItem="vlE-au-jVH" secondAttribute="bottom" id="kaP-97-HjK"/>
+                                    <constraint firstItem="lgQ-HO-ZUZ" firstAttribute="centerX" secondItem="NJ1-rk-sTo" secondAttribute="centerX" id="lR4-1S-8Zp"/>
                                     <constraint firstItem="vlE-au-jVH" firstAttribute="leading" secondItem="NJ1-rk-sTo" secondAttribute="leading" id="tyw-zf-R5Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="lgQ-HO-ZUZ" secondAttribute="trailing" constant="74" id="z47-eN-zNe"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -112,7 +121,7 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AuU-k0-vsV" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AuU-k0-vsV" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
                                         <rect key="frame" x="15" y="30" width="400" height="170"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -206,6 +215,7 @@
                 <outlet property="titleTextView" destination="AuU-k0-vsV" id="RoS-Vn-jiQ"/>
                 <outlet property="titleTopMarginConstraint" destination="hfP-Fx-5lM" id="E8K-tI-QbQ"/>
                 <outlet property="topPartContainerHeightConstraint" destination="W9Y-eF-9AQ" id="xvg-vt-4uw"/>
+                <outlet property="uploadProgressView" destination="lgQ-HO-ZUZ" id="KhO-2V-g9H"/>
             </connections>
             <point key="canvasLocation" x="320" y="437"/>
         </tableViewCell>

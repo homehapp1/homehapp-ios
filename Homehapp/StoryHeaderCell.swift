@@ -8,6 +8,7 @@
 
 import UIKit
 import QvikNetwork
+import QvikSwift
 
 /**
  'Header' view placed on top of the large cell before any views formed from the story block.
@@ -31,6 +32,9 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
     @IBOutlet private weak var bottomPartContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topPartContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var titleTopMarginConstraint: NSLayoutConstraint!
+    
+    /// Progress indicator for image upload
+    @IBOutlet private weak var uploadProgressView: UIProgressView!
     
     /// Action to be executed when share button is pressed
     var shareCallback: (Void -> Void)?
@@ -56,6 +60,11 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
             if let image = storyObject?.image {
                 mainImageView.imageUrl = image.scaledUrl
                 mainImageView.thumbnailData = image.thumbnailData
+                
+                if image.uploadProgress < 1.0 {
+                    updateProgressBar()
+                }
+                
             } else {
                 mainImageView.imageUrl = storyObject?.coverImage?.scaledUrl
                 mainImageView.thumbnailData = storyObject?.coverImage?.thumbnailData
@@ -139,6 +148,20 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
             
             // Update initial transform
             scrollViewDidScroll(scrollView)
+        }
+    }
+    
+    private func updateProgressBar() {
+        if let image = storyObject?.image {
+            if image.uploadProgress < 1.0 {
+                uploadProgressView.hidden = false
+                uploadProgressView.progress = image.uploadProgress
+                runOnMainThreadAfter(delay: 0.3, task: {
+                    self.updateProgressBar()
+                })
+            } else {
+                uploadProgressView.hidden = true
+            }
         }
     }
     
