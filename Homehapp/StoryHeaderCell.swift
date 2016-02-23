@@ -58,7 +58,7 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
     var storyObject: StoryObject? = nil {
         didSet {
             if let image = storyObject?.image {
-                mainImageView.imageUrl = image.scaledUrl
+                mainImageView.imageUrl = image.scaledCoverImageUrl
                 mainImageView.thumbnailData = image.thumbnailData
                 
                 if image.uploadProgress < 1.0 {
@@ -66,11 +66,12 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
                 }
                 
             } else {
-                mainImageView.imageUrl = storyObject?.coverImage?.scaledUrl
+                mainImageView.imageUrl = storyObject?.coverImage?.scaledCoverImageUrl
                 mainImageView.thumbnailData = storyObject?.coverImage?.thumbnailData
             }
             
             if mainImageView.image == nil {
+                mainImageView.thumbnailData = nil
                 if storyObject is Neighborhood {
                     mainImageView.image = UIImage(named: "neighbourhood_default_background")
                 } else {

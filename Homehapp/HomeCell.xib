@@ -38,7 +38,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="mY2-WT-PqX" secondAttribute="bottom" id="Ftq-ls-7QB"/>
                                             <constraint firstAttribute="trailing" secondItem="mY2-WT-PqX" secondAttribute="trailing" id="Nim-fA-WSh"/>
@@ -123,8 +123,8 @@
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="xpl-mp-ld4"/>
                                                 <exclude reference="vPP-Db-OR4"/>
+                                                <exclude reference="xpl-mp-ld4"/>
                                             </mask>
                                         </variation>
                                     </label>

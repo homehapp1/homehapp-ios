@@ -60,7 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CloudinaryServiceDelegate
         
         // Define maximum size of images we fetch from cloudinary
         ImageCache.sharedInstance().maximumImageDimensions = CGSize(width: 1500, height: 1000)
-        //ImageCache.sharedInstance().maximumImageDimensions = CGSize(width: 100, height: 100)
         
         // Configure global UI appearance
         setupAppearance()

@@ -22,6 +22,9 @@ class Image: DeletableObject {
     var scaledUrl: String {
         return local ? url : scaledCloudinaryUrl(width: width, height: height, url: url)
     }
+
+    var scaledCoverImageUrl: String {
+        return local ? url : scaledCloudinaryCoverImageUrl(width: width, height: height, url: url)    }
     
     convenience init(url: String, width: Int, height: Int, local: Bool = false, localUrl: String?) {
         self.init()
@@ -36,6 +39,8 @@ class Image: DeletableObject {
     override static func indexedProperties() -> [String] {
         return ["deleted"]
     }
+    
+
     
     func toJSON() -> [String: AnyObject] {
         var imageJson: [String: AnyObject] = [

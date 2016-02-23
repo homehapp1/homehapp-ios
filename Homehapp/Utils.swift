@@ -50,6 +50,29 @@ func scaledCloudinaryUrl(width width: Int, height: Int, url: String) -> String {
     return scaledUrl
 }
 
+/// Return scaled Cloudinary url for home cover images in main list and home story header
+func scaledCloudinaryCoverImageUrl(width width: Int, height: Int, url: String) -> String {
+    
+    let width = CGFloat(width)
+    let height = CGFloat(height)
+    
+    let screenBounds = UIScreen.mainScreen().bounds
+    let screenScale = UIScreen.mainScreen().scale
+    let screenPixels = CGSizeMake(screenBounds.size.width * screenScale, max(1000, screenBounds.size.height * screenScale));
+    
+    if (width < screenPixels.width) && (height < screenPixels.height) {
+        return url
+    }
+    
+    let widthRatio = width / screenPixels.width
+    let heightRatio = height / screenPixels.height
+    let scale = 1.0 / max(widthRatio, heightRatio)
+    let scaleFormat = "w_\(scale)"
+    let scaledUrl = url.stringByReplacingOccurrencesOfString("/upload/", withString: "/upload/\(scaleFormat)/")
+    
+    return scaledUrl
+}
+
 /// Returns a snapshot image for a local video asset, taken as a snapshot from the start of the video
 func getVideoSnapshot(videoUrl: NSURL) -> UIImage? {
     do {

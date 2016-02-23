@@ -81,7 +81,7 @@ class HomeCell: UICollectionViewCell {
             
             if isMyHomeCell {
                 if home!.image != nil {
-                    mainImageView.imageUrl = home!.image?.scaledUrl
+                    mainImageView.imageUrl = home!.image?.scaledCoverImageUrl
                     mainImageView.thumbnailData = home!.image?.thumbnailData
                 } else {
                     createStoryContainerView.hidden = false
@@ -90,10 +90,18 @@ class HomeCell: UICollectionViewCell {
                 }
             } else {
                 if home!.image != nil {
-                    mainImageView.imageUrl = home!.image?.scaledUrl
-                    mainImageView.thumbnailData = home!.image?.thumbnailData
+                    // Home image url does not contain http and is not a valid url 
+                    // if image upload in sending end has failed
+                    if home!.image!.url.contains("http") {
+                        mainImageView.imageUrl = home!.image!.scaledCoverImageUrl
+                        mainImageView.thumbnailData = home!.image!.thumbnailData
+                    } else {
+                        mainImageView.thumbnailData = nil
+                        mainImageView.imageUrl = nil
+                        mainImageView.image = UIImage(named: "home_default_background")
+                    }
                 } else {
-                    mainImageView.imageUrl = home!.coverImage?.scaledUrl
+                    mainImageView.imageUrl = home!.coverImage?.scaledCoverImageUrl
                     mainImageView.thumbnailData = home!.coverImage?.thumbnailData
                 }
             }
