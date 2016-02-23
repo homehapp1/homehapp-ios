@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view alpha="0.84999999999999998" contentMode="scaleToFill" id="iN0-l3-epB" customClass="Toast" customModule="Homehapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="505" height="64"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toast message here!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VX6-J4-BLV">
+                    <rect key="frame" x="4" y="4" width="497" height="56"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="VX6-J4-BLV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="8uu-si-AW1"/>
+                <constraint firstAttribute="trailing" secondItem="VX6-J4-BLV" secondAttribute="trailing" constant="4" id="GNK-8h-n0m"/>
+                <constraint firstItem="VX6-J4-BLV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="lmw-qc-5wk"/>
+                <constraint firstAttribute="bottom" secondItem="VX6-J4-BLV" secondAttribute="bottom" constant="4" id="qez-Dc-QgA"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="messageLabel" destination="VX6-J4-BLV" id="nKM-pR-DDl"/>
+            </connections>
+            <point key="canvasLocation" x="298.5" y="-382"/>
+        </view>
+    </objects>
+</document>

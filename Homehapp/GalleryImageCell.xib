@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GalleryImageCell" id="j5N-r5-yfB" customClass="GalleryImageCell" customModule="Homehapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="358" height="324"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="358" height="324"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsN-Ha-i6m">
+                        <rect key="frame" x="0.0" y="0.0" width="358" height="324"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eo0-gA-hvl" customClass="CachedImageView" customModule="QvikNetwork">
+                                <rect key="frame" x="0.0" y="0.0" width="358" height="324"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUc-82-thg">
+                                <rect key="frame" x="328" y="5" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="NRD-dw-i1u"/>
+                                    <constraint firstAttribute="width" constant="25" id="vxa-g9-Trc"/>
+                                </constraints>
+                                <state key="normal" image="icon_delete"/>
+                                <connections>
+                                    <action selector="deleteButtonPressed:" destination="j5N-r5-yfB" eventType="touchUpInside" id="hd8-tx-Lfl"/>
+                                </connections>
+                            </button>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tgT-Ig-lko">
+                                <rect key="frame" x="40" y="248" width="278" height="2"/>
+                                <color key="progressTintColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="trackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </progressView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Eo0-gA-hvl" firstAttribute="top" secondItem="hsN-Ha-i6m" secondAttribute="top" id="6IZ-uT-RrQ"/>
+                            <constraint firstAttribute="trailing" secondItem="tUc-82-thg" secondAttribute="trailing" constant="5" id="LMx-Yq-Vzc"/>
+                            <constraint firstItem="tgT-Ig-lko" firstAttribute="centerY" secondItem="hsN-Ha-i6m" secondAttribute="centerY" id="Poa-2G-AfK"/>
+                            <constraint firstItem="Eo0-gA-hvl" firstAttribute="leading" secondItem="hsN-Ha-i6m" secondAttribute="leading" id="Tex-tD-LwK"/>
+                            <constraint firstAttribute="bottom" secondItem="tgT-Ig-lko" secondAttribute="bottom" constant="74" id="XsP-hf-OZa"/>
+                            <constraint firstItem="tUc-82-thg" firstAttribute="top" secondItem="hsN-Ha-i6m" secondAttribute="top" constant="5" id="fGd-d8-r1L"/>
+                            <constraint firstItem="tgT-Ig-lko" firstAttribute="leading" secondItem="hsN-Ha-i6m" secondAttribute="leading" constant="40" id="jBg-Ki-uIT"/>
+                            <constraint firstAttribute="bottom" secondItem="Eo0-gA-hvl" secondAttribute="bottom" id="kH2-iS-C08"/>
+                            <constraint firstAttribute="trailing" secondItem="Eo0-gA-hvl" secondAttribute="trailing" id="pkD-3P-vaB"/>
+                            <constraint firstItem="tgT-Ig-lko" firstAttribute="centerX" secondItem="hsN-Ha-i6m" secondAttribute="centerX" id="qEc-r1-kwk"/>
+                            <constraint firstAttribute="trailing" secondItem="tgT-Ig-lko" secondAttribute="trailing" constant="40" id="wrg-bk-a2X"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Poa-2G-AfK"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="hsN-Ha-i6m" firstAttribute="leading" secondItem="j5N-r5-yfB" secondAttribute="leading" id="LMS-Rt-ik8"/>
+                <constraint firstAttribute="trailing" secondItem="hsN-Ha-i6m" secondAttribute="trailing" id="RAA-0y-WWE"/>
+                <constraint firstItem="hsN-Ha-i6m" firstAttribute="top" secondItem="j5N-r5-yfB" secondAttribute="top" id="W4v-Nh-19B"/>
+                <constraint firstAttribute="bottom" secondItem="hsN-Ha-i6m" secondAttribute="bottom" id="kuQ-3r-xfe"/>
+            </constraints>
+            <size key="customSize" width="358" height="324"/>
+            <connections>
+                <outlet property="deleteButton" destination="tUc-82-thg" id="PQU-Jq-2Zj"/>
+                <outlet property="imageView" destination="Eo0-gA-hvl" id="tFT-xA-qki"/>
+                <outlet property="leadingConstraint" destination="Tex-tD-LwK" id="PZ2-6z-Pg9"/>
+                <outlet property="trailingConstraint" destination="pkD-3P-vaB" id="4KV-Vt-eux"/>
+                <outlet property="uploadProgressView" destination="tgT-Ig-lko" id="JZH-le-Shi"/>
+            </connections>
+            <point key="canvasLocation" x="173" y="118"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="icon_delete" width="20" height="20"/>
+    </resources>
+</document>

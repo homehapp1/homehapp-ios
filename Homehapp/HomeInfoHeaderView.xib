@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FjallaOne-Regular.ttf">
+            <string>FjallaOne-Regular</string>
+        </mutableArray>
+        <mutableArray key="Roboto-Light.ttf">
+            <string>Roboto-Light</string>
+        </mutableArray>
+        <mutableArray key="Roboto-MediumItalic.ttf">
+            <string>Roboto-MediumItalic</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HomeInfoHeaderView" customModule="Homehapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRe-yW-1RF">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_home_info" translatesAutoresizingMaskIntoConstraints="NO" id="yZ4-An-VSp">
+                            <rect key="frame" x="250" y="30" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="avu-xC-p4q"/>
+                                <constraint firstAttribute="width" constant="100" id="lWy-BM-hyL"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltJ-de-AKs">
+                            <rect key="frame" x="10" y="140" width="580" height="43"/>
+                            <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="34"/>
+                            <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZM1-Rh-pgL">
+                            <rect key="frame" x="300" y="191" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="18"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mtz-Wo-EAT">
+                            <rect key="frame" x="300" y="193" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" name="Roboto-MediumItalic" family="Roboto" pointSize="13"/>
+                            <color key="textColor" red="0.58039215690000001" green="0.51372549020000002" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="mtz-Wo-EAT" firstAttribute="centerX" secondItem="nRe-yW-1RF" secondAttribute="centerX" id="9KT-rv-TnP"/>
+                        <constraint firstItem="ltJ-de-AKs" firstAttribute="leading" secondItem="nRe-yW-1RF" secondAttribute="leading" constant="10" id="BJl-34-bgf"/>
+                        <constraint firstItem="ZM1-Rh-pgL" firstAttribute="centerX" secondItem="nRe-yW-1RF" secondAttribute="centerX" id="BQN-n1-gBy"/>
+                        <constraint firstAttribute="height" constant="300" id="FAz-b2-wGE"/>
+                        <constraint firstItem="mtz-Wo-EAT" firstAttribute="top" secondItem="ZM1-Rh-pgL" secondAttribute="bottom" constant="2" id="eZa-Os-vtu"/>
+                        <constraint firstItem="yZ4-An-VSp" firstAttribute="top" secondItem="nRe-yW-1RF" secondAttribute="top" constant="30" id="gLv-yw-sZE"/>
+                        <constraint firstItem="yZ4-An-VSp" firstAttribute="centerX" secondItem="nRe-yW-1RF" secondAttribute="centerX" id="ov4-Cx-bR4"/>
+                        <constraint firstItem="ltJ-de-AKs" firstAttribute="top" secondItem="yZ4-An-VSp" secondAttribute="bottom" constant="10" id="uDI-OK-Uf4"/>
+                        <constraint firstItem="ZM1-Rh-pgL" firstAttribute="top" secondItem="ltJ-de-AKs" secondAttribute="bottom" constant="8" id="uGU-ym-Lr0"/>
+                        <constraint firstAttribute="trailing" secondItem="ltJ-de-AKs" secondAttribute="trailing" constant="10" id="uLT-pf-bD7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="nRe-yW-1RF" secondAttribute="trailing" id="0cB-mI-1dI"/>
+                <constraint firstAttribute="bottom" secondItem="nRe-yW-1RF" secondAttribute="bottom" id="l4e-s7-cCp"/>
+                <constraint firstItem="nRe-yW-1RF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ov4-cB-J4f"/>
+                <constraint firstItem="nRe-yW-1RF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="t6s-Du-kQi"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addressLabel" destination="ZM1-Rh-pgL" id="0zG-1I-r5A"/>
+                <outlet property="heightConstraint" destination="FAz-b2-wGE" id="wKF-Bb-P3i"/>
+                <outlet property="priceLabel" destination="mtz-Wo-EAT" id="qap-ho-yVc"/>
+                <outlet property="titleLabel" destination="ltJ-de-AKs" id="ups-Em-I3e"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_home_info" width="73" height="72"/>
+    </resources>
+</document>

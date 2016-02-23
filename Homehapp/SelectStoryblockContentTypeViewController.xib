@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+            <string>Roboto-Medium</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController automaticallyAdjustsScrollViewInsets="NO" id="qKc-Hb-Tqi" customClass="SelectStoryblockContentTypeViewController" customModule="Homehapp" customModuleProvider="target">
+            <layoutGuides>
+                <viewControllerLayoutGuide type="top" id="GWX-7N-l0k"/>
+                <viewControllerLayoutGuide type="bottom" id="kjM-PY-784"/>
+            </layoutGuides>
+            <view key="view" contentMode="scaleToFill" id="Nt1-5h-2KT">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJA-N8-emx">
+                        <rect key="frame" x="0.0" y="-108" width="600" height="708"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLR-YU-8U0" userLabel="Select recent image container">
+                                <rect key="frame" x="0.0" y="3" width="600" height="600"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="YLw-re-RGz">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="r8b-px-jbB">
+                                            <size key="itemSize" width="120" height="120"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <connections>
+                                            <outlet property="dataSource" destination="qKc-Hb-Tqi" id="U2f-VJ-N4J"/>
+                                            <outlet property="delegate" destination="qKc-Hb-Tqi" id="oY8-I0-PLF"/>
+                                        </connections>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="YLw-re-RGz" secondAttribute="trailing" id="08J-kh-W77"/>
+                                    <constraint firstItem="YLw-re-RGz" firstAttribute="top" secondItem="YLR-YU-8U0" secondAttribute="top" id="eLT-hm-375"/>
+                                    <constraint firstItem="YLw-re-RGz" firstAttribute="leading" secondItem="YLR-YU-8U0" secondAttribute="leading" id="iZX-U1-kEj"/>
+                                    <constraint firstAttribute="height" secondItem="YLR-YU-8U0" secondAttribute="width" multiplier="1:1" id="lTn-6q-Muy"/>
+                                    <constraint firstAttribute="bottom" secondItem="YLw-re-RGz" secondAttribute="bottom" id="maS-pR-2Jw"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rxy-Od-C0b">
+                                <rect key="frame" x="3" y="603" width="594" height="50"/>
+                                <color key="backgroundColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="l8J-fb-vjW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                                <state key="normal" title="Add from photo gallery">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="galleryButtonPressed:" destination="qKc-Hb-Tqi" eventType="touchUpInside" id="h07-lc-LFm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIH-mm-ROB">
+                                <rect key="frame" x="3" y="656" width="594" height="50"/>
+                                <color key="backgroundColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hM2-0O-kBn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                                <state key="normal" title="Add from camera">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cameraButtonPressed:" destination="qKc-Hb-Tqi" eventType="touchUpInside" id="ppZ-tv-nDX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" secondItem="AJA-N8-emx" secondAttribute="width" multiplier="1:1" id="DKa-TH-5CK"/>
+                            <constraint firstItem="rxy-Od-C0b" firstAttribute="leading" secondItem="AJA-N8-emx" secondAttribute="leading" constant="3" id="E1w-cH-bVk"/>
+                            <constraint firstItem="FIH-mm-ROB" firstAttribute="leading" secondItem="AJA-N8-emx" secondAttribute="leading" constant="3" id="FK9-Q9-rvp"/>
+                            <constraint firstAttribute="trailing" secondItem="rxy-Od-C0b" secondAttribute="trailing" constant="3" id="I0f-Sx-MgV"/>
+                            <constraint firstItem="YLR-YU-8U0" firstAttribute="top" secondItem="AJA-N8-emx" secondAttribute="top" constant="3" id="OjU-NW-P1A"/>
+                            <constraint firstItem="rxy-Od-C0b" firstAttribute="top" secondItem="YLR-YU-8U0" secondAttribute="bottom" id="Ztw-hf-7bH"/>
+                            <constraint firstAttribute="trailing" secondItem="YLR-YU-8U0" secondAttribute="trailing" id="bEs-1E-hTI"/>
+                            <constraint firstAttribute="bottom" secondItem="FIH-mm-ROB" secondAttribute="bottom" constant="2" id="d1T-bC-699"/>
+                            <constraint firstItem="FIH-mm-ROB" firstAttribute="top" secondItem="rxy-Od-C0b" secondAttribute="bottom" constant="3" id="gJs-oj-mgn"/>
+                            <constraint firstItem="YLR-YU-8U0" firstAttribute="leading" secondItem="AJA-N8-emx" secondAttribute="leading" id="sos-Nj-CWX"/>
+                            <constraint firstAttribute="trailing" secondItem="FIH-mm-ROB" secondAttribute="trailing" constant="3" id="ziZ-Ej-Ljj"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="DKa-TH-5CK"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="AJA-N8-emx" firstAttribute="top" secondItem="GWX-7N-l0k" secondAttribute="bottom" constant="150" id="0Vc-xs-Bcd"/>
+                    <constraint firstItem="AJA-N8-emx" firstAttribute="top" secondItem="GWX-7N-l0k" secondAttribute="bottom" constant="299" id="3mK-CH-5QB"/>
+                    <constraint firstItem="AJA-N8-emx" firstAttribute="leading" secondItem="Nt1-5h-2KT" secondAttribute="leading" id="KDf-ZV-S0p"/>
+                    <constraint firstItem="kjM-PY-784" firstAttribute="top" secondItem="AJA-N8-emx" secondAttribute="bottom" id="Rip-Pl-Ud5"/>
+                    <constraint firstItem="kjM-PY-784" firstAttribute="top" secondItem="AJA-N8-emx" secondAttribute="top" constant="300" id="tgI-Fd-lDj"/>
+                    <constraint firstAttribute="trailing" secondItem="AJA-N8-emx" secondAttribute="trailing" id="uE6-Ei-mBF"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="0Vc-xs-Bcd"/>
+                        <exclude reference="3mK-CH-5QB"/>
+                        <exclude reference="tgI-Fd-lDj"/>
+                    </mask>
+                </variation>
+            </view>
+            <connections>
+                <outlet property="cameraButton" destination="FIH-mm-ROB" id="DDK-if-zQh"/>
+                <outlet property="recentImageCollectionView" destination="YLw-re-RGz" id="1sj-9T-bp8"/>
+                <outlet property="selectionView" destination="AJA-N8-emx" id="oox-fK-zN7"/>
+            </connections>
+            <point key="canvasLocation" x="381" y="377"/>
+        </viewController>
+    </objects>
+</document>

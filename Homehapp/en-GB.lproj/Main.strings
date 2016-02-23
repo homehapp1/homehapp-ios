@@ -1,0 +1,85 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "0fi-C7-m3Y"; */
+"0fi-C7-m3Y.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Sign in with Facebook"; ObjectID = "3Gd-hk-fQC"; */
+"3Gd-hk-fQC.normalTitle" = "Sign in with Facebook";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "400-ac-S7R"; */
+"400-ac-S7R.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Log out"; ObjectID = "4c6-P5-d2g"; */
+"4c6-P5-d2g.normalTitle" = "Log out";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "7qZ-PO-5Z2"; */
+"7qZ-PO-5Z2.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "Try without Login"; ObjectID = "9e0-Eg-O0t"; */
+"9e0-Eg-O0t.normalTitle" = "Try without Login";
+
+/* Class = "UIButton"; normalTitle = "Sign in with Google"; ObjectID = "9j0-hR-Ju1"; */
+"9j0-hR-Ju1.normalTitle" = "Sign in with Google";
+
+/* Class = "UILabel"; text = "Welcome"; ObjectID = "H3k-jm-NjS"; */
+"H3k-jm-NjS.text" = "Welcome";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "HHZ-FE-951"; */
+"HHZ-FE-951.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Add neighbourhood"; ObjectID = "Hl7-H9-Edh"; */
+"Hl7-H9-Edh.normalTitle" = "Add neighbourhood";
+
+/* Class = "UILabel"; text = "ALLOW PRIVATE MESSAGES"; ObjectID = "Mvy-4D-BFH"; */
+"Mvy-4D-BFH.text" = "ALLOW PRIVATE MESSAGES";
+
+/* Class = "UIButton"; normalTitle = "Add telephone number"; ObjectID = "QJP-e7-fMY"; */
+"QJP-e7-fMY.normalTitle" = "Add telephone number";
+
+/* Class = "UILabel"; text = "Telephone info is never public. If you are selling or letting your home, people may need to contact you. Calls are always made through homehapp call center. Caller will not see your number, when calling via app."; ObjectID = "aPq-Fj-S4z"; */
+"aPq-Fj-S4z.text" = "Telephone info is never public. If you are selling or letting your home, people may need to contact you. Calls are always made through homehapp call center. Caller will not see your number, when calling via app.";
+
+/* Class = "UILabel"; text = "LOGGED IN WITH"; ObjectID = "cMN-Qb-ofU"; */
+"cMN-Qb-ofU.text" = "LOGGED IN WITH";
+
+/* Class = "UIButton"; normalTitle = "Terms & Conditions"; ObjectID = "ee8-l3-CWQ"; */
+"ee8-l3-CWQ.normalTitle" = "Terms & Conditions";
+
+/* Class = "UILabel"; text = "DISCOVER THE PLACE \nYOU BELONG TO"; ObjectID = "gBO-8k-rXu"; */
+"gBO-8k-rXu.text" = "DISCOVER THE PLACE \nYOU BELONG TO";
+
+/* Class = "UILabel"; text = "ALLOW PUSH NOTIFICATIONS"; ObjectID = "gKF-no-D7t"; */
+"gKF-no-D7t.text" = "ALLOW PUSH NOTIFICATIONS";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "i3M-dl-O5Z"; */
+"i3M-dl-O5Z.normalTitle" = "Save";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "iOK-nX-InY"; */
+"iOK-nX-InY.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "kRL-vh-f6t"; */
+"kRL-vh-f6t.normalTitle" = "Button";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "mgQ-Lx-UAS"; */
+"mgQ-Lx-UAS.title" = "Item";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "pmc-jE-dRd"; */
+"pmc-jE-dRd.normalTitle" = "Edit";
+
+/* Class = "UILabel"; text = "homehapp user"; ObjectID = "pou-0l-dRH"; */
+"pou-0l-dRH.text" = "homehapp user";
+
+/* Class = "UILabel"; text = "MY NEIGHBOURHOOD"; ObjectID = "px2-Bz-KYx"; */
+"px2-Bz-KYx.text" = "MY NEIGHBOURHOOD";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "r09-Kc-lQo"; */
+"r09-Kc-lQo.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "homehapp"; ObjectID = "sIq-DQ-3sN"; */
+"sIq-DQ-3sN.text" = "homehapp";
+
+/* Class = "UILabel"; text = "CONTACT TELEPHONE"; ObjectID = "txz-Mf-q0M"; */
+"txz-Mf-q0M.text" = "CONTACT TELEPHONE";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "xqG-hS-YtK"; */
+"xqG-hS-YtK.normalTitle" = "Button";
+

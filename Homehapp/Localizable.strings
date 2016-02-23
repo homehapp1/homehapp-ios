@@ -1,0 +1,52 @@
+/* 
+  Localizable.strings
+  Homehapp
+
+  Created by Lari Tuominen on 1.11.2015.
+  Copyright © 2015 Homehapp. All rights reserved.
+*/
+
+"loginviewcontroller:login-failed-title" = "Login failed";
+"loginviewcontroller:fb-login-failed-title" = "Facebook login failed";
+"loginviewcontroller:login-failed-message" = "Could not connect homehapp. Please check your network connection and try again later.";
+"loginviewcontroller:fb-login-failed-message" = "Could not connect to Facebook. Please try again later.";
+
+"cancel" = "Cancel";
+"camera" = "Camera";
+
+"homestory:photos-and-videos" = "Photos and videos";
+"homestory:back-button:title" = "< HOMES";
+
+"myhomeviewcontroller:actionsheet-title-videos" = "Videos";
+"myhomeviewcontroller:actionsheet-title-photos" = "Photos";
+"myhomeviewcontroller:actionsheet-description" = "Select source...";
+"myhomeviewcontroller:actionsheet-photos-and-videos" = "Photo Library";
+
+"homestorycell:for-sale" = "FOR SALE ";
+"homestorycell:your-home" = "Your home";
+"homestorycell:someones-home" = "'S HOME";
+"homestorycell:by" = "By";
+"homestorycell:here-you-can-add" = "Here you can add";
+"homestorycell:your-very-own-home-story" = "YOUR VERY OWN HOME STORY";
+"homestorycell:by-yourself" = "By yourself";
+
+"edithomestory:header-placeholder" = "ADD TITLE FOR YOUR HOME STORY";
+"editneighborhoodstory:header-placeholder" = "ADD TITLE FOR YOUR NEIGHBORHOOD";
+"edithomestory:content:title-placeholder" = "TITLE FOR YOUR POST";
+"edithomestory:content:image-title-placeholder" = "TITLE FOR THE IMAGE";
+"edithomestory:content:maintext-placeholder" = "Write something about your home or the pictures you post – what is your home life like?";
+
+"profileviewcontroller:logged-id" = "LOGGED IN WITH";
+"profileviewcontroller:add-neighbourhood" = "Add neighbourhood";
+
+"errormsg:network" = "Network error";
+"errormsg:network-timeout" = "Network timeout";
+"errormsg:server" = "Server error";
+"errormsg:videoenc-failed" = "Video encoding failed";
+
+"homeownerinfocell:agent-title" = "CONTACT AGENT";
+
+"homefeatures:general" = "GENERAL";
+"homefeatures:services" = "SERVICES";
+"homefeatures:appliances" = "APPLIANCES";
+

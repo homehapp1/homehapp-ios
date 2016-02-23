@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FjallaOne-Regular.ttf">
+            <string>FjallaOne-Regular</string>
+            <string>FjallaOne-Regular</string>
+        </mutableArray>
+        <mutableArray key="Roboto-Light.ttf">
+            <string>Roboto-Light</string>
+            <string>Roboto-Light</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContentStoryBlockCell" rowHeight="305" id="MmN-MS-zpa" customClass="ContentStoryBlockCell" customModule="Homehapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="591" height="305"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MmN-MS-zpa" id="bTG-dM-I2n">
+                <rect key="frame" x="0.0" y="0.0" width="591" height="304.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="3OI-xO-5J8" userLabel="Container view">
+                        <rect key="frame" x="0.0" y="0.0" width="591" height="304.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" text="HEADER TEXT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVR-gE-LN6">
+                                <rect key="frame" x="30" y="37" width="531" height="21.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="ssL-8a-eUA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="17"/>
+                                <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ssL-8a-eUA"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zu2-7o-f0l">
+                                <rect key="frame" x="30" y="68.5" width="531" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="weK-CK-FNe"/>
+                                </constraints>
+                                <string key="text">As quintessentially London as black cabs, Routemaster buses and Fortnum’s, the stucco-fronted townhouse is the dream to which every city-dweller aspires.</string>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
+                                <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="weK-CK-FNe"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <textView opaque="NO" contentMode="left" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-b0-djd" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
+                                <rect key="frame" x="30" y="30.5" width="531" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="999" constant="56" id="li6-iJ-CeO"/>
+                                </constraints>
+                                <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="next"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="dottedBorderColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="MmN-MS-zpa" id="Ac4-30-LXb"/>
+                                </connections>
+                            </textView>
+                            <textView opaque="NO" contentMode="left" verticalHuggingPriority="249" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NBz-86-1kG" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
+                                <rect key="frame" x="30" y="86.5" width="531" height="188"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="188" id="khY-5q-0ip"/>
+                                </constraints>
+                                <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="dottedBorderColor">
+                                        <color key="value" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minimumHeight">
+                                        <real key="value" value="60"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="MmN-MS-zpa" id="5ep-2H-bBc"/>
+                                </connections>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647064920000004" green="0.10588236149999999" blue="0.47843140360000003" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="NBz-86-1kG" firstAttribute="top" secondItem="qRK-b0-djd" secondAttribute="bottom" priority="999" id="DWk-2d-CaM"/>
+                            <constraint firstAttribute="bottom" secondItem="NBz-86-1kG" secondAttribute="bottom" priority="999" constant="30" id="HJz-aI-Hiv"/>
+                            <constraint firstItem="KVR-gE-LN6" firstAttribute="top" secondItem="3OI-xO-5J8" secondAttribute="top" priority="999" constant="37" id="Oy9-7U-Vge"/>
+                            <constraint firstAttribute="trailing" secondItem="zu2-7o-f0l" secondAttribute="trailing" constant="30" id="RcM-JA-nyL"/>
+                            <constraint firstItem="zu2-7o-f0l" firstAttribute="top" secondItem="KVR-gE-LN6" secondAttribute="bottom" priority="999" constant="10" id="WrZ-xc-n3g"/>
+                            <constraint firstItem="KVR-gE-LN6" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="ZdK-SZ-SZG"/>
+                            <constraint firstAttribute="trailing" secondItem="NBz-86-1kG" secondAttribute="trailing" constant="30" id="eAJ-HG-khB"/>
+                            <constraint firstItem="qRK-b0-djd" firstAttribute="top" secondItem="3OI-xO-5J8" secondAttribute="top" priority="999" constant="30" id="eGK-cd-eHy"/>
+                            <constraint firstAttribute="bottom" secondItem="zu2-7o-f0l" secondAttribute="bottom" priority="998" constant="30" id="gpg-Fd-Nsp"/>
+                            <constraint firstItem="NBz-86-1kG" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="hKy-VU-8J9"/>
+                            <constraint firstItem="qRK-b0-djd" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="hUO-Tk-KG9"/>
+                            <constraint firstAttribute="trailing" secondItem="qRK-b0-djd" secondAttribute="trailing" constant="30" id="j12-ZJ-obK"/>
+                            <constraint firstItem="zu2-7o-f0l" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="qMZ-Lb-6Fb"/>
+                            <constraint firstAttribute="trailing" secondItem="KVR-gE-LN6" secondAttribute="trailing" constant="30" id="snd-31-kEW"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="3OI-xO-5J8" secondAttribute="trailing" id="K3V-lR-qel"/>
+                    <constraint firstItem="3OI-xO-5J8" firstAttribute="top" secondItem="bTG-dM-I2n" secondAttribute="top" id="Mnc-rq-DsL"/>
+                    <constraint firstItem="3OI-xO-5J8" firstAttribute="leading" secondItem="bTG-dM-I2n" secondAttribute="leading" id="oa3-mw-CqQ"/>
+                    <constraint firstAttribute="bottom" secondItem="3OI-xO-5J8" secondAttribute="bottom" id="ykO-sz-IQb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="editMainTextTopMarginConstraint" destination="DWk-2d-CaM" id="WYa-H7-IWN"/>
+                <outlet property="editMainTextView" destination="NBz-86-1kG" id="xya-Pd-4KO"/>
+                <outlet property="editTitleTextView" destination="qRK-b0-djd" id="9YM-zL-b3V"/>
+                <outlet property="mainTextLabel" destination="zu2-7o-f0l" id="zBA-AB-YHV"/>
+                <outlet property="mainTextLabelHeightConstraint" destination="weK-CK-FNe" id="uLo-GF-aYA"/>
+                <outlet property="mainTextLabelTopMarginConstraint" destination="WrZ-xc-n3g" id="VJu-d4-WN1"/>
+                <outlet property="titleLabel" destination="KVR-gE-LN6" id="Q7B-Jc-i6q"/>
+                <outlet property="titleLabelHeightConstraint" destination="ssL-8a-eUA" id="C0G-z7-8lQ"/>
+                <outlet property="titleLabelTopConstraint" destination="Oy9-7U-Vge" id="Xsb-ah-9Xn"/>
+            </connections>
+            <point key="canvasLocation" x="509.5" y="361.5"/>
+        </tableViewCell>
+    </objects>
+</document>
