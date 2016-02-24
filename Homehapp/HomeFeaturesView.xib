@@ -27,7 +27,7 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZuJ-XM-nlh">
+                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZuJ-XM-nlh">
                             <rect key="frame" x="20" y="83" width="560" height="147"/>
                             <color key="backgroundColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="0.0" colorSpace="calibratedRGB"/>
                             <constraints>

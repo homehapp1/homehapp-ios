@@ -25,8 +25,12 @@ class HomeFeaturesView: UIView, EditableHomeInfoView, UICollectionViewDataSource
             //Divide features amount by 4 to get how many rows collectionView has
             let featuresAmount = home?.getFeatures().count ?? 0
             
-            // 210 is eveything else on the cell but collectionView. TODO Get it programmatically!
-            containerViewHeight.constant = ceil(CGFloat(featuresAmount) / 4) * cellHeight + 210
+            // 180 is eveything else on the view but collectionView.
+            containerViewHeight.constant = ceil(CGFloat(featuresAmount) / 4) * cellHeight + 180
+            
+            if featuresAmount == 0 {
+                containerViewHeight.constant -= 40
+            }
             
             collectionView.reloadData()
         }

@@ -28,7 +28,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UF1-YD-bSN">
-                            <rect key="frame" x="200" y="222" width="200" height="50"/>
+                            <rect key="frame" x="200" y="205" width="200" height="50"/>
                             <color key="backgroundColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="0.0" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="5rw-c9-6eb"/>
@@ -111,7 +111,7 @@
                         <constraint firstItem="UF1-YD-bSN" firstAttribute="centerX" secondItem="ZhI-bw-eeq" secondAttribute="centerX" id="o1a-Zj-zTt"/>
                         <constraint firstItem="QEY-d9-TDx" firstAttribute="centerX" secondItem="xK3-C5-8Kh" secondAttribute="centerX" multiplier="1.2" id="rIR-Fb-m9y"/>
                         <constraint firstItem="ZhI-bw-eeq" firstAttribute="leading" secondItem="xK3-C5-8Kh" secondAttribute="leading" constant="20" id="uAA-eX-5w6"/>
-                        <constraint firstItem="UF1-YD-bSN" firstAttribute="centerY" secondItem="ZhI-bw-eeq" secondAttribute="centerY" constant="17" id="vCM-HP-xUd"/>
+                        <constraint firstItem="UF1-YD-bSN" firstAttribute="centerY" secondItem="ZhI-bw-eeq" secondAttribute="centerY" id="vCM-HP-xUd"/>
                         <constraint firstAttribute="bottom" secondItem="WVl-oj-cAT" secondAttribute="bottom" constant="80" id="x10-Sc-FIC"/>
                         <constraint firstItem="ZhI-bw-eeq" firstAttribute="top" secondItem="xK3-C5-8Kh" secondAttribute="top" constant="40" id="ztW-mC-eRt"/>
                     </constraints>
