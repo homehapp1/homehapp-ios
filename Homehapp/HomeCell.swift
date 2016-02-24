@@ -75,6 +75,8 @@ class HomeCell: UICollectionViewCell {
             locationLabel.text = NSLocalizedString("homestorycell:here-you-can-add", comment: "")
             titleLabel.text = NSLocalizedString("homestorycell:your-very-own-home-story", comment: "")
             createdByLabel.text = NSLocalizedString("homestorycell:by-yourself", comment: "")
+            likeIcon.hidden = true
+            likeLabel.hidden = true
         } else {
             
             createStoryContainerView.hidden = true
@@ -131,6 +133,7 @@ class HomeCell: UICollectionViewCell {
             locationLabel.text = home!.locationWithCity()
             
             // Likes
+            likeIcon.hidden = false
             likeLabel.text = "\(home!.likes)"
             if home!.likes > 0 {
                 likeLabel.hidden = false
