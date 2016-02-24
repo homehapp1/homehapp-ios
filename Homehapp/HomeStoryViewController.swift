@@ -52,9 +52,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     /// Close view -button
     @IBOutlet weak var closeViewButton: UIButton!
     
-    /// Button for canceling the edit state
-    //@IBOutlet private weak var cancelButton: UIButton!
-    
     /// Edit button; toggles to the edit mode
     @IBOutlet private weak var editButton: UIButton!
     
@@ -195,19 +192,41 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         return nil
     }
     
-    /// Animatedly adds a row to the table view and scrolls to the new row when done
-    private func addStoryBlockTableViewRow() {
-        // The new index the index of the last storyblock (we're always appending) + 1 for the header
-        let newIndexPath = NSIndexPath(forRow: storyObject.storyBlocks.count, inSection: 0)
+    /// Calculate to which position to insert cell that will be added
+    private func calculateCellInsertPosition() -> Int {
+        let tableViewPoint = tableView.convertPoint(CGPointMake(self.view.width / 2, self.view.height / 3), fromView: tableView.superview)
+        var newIndexPath = tableView.indexPathForRowAtPoint(tableViewPoint)
+        if newIndexPath == nil {
+            newIndexPath = NSIndexPath(forRow: storyObject.storyBlocks.count, inSection: 0)
+        }
+        return min(newIndexPath!.row + 1, storyObject.storyBlocks.count + 1)
+    }
+    
+    /** 
+     Animatedly adds a row to the table view and scrolls to the new row when done
+    */
+    private func addStoryBlockTableViewRow(position: Int) {
+        
+        let newIndexPath = NSIndexPath(forRow: position, inSection: 0)
+        
+        // Scroll only if the cell would be otherwise invisible
+        // TODO calculate scroll amount based on the cell that was added?
+        // If text block, probably the best position would be in the screen so that keyboard just opens below
+        let rectOfCellInTableView: CGRect = tableView.rectForRowAtIndexPath(NSIndexPath(forRow: position - 1, inSection: 0))
+        let rectOfCellInSuperview: CGRect = tableView.convertRect(rectOfCellInTableView, toView: tableView.superview)
+        let marginFromBottom: CGFloat = 160 // We scroll if block was added within 160px up from bottom bar
+        let scroll = rectOfCellInSuperview.y + rectOfCellInSuperview.height > view.height - bottomBarHeight - marginFromBottom
         
         CATransaction.begin()
         
-        CATransaction.setCompletionBlock() {
-            self.tableView.scrollToRowAtIndexPath(newIndexPath, atScrollPosition: .Bottom, animated: true)
+        if scroll {
+            CATransaction.setCompletionBlock() {
+                self.tableView.scrollToRowAtIndexPath(newIndexPath, atScrollPosition: .Middle, animated: true)
+            }
         }
         
         tableView.beginUpdates()
-        tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
+        tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
         tableView.endUpdates()
         
         CATransaction.commit()
@@ -316,7 +335,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 // Add/changing the image of the header cell (home's main image)
                 dataManager.performUpdates {
                     storyObject.image = image // Updates the cell
-                    //storyObject.coverImage = image
                 }
                 headerCell.storyObject = storyObject
         } else if let galleryCell = editingCell as? GalleryStoryBlockCell,
@@ -334,21 +352,25 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 }
                 contentImageCell.storyBlock = storyBlock
         } else {
+            
+            // Calculate position where to add new storyBlock
+            let position = calculateCellInsertPosition()
+            
             // Create a new StoryBlock with the local image
             dataManager.performUpdates {
                 if images.count > 1 {
                     let storyBlock = StoryBlock(template: .Gallery)
                     storyBlock.galleryImages.appendContentsOf(images)
-                    storyObject.storyBlocks.append(storyBlock)
+                    storyObject.storyBlocks.insert(storyBlock, atIndex: position - 1)
                 } else {
                     let storyBlock = StoryBlock(template: .ContentImage)
                     storyBlock.image = images.first
-                    storyObject.storyBlocks.append(storyBlock)
+                    storyObject.storyBlocks.insert(storyBlock, atIndex: position - 1)
                 }
             }
             
             // Animatedly add the new story block row
-            addStoryBlockTableViewRow()
+            addStoryBlockTableViewRow(position)
         }
         
         for var i = 0; i < selectedImages.count; ++i {
@@ -413,15 +435,18 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Insert a thumbnail image into the image cache by that url
         ImageCache.sharedInstance().putImage(image: snapshotImage, url: videoAssetUrl.absoluteString, storeOnDisk: true)
         
+        // Calculate position where to add new storyBlock
+        let position = calculateCellInsertPosition()
+        
         // Create a story block out of this video
         dataManager.performUpdates {
             let storyBlock = StoryBlock(template: .BigVideo)
             storyBlock.video = video
-            storyObject.storyBlocks.append(storyBlock)
+            storyObject.storyBlocks.insert(storyBlock, atIndex: position - 1)
         }
         
         // Animatedly add the new table view row for the video
-        addStoryBlockTableViewRow()
+        addStoryBlockTableViewRow(position)
         
         // Re-encode the local video into 720p and get access to the new video file
         requestVideoDataForAssetUrl(videoAssetUrl) { (videoFileUrl, error) in
@@ -527,7 +552,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         tableView.allowLongPressReordering = editMode
         editButton.hidden = editMode
         saveButton.hidden = !editMode
-        //cancelButton.hidden = !editMode
         backButton.hidden = editMode
         
         // Animatedly change the edit state for visible cells
@@ -537,7 +561,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             }
         }
 
-        editModeChanged()
+        // Uncomment to hide home owner cell in edit mode. See numberOfRowsInSection also
+        //editModeChanged()
     }
     
     private func toggleAddContentControls() {
@@ -744,14 +769,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         }
     }
     
-    // MARK: IBAction handlers
-    /*
-    @IBAction func cancelButtonPressed(button: UIButton) {
-        setEditMode(false)
-        toggleAddContentControls()
-    }
-    */
-    
     @IBAction func editButtonPressed(button: UIButton) {
         setEditMode(true)
         toggleAddContentControls()
@@ -788,13 +805,16 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     @IBAction func addTextButtonPressed(sender: UIButton) {
         UIResponder.resignCurrentFirstResponder()
         
+        // Calculate position where to add new storyBlock
+        let position = calculateCellInsertPosition()
+        
         // Add new Content block
         dataManager.performUpdates {
-            storyObject.storyBlocks.append(StoryBlock(template: .ContentBlock))
+            storyObject.storyBlocks.insert(StoryBlock(template: .ContentBlock), atIndex: position - 1)
         }
         
         // Animate the addition of the new row in the table view
-        addStoryBlockTableViewRow()
+        addStoryBlockTableViewRow(position)
     }
     
     @IBAction func neighborhoodButtonPressed(sender: UIButton) {
@@ -945,9 +965,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     // MARK: From UITableViewDataSource
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Normal mode has header + footer; edit mode only header.
-        var count = editMode ? 1 : 2
-
+        // Uncomment to hide home owner cell in edit mode. See setEditMode also
+        //var count = editMode ? 1 : 2
+        
+        var count = 2
         count += storyObject.storyBlocks.count
 
         return count
@@ -1192,7 +1213,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         }
         
         saveButton.hidden = true
-        //cancelButton.hidden = true
         closeViewButton.hidden = allowEditMode
         toggleSettingsButtonVisibility()
         
