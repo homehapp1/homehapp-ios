@@ -133,11 +133,12 @@ class HomeCell: UICollectionViewCell {
             locationLabel.text = home!.locationWithCity()
             
             // Likes
-            likeIcon.hidden = false
             likeLabel.text = "\(home!.likes)"
             if home!.likes > 0 {
                 likeLabel.hidden = false
+                likeIcon.hidden = false
             } else {
+                likeIcon.hidden = true
                 likeLabel.hidden = true
             }
             if home!.iHaveLiked {
