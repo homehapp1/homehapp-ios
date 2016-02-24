@@ -1020,7 +1020,7 @@ YOU BELONG TO</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vp8-t5-zWo">
-                                <rect key="frame" x="-140" y="-140" width="880" height="880"/>
+                                <rect key="frame" x="-540" y="-540" width="1680" height="1680"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="t8I-Hc-H2r">
@@ -1053,10 +1053,10 @@ YOU BELONG TO</string>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="Vp8-t5-zWo" secondAttribute="trailing" constant="-160" id="0Dv-PD-ADH"/>
-                            <constraint firstItem="aos-Cw-9cU" firstAttribute="top" secondItem="Vp8-t5-zWo" secondAttribute="bottom" constant="-140" id="3vu-Yx-tns"/>
-                            <constraint firstItem="Vp8-t5-zWo" firstAttribute="leading" secondItem="Jdl-93-MYY" secondAttribute="leadingMargin" constant="-160" id="M22-Hm-0jX"/>
-                            <constraint firstItem="Vp8-t5-zWo" firstAttribute="top" secondItem="VQS-ot-hQ7" secondAttribute="bottom" constant="-140" id="PBT-8k-9iG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Vp8-t5-zWo" secondAttribute="trailing" constant="-560" id="0Dv-PD-ADH"/>
+                            <constraint firstItem="aos-Cw-9cU" firstAttribute="top" secondItem="Vp8-t5-zWo" secondAttribute="bottom" constant="-540" id="3vu-Yx-tns"/>
+                            <constraint firstItem="Vp8-t5-zWo" firstAttribute="leading" secondItem="Jdl-93-MYY" secondAttribute="leadingMargin" constant="-560" id="M22-Hm-0jX"/>
+                            <constraint firstItem="Vp8-t5-zWo" firstAttribute="top" secondItem="VQS-ot-hQ7" secondAttribute="bottom" constant="-540" id="PBT-8k-9iG"/>
                             <constraint firstItem="Vp8-t5-zWo" firstAttribute="centerY" secondItem="Jdl-93-MYY" secondAttribute="centerY" id="SS0-2c-LFs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5Yf-fP-Byv" secondAttribute="trailing" id="YHk-WO-lqW"/>
                             <constraint firstItem="5Yf-fP-Byv" firstAttribute="top" secondItem="t8I-Hc-H2r" secondAttribute="top" constant="10" id="dsw-m8-LPx"/>

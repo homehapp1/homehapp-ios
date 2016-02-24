@@ -153,6 +153,11 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     // MARK: Private methods
     
     func getSizeForOpenedImage() -> CGSize {
+        
+        if selectedImage == nil {
+            return CGSizeZero
+        }
+        
         var newSize = CGSizeMake(self.view.width, self.view.height)
         if CGFloat(selectedImage!.height) > self.view.height {
             newSize = CGSizeMake(max((self.view.height / CGFloat(selectedImage!.height)) * CGFloat(selectedImage!.width), self.view.width), self.view.height)
@@ -201,13 +206,11 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         
-        // Calculate current collection view page index. First check if image is opened
-        var pageIndex: CGFloat = 0
-        if collectionView.contentSize.width > collectionView.bounds.width * CGFloat(getImageCount()) {
-            
-        } else {
-            pageIndex = round(collectionView.contentOffset.x / collectionView.bounds.width)
-        }
+        // Close opened image if rotation occurred
+        selectedImage = nil
+        
+        // Get current collection view page index.
+        let pageIndex = CGFloat(collectionView.indexPathForItemAtPoint(CGPointMake(collectionView.contentOffset.x, size.width / 2))!.row)
         
         // Calculate inverse transform and translationfor the background view in case we're going 
         // landscape since background view should always be portrait as the main home list view is
