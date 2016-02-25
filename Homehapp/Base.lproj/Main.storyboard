@@ -1181,7 +1181,7 @@ YOU BELONG TO</string>
                                 <rect key="frame" x="0.0" y="65" width="600" height="535"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YDf-hR-xKO">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="535"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="Uk0-uw-jb7" id="Tb9-5r-Zmk"/>
@@ -1316,10 +1316,16 @@ YOU BELONG TO</string>
                                     <constraint firstItem="YDf-hR-xKO" firstAttribute="top" secondItem="6er-OQ-v9M" secondAttribute="top" id="R34-Wx-bQw"/>
                                     <constraint firstItem="35A-QN-Cgs" firstAttribute="leading" secondItem="6er-OQ-v9M" secondAttribute="leading" id="RwH-h7-8im"/>
                                     <constraint firstItem="YDf-hR-xKO" firstAttribute="leading" secondItem="6er-OQ-v9M" secondAttribute="leading" id="Zn0-E6-AWE"/>
+                                    <constraint firstAttribute="bottom" secondItem="YDf-hR-xKO" secondAttribute="bottom" id="okQ-C7-TOK"/>
                                     <constraint firstAttribute="trailing" secondItem="WQq-m1-VdT" secondAttribute="trailing" id="qcP-jT-bGu"/>
                                     <constraint firstItem="npe-ev-8sr" firstAttribute="top" secondItem="6er-OQ-v9M" secondAttribute="top" constant="10" id="tSg-kr-s7j"/>
                                     <constraint firstItem="npe-ev-8sr" firstAttribute="leading" secondItem="6er-OQ-v9M" secondAttribute="leading" id="uIf-9C-a9J"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="21j-MI-75z"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2349,10 +2355,10 @@ YOU BELONG TO</string>
         <image name="tab_profile" width="22" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="2oZ-Kv-ZPv"/>
         <segue reference="dGe-dO-Sax"/>
-        <segue reference="6KU-IE-xqa"/>
-        <segue reference="nEd-vW-twW"/>
-        <segue reference="RfA-h3-Lwk"/>
-        <segue reference="VaH-IM-T7w"/>
+        <segue reference="tLn-3J-sXe"/>
+        <segue reference="I1G-aj-zTu"/>
+        <segue reference="ZHq-AG-WSJ"/>
     </inferredMetricsTieBreakers>
 </document>
