@@ -709,7 +709,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // If there is two subsequent content blocks (from latter top margin is removed)
         if cell is ContentStoryBlockCell || cell is ContentImageStoryBlockCell || cell is GalleryStoryBlockCell {
             if let marginCell = cell as? BaseStoryBlockCell {
-                if indexPath.row == 1 || (indexPath.row > 1 && home.storyBlocks[indexPath.row - 2].template == "ContentBlock") {
+                if indexPath.row == 1 || (!home.isMyHome() && (indexPath.row > 1 && home.storyBlocks[indexPath.row - 2].template == "ContentBlock")) {
                     marginCell.removeTopMargin = true
                 } else {
                     marginCell.removeTopMargin = false

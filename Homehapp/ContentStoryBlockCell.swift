@@ -59,7 +59,7 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
                 editTitleLabelTopConstraint.constant = 0
             } else {
                 titleLabelTopConstraint.constant = titleLabelOriginalTopMarginConstraint
-                editTitleLabelTopConstraint.constant = titleLabelOriginalTopMarginConstraint
+                editTitleLabelTopConstraint.constant = 30
             }
         }
     }
