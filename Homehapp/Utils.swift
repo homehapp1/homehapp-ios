@@ -38,7 +38,11 @@ func scaledCloudinaryUrl(width width: Int, height: Int, url: String) -> String {
     let height = CGFloat(height)
     
     if (width < maxSize.width) && (height < maxSize.height) {
-        return url
+        
+        // Let's always make sure exif information and orientation considered if we dont't scale image in cloudinary
+        let scaledUrl = url.stringByReplacingOccurrencesOfString("/upload/", withString: "/upload/a_exif")
+        
+        return scaledUrl
     }
 
     let widthRatio = width / maxSize.width
