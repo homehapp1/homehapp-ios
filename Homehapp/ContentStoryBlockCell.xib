@@ -122,6 +122,7 @@
             <connections>
                 <outlet property="editMainTextTopMarginConstraint" destination="DWk-2d-CaM" id="WYa-H7-IWN"/>
                 <outlet property="editMainTextView" destination="NBz-86-1kG" id="xya-Pd-4KO"/>
+                <outlet property="editTitleLabelTopConstraint" destination="eGK-cd-eHy" id="XCa-Na-a7Q"/>
                 <outlet property="editTitleTextView" destination="qRK-b0-djd" id="9YM-zL-b3V"/>
                 <outlet property="mainTextLabel" destination="zu2-7o-f0l" id="zBA-AB-YHV"/>
                 <outlet property="mainTextLabelHeightConstraint" destination="weK-CK-FNe" id="uLo-GF-aYA"/>

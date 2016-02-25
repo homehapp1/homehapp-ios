@@ -20,6 +20,7 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     @IBOutlet private weak var mainTextLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var editMainTextTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet private weak var mainTextLabelTopMarginConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var editTitleLabelTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var editTitleTextView: ExpandingTextView!
     @IBOutlet weak var editMainTextView: ExpandingTextView!
@@ -55,10 +56,10 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             // If content block is first cell, it should not have top margin
             if removeTopMargin {
                 titleLabelTopConstraint.constant = 0
-                //editTitleLabelTopConstraint.constant = 0
+                editTitleLabelTopConstraint.constant = 0
             } else {
                 titleLabelTopConstraint.constant = titleLabelOriginalTopMarginConstraint
-                //editTitleLabelTopConstraint.constant = titleLabelOriginalTopMarginConstraint
+                editTitleLabelTopConstraint.constant = titleLabelOriginalTopMarginConstraint
             }
         }
     }
@@ -102,6 +103,7 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             titleLabelHeightConstraint.active = false
             mainTextLabelHeightConstraint.active = false
             editMainTextTopMarginConstraint.constant = 0
+            mainTextLabelTopMarginConstraint.constant = 10
 
             editTitleTextView.shouldResize = true
             editTitleTextView.updateSize(notify: false)
