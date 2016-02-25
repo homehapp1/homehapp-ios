@@ -52,23 +52,25 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
 
     override var storyBlock: StoryBlock? {
         didSet {
-            if storyBlock?.title?.length > 0 {
-                titleLabel.text = storyBlock?.title?.uppercaseString
-                titleBottomMarginConstraint.constant = 40;
-                if removeTopMargin {
-                    titleTopMarginConstraint.constant = 0;
+            if storyBlock != nil {
+                if storyBlock?.title?.length > 0 {
+                    titleLabel.text = storyBlock?.title?.uppercaseString
+                    titleBottomMarginConstraint.constant = 40;
+                    if removeTopMargin {
+                        titleTopMarginConstraint.constant = 0;
+                    } else {
+                        titleTopMarginConstraint.constant = 40;
+                    }
                 } else {
-                    titleTopMarginConstraint.constant = 40;
+                    titleLabel.text = ""
+                    titleBottomMarginConstraint.constant = 0;
+                    titleTopMarginConstraint.constant = 3;
                 }
-            } else {
-                titleLabel.text = ""
-                titleBottomMarginConstraint.constant = 0;
-                titleTopMarginConstraint.constant = 3;
+                if storyBlock?.galleryImages.count > 0 {
+                    calculateImageSizes()
+                }
+                collectionView.reloadData()
             }
-            if storyBlock?.galleryImages.count > 0 {
-                calculateImageSizes()
-            }
-            collectionView.reloadData()
         }
     }
     
@@ -317,6 +319,11 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! GalleryImageCell
         imageSelectedCallback?(imageIndex: indexPath.row, imageView: cell.imageView)
+    }
+    
+    override func prepareForReuse() {
+        storyBlock = nil
+        super.prepareForReuse()
     }
     
     // MARK: From UICollectionViewDelegateFlowLayout
