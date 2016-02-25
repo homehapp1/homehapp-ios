@@ -6,18 +6,18 @@ PODS:
   - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
-  - Cloudinary (1.0.14)
-  - Crashlytics (3.6.0):
+  - Cloudinary (1.0.15)
+  - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
-  - CryptoSwift (0.2.2)
+  - CryptoSwift (0.2.3)
   - CTAssetsPickerController (3.1.1):
     - PureLayout (~> 3.0.0)
-  - Fabric (1.6.4)
-  - FBSDKCoreKit (4.9.1):
+  - Fabric (1.6.6)
+  - FBSDKCoreKit (4.10.0):
     - Bolts (~> 1.5)
-  - FBSDKLoginKit (4.9.1):
+  - FBSDKLoginKit (4.10.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.9.1):
+  - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
   - Google/Analytics (1.3.2):
     - Google/Core
@@ -38,7 +38,7 @@ PODS:
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleInterchangeUtilities (1.1.0):
     - GoogleSymbolUtilities (~> 1.0)
-  - GoogleMaps (1.11.1)
+  - GoogleMaps (1.12.2)
   - GoogleNetworkingUtilities (1.0.0):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleSignIn (2.4.0):
@@ -50,11 +50,11 @@ PODS:
   - GoogleUtilities (1.1.0):
     - GoogleSymbolUtilities (~> 1.0.0)
   - PureLayout (3.0.1)
-  - QvikNetwork (0.1.0):
+  - QvikNetwork (0.1.3):
     - Alamofire (~> 2.0)
     - CryptoSwift
     - QvikSwift (~> 2.0.0)
-    - SwiftKeychain
+    - SwiftKeychain (~> 0.1)
     - XCGLogger (~> 3.0)
   - QvikSwift (2.0.14)
   - Realm (0.96.2):
@@ -63,7 +63,7 @@ PODS:
   - RealmSwift (0.96.2):
     - Realm (= 0.96.2)
   - Reveal-iOS-SDK (1.6.2)
-  - SwiftDate (3.0.0)
+  - SwiftDate (3.0.2)
   - SwiftKeychain (0.1.5)
   - XCGLogger (3.2)
 
@@ -84,37 +84,36 @@ DEPENDENCIES:
   - RealmSwift (= 0.96.2)
   - Reveal-iOS-SDK
   - SwiftDate
-  - SwiftKeychain
   - XCGLogger (~> 3.0)
 
 SPEC CHECKSUMS:
   Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
   Bolts: f52a250053bb517ca874523c3913776359ab3def
-  Cloudinary: b07e14313bcc3a47418ea47e1c4020cb70518446
-  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
-  CryptoSwift: d382228d6301c09474132417878a741c2a2e68cd
+  Cloudinary: f80af4565ec08c521d5e58cb56d9fbe1e4595e40
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  CryptoSwift: b2bf37b8e7cc6d682ef3365cb966bc5ae5174aa5
   CTAssetsPickerController: 6fba9134a230656ffe34ac0effb0060a1ead65cb
-  Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
-  FBSDKCoreKit: aee20b6d9855f15b618d4fddd1a5ad45f5a4a59d
-  FBSDKLoginKit: ec22dc49bd372b064e93d6773df4ffefb3a552a2
-  FBSDKShareKit: b8c8ef0ed173f9fc1b3c8df384a0202ce53008d4
+  Fabric: 1abc1e59f11fa39ede6f690ef7309d8563e3ec59
+  FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
+  FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
+  FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   Google: 97618e118111b998cce1d8dd1bd98b82301d72db
   GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
   GoogleAuthUtilities: 049ffd3a297cdffd271451b82fd4e75304f15ef3
   GoogleInterchangeUtilities: d7f7174176fbcf9710f696f1acebad4dbd98ac03
-  GoogleMaps: c947160008f414c66707a5ea60f35e92055c7670
+  GoogleMaps: cc76edaa94a4284e80ecd7089ed319d1cca5f37e
   GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
   GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
-  QvikNetwork: df844719f9d774c29ccebd18a7f6040cef0f1654
+  QvikNetwork: e8f50ea68b57bdb7cc14358de7fa58c950d5ea72
   QvikSwift: ad17c1cd2182e86edcf7b7ba2bb500a42c27f44a
   Realm: 3ce8448151c571e90b85002d984d7f93f54fc8a3
   RealmSwift: 485599fe54e35461c4a0daa7d01d8fbf11424873
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
-  SwiftDate: 7bbfdabea1500fef0a32c09ba05f9645dca5190a
+  SwiftDate: 952306bbcd546719ba7431889939b58c5f57bae8
   SwiftKeychain: 1387edad8b56c659daa93d9ffc99526bac5b0088
   XCGLogger: da1f341f4bb8979db6e1df64232f04d9698402d4
 

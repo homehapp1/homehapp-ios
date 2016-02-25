@@ -66,8 +66,8 @@ class AddHomeLocationViewController: BaseViewController, GMSMapViewDelegate {
     
     // MARK GMSMapViewDelegate
     
-    func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
-        mapView?.clear()
+    func mapView(mapView: GMSMapView, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
+        mapView.clear()
         
         // We move annotation a bit due to the fact that our annotation is circle instead on pin
         // and thus center of circle is a bit different than pin position
@@ -82,8 +82,10 @@ class AddHomeLocationViewController: BaseViewController, GMSMapViewDelegate {
         super.viewDidLoad()
         
         camera = GMSCameraPosition.cameraWithLatitude(0, longitude: 0, zoom: 0)
+        
         self.view.layoutIfNeeded()
-        mapView = GMSMapView.mapWithFrame(CGRectMake(0, 0, mapContainerView.width, mapContainerView.height), camera: camera)
+        
+        mapView = GMSMapView.mapWithFrame(CGRectMake(0, 0, mapContainerView.width, mapContainerView.height), camera: camera!)
         mapView!.delegate = self
         mapView?.setMinZoom(0, maxZoom: 14)
         mapContainerView.addSubview(mapView!)
@@ -92,7 +94,7 @@ class AddHomeLocationViewController: BaseViewController, GMSMapViewDelegate {
         if home!.locationLatitude != 0.0 && home!.locationLongitude != 0.0 {
             selectedCoordinate = CLLocationCoordinate2D(latitude: home!.locationLatitude, longitude: home!.locationLongitude)
             camera = GMSCameraPosition.cameraWithTarget(selectedCoordinate!, zoom: 12)
-            mapView?.camera = camera
+            mapView?.camera = camera!
             addUserHomeAnnotation()
         }
     }
