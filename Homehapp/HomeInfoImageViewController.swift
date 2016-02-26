@@ -45,7 +45,7 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
     }
     
     @IBAction func closeButtonPressed(button: UIButton) {
-        self.performSegueWithIdentifier(segueIdhomeInfoImageToHomeInfo, sender: self)
+        self.performSegueWithIdentifier(self.segueIdhomeInfoImageToHomeInfo, sender: self)
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
@@ -83,8 +83,7 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
                         if let pickingMode = self?.pickingMode {
                             switch pickingMode {
                             case .EPC:
-                                appstate.mostRecentlyOpenedHome?.epcs.removeAll()
-                                appstate.mostRecentlyOpenedHome?.epcs.append(pickedImage)
+                                appstate.mostRecentlyOpenedHome?.epc = pickedImage
                             case .FloorPlan:
                                 appstate.mostRecentlyOpenedHome?.floorPlans.removeAll()
                                 appstate.mostRecentlyOpenedHome?.floorPlans.append(pickedImage)

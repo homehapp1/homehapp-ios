@@ -132,14 +132,8 @@ class RemoteService: BaseRemoteService {
         }
         
         // EPC
-        if home.epcs.count > 0 {
-            var epcsJson = [AnyObject]()
-            for epc in home.epcs {
-                if let imageJson = epc.toJSON() {
-                    epcsJson.append(imageJson)
-                }
-            }
-            homeJson["epc"] = epcsJson
+        if home.epc != nil {
+            homeJson["epc"] = home.epc!.toJSON()
         }
         
         // Floorplan

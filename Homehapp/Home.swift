@@ -67,7 +67,7 @@ class Home: DeletableObject, StoryObject {
     
     // Floorplans and EPCs
     let floorPlans = List<Image>()
-    let epcs = List<Image>()
+    dynamic var epc: Image? = nil
 
     // Stories / blocks for home story
     let storyBlocks = List<StoryBlock>()

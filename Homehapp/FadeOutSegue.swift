@@ -9,12 +9,11 @@
 class FadeOutSegue: UIStoryboardSegue {
     
     override func perform() {
-            let transition: CATransition = CATransition()
-            transition.duration = 0.3
-            transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            transition.type = kCATransitionFade;
-            sourceViewController.view.window?.layer.addAnimation(transition, forKey: "kCATransition")
-            sourceViewController.navigationController?.popViewControllerAnimated(false)
+        let transition: CATransition = CATransition()
+        transition.duration = 0.2
+        transition.type = kCATransitionFade;
+        sourceViewController.view.window?.layer.addAnimation(transition, forKey: "kCATransition")
+        sourceViewController.navigationController?.popViewControllerAnimated(false)
     }
     
 }

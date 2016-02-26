@@ -271,8 +271,8 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
             switch pickingMode {
             case .EPC:
                 homeInfoImageViewController.pickingMode = .EPC
-                if appstate.mostRecentlyOpenedHome!.epcs.count > 0 {
-                    homeInfoImageViewController.image = appstate.mostRecentlyOpenedHome!.epcs[0]
+                if appstate.mostRecentlyOpenedHome!.epc != nil {
+                    homeInfoImageViewController.image = appstate.mostRecentlyOpenedHome!.epc
                 }
             case .FloorPlan:
                 homeInfoImageViewController.pickingMode = .FloorPlan

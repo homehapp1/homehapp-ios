@@ -176,7 +176,6 @@ class DataManager {
             }
 
             existing.storyBlocks.removeAll()
-            existing.epcs.removeAll()
             existing.floorPlans.removeAll()
             existing.coverImage?.deleted = true
             existing.image?.deleted = true
@@ -278,12 +277,9 @@ class DataManager {
         }
         
         // EPCs
-        if let epcs = json["epc"] as? NSArray {
-            for imageJSON in epcs {
-                if let image = Image.fromJSON(imageJSON) {
-                    home.epcs.append(image)
-                }
-            }
+        home.epc = Image.fromJSON(json["epc"])
+        if home.epc != nil {
+            print("kivaa")
         }
 
         // FloorPlans

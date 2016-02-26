@@ -56,7 +56,7 @@ class HomeRoomsView: UIView, EditableHomeInfoView {
             } else {
                 floorPlanButtonHeightConstraint.constant = home.floorPlans.count > 0 ? originalFloorPlanButtonHeight : 0
                 floorPlanButtonBottomMarginConstraint.constant = home.floorPlans.count > 0 ? originalFloorPlanButtonBottomMargin : 0
-                epcButtonHeightConstraint.constant = home.epcs.count > 0 ? originalEpcButtonHeight : 0
+                epcButtonHeightConstraint.constant = home.epc != nil ? originalEpcButtonHeight : 0
             }
         }
     }
@@ -69,11 +69,18 @@ class HomeRoomsView: UIView, EditableHomeInfoView {
         removeOtherRoomsButton.hidden = !editMode
         addOtherRoomsButton.hidden = !editMode
         
-        floorPlanbutton.enabled = editMode
-        epcButton.enabled = editMode
+        if editMode || (home != nil && !home!.isMyHome() && home!.floorPlans.count > 0) {
+            floorPlanbutton.backgroundColor = UIColor.homehappColorActive()
+        } else {
+            floorPlanbutton.backgroundColor = UIColor.homehappDarkColor()
+        }
         
-        floorPlanbutton.backgroundColor = editMode ? UIColor.homehappColorActive() : UIColor.homehappDarkColor()
-        epcButton.backgroundColor = editMode ? UIColor.homehappColorActive() : UIColor.homehappDarkColor()
+        if editMode || (home != nil && !home!.isMyHome() && home!.epc != nil) {
+            epcButton.backgroundColor = UIColor.homehappColorActive()
+        } else {
+            epcButton.backgroundColor = UIColor.homehappDarkColor()
+        }
+    
     }
     
     // MARK Private methods
@@ -141,7 +148,7 @@ class HomeRoomsView: UIView, EditableHomeInfoView {
     }
     
     @IBAction func epcButtonPressed(button: UIButton) {
-        if home?.epcs.count > 0 || home!.isMyHome() {
+        if home?.epc != nil || home!.isMyHome() {
             epcPressedCallback?()
         }
     }
