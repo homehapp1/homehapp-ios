@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QvikNetwork
 
 /// Describes the available text editing modes for home story cells
 enum ImagePickingMode: String {
