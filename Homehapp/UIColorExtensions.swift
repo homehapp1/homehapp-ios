@@ -86,5 +86,6 @@ extension UIColor {
         let blue = Float(components[2])
         return String(format: "#%02lX%02lX%02lX", lroundf(red * 255), lroundf(green * 255), lroundf(blue * 255))
     }
+
 }
 

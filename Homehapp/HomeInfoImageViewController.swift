@@ -74,11 +74,11 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
                     if success {
                         pickedImage.url = url!
                         pickedImage.local = false
+                        let scaledCloudinaryUrl = pickedImage.scaledUrl
+                        ImageCache.sharedInstance().putImage(image: image, url: scaledCloudinaryUrl, storeOnDisk: true)
                     } else {
                         pickedImage.local = true
                     }
-                
-                    ImageCache.sharedInstance().putImage(image: image, url: imageUrl, storeOnDisk: true)
                 
                     dataManager.performUpdates({
                         if let pickingMode = self?.pickingMode {
@@ -126,9 +126,11 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
             imageView.imageUrl = image.scaledUrl
             imageView.thumbnailData = image.thumbnailData
             imageView.fadeInColor = UIColor.blackColor()
+            /* Not correct aspect ratio
             if let fadeInColor = image.backgroundColor {
                 imageView.fadeInColor = UIColor(hexString: fadeInColor)
             }
+            */
             
             imageView.imageFadeInDuration = 0
         }

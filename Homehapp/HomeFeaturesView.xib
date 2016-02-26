@@ -28,7 +28,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZuJ-XM-nlh">
-                            <rect key="frame" x="20" y="83" width="560" height="147"/>
+                            <rect key="frame" x="20" y="73" width="560" height="162"/>
                             <color key="backgroundColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="0.0" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="160" id="5y2-CQ-Hqp"/>
@@ -66,12 +66,12 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="ZuJ-XM-nlh" firstAttribute="top" secondItem="lGS-Sz-g6b" secondAttribute="bottom" constant="20" id="1xI-tE-p6B"/>
+                        <constraint firstItem="ZuJ-XM-nlh" firstAttribute="top" secondItem="lGS-Sz-g6b" secondAttribute="bottom" constant="10" id="1xI-tE-p6B"/>
                         <constraint firstItem="lGS-Sz-g6b" firstAttribute="top" secondItem="Esp-Di-CdA" secondAttribute="top" constant="20" id="32e-RK-z5K"/>
                         <constraint firstAttribute="height" constant="300" id="3A4-JE-lmm"/>
                         <constraint firstAttribute="trailing" secondItem="ZuJ-XM-nlh" secondAttribute="trailing" constant="20" id="C8C-hb-XHG"/>
                         <constraint firstItem="lGS-Sz-g6b" firstAttribute="centerX" secondItem="Esp-Di-CdA" secondAttribute="centerX" id="XyM-gS-rfu"/>
-                        <constraint firstItem="kEt-b3-6Gm" firstAttribute="top" secondItem="ZuJ-XM-nlh" secondAttribute="bottom" constant="20" id="Y6S-Yk-fet"/>
+                        <constraint firstItem="kEt-b3-6Gm" firstAttribute="top" secondItem="ZuJ-XM-nlh" secondAttribute="bottom" constant="15" id="Y6S-Yk-fet"/>
                         <constraint firstAttribute="bottom" secondItem="kEt-b3-6Gm" secondAttribute="bottom" constant="20" id="erP-6J-zVP"/>
                         <constraint firstItem="kEt-b3-6Gm" firstAttribute="centerX" secondItem="Esp-Di-CdA" secondAttribute="centerX" id="lf2-jj-uxL"/>
                         <constraint firstItem="ZuJ-XM-nlh" firstAttribute="leading" secondItem="Esp-Di-CdA" secondAttribute="leading" constant="20" id="xcm-cx-Vho"/>

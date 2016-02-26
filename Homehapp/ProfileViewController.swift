@@ -81,11 +81,11 @@ class ProfileViewController: BaseViewController, UIImagePickerControllerDelegate
                     if success {
                         userImage.url = url!
                         userImage.local = false
+                        let scaledCloudinaryUrl = userImage.scaledUrl
+                        ImageCache.sharedInstance().putImage(image: scaledImage, url: scaledCloudinaryUrl, storeOnDisk: true)
                     } else {
                         userImage.local = true
                     }
-                    
-                    ImageCache.sharedInstance().putImage(image: scaledImage, url: imageUrl, storeOnDisk: true)
                     
                     dataManager.performUpdates({
                         dataManager.findCurrentUser()?.profileImage = userImage
