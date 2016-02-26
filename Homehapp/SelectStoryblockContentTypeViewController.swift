@@ -11,8 +11,6 @@ import Photos
 import MobileCoreServices
 import CTAssetsPickerController
 
-import QvikSwift
-
 class SelectStoryblockContentTypeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, CTAssetsPickerControllerDelegate {
     
     @IBOutlet private weak var selectionView: UIView!

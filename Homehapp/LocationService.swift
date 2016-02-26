@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import QvikNetwork
 import MapKit
 import GoogleMaps
 

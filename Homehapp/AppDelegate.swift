@@ -8,8 +8,6 @@
 
 import UIKit
 import XCGLogger
-import QvikSwift
-import QvikNetwork
 import FBSDKLoginKit
 import Fabric
 import Crashlytics
@@ -44,10 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CloudinaryServiceDelegate
         
         #if DEBUG // Debug configuration
             log.setup(.Debug, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLogLevel: nil)
-            QvikNetwork.debugLogging = false
+//            QvikNetwork.debugLogging = false
         #else // Release configuration
             log.setup(.Info, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLogLevel: nil)
-            QvikNetwork.debugLogging = false
+//            QvikNetwork.debugLogging = false
             
         #endif
         

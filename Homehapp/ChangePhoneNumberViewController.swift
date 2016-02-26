@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QvikNetwork
 
 class ChangePhoneNumberViewController: BaseViewController {
 

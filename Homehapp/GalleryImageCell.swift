@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import QvikNetwork
-import QvikSwift
 
 /**
  Displays a single image in the gallery image grid.

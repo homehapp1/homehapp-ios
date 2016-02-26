@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QvikNetwork
 import MessageUI
 
 class HomeOwnerInfoCell: UITableViewCell {

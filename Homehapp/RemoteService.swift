@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import QvikNetwork
-import QvikSwift
 
 // https://mobile-api.homehapp.com/api-docs/
 // homehapp / qvik-homehapp-docs

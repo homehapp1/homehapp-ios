@@ -8,8 +8,6 @@
 
 import UIKit
 import FBSDKLoginKit
-import QvikSwift
-import QvikNetwork
 
 let loginSuccessNotification = "loginSuccessNotification"
 

@@ -8,8 +8,6 @@
 
 import UIKit
 import AVFoundation
-import QvikNetwork
-import QvikSwift
 
 /**
  Displays a single video player.

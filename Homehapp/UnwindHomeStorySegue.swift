@@ -8,9 +8,6 @@
 
 import UIKit
 
-import QvikSwift
-import QvikNetwork
-
 /**
  Segue for unwinding (going 'back') home story view to homes list view; animates
  and transitions the main image element of the home story view onto the

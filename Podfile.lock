@@ -50,13 +50,6 @@ PODS:
   - GoogleUtilities (1.1.0):
     - GoogleSymbolUtilities (~> 1.0.0)
   - PureLayout (3.0.1)
-  - QvikNetwork (0.1.3):
-    - Alamofire (~> 2.0)
-    - CryptoSwift
-    - QvikSwift (~> 2.0.0)
-    - SwiftKeychain (~> 0.1)
-    - XCGLogger (~> 3.0)
-  - QvikSwift (2.0.14)
   - Realm (0.96.2):
     - Realm/Headers (= 0.96.2)
   - Realm/Headers (0.96.2)
@@ -71,6 +64,7 @@ DEPENDENCIES:
   - Alamofire (~> 2.0)
   - Cloudinary
   - Crashlytics
+  - CryptoSwift
   - CTAssetsPickerController (~> 3.1.0)
   - Fabric
   - FBSDKCoreKit
@@ -79,11 +73,10 @@ DEPENDENCIES:
   - Google/Analytics
   - Google/SignIn
   - GoogleMaps
-  - QvikNetwork
-  - QvikSwift (~> 2.0.0)
   - RealmSwift (= 0.96.2)
   - Reveal-iOS-SDK
   - SwiftDate
+  - SwiftKeychain (~> 0.1)
   - XCGLogger (~> 3.0)
 
 SPEC CHECKSUMS:
@@ -108,8 +101,6 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
-  QvikNetwork: e8f50ea68b57bdb7cc14358de7fa58c950d5ea72
-  QvikSwift: ad17c1cd2182e86edcf7b7ba2bb500a42c27f44a
   Realm: 3ce8448151c571e90b85002d984d7f93f54fc8a3
   RealmSwift: 485599fe54e35461c4a0daa7d01d8fbf11424873
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33

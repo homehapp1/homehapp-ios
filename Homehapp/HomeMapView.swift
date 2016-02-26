@@ -8,8 +8,6 @@
 
 import UIKit
 import GoogleMaps
-import QvikNetwork
-import QvikSwift
 
 class HomeMapView: UIView, EditableHomeInfoView {
 

@@ -8,8 +8,6 @@
 
 import UIKit
 
-import QvikSwift
-
 private let deleteButtonSize : CGFloat = 60
 private let deleteButtonMargin : CGFloat = 10
 

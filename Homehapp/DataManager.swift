@@ -8,7 +8,6 @@
 
 import Foundation
 import RealmSwift
-import QvikSwift
 
 /// Notification sent when homes are updated
 let homesUpdatedNotification = "homesUpdatedNotification"

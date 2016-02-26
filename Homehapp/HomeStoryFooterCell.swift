@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QvikNetwork
 
 /**
  'Footer' view displayed after the story blocks in the home story.
