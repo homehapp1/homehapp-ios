@@ -51,6 +51,25 @@ class Video: DeletableObject {
         self.local = local
     }
     
+    func toJSON() -> [String: AnyObject]? {
+        
+        if local {
+            return nil
+        }
+        
+        var videoJson: [String: AnyObject] = [
+            "url": url,
+            "width": width,
+            "height": height
+        ]
+        
+        if let thumbnailData = thumbnailData {
+            videoJson["thumbnail"] = ["data": thumbnailData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())]
+        }
+        
+        return videoJson
+    }
+    
     override static func indexedProperties() -> [String] {
         return ["deleted"]
     }

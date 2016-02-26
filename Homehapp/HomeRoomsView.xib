@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -28,7 +28,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZM-6q-Mwb">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diQ-HA-7jf">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diQ-HA-7jf">
                             <rect key="frame" x="103" y="36" width="34" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="34" id="OCh-JR-fz2"/>
@@ -37,13 +37,13 @@
                             <color key="textColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BEDROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMP-SN-niL">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEDROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMP-SN-niL">
                             <rect key="frame" x="89" y="88" width="62.5" height="19"/>
                             <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="15"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pz4-B1-RkM">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pz4-B1-RkM">
                             <rect key="frame" x="68" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Itr-TG-pVg"/>
@@ -54,7 +54,7 @@
                                 <action selector="removeBedroomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="LRC-It-sNP"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPu-E6-1Yv">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPu-E6-1Yv">
                             <rect key="frame" x="132" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="FTG-ZJ-wHi"/>
@@ -65,7 +65,7 @@
                                 <action selector="addBedroomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="h5Y-XV-gvH"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rt8-1K-uOS">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rt8-1K-uOS">
                             <rect key="frame" x="283" y="36" width="34" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="34" id="p1e-oO-mjB"/>
@@ -74,13 +74,13 @@
                             <color key="textColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BATHROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmt-GS-6pG">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BATHROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmt-GS-6pG">
                             <rect key="frame" x="265" y="88" width="70" height="19"/>
                             <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="15"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ojl-lh-Jd6">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ojl-lh-Jd6">
                             <rect key="frame" x="248" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="gfe-UI-5eG"/>
@@ -91,7 +91,7 @@
                                 <action selector="removeBathroomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="mfO-vK-hrd"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT7-Nd-ZvH">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT7-Nd-ZvH">
                             <rect key="frame" x="312" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="g2h-cq-6Ec"/>
@@ -102,7 +102,7 @@
                                 <action selector="addBathroomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="PRO-Hp-enG"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-eY-njm">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-eY-njm">
                             <rect key="frame" x="463" y="36" width="34" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="34" id="GxH-8g-w7F"/>
@@ -111,13 +111,13 @@
                             <color key="textColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="OTHER ROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zs5-Bd-65N">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OTHER ROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zs5-Bd-65N">
                             <rect key="frame" x="440" y="88" width="80" height="19"/>
                             <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="15"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9M-go-cvd">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9M-go-cvd">
                             <rect key="frame" x="428" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="ZH8-NJ-QYL"/>
@@ -128,7 +128,7 @@
                                 <action selector="removeOtherRoomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="tTZ-QO-PMn"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLP-Xf-Uze">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLP-Xf-Uze">
                             <rect key="frame" x="492" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="a1x-9Q-VXG"/>
@@ -139,43 +139,37 @@
                                 <action selector="addOtherRoomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="xza-vR-MMC"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PzH-cw-WJt">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PzH-cw-WJt">
                             <rect key="frame" x="40" y="141" width="520" height="45"/>
                             <color key="backgroundColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="220" id="Gz9-5z-iak"/>
                                 <constraint firstAttribute="height" constant="45" id="McI-Y7-qxq"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                             <state key="normal" title="Floorplan"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="Gz9-5z-iak"/>
-                                </mask>
-                            </variation>
+                            <connections>
+                                <action selector="floorPlanButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="xYK-ee-x7T"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAK-Ad-Hcg">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAK-Ad-Hcg">
                             <rect key="frame" x="40" y="206" width="520" height="45"/>
                             <color key="backgroundColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="8ZU-fE-SgF"/>
-                                <constraint firstAttribute="width" constant="220" id="q3c-DN-Pib"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                             <state key="normal" title="Energy certificate"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="q3c-DN-Pib"/>
-                                </mask>
-                            </variation>
+                            <connections>
+                                <action selector="epcButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="ubs-vp-DNm"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="Rt8-1K-uOS" firstAttribute="centerX" secondItem="vZM-6q-Mwb" secondAttribute="centerX" id="122-xe-64W"/>
                         <constraint firstItem="NPu-E6-1Yv" firstAttribute="centerY" secondItem="diQ-HA-7jf" secondAttribute="centerY" id="1pf-0L-Pwp"/>
+                        <constraint firstItem="PzH-cw-WJt" firstAttribute="top" secondItem="vZM-6q-Mwb" secondAttribute="top" constant="141" id="CdE-yX-onL"/>
                         <constraint firstAttribute="trailing" secondItem="tAK-Ad-Hcg" secondAttribute="trailing" constant="40" id="E7u-3a-Jua"/>
-                        <constraint firstItem="NPu-E6-1Yv" firstAttribute="centerY" secondItem="oMP-SN-niL" secondAttribute="centerY" id="EWD-2A-6Rk"/>
                         <constraint firstItem="C9M-go-cvd" firstAttribute="centerY" secondItem="hNe-eY-njm" secondAttribute="centerY" id="G95-MT-kP6"/>
                         <constraint firstItem="hNe-eY-njm" firstAttribute="top" secondItem="vZM-6q-Mwb" secondAttribute="top" constant="36" id="GCO-cv-BF9"/>
                         <constraint firstItem="diQ-HA-7jf" firstAttribute="top" secondItem="vZM-6q-Mwb" secondAttribute="top" constant="36" id="Ges-m1-y6c"/>
@@ -185,16 +179,15 @@
                         <constraint firstItem="nT7-Nd-ZvH" firstAttribute="centerY" secondItem="Rt8-1K-uOS" secondAttribute="centerY" id="NHJ-FH-8xq"/>
                         <constraint firstItem="Qmt-GS-6pG" firstAttribute="top" secondItem="Rt8-1K-uOS" secondAttribute="bottom" constant="8" id="NTe-N9-yhf"/>
                         <constraint firstItem="Qmt-GS-6pG" firstAttribute="centerX" secondItem="Rt8-1K-uOS" secondAttribute="centerX" id="OBF-KI-EV1"/>
-                        <constraint firstItem="PzH-cw-WJt" firstAttribute="top" secondItem="Qmt-GS-6pG" secondAttribute="bottom" constant="34" id="QJf-Qv-8Dh"/>
                         <constraint firstItem="NPu-E6-1Yv" firstAttribute="leading" secondItem="diQ-HA-7jf" secondAttribute="trailing" constant="-5" id="QqL-QO-aw3"/>
                         <constraint firstItem="Ojl-lh-Jd6" firstAttribute="centerY" secondItem="Rt8-1K-uOS" secondAttribute="centerY" id="U0G-y0-I9k"/>
                         <constraint firstItem="LLP-Xf-Uze" firstAttribute="leading" secondItem="hNe-eY-njm" secondAttribute="trailing" constant="-5" id="Utr-av-B2q"/>
-                        <constraint firstItem="NPu-E6-1Yv" firstAttribute="leading" secondItem="oMP-SN-niL" secondAttribute="trailing" constant="-15.5" id="WaO-ZU-9Ju"/>
                         <constraint firstAttribute="height" constant="280" id="XLa-cd-MZX"/>
                         <constraint firstItem="Rt8-1K-uOS" firstAttribute="leading" secondItem="Ojl-lh-Jd6" secondAttribute="trailing" constant="-5" id="YDc-qC-Auc"/>
                         <constraint firstItem="LLP-Xf-Uze" firstAttribute="centerY" secondItem="hNe-eY-njm" secondAttribute="centerY" id="Zt5-6b-RyD"/>
                         <constraint firstAttribute="trailing" secondItem="PzH-cw-WJt" secondAttribute="trailing" constant="40" id="a7f-Xf-fae"/>
                         <constraint firstItem="diQ-HA-7jf" firstAttribute="centerX" secondItem="vZM-6q-Mwb" secondAttribute="centerX" multiplier="0.4" id="cb5-0X-jGf"/>
+                        <constraint firstAttribute="bottom" secondItem="tAK-Ad-Hcg" secondAttribute="bottom" constant="29" id="dHi-da-VDQ"/>
                         <constraint firstItem="PzH-cw-WJt" firstAttribute="centerX" secondItem="vZM-6q-Mwb" secondAttribute="centerX" id="elU-37-dQn"/>
                         <constraint firstItem="nT7-Nd-ZvH" firstAttribute="leading" secondItem="Rt8-1K-uOS" secondAttribute="trailing" constant="-5" id="fRd-4t-wGt"/>
                         <constraint firstItem="oMP-SN-niL" firstAttribute="centerX" secondItem="diQ-HA-7jf" secondAttribute="centerX" id="gJ5-f0-ORj"/>
@@ -210,8 +203,7 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="EWD-2A-6Rk"/>
-                            <exclude reference="WaO-ZU-9Ju"/>
+                            <exclude reference="XLa-cd-MZX"/>
                         </mask>
                     </variation>
                 </view>
@@ -230,6 +222,11 @@
                 <outlet property="addOtherRoomsButton" destination="LLP-Xf-Uze" id="CVv-eV-etT"/>
                 <outlet property="bathroomsLabel" destination="Rt8-1K-uOS" id="H6x-Ze-tWR"/>
                 <outlet property="bedroomsLabel" destination="diQ-HA-7jf" id="9VS-do-OLW"/>
+                <outlet property="epcButton" destination="tAK-Ad-Hcg" id="LGK-n1-UgX"/>
+                <outlet property="epcButtonHeightConstraint" destination="8ZU-fE-SgF" id="5v1-DX-vU4"/>
+                <outlet property="floorPlanButtonBottomMarginConstraint" destination="MSs-cd-2jH" id="Q37-Ig-kGB"/>
+                <outlet property="floorPlanButtonHeightConstraint" destination="McI-Y7-qxq" id="71a-OT-bvO"/>
+                <outlet property="floorPlanbutton" destination="PzH-cw-WJt" id="2YR-D2-uIn"/>
                 <outlet property="otherRoomsLabel" destination="hNe-eY-njm" id="q9D-tb-h9e"/>
                 <outlet property="removeBathroomsButton" destination="Ojl-lh-Jd6" id="XgH-n0-BvX"/>
                 <outlet property="removeBedroomsButton" destination="Pz4-B1-RkM" id="F5G-Tc-cqG"/>

@@ -74,6 +74,7 @@
 		49E97C941BDBA54300AEEB5D /* Neighborhood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E97C931BDBA54300AEEB5D /* Neighborhood.swift */; };
 		49E97C9A1BDCEE3900AEEB5D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E97C991BDCEE3900AEEB5D /* Utils.swift */; };
 		4B040FBB1C6179B200A82B3D /* EditableHomeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B040FBA1C6179B200A82B3D /* EditableHomeInfoView.swift */; };
+		4B05A87D1C7F7A0D007891CF /* HomeInfoImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B05A87C1C7F7A0D007891CF /* HomeInfoImageViewController.swift */; };
 		4B1132701C6526440081A06A /* FadeInSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B11326F1C6526440081A06A /* FadeInSegue.swift */; };
 		4B1132721C6526D10081A06A /* FadeOutSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1132711C6526D10081A06A /* FadeOutSegue.swift */; };
 		4B1132761C653F640081A06A /* HomeRoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1132751C653F640081A06A /* HomeRoomsView.swift */; };
@@ -106,6 +107,7 @@
 		4B7113851C4B0EB500156B2C /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7113841C4B0EB500156B2C /* ReplaceSegue.swift */; };
 		4BA638E41C710AA000408406 /* HomeFeatureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BA638E31C710AA000408406 /* HomeFeatureCell.xib */; };
 		4BA638E61C710AD400408406 /* HomeFeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA638E51C710AD400408406 /* HomeFeatureCell.swift */; };
+		4BACFA851C8075CF0084E74D /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BACFA841C8075CF0084E74D /* UIImageExtensions.swift */; };
 		4BC036831BE0F2190021A30E /* GalleryBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC036821BE0F2190021A30E /* GalleryBrowserViewController.swift */; };
 		4BC036851BE157C50021A30E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC036841BE157C50021A30E /* User.swift */; };
 		4BC036861BE157C50021A30E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC036841BE157C50021A30E /* User.swift */; };
@@ -217,6 +219,7 @@
 		49E97C931BDBA54300AEEB5D /* Neighborhood.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Neighborhood.swift; sourceTree = "<group>"; };
 		49E97C991BDCEE3900AEEB5D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4B040FBA1C6179B200A82B3D /* EditableHomeInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableHomeInfoView.swift; sourceTree = "<group>"; };
+		4B05A87C1C7F7A0D007891CF /* HomeInfoImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfoImageViewController.swift; sourceTree = "<group>"; };
 		4B11326F1C6526440081A06A /* FadeInSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeInSegue.swift; sourceTree = "<group>"; };
 		4B1132711C6526D10081A06A /* FadeOutSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeOutSegue.swift; sourceTree = "<group>"; };
 		4B1132751C653F640081A06A /* HomeRoomsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRoomsView.swift; sourceTree = "<group>"; };
@@ -251,6 +254,7 @@
 		4B7113841C4B0EB500156B2C /* ReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceSegue.swift; sourceTree = "<group>"; };
 		4BA638E31C710AA000408406 /* HomeFeatureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeFeatureCell.xib; sourceTree = "<group>"; };
 		4BA638E51C710AD400408406 /* HomeFeatureCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeFeatureCell.swift; sourceTree = "<group>"; };
+		4BACFA841C8075CF0084E74D /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		4BC036821BE0F2190021A30E /* GalleryBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryBrowserViewController.swift; sourceTree = "<group>"; };
 		4BC036841BE157C50021A30E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4BCEC1271C0C289F00190888 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -584,6 +588,7 @@
 				494558671C3AA6DE00F3E8FC /* UITableViewReorderExtension.swift */,
 				4945586B1C3D816E00F3E8FC /* UIColorExtensions.swift */,
 				4980E3FA1C48CEBC00BC15F1 /* UIFontExtensions.swift */,
+				4BACFA841C8075CF0084E74D /* UIImageExtensions.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -653,6 +658,7 @@
 			children = (
 				4BED43231C5D68E3002B1500 /* HomeInfoViewController.swift */,
 				4B11327B1C65527D0081A06A /* AddHomeLocationViewController.swift */,
+				4B05A87C1C7F7A0D007891CF /* HomeInfoImageViewController.swift */,
 				4B58860A1C67C322004FCE90 /* HomeFeaturesSelection */,
 				4B1132811C6565690081A06A /* Subviews */,
 			);
@@ -932,6 +938,7 @@
 				494558681C3AA6DE00F3E8FC /* UITableViewReorderExtension.swift in Sources */,
 				49E97C9A1BDCEE3900AEEB5D /* Utils.swift in Sources */,
 				4B5886091C67B909004FCE90 /* HomeFeaturesViewController.swift in Sources */,
+				4BACFA851C8075CF0084E74D /* UIImageExtensions.swift in Sources */,
 				4945586C1C3D816E00F3E8FC /* UIColorExtensions.swift in Sources */,
 				4B6C5FFD1C6C9637000F3607 /* HomeDescriptionView.swift in Sources */,
 				4B4E17A71C2B07E400C8A21E /* ProfileTabbarController.swift in Sources */,
@@ -972,6 +979,7 @@
 				49770AE21C576E3F001DF076 /* StoryObject.swift in Sources */,
 				49293C8C1BCFD01D008BF9C6 /* RemoteService.swift in Sources */,
 				499BFDC31BDEACEB00B5BB83 /* GalleryImageCell.swift in Sources */,
+				4B05A87D1C7F7A0D007891CF /* HomeInfoImageViewController.swift in Sources */,
 				4B1132721C6526D10081A06A /* FadeOutSegue.swift in Sources */,
 				49770AE01C575CB5001DF076 /* NeighborhoodViewController.swift in Sources */,
 				4B5886101C67E537004FCE90 /* HomeFeatureHeaderCell.swift in Sources */,

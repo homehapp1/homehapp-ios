@@ -26,32 +26,13 @@ class RemoteService: BaseRemoteService {
 
     // MARK: Private methods
     
-    private func createVideoJSON(video: Video?) -> [String: AnyObject]? {
-        guard let video = video where !video.local else {
-            // Nil or local-only Videos arent added
-            return nil
-        }
-        
-        var videoJson: [String: AnyObject] = [
-            "url": video.url,
-            "width": video.width,
-            "height": video.height
-        ]
-        
-        if let thumbnailData = video.thumbnailData {
-            videoJson["thumbnail"] = ["data": thumbnailData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())]
-        }
-        
-        return videoJson
-    }
-    
     /// Create json presentation for home and neighborhood story block
     private func createStoryBlockJSON(storyBlock: StoryBlock) -> [String: AnyObject] {
         var blockProperties = [String: AnyObject]()
         
         switch storyBlock.template {
         case "BigVideo":
-            if let videoJson = createVideoJSON(storyBlock.video) {
+            if let videoJson = storyBlock.video?.toJSON() {
                 blockProperties["video"] = videoJson
             }
         case "ContentImage":
@@ -85,7 +66,9 @@ class RemoteService: BaseRemoteService {
             ]
         
         if let image = neighborhood.image {
-            json["images"] = [image.toJSON()]
+            if let imageJson = image.toJSON() {
+                json["images"] = [imageJson]
+            }
         }
         
         json["story"] = [
@@ -149,7 +132,29 @@ class RemoteService: BaseRemoteService {
             let features = home.getFeatures() as? [String]
             homeJson["amenities"] = features
         }
-
+        
+        // EPC
+        if home.epcs.count > 0 {
+            var epcsJson = [AnyObject]()
+            for epc in home.epcs {
+                if let imageJson = epc.toJSON() {
+                    epcsJson.append(imageJson)
+                }
+            }
+            homeJson["epc"] = epcsJson
+        }
+        
+        // Floorplan
+        if home.floorPlans.count > 0 {
+            var floorPlansJson = [AnyObject]()
+            for floorPlan in home.floorPlans {
+                if let floorPlanJson = floorPlan.toJSON() {
+                    floorPlansJson.append(floorPlanJson)
+                }
+            }
+            homeJson["floorplans"] = floorPlansJson
+        }
+        
         return ["home": homeJson]
     }
     

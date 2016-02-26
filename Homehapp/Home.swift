@@ -64,6 +64,10 @@ class Home: DeletableObject, StoryObject {
     
     // Agent assigned for this home
     dynamic var agent: Agent? = nil
+    
+    // Floorplans and EPCs
+    let floorPlans = List<Image>()
+    let epcs = List<Image>()
 
     // Stories / blocks for home story
     let storyBlocks = List<StoryBlock>()

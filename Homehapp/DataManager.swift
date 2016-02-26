@@ -177,8 +177,11 @@ class DataManager {
             }
 
             existing.storyBlocks.removeAll()
+            existing.epcs.removeAll()
+            existing.floorPlans.removeAll()
             existing.coverImage?.deleted = true
             existing.image?.deleted = true
+            existing.agent?.deleted = true
         } else {
             home = Home(id: id, createdBy: createdBy, createdAt: createdDate, updatedAt: updatedDate, title: title)
         }
@@ -272,6 +275,24 @@ class DataManager {
             }
             if let otherRooms = json["otherRooms"] as? Int {
                 home.otherRooms = otherRooms
+            }
+        }
+        
+        // EPCs
+        if let epcs = json["epc"] as? NSArray {
+            for imageJSON in epcs {
+                if let image = Image.fromJSON(imageJSON) {
+                    home.epcs.append(image)
+                }
+            }
+        }
+
+        // FloorPlans
+        if let floorPlans = json["floorplans"] as? NSArray {
+            for floorPlanJSON in floorPlans {
+                if let floorPlan = Image.fromJSON(floorPlanJSON) {
+                    home.floorPlans.append(floorPlan)
+                }
             }
         }
         
@@ -424,6 +445,7 @@ class DataManager {
             self.removeDeletedOfType(realm, Neighborhood.self)
             self.removeDeletedOfType(realm, User.self)
             self.removeDeletedOfType(realm, Home.self)
+            self.removeDeletedOfType(realm, Agent.self)
         }
         log.debug("Removing soft-deleted objects took \(-start.timeIntervalSinceNow) seconds.")
     }

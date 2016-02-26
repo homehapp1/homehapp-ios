@@ -1635,6 +1635,7 @@ YOU BELONG TO</string>
                         <segue destination="05y-lv-ozP" kind="custom" identifier="HomeInfoToNeighborhood" customClass="ReplaceSegue" customModule="Homehapp" animates="NO" id="nEd-vW-twW"/>
                         <segue destination="ZHW-Do-5TK" kind="presentation" identifier="HomeInfoToAddHomeLocation" id="KB2-To-nEc"/>
                         <segue destination="udr-kT-xjX" kind="show" identifier="HomeInfoToAddHomeFeatures" id="9Ah-9k-dEr"/>
+                        <segue destination="eo5-9X-1c7" kind="custom" identifier="HomeInfoToHomeInfoImage" customClass="FadeInSegue" customModule="Homehapp" customModuleProvider="target" id="2tT-XA-7x6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rup-3B-uUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1833,7 +1834,7 @@ YOU BELONG TO</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e7W-CI-I12" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1302" y="1446"/>
+            <point key="canvasLocation" x="1310" y="1260"/>
         </scene>
         <!--Neighborhood View Controller-->
         <scene sceneID="ybi-Ha-rL7">
@@ -2321,6 +2322,114 @@ YOU BELONG TO</string>
             </objects>
             <point key="canvasLocation" x="455" y="1988"/>
         </scene>
+        <!--Home Info Image View Controller-->
+        <scene sceneID="iII-Mz-K8d">
+            <objects>
+                <viewController id="eo5-9X-1c7" customClass="HomeInfoImageViewController" customModule="Homehapp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oeq-M5-fHs"/>
+                        <viewControllerLayoutGuide type="bottom" id="mkG-tn-KFm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zzr-ZY-zp8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RiN-o6-Sfm">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="10" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6T-Gc-d40">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fH9-Q2-Gdm" customClass="CachedImageView" customModule="QvikNetwork">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" id="cHg-Uf-MDh"/>
+                                                    <constraint firstAttribute="height" constant="128" id="ysa-Ld-P4J"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="cHg-Uf-MDh"/>
+                                                        <exclude reference="ysa-Ld-P4J"/>
+                                                    </mask>
+                                                </variation>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="fH9-Q2-Gdm" secondAttribute="trailing" id="7ka-Ay-mpx"/>
+                                            <constraint firstItem="fH9-Q2-Gdm" firstAttribute="leading" secondItem="l6T-Gc-d40" secondAttribute="leading" id="VkZ-zM-VUE"/>
+                                            <constraint firstItem="fH9-Q2-Gdm" firstAttribute="top" secondItem="l6T-Gc-d40" secondAttribute="top" id="ejN-NW-YRx"/>
+                                            <constraint firstAttribute="bottom" secondItem="fH9-Q2-Gdm" secondAttribute="bottom" id="glA-1A-AlD"/>
+                                            <constraint firstItem="fH9-Q2-Gdm" firstAttribute="centerY" secondItem="l6T-Gc-d40" secondAttribute="centerY" id="ih3-YV-Rkc"/>
+                                            <constraint firstItem="fH9-Q2-Gdm" firstAttribute="centerX" secondItem="l6T-Gc-d40" secondAttribute="centerX" id="yHU-ir-NNo"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="eo5-9X-1c7" id="4af-uo-HDV"/>
+                                        </connections>
+                                    </scrollView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ynp-V0-RQi">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="4Kl-Qm-r5y"/>
+                                            <constraint firstAttribute="height" constant="70" id="F2b-E8-SrC"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="20" maxY="0.0"/>
+                                        <state key="normal" image="button_close_white"/>
+                                        <connections>
+                                            <action selector="closeButtonPressed:" destination="eo5-9X-1c7" eventType="touchUpInside" id="Jz9-IZ-Heo"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfK-e5-MRs">
+                                        <rect key="frame" x="260" y="260" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="8xh-yq-JpI"/>
+                                            <constraint firstAttribute="width" constant="80" id="jnI-SJ-vM1"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_camera"/>
+                                        <connections>
+                                            <action selector="editImageButtonPressed:" destination="eo5-9X-1c7" eventType="touchUpInside" id="7DC-Zh-f5F"/>
+                                        </connections>
+                                    </button>
+                                    <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9aZ-1e-8zx">
+                                        <rect key="frame" x="74" y="370" width="452" height="2"/>
+                                        <color key="progressTintColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="trackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </progressView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="9aZ-1e-8zx" firstAttribute="leading" secondItem="RiN-o6-Sfm" secondAttribute="leading" constant="74" id="5pZ-pH-8WN"/>
+                                    <constraint firstItem="9aZ-1e-8zx" firstAttribute="top" secondItem="ZfK-e5-MRs" secondAttribute="bottom" constant="30" id="EYz-Aw-S2R"/>
+                                    <constraint firstItem="l6T-Gc-d40" firstAttribute="leading" secondItem="RiN-o6-Sfm" secondAttribute="leading" id="FLf-g4-86D"/>
+                                    <constraint firstAttribute="trailing" secondItem="l6T-Gc-d40" secondAttribute="trailing" id="GiP-ln-RFP"/>
+                                    <constraint firstItem="ynp-V0-RQi" firstAttribute="leading" secondItem="RiN-o6-Sfm" secondAttribute="leading" id="N0q-Ty-Fn9"/>
+                                    <constraint firstItem="ynp-V0-RQi" firstAttribute="top" secondItem="RiN-o6-Sfm" secondAttribute="top" id="WLQ-4S-gLK"/>
+                                    <constraint firstItem="ZfK-e5-MRs" firstAttribute="centerY" secondItem="RiN-o6-Sfm" secondAttribute="centerY" id="Wh8-Bm-Mlw"/>
+                                    <constraint firstItem="ZfK-e5-MRs" firstAttribute="centerX" secondItem="RiN-o6-Sfm" secondAttribute="centerX" id="X8q-q0-eAK"/>
+                                    <constraint firstItem="l6T-Gc-d40" firstAttribute="top" secondItem="RiN-o6-Sfm" secondAttribute="top" id="kfj-5f-vVc"/>
+                                    <constraint firstAttribute="trailing" secondItem="9aZ-1e-8zx" secondAttribute="trailing" constant="74" id="l3s-dp-KFE"/>
+                                    <constraint firstAttribute="bottom" secondItem="l6T-Gc-d40" secondAttribute="bottom" id="pEO-Rw-tOB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="RiN-o6-Sfm" secondAttribute="trailing" id="5C7-0p-vjB"/>
+                            <constraint firstItem="RiN-o6-Sfm" firstAttribute="leading" secondItem="Zzr-ZY-zp8" secondAttribute="leading" id="A3L-LC-8kW"/>
+                            <constraint firstItem="mkG-tn-KFm" firstAttribute="top" secondItem="RiN-o6-Sfm" secondAttribute="bottom" id="lu2-Ha-PAc"/>
+                            <constraint firstItem="RiN-o6-Sfm" firstAttribute="top" secondItem="Zzr-ZY-zp8" secondAttribute="top" id="qW0-Zg-BfB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="editImageButton" destination="ZfK-e5-MRs" id="yMY-xZ-hqf"/>
+                        <outlet property="imageView" destination="fH9-Q2-Gdm" id="PfW-kM-hnI"/>
+                        <outlet property="uploadProgressView" destination="9aZ-1e-8zx" id="24C-wA-eQc"/>
+                        <segue destination="ZHW-Do-5TK" kind="custom" identifier="HomeInfoImageToHomeInfo" customClass="FadeOutSegue" customModule="Homehapp" customModuleProvider="target" id="1ZR-xE-oZE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vnr-OG-EVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1259" y="1980"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bg_gray" width="320" height="568"/>
@@ -2339,6 +2448,7 @@ YOU BELONG TO</string>
         <image name="divider_gray" width="320" height="13"/>
         <image name="icon_add_picture" width="23" height="23"/>
         <image name="icon_add_text" width="30" height="21"/>
+        <image name="icon_camera" width="66" height="66"/>
         <image name="icon_close" width="10" height="17"/>
         <image name="icon_fb" width="18" height="18"/>
         <image name="icon_google" width="22" height="14"/>
@@ -2355,9 +2465,10 @@ YOU BELONG TO</string>
         <image name="tab_profile" width="22" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2oZ-Kv-ZPv"/>
-        <segue reference="dGe-dO-Sax"/>
         <segue reference="tLn-3J-sXe"/>
+        <segue reference="dGe-dO-Sax"/>
+        <segue reference="2oZ-Kv-ZPv"/>
+        <segue reference="1ZR-xE-oZE"/>
         <segue reference="I1G-aj-zTu"/>
         <segue reference="ZHq-AG-WSJ"/>
     </inferredMetricsTieBreakers>

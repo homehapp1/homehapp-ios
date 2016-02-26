@@ -41,7 +41,12 @@ class Image: DeletableObject {
     }
     
     /// Return JSON presentation of this Image
-    func toJSON() -> [String: AnyObject] {
+    func toJSON() -> [String: AnyObject]? {
+        
+        if local {
+            return nil
+        }
+        
         var imageJson: [String: AnyObject] = [
             "url": url,
             "width": width,

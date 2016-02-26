@@ -54,6 +54,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     private let segueIdHomeInfoToNeighborhood = "HomeInfoToNeighborhood"
     private let segueIdHomeInfoToAddHomeLocation = "HomeInfoToAddHomeLocation"
     private let segueIdHomeInfoToAddHomeFeatures = "HomeInfoToAddHomeFeatures"
+    private let segueIdHomeInfoToHomeInfoImage = "HomeInfoToHomeInfoImage"
     
     /// Height of the bottom bar, in units
     let bottomBarHeight: CGFloat = 48
@@ -64,6 +65,10 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     /// Last change to bottom bar height due to table view scrolling
     private var bottomBarLatestChange: CGFloat?
     private var bottomBarOriginalHeight: CGFloat = 0.0
+    
+    // Image Picker for EPC and floorplan
+    var imagePicker = UIImagePickerController()
+    var pickingMode: ImagePickingMode = .EPC
     
     // MARK: IBActions
     
@@ -103,7 +108,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     @IBAction func backButtonPressed(button: UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
+        
     // MARK: Private methods
     
     /// Set editmode on or off for all the stackview subviews
@@ -138,6 +143,16 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         let homeRoomsView = HomeRoomsView.instanceFromNib() as! HomeRoomsView
         stackView.addArrangedSubview(homeRoomsView)
         homeRoomsView.home = appstate.mostRecentlyOpenedHome!
+        
+        homeRoomsView.epcPressedCallback = {
+            self.pickingMode = .EPC
+            self.performSegueWithIdentifier(self.segueIdHomeInfoToHomeInfoImage, sender: self)
+        }
+        
+        homeRoomsView.floorplanPressedCallback = {
+            self.pickingMode = .FloorPlan
+            self.performSegueWithIdentifier(self.segueIdHomeInfoToHomeInfoImage, sender: self)
+        }
     }
     
     /// Home Description section
@@ -251,6 +266,20 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         if segue.identifier == segueIdHomeInfoToHomeStory || segue.identifier == segueIdHomeInfoToNeighborhood {
             let homeStoryViewController = segue.destinationViewController as! HomeStoryViewController
             homeStoryViewController.hideBottomBarOriginally = false
+        } else if segue.identifier == segueIdHomeInfoToHomeInfoImage {
+            let homeInfoImageViewController = segue.destinationViewController as! HomeInfoImageViewController
+            switch pickingMode {
+            case .EPC:
+                homeInfoImageViewController.pickingMode = .EPC
+                if appstate.mostRecentlyOpenedHome!.epcs.count > 0 {
+                    homeInfoImageViewController.image = appstate.mostRecentlyOpenedHome!.epcs[0]
+                }
+            case .FloorPlan:
+                homeInfoImageViewController.pickingMode = .FloorPlan
+                if appstate.mostRecentlyOpenedHome!.floorPlans.count > 0 {
+                    homeInfoImageViewController.image = appstate.mostRecentlyOpenedHome!.floorPlans[0]
+                }
+            }
         }
     }
     
