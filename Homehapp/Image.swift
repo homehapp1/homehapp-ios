@@ -17,6 +17,7 @@ class Image: DeletableObject {
     dynamic var thumbnailData: NSData? = nil
     dynamic var localUrl: String? = nil
     dynamic var uploadProgress: Float = 1.0 // upload progress value from 0 .... 1 when user uploads image
+    dynamic var backgroundColor: String? = nil
     
     /// Returns a scaled (cloudinary) url. For local ones, returns the url itself.
     var scaledUrl: String {
@@ -26,7 +27,7 @@ class Image: DeletableObject {
     var scaledCoverImageUrl: String {
         return local ? url : scaledCloudinaryCoverImageUrl(width: width, height: height, url: url)    }
     
-    convenience init(url: String, width: Int, height: Int, local: Bool = false, localUrl: String?) {
+    convenience init(url: String, width: Int, height: Int, local: Bool = false, localUrl: String?, backgroundColor: String? = "#ffffff") {
         self.init()
         
         self.url = url
@@ -34,6 +35,7 @@ class Image: DeletableObject {
         self.height = height
         self.local = local
         self.localUrl = localUrl
+        self.backgroundColor = backgroundColor
     }
     
     override static func indexedProperties() -> [String] {
@@ -50,8 +52,12 @@ class Image: DeletableObject {
         var imageJson: [String: AnyObject] = [
             "url": url,
             "width": width,
-            "height": height
+            "height": height,
         ]
+        
+        if let backgroundColor = backgroundColor {
+            imageJson["backgroundColor"] = backgroundColor
+        }
         
         if let thumbnailData = thumbnailData {
             imageJson["thumbnail"] = ["data": thumbnailData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())]
@@ -71,7 +77,10 @@ class Image: DeletableObject {
             width = imageJson["width"] as? Int,
             height = imageJson["height"] as? Int,
             url = imageJson["url"] as? String {
-                let image = Image(url: url, width: width, height: height, localUrl: nil)
+                
+                let backgroundColor = imageJson["backgroundColor"] as? String
+                
+                let image = Image(url: url, width: width, height: height, localUrl: nil, backgroundColor: backgroundColor)
                 
                 if let thumbnailDataBase64 = imageJson["thumbnail"]?["data"] as? String {
                     image.thumbnailData = NSData(base64EncodedString: thumbnailDataBase64, options: NSDataBase64DecodingOptions())

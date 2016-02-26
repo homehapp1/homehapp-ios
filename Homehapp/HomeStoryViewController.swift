@@ -112,6 +112,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     var animationStarted = false
     
+    private var createThumbnailData = false
+    
     /// Returns the main home image view from the header, or nil if the header is not visible (enough)
     var headerMainImageView: CachedImageView? {
         if tableView.contentOffset.y > transitionAnimationTableViewMaxScroll {
@@ -311,11 +313,13 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 localUrl = originalURLs![selectedImages.indexOf(selectedImage)!]
             }
 
-            let image = Image(url: fakeUrl, width: width, height: height, local: true, localUrl: localUrl)
+            let image = Image(url: fakeUrl, width: width, height: height, local: true, localUrl: localUrl, backgroundColor: selectedImage.averageColor().hexColor())
             image.uploadProgress = 0.0
             
-            if let snapshotThumbnailData = imageToJpegThumbnailData(sourceImage: selectedImage) {
-                image.thumbnailData = snapshotThumbnailData
+            if createThumbnailData {
+                if let snapshotThumbnailData = imageToJpegThumbnailData(sourceImage: selectedImage) {
+                    image.thumbnailData = snapshotThumbnailData
+                }
             }
             
             images.append(image)
@@ -420,8 +424,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         let height = Int(snapshotImage.height * snapshotImage.scale)
         let video = Video(url: videoAssetUrl.absoluteString, width: width, height: height, local: true)
         video.uploadProgress = 0.0
-        if let snapshotThumbnailData = imageToJpegThumbnailData(sourceImage: snapshotImage) {
-            video.thumbnailData = snapshotThumbnailData
+        if createThumbnailData {
+            if let snapshotThumbnailData = imageToJpegThumbnailData(sourceImage: snapshotImage) {
+                video.thumbnailData = snapshotThumbnailData
+            }
         }
         
         dataManager.performUpdatesInRealm { realm in

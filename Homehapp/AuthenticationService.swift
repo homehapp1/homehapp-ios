@@ -83,12 +83,13 @@ class AuthenticationService {
         remoteService.checkUserSession(onComplete)
     }
     
-    /// Clear user access token from appstate and delete all data stored in database
+    /// Clear user access token from appstate and delete all data stored in database and device
     func logoutUser() {
         appstate.authUserId = nil
         appstate.accessToken = nil
         appstate.homesLastUpdated = nil
         appstate.mostRecentlyOpenedHome = nil
         dataManager.deleteAll()
+        ImageCache.sharedInstance().clearCache()
     }
 }

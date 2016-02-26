@@ -45,7 +45,9 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             
             mainImageView.imageUrl = storyBlock?.image?.scaledUrl
             mainImageView.thumbnailData = storyBlock?.image?.thumbnailData
-            mainImageView.fadeInColor = UIColor.whiteColor()
+            if let fadeInColor = storyBlock?.image?.backgroundColor {
+                mainImageView.fadeInColor = UIColor(hexString: fadeInColor)
+            }
             
             if let image = storyBlock?.image where image.uploadProgress < 1.0 {
                 uploadProgressView.progress = image.uploadProgress

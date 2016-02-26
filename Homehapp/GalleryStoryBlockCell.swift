@@ -15,7 +15,7 @@ import RealmSwift
 class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     // Gallery image margin
     private static let margin: CGFloat = 3.0
-    private static let maxImagesPerLine = 3
+    private let maxImagesPerLine: Int = 3
 
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -167,48 +167,59 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     
     /// Define how many images there is in line starting with image index
     private func defineImagesInLine(images: List<Image>, index: Int) -> Int {
+        var amount = 0
         if let thumbnail = images[index].thumbnailData {
-            var amount = thumbnail.arrayOfBytes().count % GalleryStoryBlockCell.maxImagesPerLine
+            amount = thumbnail.arrayOfBytes().count % maxImagesPerLine
             if amount == 0 {
-                amount = GalleryStoryBlockCell.maxImagesPerLine
+                amount = maxImagesPerLine
             }
-            
-            // If we have three images in line. we only allow one to be landscape (device is quite narrow)
-            if amount == 3 && index + 2 < images.count {
-                var landScapeCount = 0
-                for var i = index; i < index + 3; ++i {
-                    if images[i].isLandscape() {
-                        ++landScapeCount
-                    }
-                }
-                if landScapeCount > 1 {
-                    amount = 2
-                }
+        } else if let backgroundColor = images[index].backgroundColor where backgroundColor.length > 0 {
+            let firstByte = backgroundColor[backgroundColor.startIndex.advancedBy(1)...backgroundColor.startIndex.advancedBy(2)]
+            amount = Int(strtoul(firstByte, nil, 16)) % maxImagesPerLine
+            if amount == 0 {
+                amount = maxImagesPerLine
             }
-            
-            return amount
         }
-        return Int.random(4)
+        
+        // If we have three images in line. we only allow one to be landscape (device is quite narrow)
+        if amount == 3 && index + 2 < images.count {
+            var landScapeCount = 0
+            for var i = index; i < index + 3; ++i {
+                if images[i].isLandscape() {
+                    ++landScapeCount
+                }
+            }
+            if landScapeCount > 1 {
+                amount = 2
+            }
+        }
+        
+        return amount > 0 ? amount : Int.random(UInt32(maxImagesPerLine) + 1)
     }
     
     /// Get height for image row starting with given image
     /// See widthPointsForImage method for reference
     private func heightForImageRow(image: Image, imagesForLine: Int) -> CGFloat {
+        var index = 0
         if let thumbnail = image.thumbnailData {
-            let index = thumbnail.arrayOfBytes().count % 15
-            if imagesForLine == 1 {
-                if image.width > image.height {
-                    return singleImageLandscapeRowHeights[index % singleImageLandscapeRowHeights.count]
-                } else {
-                    return singleImagePortraitRowHeights[index % singleImagePortraitRowHeights.count]
-                }
-            } else if imagesForLine == 2 {
-                return twoImageRowHeights[index % twoImageRowHeights.count]
-            } else {
-                return threeImageRowHeights[index % threeImageRowHeights.count]
-            }
+            index = thumbnail.arrayOfBytes().count % 15
+        } else if let backgroundColor = image.backgroundColor where backgroundColor.length > 0 {
+            let firstByte = backgroundColor[backgroundColor.startIndex.advancedBy(1)...backgroundColor.startIndex.advancedBy(2)]
+            index = Int(strtoul(firstByte, nil, 16)) % 15
         }
-        return singleImageLandscapeRowHeights[Int.random(5)]
+        
+        // Height of row is dependent on how many images there are in one line
+        if imagesForLine == 1 {
+            if image.width > image.height {
+                return singleImageLandscapeRowHeights[index % singleImageLandscapeRowHeights.count]
+            } else {
+                return singleImagePortraitRowHeights[index % singleImagePortraitRowHeights.count]
+            }
+        } else if imagesForLine == 2 {
+            return twoImageRowHeights[index % twoImageRowHeights.count]
+        } else {
+            return threeImageRowHeights[index % threeImageRowHeights.count]
+        }
     }
     
     private func indexPathForImage(image: Image) -> NSIndexPath? {

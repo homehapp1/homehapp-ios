@@ -66,7 +66,7 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
                 }, completionCallback: { [weak self] (success: Bool, url: String?, width: Int?, height: Int?) -> Void in
                     let imageUrl = url != nil ? url! : ""
                     let localImageUrl = info[UIImagePickerControllerReferenceURL] as? NSURL
-                    let pickedImage = Image(url: imageUrl, width: Int(image.width), height: Int(image.height), localUrl: localImageUrl?.absoluteString)
+                    let pickedImage = Image(url: imageUrl, width: Int(image.width), height: Int(image.height), localUrl: localImageUrl?.absoluteString, backgroundColor: image.averageColor().hexColor())
     
                     self?.uploadProgressView.hidden = true
                     self?.editImageButton.hidden = false
@@ -126,6 +126,10 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
             imageView.imageUrl = image.scaledUrl
             imageView.thumbnailData = image.thumbnailData
             imageView.fadeInColor = UIColor.blackColor()
+            if let fadeInColor = image.backgroundColor {
+                imageView.fadeInColor = UIColor(hexString: fadeInColor)
+            }
+            
             imageView.imageFadeInDuration = 0
         }
         

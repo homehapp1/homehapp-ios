@@ -84,6 +84,9 @@ class HomeCell: UICollectionViewCell {
                 if home!.image != nil {
                     mainImageView.imageUrl = home!.image?.scaledCoverImageUrl
                     mainImageView.thumbnailData = home!.image?.thumbnailData
+                    if let fadeInColor = home!.image?.backgroundColor {
+                        mainImageView.fadeInColor = UIColor(hexString: fadeInColor)
+                    }
                 } else {
                     createStoryContainerView.hidden = false
                     mainImageView.imageUrl = nil
@@ -105,9 +108,8 @@ class HomeCell: UICollectionViewCell {
                     mainImageView.imageUrl = home!.coverImage?.scaledCoverImageUrl
                     mainImageView.thumbnailData = home!.coverImage?.thumbnailData
                 }
+                mainImageView.fadeInColor = UIColor.whiteColor()
             }
-            
-            mainImageView.fadeInColor = UIColor.whiteColor()
             
             // Home story title
             if home!.title.length > 0 {

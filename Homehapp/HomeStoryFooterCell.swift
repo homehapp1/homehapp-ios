@@ -26,7 +26,9 @@ class HomeStoryFooterCell: UITableViewCell {
         didSet {
             mainImageView.imageUrl = home?.userNeighborhood?.image?.scaledUrl
             mainImageView.thumbnailData = home?.userNeighborhood?.image?.thumbnailData
-            mainImageView.fadeInColor = UIColor.whiteColor()
+            if let fadeInColor = home!.image?.backgroundColor {
+                mainImageView.fadeInColor = UIColor(hexString: fadeInColor)
+            }
             titleLabel.text = home?.userNeighborhood?.title
         }
     }
