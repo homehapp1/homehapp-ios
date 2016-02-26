@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import QvikNetwork
-import QvikSwift
 
 /**
  'Header' view placed on top of the large cell before any views formed from the story block.

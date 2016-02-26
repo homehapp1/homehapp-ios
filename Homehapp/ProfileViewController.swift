@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QvikNetwork
 import CoreLocation
 
 let profileToChangePhoneNumberSegueIdentifier = "profileToChangePhoneNumber"

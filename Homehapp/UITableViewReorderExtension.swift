@@ -8,8 +8,6 @@
 
 import UIKit
 
-import QvikSwift
-
 /// Optional delegate protocol for providing customizations for long press reorder operations
 @objc protocol LongPressReorderTableViewDelegate: UITableViewDelegate {
     /**

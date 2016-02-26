@@ -8,8 +8,6 @@
 
 import Foundation
 import Cloudinary
-import QvikSwift
-import QvikNetwork
 
 public protocol CloudinaryServiceDelegate {
     /// Called when all running operations have completed

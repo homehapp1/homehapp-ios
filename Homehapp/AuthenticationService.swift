@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import QvikNetwork
 
 enum LoginService: String {
     case Facebook = "facebook"

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QvikSwift
 
 /**
 Displays a toast message.

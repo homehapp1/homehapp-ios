@@ -8,8 +8,6 @@
 
 import UIKit
 
-import QvikSwift
-
 /// Displays text editor mode selection controls
 class TextEditorModeSelectionView: UIView {
     private let selectionViewHeight: CGFloat = 50

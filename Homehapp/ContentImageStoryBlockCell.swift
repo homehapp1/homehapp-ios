@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import QvikNetwork
-import QvikSwift
 
 /**
  Used to display 'ContentImage' layout style story block.

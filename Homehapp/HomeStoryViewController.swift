@@ -12,8 +12,6 @@ import AVKit
 import MessageUI
 import RealmSwift
 
-import QvikSwift
-import QvikNetwork
 
 /**
  Displays the home story for a home.

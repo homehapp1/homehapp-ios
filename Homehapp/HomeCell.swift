@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import QvikNetwork
 
 private let titleBottomMargin: CGFloat = 8.0
 private let shareIconWidth: CGFloat = 20.0

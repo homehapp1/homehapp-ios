@@ -8,7 +8,6 @@
 
 import Foundation
 import RealmSwift
-import QvikSwift
 
 class Video: DeletableObject {
     dynamic var width: Int = 0

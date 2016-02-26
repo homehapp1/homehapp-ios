@@ -8,9 +8,6 @@
 
 import UIKit
 
-import QvikSwift
-import QvikNetwork
-
 /**
  Custom segue for opening the home story view. Animates the selected
  home into a home story.

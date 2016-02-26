@@ -11,12 +11,43 @@ import AVKit
 import AVFoundation
 import Photos
 
-import QvikNetwork
-import QvikSwift
-
 let HHUtilsErrorDomain = "HHUtilsErrorDomain"
 let HHUtilsVideoEncodeFailed = -100
 let HHUtilsCouldNotGetAssetURL = -101
+
+/**
+ Asynchronously executes a task in a background queue.
+ 
+ - parameter task: Task to be executed
+ */
+public func runInBackground(task: (Void -> Void)) {
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), task)
+}
+
+/**
+ Asynchronously executes a task in the main thread. If the calling thread is
+ the main thread itself, the task is executed immediately.
+ 
+ - parameter task: Task to be executed
+ */
+public func runOnMainThread(task: (Void -> Void)) {
+    if NSThread.isMainThread() {
+        // Already on main UI thread - call directly
+        task()
+    } else {
+        dispatch_async(dispatch_get_main_queue(), task)
+    }
+}
+
+/**
+ Executes a task on the main queue (UI thread) after a given delay.
+ 
+ - parameter delay: Delay in seconds
+ - parameter task: Task to be executed
+ */
+public func runOnMainThreadAfter(delay delay: NSTimeInterval, task: (Void -> Void)) {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))),dispatch_get_main_queue(), task)
+}
 
 /**
  Calculates the required downscale ratio for an image in a way that the 

@@ -8,8 +8,6 @@
 
 import UIKit
 import XCGLogger
-import QvikSwift
-import QvikNetwork
 import FBSDKLoginKit
 import Fabric
 import Crashlytics
@@ -43,11 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CloudinaryServiceDelegate
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         #if DEBUG // Debug configuration
-            log.setup(.Debug, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLogLevel: nil)
-            QvikNetwork.debugLogging = false
+            log.setup(.Warning, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLogLevel: nil)
         #else // Release configuration
             log.setup(.Info, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLogLevel: nil)
-            QvikNetwork.debugLogging = false
             
         #endif
         

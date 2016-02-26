@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreMotion
-import QvikSwift
 
 /// Handles reading the accelerator sensor
 private class MotionManager {
