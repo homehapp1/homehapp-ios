@@ -104,11 +104,14 @@ class HomeCell: UICollectionViewCell {
                         mainImageView.imageUrl = nil
                         mainImageView.image = UIImage(named: "home_default_background")
                     }
+                    
+                    if let backgroundColor = home!.image?.backgroundColor {
+                        mainImageView.fadeInColor = UIColor(hexString: backgroundColor)
+                    }
                 } else {
                     mainImageView.imageUrl = home!.coverImage?.scaledCoverImageUrl
                     mainImageView.thumbnailData = home!.coverImage?.thumbnailData
                 }
-                mainImageView.fadeInColor = UIColor.whiteColor()
             }
             
             // Home story title

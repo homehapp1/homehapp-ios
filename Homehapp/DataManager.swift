@@ -278,9 +278,6 @@ class DataManager {
         
         // EPCs
         home.epc = Image.fromJSON(json["epc"])
-        if home.epc != nil {
-            print("kivaa")
-        }
 
         // FloorPlans
         if let floorPlans = json["floorplans"] as? NSArray {
