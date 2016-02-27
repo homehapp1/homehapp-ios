@@ -140,6 +140,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                     }
                 }
                 
+                // Define row height
                 let imageRowHeight = heightForImageRow(image, imagesForLine: imagesInLine)
                 totalHeight += imageRowHeight
 
@@ -154,7 +155,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                 for var j = 0; j < imagesInLine; j++ {
                     let aspectRatio = CGFloat(images[index].width) / CGFloat(images[index].height)
                     if j == imagesInLine - 1 {
-                        // Last one takes always all the remaining space
+                        // Last image takes always all the remaining space from the line
                         let size = CGSizeMake(collectionViewWidth - widthUsed, imageRowHeight)
                         imageSizes.append(size)
                     } else {

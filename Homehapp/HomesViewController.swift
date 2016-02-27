@@ -144,15 +144,13 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
         }
         
         // Set left and right margin to make grid look better
-        if indexPath.row % 2 == 0 {
-            cell.rightMargin.constant = sizingCell.rightMargin.constant / 2
-            cell.leftMargin.constant = sizingCell.leftMargin.constant
+        if cell.frame.x == 0.0 {
+            cell.rightMargin.constant = 3 / 2
+            cell.leftMargin.constant = 3
         } else {
-            cell.leftMargin.constant = sizingCell.leftMargin.constant / 2
-            cell.rightMargin.constant = sizingCell.rightMargin.constant
+            cell.leftMargin.constant = 3 / 2
+            cell.rightMargin.constant = 3
         }
-        cell.setNeedsUpdateConstraints()
-        cell.setNeedsLayout()
         
         return cell
     }
