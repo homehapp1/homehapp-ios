@@ -530,7 +530,7 @@ class DataManager {
         if let currentUser = findCurrentUser() {
             return realm.objects(Home).filter("createdBy != %@ AND deleted != true AND (image != nil OR coverImage != nil)", currentUser)
         } else {
-            return realm.objects(Home).filter("deleted != true")
+            return realm.objects(Home).filter("deleted != true AND (image != nil OR coverImage != nil)")
         }
     }
 

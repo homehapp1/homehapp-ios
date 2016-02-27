@@ -76,7 +76,7 @@ class Image: DeletableObject {
         if let imageJson = imageJsonObject as? NSDictionary,
             width = imageJson["width"] as? Int,
             height = imageJson["height"] as? Int,
-            url = imageJson["url"] as? String {
+            url = imageJson["url"] as? String where url.contains("http") && width > 0 {
                 
                 let backgroundColor = imageJson["backgroundColor"] as? String
                 
