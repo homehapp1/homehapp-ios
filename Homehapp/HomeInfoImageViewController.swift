@@ -16,6 +16,7 @@ enum ImagePickingMode: String {
 
 class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UIImagePickerControllerDelegate {
     
+    /// Displays main image in this view
     @IBOutlet weak var imageView: CachedImageView!
     
     /// Change image button
@@ -30,6 +31,10 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
     /// Picking mode, for what purposes we're picking image
     var pickingMode: ImagePickingMode = .EPC
     
+    /// Defines if this view is in edit mode or not
+    var editMode: Bool = false
+    
+    /// Picker controller to change the image in this view
     var imagePicker = UIImagePickerController()
     
     private let segueIdhomeInfoImageToHomeInfo = "HomeInfoImageToHomeInfo"
@@ -124,15 +129,9 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
             imageView.imageUrl = image.scaledUrl
             imageView.thumbnailData = image.thumbnailData
             imageView.fadeInColor = UIColor.blackColor()
-            /* Not correct aspect ratio
-            if let fadeInColor = image.backgroundColor {
-                imageView.fadeInColor = UIColor(hexString: fadeInColor)
-            }
-            */
-            
             imageView.imageFadeInDuration = 0
         }
         
-        editImageButton.hidden = !appstate.mostRecentlyOpenedHome!.isMyHome()
+        editImageButton.hidden = (!appstate.mostRecentlyOpenedHome!.isMyHome() || editMode == false)
     }
 }

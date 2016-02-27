@@ -268,6 +268,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
             homeStoryViewController.hideBottomBarOriginally = false
         } else if segue.identifier == segueIdHomeInfoToHomeInfoImage {
             let homeInfoImageViewController = segue.destinationViewController as! HomeInfoImageViewController
+            homeInfoImageViewController.editMode = editMode
             switch pickingMode {
             case .EPC:
                 homeInfoImageViewController.pickingMode = .EPC
