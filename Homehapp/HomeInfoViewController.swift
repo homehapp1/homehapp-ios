@@ -253,6 +253,9 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
             }
         }
         
+        // Preload epc and floorplan when user opens home information????
+        
+        
         setSubviewEditModes()
     }
     
