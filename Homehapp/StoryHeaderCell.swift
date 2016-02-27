@@ -55,12 +55,17 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
 
     var storyObject: StoryObject? = nil {
         didSet {
+
             if let image = storyObject?.image {
-                mainImageView.imageUrl = image.scaledCoverImageUrl
-                mainImageView.thumbnailData = image.thumbnailData
+            
+                // TODO remove image url check when london-view removed from server
+                if !image.url.contains("london-view") {
+                    mainImageView.imageUrl = image.scaledCoverImageUrl
+                    mainImageView.thumbnailData = image.thumbnailData
                 
-                if image.uploadProgress < 1.0 {
-                    updateProgressBar()
+                    if image.uploadProgress < 1.0 {
+                        updateProgressBar()
+                    }
                 }
                 
             } else {
