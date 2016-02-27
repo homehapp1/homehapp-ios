@@ -190,8 +190,13 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
             openImageSegue.openedImageView = cell.imageView
             openImageSegue.currentImage = getStoryBlockImageAtIndex(currentImageIndex)
             openImageSegue.blackBackgroundAlpha = self.backgroundView.alpha
-            self.backgroundView.alpha = 0
             openImageSegue.unwinding = true
+            
+            self.backgroundView.alpha = 0
+            
+            if let destViewController = segue.destinationViewController as? HomeStoryViewController {
+                destViewController.hideBottomBarOriginally = false
+            }
         }
     }
     

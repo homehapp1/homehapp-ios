@@ -1179,7 +1179,9 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Bring bottom bar into sight and close view -button visible
         closeViewButton.alpha = 0
         UIView.animateWithDuration(0.2) {
-            self.bottomBarView.transform = CGAffineTransformIdentity
+            if self.hideBottomBarOriginally {
+                self.bottomBarView.transform = CGAffineTransformIdentity
+            }
             self.closeViewButton.alpha = 1
         }
         
