@@ -553,7 +553,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         UIResponder.resignCurrentFirstResponder()
         
         self.editMode = editMode
-        tableView.allowLongPressReordering = editMode
+        tableView.allowLongPressReordering = false // Disabled for now
         editButton.hidden = editMode
         saveButton.hidden = !editMode
         backButton.hidden = editMode
@@ -1249,7 +1249,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomBarHeight, right: 0)
         
         // Enable longpress -initiated drag reordering
-        tableView.allowLongPressReordering = editMode
+        tableView.allowLongPressReordering = false
         
         // Enable neighbourhood if home has it and neighbourhood story has story blocks or story is mine
         neighborhoodButton.enabled = false

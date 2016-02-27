@@ -150,9 +150,18 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                     widthSumForLine += aspectRatio
                 }
                 
+                var widthUsed: CGFloat = 0
                 for var j = 0; j < imagesInLine; j++ {
                     let aspectRatio = CGFloat(images[index].width) / CGFloat(images[index].height)
-                    imageSizes.append(CGSizeMake(floor((collectionViewWidth - CGFloat(imagesInLine - 1) * GalleryStoryBlockCell.margin) * aspectRatio / widthSumForLine), imageRowHeight))
+                    if j == imagesInLine - 1 {
+                        // Last one takes always all the remaining space
+                        let size = CGSizeMake(collectionViewWidth - widthUsed, imageRowHeight)
+                        imageSizes.append(size)
+                    } else {
+                        let size = CGSizeMake(floor((collectionViewWidth - CGFloat(imagesInLine - 1) * GalleryStoryBlockCell.margin) * aspectRatio / widthSumForLine), imageRowHeight)
+                        imageSizes.append(size)
+                        widthUsed += size.width + GalleryStoryBlockCell.margin
+                    }
                     index++
                 }
                
