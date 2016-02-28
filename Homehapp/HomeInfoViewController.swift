@@ -219,6 +219,10 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         bottomBarView.transform = CGAffineTransformMakeTranslation(0, translation)
     }
     
+    dynamic private func applicationWillResignActive(notification: NSNotification){
+        self.saveButtonPressed(saveButton)
+    }
+    
     // MARK: Lifecycle
     
     override func viewWillAppear(animated: Bool) {
@@ -263,6 +267,11 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         bottomBarOriginalHeight = bottomBarViewHeightConstraint.constant
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "applicationWillResignActive:",
+            name: "UIApplicationWillResignActiveNotification",
+            object: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -285,6 +294,10 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
                 }
             }
         }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
 }
