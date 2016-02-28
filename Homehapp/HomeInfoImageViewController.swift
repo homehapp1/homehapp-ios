@@ -25,6 +25,9 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
     /// Progress indicator for image upload
     @IBOutlet private weak var uploadProgressView: UIProgressView!
     
+    /// Loading indicator for image loading
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
+    
     /// Image selected and displayed
     var image: Image? = nil
     
@@ -120,6 +123,10 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if !appstate.mostRecentlyOpenedHome!.isMyHome() && imageView.image == nil {
+            loadingIndicator.startAnimating()
+        }
     }
     
     override func viewDidLoad() {
@@ -130,6 +137,9 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
             imageView.thumbnailData = image.thumbnailData
             imageView.fadeInColor = UIColor.blackColor()
             imageView.imageFadeInDuration = 0
+            imageView.imageChangedCallback = {
+                self.loadingIndicator.stopAnimating()
+            }
         }
         
         editImageButton.hidden = (!appstate.mostRecentlyOpenedHome!.isMyHome() || editMode == false)

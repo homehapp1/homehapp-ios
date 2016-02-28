@@ -91,5 +91,8 @@ class AuthenticationService {
         appstate.mostRecentlyOpenedHome = nil
         dataManager.deleteAll()
         ImageCache.sharedInstance().clearCache()
+        if GIDSignIn.sharedInstance().currentUser != nil {
+            GIDSignIn.sharedInstance().signOut()
+        }
     }
 }

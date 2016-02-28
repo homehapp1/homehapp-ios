@@ -2394,6 +2394,9 @@ YOU BELONG TO</string>
                                         <color key="progressTintColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="trackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </progressView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ewr-8s-7Ah">
+                                        <rect key="frame" x="282" y="281" width="37" height="37"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2402,11 +2405,13 @@ YOU BELONG TO</string>
                                     <constraint firstItem="l6T-Gc-d40" firstAttribute="leading" secondItem="RiN-o6-Sfm" secondAttribute="leading" id="FLf-g4-86D"/>
                                     <constraint firstAttribute="trailing" secondItem="l6T-Gc-d40" secondAttribute="trailing" id="GiP-ln-RFP"/>
                                     <constraint firstItem="ynp-V0-RQi" firstAttribute="leading" secondItem="RiN-o6-Sfm" secondAttribute="leading" id="N0q-Ty-Fn9"/>
+                                    <constraint firstItem="ewr-8s-7Ah" firstAttribute="centerY" secondItem="RiN-o6-Sfm" secondAttribute="centerY" id="T5x-jf-XZj"/>
                                     <constraint firstItem="ynp-V0-RQi" firstAttribute="top" secondItem="RiN-o6-Sfm" secondAttribute="top" id="WLQ-4S-gLK"/>
                                     <constraint firstItem="ZfK-e5-MRs" firstAttribute="centerY" secondItem="RiN-o6-Sfm" secondAttribute="centerY" id="Wh8-Bm-Mlw"/>
                                     <constraint firstItem="ZfK-e5-MRs" firstAttribute="centerX" secondItem="RiN-o6-Sfm" secondAttribute="centerX" id="X8q-q0-eAK"/>
                                     <constraint firstItem="l6T-Gc-d40" firstAttribute="top" secondItem="RiN-o6-Sfm" secondAttribute="top" id="kfj-5f-vVc"/>
                                     <constraint firstAttribute="trailing" secondItem="9aZ-1e-8zx" secondAttribute="trailing" constant="74" id="l3s-dp-KFE"/>
+                                    <constraint firstItem="ewr-8s-7Ah" firstAttribute="centerX" secondItem="RiN-o6-Sfm" secondAttribute="centerX" id="mhR-Tg-Wf6"/>
                                     <constraint firstAttribute="bottom" secondItem="l6T-Gc-d40" secondAttribute="bottom" id="pEO-Rw-tOB"/>
                                 </constraints>
                             </view>
@@ -2422,6 +2427,7 @@ YOU BELONG TO</string>
                     <connections>
                         <outlet property="editImageButton" destination="ZfK-e5-MRs" id="yMY-xZ-hqf"/>
                         <outlet property="imageView" destination="fH9-Q2-Gdm" id="PfW-kM-hnI"/>
+                        <outlet property="loadingIndicator" destination="ewr-8s-7Ah" id="vGL-5q-uYs"/>
                         <outlet property="uploadProgressView" destination="9aZ-1e-8zx" id="24C-wA-eQc"/>
                         <segue destination="ZHW-Do-5TK" kind="custom" identifier="HomeInfoImageToHomeInfo" customClass="FadeOutSegue" customModule="Homehapp" customModuleProvider="target" animates="NO" id="1ZR-xE-oZE"/>
                     </connections>
