@@ -144,7 +144,7 @@ extension UIImage {
     }
 
     /// Blur algorithms
-    public enum ImageBlurAlgorithm {
+    public enum BlurAlgorithm {
         case BoxConvolve
         case TentConvolve
     }
@@ -156,7 +156,7 @@ extension UIImage {
      - parameter algorithm: blur algorithm to use. .TentConvolve is faster than .BoxConvolve.
      - returns: the blurred image.
     */
-    public func blurImage(radius radius: Double, algorithm: ImageBlurAlgorithm = .TentConvolve) -> UIImage {
+    public func blurImage(radius radius: Double, algorithm: BlurAlgorithm = .TentConvolve) -> UIImage {
         let imageRect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         
         func createEffectBuffer(context: CGContext) -> vImage_Buffer {

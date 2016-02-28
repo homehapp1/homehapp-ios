@@ -86,8 +86,7 @@ func scaledCloudinaryUrl(width width: Int, height: Int, url: String) -> String {
 }
 
 /// Return scaled Cloudinary url for home cover images in main list and home story header
-func scaledCloudinaryCoverImageUrl(width width: Int, height: Int, url: String) -> String {
-    
+func scaledCloudinaryCoverImageUrl(width width: Int, height: Int, url: String) -> String {    
     let width = CGFloat(width)
     let height = CGFloat(height)
     

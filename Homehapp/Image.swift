@@ -25,7 +25,8 @@ class Image: DeletableObject {
     }
 
     var scaledCoverImageUrl: String {
-        return local ? url : scaledCloudinaryCoverImageUrl(width: width, height: height, url: url)    }
+        return local ? url : scaledCloudinaryCoverImageUrl(width: width, height: height, url: url)
+    }
     
     convenience init(url: String, width: Int, height: Int, local: Bool = false, localUrl: String?, backgroundColor: String? = "#ffffff") {
         self.init()

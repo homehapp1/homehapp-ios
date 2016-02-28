@@ -59,7 +59,6 @@
 		49516BBD1C1323A900C56FDC /* Toast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49516BBB1C1323A900C56FDC /* Toast.xib */; };
 		495787FF1C4E42D000237466 /* ShowHomeStorySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495787FE1C4E42D000237466 /* ShowHomeStorySegue.swift */; };
 		495788011C4E5AA700237466 /* UnwindHomeStorySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495788001C4E5AA700237466 /* UnwindHomeStorySegue.swift */; };
-		4962C2331C1DC52400D1E289 /* ios-jpegheader.data in Resources */ = {isa = PBXBuildFile; fileRef = 4962C2321C1DC52400D1E289 /* ios-jpegheader.data */; };
 		49770AE01C575CB5001DF076 /* NeighborhoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49770ADF1C575CB5001DF076 /* NeighborhoodViewController.swift */; };
 		49770AE21C576E3F001DF076 /* StoryObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49770AE11C576E3F001DF076 /* StoryObject.swift */; };
 		4980E3F41C3EA69E00BC15F1 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4B4E17A11C2AEC5E00C8A21E /* Roboto-Regular.ttf */; };
@@ -99,6 +98,7 @@
 		49B691C81C804B650076F680 /* UIResponderExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B691AB1C804B650076F680 /* UIResponderExtensions.swift */; };
 		49B691C91C804B650076F680 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B691AC1C804B650076F680 /* UIViewExtensions.swift */; };
 		49B691CA1C804B650076F680 /* UnderlinedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B691AD1C804B650076F680 /* UnderlinedLabel.swift */; };
+		49B691CC1C82F60C0076F680 /* ios-jpegheader-q30.data in Resources */ = {isa = PBXBuildFile; fileRef = 49B691CB1C82F60C0076F680 /* ios-jpegheader-q30.data */; };
 		49D546551BF5F73E007A1383 /* ParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D546541BF5F73E007A1383 /* ParallaxView.swift */; };
 		49E97C941BDBA54300AEEB5D /* Neighborhood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E97C931BDBA54300AEEB5D /* Neighborhood.swift */; };
 		49E97C9A1BDCEE3900AEEB5D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E97C991BDCEE3900AEEB5D /* Utils.swift */; };
@@ -235,7 +235,6 @@
 		49516BBB1C1323A900C56FDC /* Toast.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Toast.xib; sourceTree = "<group>"; };
 		495787FE1C4E42D000237466 /* ShowHomeStorySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowHomeStorySegue.swift; sourceTree = "<group>"; };
 		495788001C4E5AA700237466 /* UnwindHomeStorySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnwindHomeStorySegue.swift; sourceTree = "<group>"; };
-		4962C2321C1DC52400D1E289 /* ios-jpegheader.data */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ios-jpegheader.data"; sourceTree = "<group>"; };
 		49770ADF1C575CB5001DF076 /* NeighborhoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeighborhoodViewController.swift; sourceTree = "<group>"; };
 		49770AE11C576E3F001DF076 /* StoryObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryObject.swift; sourceTree = "<group>"; };
 		4980E3F21C3EA50400BC15F1 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -272,6 +271,7 @@
 		49B691AB1C804B650076F680 /* UIResponderExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIResponderExtensions.swift; sourceTree = "<group>"; };
 		49B691AC1C804B650076F680 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		49B691AD1C804B650076F680 /* UnderlinedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlinedLabel.swift; sourceTree = "<group>"; };
+		49B691CB1C82F60C0076F680 /* ios-jpegheader-q30.data */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ios-jpegheader-q30.data"; sourceTree = "<group>"; };
 		49D546541BF5F73E007A1383 /* ParallaxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxView.swift; sourceTree = "<group>"; };
 		49E97C931BDBA54300AEEB5D /* Neighborhood.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Neighborhood.swift; sourceTree = "<group>"; };
 		49E97C991BDCEE3900AEEB5D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -616,8 +616,8 @@
 			isa = PBXGroup;
 			children = (
 				648225B01C10C182002BB5F3 /* Fonts */,
+				49B691CB1C82F60C0076F680 /* ios-jpegheader-q30.data */,
 				4938C51C1C215A1900A1A871 /* canvas-jpegheader.data */,
-				4962C2321C1DC52400D1E289 /* ios-jpegheader.data */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -900,6 +900,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4980E3F41C3EA69E00BC15F1 /* Roboto-Regular.ttf in Resources */,
+				49B691CC1C82F60C0076F680 /* ios-jpegheader-q30.data in Resources */,
 				4980E3F51C3EA69E00BC15F1 /* Roboto-Light.ttf in Resources */,
 				4980E3F61C3EA69E00BC15F1 /* Roboto-LightItalic.ttf in Resources */,
 				4980E3F71C3EA69E00BC15F1 /* Roboto-Bold.ttf in Resources */,
@@ -930,7 +931,6 @@
 				4B58860E1C67C35B004FCE90 /* HomeFeatureSelectionCell.xib in Resources */,
 				490B369D1C269C3D0067DF51 /* ContentImageStoryBlockCell.xib in Resources */,
 				490B36A11C269E300067DF51 /* GalleryStoryBlockCell.xib in Resources */,
-				4962C2331C1DC52400D1E289 /* ios-jpegheader.data in Resources */,
 				4913DC051C0F36D800A1ADF1 /* SelectStoryblockContentTypeViewController.xib in Resources */,
 				49516BBD1C1323A900C56FDC /* Toast.xib in Resources */,
 				49293C591BCFC806008BF9C6 /* Main.storyboard in Resources */,

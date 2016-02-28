@@ -97,7 +97,7 @@ public class CloudinaryService {
     }
     
     private func uploadImage(imageData: NSData, progressCallback: (Float -> Void), completionCallback: (UploadResponse -> Void)) {
-        log.debug("Starting Cloudinary image upload..")
+        log.verbose("Starting Cloudinary image upload..")
         let uploader = CLUploader(cloudinary, delegate: nil)
         let options = ["tags": "ios_upload"]
         
@@ -117,7 +117,7 @@ public class CloudinaryService {
                 }
             }
             }, andProgress: { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite, context) -> Void in
-                log.debug("Upload progress: \(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+                log.verbose("Upload progress: \(totalBytesWritten) / \(totalBytesExpectedToWrite)")
                 progressCallback(Float(totalBytesWritten) / Float(totalBytesExpectedToWrite))
         })
 
@@ -131,7 +131,7 @@ public class CloudinaryService {
     func uploadVideo(videoMediaUrl: String, progressCallback: (Float -> Void), completionCallback: (UploadResponse -> Void)) -> Bool {
         assert(NSThread.isMainThread(), "Must be called on the main thread")
         
-        log.debug("Starting Cloudinary video upload - media URL: \(videoMediaUrl)")
+        log.verbose("Starting Cloudinary video upload - media URL: \(videoMediaUrl)")
         let uploader = CLUploader(cloudinary, delegate: nil)
         
         // Video is sent as 720p
@@ -170,10 +170,9 @@ public class CloudinaryService {
                 self.notifyDelegatesOperationsCompleted()
             }
             }, andProgress: { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite, context) -> Void in
-                log.debug("Upload progress: \(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+                log.verbose("Upload progress: \(totalBytesWritten) / \(totalBytesExpectedToWrite)")
                 progressCallback(Float(totalBytesWritten) / Float(totalBytesExpectedToWrite))
         })
-        log.debug("Video upload started")
         
         return true
     }

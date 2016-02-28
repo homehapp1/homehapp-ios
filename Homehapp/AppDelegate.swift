@@ -22,6 +22,12 @@ let cloudStorage = CloudinaryService.sharedInstance()
 let authService = AuthenticationService.sharedInstance()
 let locationService = LocationService.sharedInstance()
 
+// Global constants
+let thumbHeaderDataTypeIOSJPEG: UInt8 = 0x01
+let thumbHeaderDataTypeCanvasJPEG: UInt8 = 0x02
+let jpegThumbCompressionQuality: CGFloat = 0.3
+let jpegThumbPixelBudget: Int = (50 * 50)
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CloudinaryServiceDelegate {
 
@@ -41,10 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CloudinaryServiceDelegate
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         #if DEBUG // Debug configuration
-            log.setup(.Warning, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLogLevel: nil)
+            log.setup(.Debug, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLogLevel: nil)
         #else // Release configuration
-            log.setup(.Info, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLogLevel: nil)
-            
+            log.setup(.Info, showLogLevel: true, showFileNames: true, showLineNumbers: true, writeToFile: nil, fileLogLevel: nil)            
         #endif
         
         // Init Google analytics
@@ -72,13 +77,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CloudinaryServiceDelegate
         //NOTE this will cause "my home" to be sent to the server; do we want this to happen automatically or not?
 //        cloudStorage.addDelegate(self)
         
-        // Initialize Canvas JPEG headers for thumbnailization
-        guard let filePath = NSBundle.mainBundle().pathForResource("canvas-jpegheader", ofType: "data"),
-            jpegHeaderData = NSData(contentsOfFile: filePath) else {
-                log.error("Missing 'canvas-jpegheader.data' in bundle!")
-                return false
+        // Initialize iOS JPEG headers for thumbnailization
+        do {
+            guard let filePath = NSBundle.mainBundle().pathForResource("ios-jpegheader-q30", ofType: "data"),
+                jpegHeaderData = NSData(contentsOfFile: filePath) else {
+                    log.error("Missing iOS JPEG header data in bundle!")
+                    assert(false)
+            }
+            registerJpegThumbnailHeader(dataType: thumbHeaderDataTypeIOSJPEG, headerData: jpegHeaderData)
         }
-        registerJpegThumbnailHeader(dataType: 0x02, headerData: jpegHeaderData)
+        
+        do {
+            // Initialize Canvas JPEG headers for thumbnailization
+            guard let filePath = NSBundle.mainBundle().pathForResource("canvas-jpegheader", ofType: "data"),
+                jpegHeaderData = NSData(contentsOfFile: filePath) else {
+                    log.error("Missing 'canvas-jpegheader.data' in bundle!")
+                    assert(false)
+            }
+            registerJpegThumbnailHeader(dataType: thumbHeaderDataTypeCanvasJPEG, headerData: jpegHeaderData)
+        }
         
         // Application hooks with FB login
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)

@@ -108,10 +108,13 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     /// Last change to bottom bar height due to table view scrolling
     private var bottomBarLatestChange: CGFloat?
     
+    // TODO document me
     var hideBottomBarOriginally = true
     
+    // TODO document me. also name me properly.
     var animationStarted = false
     
+    // TODO wow so elegant. - matti
     private var createThumbnailData = false
     
     /// Returns the main home image view from the header, or nil if the header is not visible (enough)
@@ -317,7 +320,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             image.uploadProgress = 0.0
             
             if createThumbnailData {
-                if let snapshotThumbnailData = imageToJpegThumbnailData(sourceImage: selectedImage) {
+                if let snapshotThumbnailData = imageToJpegThumbnailData(sourceImage: selectedImage, dataType: thumbHeaderDataTypeIOSJPEG, compressionQuality: jpegThumbCompressionQuality, pixelBudget: jpegThumbPixelBudget) {
                     image.thumbnailData = snapshotThumbnailData
                 }
             }
@@ -425,7 +428,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         let video = Video(url: videoAssetUrl.absoluteString, width: width, height: height, local: true)
         video.uploadProgress = 0.0
         if createThumbnailData {
-            if let snapshotThumbnailData = imageToJpegThumbnailData(sourceImage: snapshotImage) {
+            if let snapshotThumbnailData = imageToJpegThumbnailData(sourceImage: snapshotImage, dataType: thumbHeaderDataTypeIOSJPEG, compressionQuality: jpegThumbCompressionQuality, pixelBudget: jpegThumbPixelBudget) {
                 video.thumbnailData = snapshotThumbnailData
             }
         }

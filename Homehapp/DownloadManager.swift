@@ -85,7 +85,7 @@ public class DownloadManager {
     - parameter completionCallback: download completion callback for this particular download
     */
     public func download(url url: String, additionalHeaders: [String: String]? = nil, progressCallback: DownloadProgressCallback?, completionCallback: DownloadCompletionCallback?) -> Download {
-        log.debug("Starting download for url '\(url)'")
+        log.verbose("Starting download for url '\(url)'")
         
         let download = Download(url: url)
         
@@ -94,7 +94,7 @@ public class DownloadManager {
         }
         
         manager.request(.GET, url, parameters: nil, encoding: .URL, headers: additionalHeaders).progress { bytesRead, totalBytesRead, totalBytesExpectedToRead in
-            log.debug("Download progress: url: \(url), \(totalBytesRead)/\(totalBytesExpectedToRead)")
+            log.verbose("Download progress: url: \(url), \(totalBytesRead)/\(totalBytesExpectedToRead)")
 
             download.bytesDownloaded = UInt64(totalBytesRead)
             download.totalSize = (totalBytesExpectedToRead > 0) ? UInt64(totalBytesExpectedToRead) : 0
@@ -107,7 +107,7 @@ public class DownloadManager {
                 progressCallback(bytesRead: UInt64(bytesRead), totalBytesRead: UInt64(totalBytesRead), totalBytesExpectedToRead: UInt64(totalBytesExpectedToRead))
             }
         }.response { request, response, data, error in
-            log.debug("Request completed: url: \(url), error = \(error), response = \(response)")
+            log.verbose("Request completed: url: \(url), error = \(error), response = \(response)")
 
             var nsError = error as? NSError
             

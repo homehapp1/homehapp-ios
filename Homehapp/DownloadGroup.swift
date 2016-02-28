@@ -86,7 +86,7 @@ public class DownloadGroup {
         
         // Progress will get a value [0, 1]
         progress /= Double(numDownloads)
-        log.debug("progress: \(progress), numDownloads = \(numDownloads)")
+        log.verbose("progress: \(progress), numDownloads = \(numDownloads)")
         
         if let progressCallback = progressCallback {
             progressCallback(totalBytesRead: bytesDownloaded, progress: progress)
@@ -94,7 +94,7 @@ public class DownloadGroup {
         
         if let completionCallback = completionCallback {
             if completed {
-                log.debug("Calling group completionCallback")
+                log.verbose("Calling group completionCallback")
                 completionCallback(numErrors: errors)
             }
         }
