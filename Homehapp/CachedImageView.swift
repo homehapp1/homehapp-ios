@@ -75,7 +75,7 @@ public class CachedImageView: QvikImageView {
                     return
                 }
                 
-                self.image = imageCache.getImage(url: imageUrl, fetch: true)
+                self.image = imageCache.getImage(url: imageUrl, loadPolicy: .Network)
             }
         }
     }
@@ -96,7 +96,7 @@ public class CachedImageView: QvikImageView {
      */
     public func imageLoaded() {
         if let imageUrl = self.imageUrl {
-            if let image = ImageCache.sharedInstance().getImage(url: imageUrl, fetch: false) {
+            if let image = ImageCache.sharedInstance().getImage(url: imageUrl, loadPolicy: .Memory) {
                 // Image loaded & found
                 self.image = image
                 

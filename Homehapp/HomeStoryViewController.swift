@@ -406,7 +406,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                             }
                             
                             // Start fetching the (scaled) remote images
-                            ImageCache.sharedInstance().getImage(url: image.scaledUrl)
+                            ImageCache.sharedInstance().getImage(url: image.scaledUrl, loadPolicy: .Network)
                         }
                     }
             })
@@ -493,7 +493,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                             if let thumbnailUrl = video.scaledThumbnailUrl {
                                 // Start retrieving the remote video thumbnail
                                 log.debug("Fetching thumbnail URL into the image cache: \(thumbnailUrl)")
-                                ImageCache.sharedInstance().getImage(url: thumbnailUrl)
+                                ImageCache.sharedInstance().getImage(url: thumbnailUrl, loadPolicy: .Network)
                             }
                         }
                     } else {

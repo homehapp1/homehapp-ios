@@ -79,7 +79,7 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
             realm.add(profileImage)
             currentUser?.profileImage = profileImage
         }
-        ImageCache.sharedInstance().getImage(url: facebookProfileImageUrl);
+        ImageCache.sharedInstance().getImage(url: facebookProfileImageUrl, loadPolicy: .Network);
         remoteService.updateCurrentUserOnServer()
     }
     
@@ -95,7 +95,7 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
                     realm.add(profileImage)
                     currentUser?.profileImage = profileImage
                 }
-                ImageCache.sharedInstance().getImage(url: imageURL.absoluteString);
+                ImageCache.sharedInstance().getImage(url: imageURL.absoluteString, loadPolicy: .Network);
                 remoteService.updateCurrentUserOnServer()
             }
         }

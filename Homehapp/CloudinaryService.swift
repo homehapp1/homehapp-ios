@@ -202,7 +202,7 @@ public class CloudinaryService {
                                         }
                                         
                                         // Start fetching the (scaled) remote images
-                                        ImageCache.sharedInstance().getImage(url: image.scaledUrl)
+                                        ImageCache.sharedInstance().getImage(url: image.scaledUrl, loadPolicy: .Network)
                                         
                                         // TODO define which one to send to server while images uploaded and do not send all
                                         remoteService.updateMyHomeOnServer()

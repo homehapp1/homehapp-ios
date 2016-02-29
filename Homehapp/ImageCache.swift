@@ -407,16 +407,42 @@ public class ImageCache: NSObject {
     }
     
     /**
-    Returns an image matching the given token from the cache. If not found, returns nil.
-    Only in-memory cache is accessed synchronously; if the image is loaded from disk or retrieved over the
-    internet, this is done asynchronously. When asynchronous load succeeds, 
-    cacheImageLoadedNotification is sent with urlParam set.
-    
-    If asynchronous load fails, cacheImageLoadFailedNotification is sent, with urlParam set.
-    
-    - parameter fetch: if YES, treats the token as an URL and attempts to fetch the image over the internet.
-    */
+     Returns an image matching the given token from the cache. If not found, returns nil.
+     Only in-memory cache is accessed synchronously; if the image is loaded from disk or retrieved over the
+     internet, this is done asynchronously. When asynchronous load succeeds,
+     cacheImageLoadedNotification is sent with urlParam set.
+     
+     If asynchronous load fails, cacheImageLoadFailedNotification is sent, with urlParam set.
+     
+     - parameter fetch: if YES, treats the token as an URL and attempts to fetch the image over the internet.
+     */
+    @available(*, deprecated, message="use the other overload instead. this will be removed in a (near) future release.")
     public func getImage(url url: String, fetch: Bool = true) -> UIImage? {
+        return getImage(url: url, loadPolicy: fetch ? .Network : .Disk)
+    }
+
+    /// Where to look for an image being loaded from the cache.
+    public enum CacheLoadPolicy {
+        /// Look for the image only in the in-memory cache
+        case Memory
+        /// Look for the image in in-memory cache and if not found, on the disk
+        case Disk
+        /// Look for the image over the network if not found in in-memory cache or on the disk
+        case Network
+    }
+    
+    /**
+     Returns an image matching the given token from the cache. If not found, returns nil.
+     Only in-memory cache is accessed synchronously; if the image is loaded from disk or retrieved over the
+     internet, this is done asynchronously. When asynchronous load succeeds,
+     cacheImageLoadedNotification is sent with urlParam set.
+     
+     If asynchronous load fails, cacheImageLoadFailedNotification is sent, with urlParam set.
+
+     - parameter url: image URL to request
+     - parameter loadPolicy: whether to look for the image only in in-memory cache, or also on disk and/or over network.
+    */
+    public func getImage(url url: String, loadPolicy: CacheLoadPolicy) -> UIImage? {
         log.verbose("getting image for url: \(url)")
         
         // Check if the image is found in the in-memory cache
@@ -429,6 +455,11 @@ public class ImageCache: NSObject {
             return image
         }
 
+        if loadPolicy == .Memory {
+            // Image not found in in-memory cache and we won't be looking any further!
+            return nil
+        }
+        
         dispatch_async(diskOperationQueue) {
             let filePath = self.getFilePath(url: url)
 
@@ -457,7 +488,7 @@ public class ImageCache: NSObject {
                 self.insertToMemoryCache(image: image, url: url) // Will send loaded -notification
             } else {
                 log.verbose("Image not found on disk.")
-                if fetch {
+                if loadPolicy == .Network {
                     if self.downloadManager.hasPendingDownload(url: url) {
                         log.verbose("Already fetching image from url \(url)")
                     } else {
@@ -468,6 +499,15 @@ public class ImageCache: NSObject {
         }
         
         return nil
+    }
+    
+    /// Whether an image for a given URL is present in the in-memory cache
+    public func availableInMemory(url url: String) -> Bool {
+        let image = lock.withReadLock {
+            return self.inMemoryCache[url]
+        }
+        
+        return image != nil
     }
 
     /// Returns a shared, singleton instance

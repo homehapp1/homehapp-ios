@@ -167,13 +167,13 @@ public func imageToJpegThumbnailData(sourceImage image: UIImage, dataType: UInt8
     }
 
     //TODO REMOVE
-    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-    let jpegPath = (documentsPath as NSString).stringByAppendingPathComponent("thumbnail.jpeg")
-    if jpegData.writeToFile(jpegPath, atomically: true) {
-        log.debug("JPEG thumb written to \(jpegPath)")
-    } else {
-        log.error("Failed to write JPEG")
-    }
+//    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+//    let jpegPath = (documentsPath as NSString).stringByAppendingPathComponent("thumbnail.jpeg")
+//    if jpegData.writeToFile(jpegPath, atomically: true) {
+//        log.debug("JPEG thumb written to \(jpegPath)")
+//    } else {
+//        log.error("Failed to write JPEG")
+//    }
     
     // Try to extract the JPEG image data
     guard let jpegImageData = extractJpegImageData(jpegData) else {
@@ -189,7 +189,7 @@ public func imageToJpegThumbnailData(sourceImage image: UIImage, dataType: UInt8
     }
 
     let thumbHeader = [thumbHeaderPacketVersion, dataType, UInt8(thumbWidth), UInt8(thumbHeight)]
-    packetData.appendBytes(UnsafePointer<Void>(thumbHeader), length: thumbHeader.count)
+    packetData.appendBytes(UnsafePointer<UInt8>(thumbHeader), length: thumbHeader.count)
     packetData.appendData(jpegImageData)
 
     log.debug("JPEG thumb packet is \(packetData.length) bytes")
