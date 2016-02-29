@@ -9,6 +9,9 @@
 import Foundation
 import RealmSwift
 
+// Max image size for small images used in lists etc; max size is half of iPhone6 screen width.
+let smallImageMaxDimensions = CGSize(width: 375, height: 375)
+
 class Image: DeletableObject {
     dynamic var width: Int = 0
     dynamic var height: Int = 0
@@ -24,6 +27,11 @@ class Image: DeletableObject {
         return local ? url : scaledCloudinaryUrl(width: width, height: height, url: url)
     }
 
+    /// Returns a (cloudinary) url that represents a scaled-down, small version of the image, for use in lists etc.
+    var smallScaledUrl: String {
+        return local ? url : scaledCloudinaryUrl(width: width, height: height, url: url, maxSize: smallImageMaxDimensions)
+    }
+    
     var scaledCoverImageUrl: String {
         return local ? url : scaledCloudinaryCoverImageUrl(width: width, height: height, url: url)
     }

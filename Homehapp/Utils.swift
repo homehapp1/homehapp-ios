@@ -60,8 +60,8 @@ public func runOnMainThreadAfter(delay delay: NSTimeInterval, task: (Void -> Voi
 
  http://res.cloudinary.com/demo/image/upload/w_0.6/sample.jpg
 */
-func scaledCloudinaryUrl(width width: Int, height: Int, url: String) -> String {
-    guard let maxSize = ImageCache.sharedInstance().maximumImageDimensions else {
+func scaledCloudinaryUrl(width width: Int, height: Int, url: String, maxSize: CGSize? = nil) -> String {
+    guard let maxSize = maxSize ?? ImageCache.sharedInstance().maximumImageDimensions else {
         return url
     }
     
