@@ -12,6 +12,13 @@ import UIKit
  Displays a single image in the gallery image grid.
 */
 class GalleryImageCell: UICollectionViewCell {
+    enum ImageSize {
+        /// Image size for small gallery items
+        case Small
+        /// Image size setting for fullscreen etc. large gallery images
+        case Large
+    }
+    
     @IBOutlet weak var imageView: CachedImageView!
 
     @IBOutlet weak var deleteButton: UIButton!
@@ -41,11 +48,21 @@ class GalleryImageCell: UICollectionViewCell {
     
     // MARK: Public methods
     
-    func populate(image: Image, contentMode: UIViewContentMode=UIViewContentMode.ScaleAspectFill) {
+    func populate(image: Image, imageSize: ImageSize = .Large, contentMode: UIViewContentMode = UIViewContentMode.ScaleAspectFill) {
         self.image = image
         
-        imageView.imageUrl = image.scaledUrl
-        imageView.thumbnailData = image.thumbnailData
+        if imageSize == .Small {
+            imageView.imageUrl = image.smallScaledUrl
+        } else {
+            // Using large image; use a smaller image as a placeholder if one is available in the in-memory cache
+            imageView.placeholderImage = ImageCache.sharedInstance().getImage(url: image.smallScaledUrl, loadPolicy: .Memory)
+            imageView.imageUrl = image.scaledUrl
+        }
+        
+        if imageView.placeholderImage == nil {
+            imageView.thumbnailData = image.thumbnailData
+        }
+        
         imageView.imageFadeInDuration = 1.0
         imageView.fadeInColor = image.backgroundColor != nil ? UIColor(hexString: image.backgroundColor!) : UIColor.whiteColor()
         imageView.contentMode = contentMode

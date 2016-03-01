@@ -19,8 +19,8 @@ class Image: DeletableObject {
     dynamic var local: Bool = false // true if not yet uploaded from this device
     dynamic var thumbnailData: NSData? = nil
     dynamic var localUrl: String? = nil
-    dynamic var uploadProgress: Float = 1.0 // upload progress value from 0 .... 1 when user uploads image
-    dynamic var backgroundColor: String? = nil
+    dynamic var uploadProgress: Float = 1.0 // upload progress value in range 0..1 when user uploads image
+    dynamic var backgroundColor: String? = nil // Background color of the image as a HEX string. 
     
     /// Returns a scaled (cloudinary) url. For local ones, returns the url itself.
     var scaledUrl: String {

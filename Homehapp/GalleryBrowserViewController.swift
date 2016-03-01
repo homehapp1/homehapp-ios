@@ -47,6 +47,7 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         }
         
         cell.deleteButton.hidden = true
+        
         return cell
     }
     
