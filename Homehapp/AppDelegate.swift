@@ -83,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CloudinaryServiceDelegate
                 jpegHeaderData = NSData(contentsOfFile: filePath) else {
                     log.error("Missing iOS JPEG header data in bundle!")
                     assert(false)
+                    return false
             }
             registerJpegThumbnailHeader(dataType: thumbHeaderDataTypeIOSJPEG, headerData: jpegHeaderData)
         }
@@ -93,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CloudinaryServiceDelegate
                 jpegHeaderData = NSData(contentsOfFile: filePath) else {
                     log.error("Missing 'canvas-jpegheader.data' in bundle!")
                     assert(false)
+                    return false
             }
             registerJpegThumbnailHeader(dataType: thumbHeaderDataTypeCanvasJPEG, headerData: jpegHeaderData)
         }

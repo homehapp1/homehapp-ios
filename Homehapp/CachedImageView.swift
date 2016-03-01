@@ -111,6 +111,7 @@ public class CachedImageView: QvikImageView {
                     self.placeholderImageView?.alpha = 0.0
                     self.fadeInView?.alpha = 0.0
                     }, completion: { finished in
+                        // After fade-in animation is done, remove the temp views
                         self.reset()
                 })
             }
@@ -143,6 +144,7 @@ public class CachedImageView: QvikImageView {
             if let placeholderImage = placeholderImage {
                 if placeholderImageView == nil {
                     placeholderImageView = UIImageView(frame: self.frame)
+                    placeholderImageView!.backgroundColor = UIColor.clearColor()
                     placeholderImageView!.contentMode = self.contentMode
                     placeholderImageView!.image = placeholderImage
                     image = placeholderImageView!.image
@@ -150,33 +152,43 @@ public class CachedImageView: QvikImageView {
                     
                     // Discard reference to the placeholder image to deallocate it when actual image has loaded
                     self.placeholderImage = nil
-                } else {
-                    placeholderImageView!.frame = self.frame
                 }
             } else if let thumbnailData = thumbnailData {
                 if placeholderImageView == nil {
                     placeholderImageView = UIImageView(frame: self.frame)
+                    placeholderImageView!.backgroundColor = UIColor.clearColor()
                     placeholderImageView!.contentMode = self.contentMode
-                    placeholderImageView!.image = jpegThumbnailDataToImage(data: thumbnailData, maxSize: self.frame.size)
-                    image = placeholderImageView!.image
+                    
+                    runInBackground {
+                        // Do the heavy lifting in a background thread
+                        let thumbnailImage = jpegThumbnailDataToImage(data: thumbnailData, maxSize: self.frame.size)
+                        
+                        runOnMainThread {
+                            self.placeholderImageView!.image = thumbnailImage
+                            //TODO why would we set this to the actual image?
+                            self.image = thumbnailImage
+                        }
+                    }
                     insertSubview(placeholderImageView!, atIndex: 0)
                     
                     // Discard reference to thumbnail data to to deallocate it when actual image has loaded
                     self.thumbnailData = nil
-                } else {
-                    placeholderImageView!.frame = self.frame
                 }
-            } else if let fadeInColor = fadeInColor where placeholderImageView == nil {
+            }
+            
+            // Add background/fade in -color view if it is set, placing it under the placeholder image as a backup
+            if let fadeInColor = fadeInColor {
                 if fadeInView == nil {
                     // No thumbnail data set; show a colored fade-in view
                     fadeInView = UIView(frame: self.frame)
                     fadeInView!.backgroundColor = fadeInColor
                     insertSubview(fadeInView!, atIndex: 0)
-                } else {
-                    fadeInView!.frame = self.frame
                 }
             }
         }
+        
+        placeholderImageView?.frame = self.frame
+        fadeInView?.frame = self.frame
     }
     
     private func commonInit() {

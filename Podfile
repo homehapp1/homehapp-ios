@@ -21,8 +21,9 @@ pod 'Fabric'
 pod 'Crashlytics'
 pod 'GoogleMaps'
 
-# For generating the Acknowledgements
+# For generating the Acknowledgements: https://github.com/CocoaPods/CocoaPods/wiki/Acknowledgements
 post_install do | installer |
 require 'fileutils'
 FileUtils.cp_r('Pods/Target Support Files/Pods/Pods-Acknowledgements.plist', 'Homehapp/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
 end
+
