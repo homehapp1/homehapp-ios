@@ -164,9 +164,18 @@ public class CachedImageView: QvikImageView {
                         let thumbnailImage = jpegThumbnailDataToImage(data: thumbnailData, maxSize: self.frame.size)
                         
                         runOnMainThread {
-                            self.placeholderImageView!.image = thumbnailImage
-                            //TODO why would we set this to the actual image?
-                            self.image = thumbnailImage
+                            if let placeholderImageView = self.placeholderImageView {
+                                //TODO why would we set this to the actual image?
+                                //                            self.image = thumbnailImage
+                                
+                                // Quickly animate in the loaded thumbnail
+                                placeholderImageView.alpha = 0.0
+                                placeholderImageView.image = thumbnailImage
+                                
+                                UIView.animateWithDuration(0.2) {
+                                    placeholderImageView.alpha = 1.0
+                                }
+                            }
                         }
                     }
                     insertSubview(placeholderImageView!, atIndex: 0)
