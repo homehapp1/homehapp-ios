@@ -35,7 +35,7 @@ public class CachedImageView: QvikImageView {
     
     /// Duration for fading in the loaded image, in case it is asynchronously loaded.
     @IBInspectable
-    public var imageFadeInDuration: NSTimeInterval = 0.5
+    public var imageFadeInDuration: NSTimeInterval = 0.3
     
     /// JPEG thumbnail data for the image. Should set this before layout cycle.
     public var thumbnailData: NSData? = nil
