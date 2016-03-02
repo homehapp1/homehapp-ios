@@ -98,7 +98,7 @@ class HomeCell: UICollectionViewCell {
                     // Home image url does not contain http and is not a valid url 
                     // if image upload in sending end has failed
                     if home!.image!.url.contains("http") {
-                        mainImageView.imageUrl = home!.image!.scaledCoverImageUrl
+                        mainImageView.imageUrl = home!.image!.smallScaledUrl
                         mainImageView.thumbnailData = home!.image!.thumbnailData
                     } else {
                         mainImageView.thumbnailData = nil
@@ -110,7 +110,6 @@ class HomeCell: UICollectionViewCell {
                         mainImageView.fadeInColor = UIColor(hexString: backgroundColor)
                     }
                 } else {
-                   // mainImageView.imageUrl = home!.coverImage?.scaledCoverImageUrl
                     mainImageView.imageUrl = home?.coverImage?.smallScaledUrl
                     mainImageView.thumbnailData = home!.coverImage?.thumbnailData
                 }

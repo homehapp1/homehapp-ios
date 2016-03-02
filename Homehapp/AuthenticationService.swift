@@ -92,7 +92,8 @@ class AuthenticationService {
         dataManager.deleteAll()
         ImageCache.sharedInstance().clearCache()
         if GIDSignIn.sharedInstance().currentUser != nil {
-            GIDSignIn.sharedInstance().signOut()
+            GIDSignIn.sharedInstance().disconnect()
+            //GIDSignIn.sharedInstance().signOut()
         }
     }
 }

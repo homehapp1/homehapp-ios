@@ -57,23 +57,39 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
         didSet {
 
             if let image = storyObject?.image {
-            
+                
                 // TODO remove image url check when london-view removed from server
                 if !image.url.contains("london-view") {
+                    
+                    //Start loading proper image for header
                     mainImageView.imageUrl = image.scaledCoverImageUrl
+                    
+                    //prior that display small scaled image that is used also in main screen list
+                    mainImageView.placeholderImage = ImageCache.sharedInstance().getImage(url: image.smallScaledUrl, loadPolicy: .Memory)
+                    
                     mainImageView.thumbnailData = image.thumbnailData
-                
+                    mainImageView.fadeInColor = UIColor.clearColor()
+                    
                     if image.uploadProgress < 1.0 {
                         updateProgressBar()
                     }
                 }
                 
             } else {
+                
+                //Start loading proper image for header
                 mainImageView.imageUrl = storyObject?.coverImage?.scaledCoverImageUrl
+                
+                //prior that display small scaled image that is used also in main screen list
+                if let smallScaledUrl = storyObject?.coverImage?.smallScaledUrl {
+                    mainImageView.placeholderImage = ImageCache.sharedInstance().getImage(url: smallScaledUrl, loadPolicy: .Memory)
+                }
+                
                 mainImageView.thumbnailData = storyObject?.coverImage?.thumbnailData
+                mainImageView.fadeInColor = UIColor.clearColor()
             }
             
-            if mainImageView.image == nil {
+            if mainImageView.image == nil && mainImageView.placeholderImage == nil {
                 mainImageView.thumbnailData = nil
                 if storyObject is Neighborhood {
                     mainImageView.image = UIImage(named: "neighbourhood_default_background")
