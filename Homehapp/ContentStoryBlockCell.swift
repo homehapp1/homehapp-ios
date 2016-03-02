@@ -51,7 +51,7 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             mainTextLabel.text = storyBlock?.mainText
             editMainTextView.text = storyBlock?.mainText
             
-            updateLayoutState()
+//            updateLayoutState()
             
             // If content block is first cell, it should not have top margin
             if removeTopMargin {
@@ -72,6 +72,8 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     - returns: The text view that should become the next first responder, or nil if first responder should not change.
     */
     private func updateLayoutState() -> ExpandingTextView? {
+//        log.debug("updateLayoutState()")
+        
         switch storyBlock!.layout {
         case .Title:
             // Show only title
@@ -80,7 +82,7 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             editMainTextTopMarginConstraint.constant = 0
             
             editTitleTextView.shouldResize = true
-            editTitleTextView.updateSize(notify: false)
+//            editTitleTextView.updateSize(notify: false)
             editMainTextView.shouldResize = false
             editMainTextView.heightConstraint.constant = 0
             
@@ -95,7 +97,7 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             editTitleTextView.shouldResize = false
             editTitleTextView.heightConstraint.constant = 0
             editMainTextView.shouldResize = true
-            editMainTextView.updateSize(notify: false)
+//            editMainTextView.updateSize(notify: false)
             
             return editMainTextView
         default:
@@ -106,9 +108,9 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             mainTextLabelTopMarginConstraint.constant = 10
 
             editTitleTextView.shouldResize = true
-            editTitleTextView.updateSize(notify: false)
+//            editTitleTextView.updateSize(notify: false)
             editMainTextView.shouldResize = true
-            editMainTextView.updateSize(notify: false)
+//            editMainTextView.updateSize(notify: false)
             
             return nil
         }
@@ -173,6 +175,8 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             nextFirstResponder.becomeFirstResponder()
         }
         
+        setNeedsLayout()
+        
         UIView.animateWithDuration(toggleEditModeAnimationDuration) {
             self.layoutIfNeeded()
         }
@@ -235,5 +239,7 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         editMainTextView.placeholderText = NSLocalizedString("edithomestory:content:maintext-placeholder", comment: "")
         
         titleLabelOriginalTopMarginConstraint = titleLabelTopConstraint.constant
+        
+        layer.shouldRasterize = true
     }
 }

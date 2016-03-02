@@ -16,14 +16,14 @@ public class ExpandingTextView: UITextView {
     @IBInspectable
     public var minimumHeight: CGFloat = 0 {
         didSet {
-            updateSize()
+//            updateSize()
         }
     }
     
     @IBInspectable
     public var maximumHeight: CGFloat = 0 {
         didSet {
-            updateSize()
+//            updateSize()
         }
     }
     
@@ -57,7 +57,8 @@ public class ExpandingTextView: UITextView {
     override public var text: String! {
         didSet {
             updatePlaceholder()
-            updateSize(notify: false)
+//            log.debug("calling from text didSet")
+//            updateSize(notify: false)
         }
     }
 
@@ -67,6 +68,7 @@ public class ExpandingTextView: UITextView {
     
     func textDidChange(notification: NSNotification) {
         updatePlaceholder()
+        log.debug("Calling from textDidChange")
         updateSize()
     }
     
@@ -78,6 +80,8 @@ public class ExpandingTextView: UITextView {
     
     /// Calculate & update the height for the editor
     public func updateSize(notify notify: Bool = true) {
+//        log.debug("updateSize()")
+        
         if !shouldResize {
             return
         }
@@ -158,10 +162,13 @@ public class ExpandingTextView: UITextView {
         }
 
         updatePlaceholder()
-        updateSize()
+//        log.debug("calling from commonInit()")
+//        updateSize()
     }
 
     override public func layoutSubviews() {
+//        log.debug("layoutSubviews")
+        
         super.layoutSubviews()
 
         // Force the text to be shown completely instead of being sometimes "scrolled"
