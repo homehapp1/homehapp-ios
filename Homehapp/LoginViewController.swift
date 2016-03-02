@@ -49,7 +49,9 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
                 ) { (session, error) -> Void in
                     if error == nil {
                         if let strongSelf = self {
-                            strongSelf.welcomeText.text = "Welcome, \(session!.valueForKey("user")!.valueForKey("displayName")!)!"
+                            if let firstName = session!.valueForKey("user")!.valueForKey("firstName"), lastName = session!.valueForKey("user")!.valueForKey("lastName") {
+                                strongSelf.welcomeText.text = "\(firstName) \(lastName)"
+                            }
                             strongSelf.preloadFacebookProfileImage(token.userID)
                             strongSelf.exitView(2)
                         }
@@ -183,7 +185,9 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
             ) { [weak self] (session, error) -> Void in
                 if error == nil {
                     if let strongSelf = self {
-                        strongSelf.welcomeText.text = "Welcome, \(session!.valueForKey("user")!.valueForKey("displayName")!)!"
+                        if let firstName = session!.valueForKey("user")!.valueForKey("firstName"), lastName = session!.valueForKey("user")!.valueForKey("lastName") {
+                            strongSelf.welcomeText.text = "\(firstName) \(lastName)"
+                        }
                         strongSelf.preloadGoogleProfileImage()
                         strongSelf.exitView(2)
                     }
