@@ -321,7 +321,15 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
             return cell
         }
         
-        cell.populate(storyBlock.galleryImages[indexPath.row])
+        let imageSizeOption: GalleryImageCell.ImageSize
+        let imageSize = imageSizes[indexPath.row]
+        if imageSize.width <= Image.smallImageMaxDimensions.width && imageSize.height <= Image.smallImageMaxDimensions.height {
+            imageSizeOption = .Small
+        } else {
+            imageSizeOption = .Medium
+        }
+        
+        cell.populate(storyBlock.galleryImages[indexPath.row], imageSize: imageSizeOption)
         
         if editMode {
             cell.deleteCallback = { [weak self] in

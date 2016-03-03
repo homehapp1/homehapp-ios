@@ -9,9 +9,6 @@
 import Foundation
 import RealmSwift
 
-// Max image size for small images used in lists etc; max size is half of iPhone6 screen width.
-let smallImageMaxDimensions = CGSize(width: 375, height: 375)
-
 class Image: DeletableObject {
     dynamic var width: Int = 0
     dynamic var height: Int = 0
@@ -21,15 +18,26 @@ class Image: DeletableObject {
     dynamic var localUrl: String? = nil
     dynamic var uploadProgress: Float = 1.0 // upload progress value in range 0..1 when user uploads image
     dynamic var backgroundColor: String? = nil // Background color of the image as a HEX string. 
+
+    // Max image size for small images used in lists etc; max size is half of iPhone6 screen width.
+    static let smallImageMaxDimensions = CGSize(width: 375, height: 375)
+    
+    // Max image size for medium images used in lists etc; max width is the iPhone6 screen width, height 1.5x width
+    static let mediumImageMaxDimensions = CGSize(width: 750, height: 750*1.5)
     
     /// Returns a scaled (cloudinary) url. For local ones, returns the url itself.
     var scaledUrl: String {
         return local ? url : scaledCloudinaryUrl(width: width, height: height, url: url)
     }
-
+    
+    /// Returns a (cloudinary) url that represents a scaled-down, medium version of the image, for use in lists etc.
+    var mediumScaledUrl: String {
+        return local ? url : scaledCloudinaryUrl(width: width, height: height, url: url, maxSize: Image.mediumImageMaxDimensions)
+    }
+    
     /// Returns a (cloudinary) url that represents a scaled-down, small version of the image, for use in lists etc.
     var smallScaledUrl: String {
-        return local ? url : scaledCloudinaryUrl(width: width, height: height, url: url, maxSize: smallImageMaxDimensions)
+        return local ? url : scaledCloudinaryUrl(width: width, height: height, url: url, maxSize: Image.smallImageMaxDimensions)
     }
     
     var scaledCoverImageUrl: String {

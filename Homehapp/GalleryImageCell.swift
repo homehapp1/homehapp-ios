@@ -15,6 +15,8 @@ class GalleryImageCell: UICollectionViewCell {
     enum ImageSize {
         /// Image size for small gallery items
         case Small
+        /// Image size setting for medium sized images, eg. screen-size images for lists
+        case Medium
         /// Image size setting for fullscreen etc. large gallery images
         case Large
     }
@@ -51,12 +53,28 @@ class GalleryImageCell: UICollectionViewCell {
     func populate(image: Image, imageSize: ImageSize = .Large, contentMode: UIViewContentMode = UIViewContentMode.ScaleAspectFill) {
         self.image = image
         
+        switch imageSize {
+        case .Small:
+            // Using the smallest image; no placeholder available
+            imageView.placeholderImage = nil
+            imageView.imageUrl = image.smallScaledUrl
+        case .Medium:
+            // Using medium image; use a smaller image as a placeholder if one is available in the in-memory cache
+            imageView.placeholderImage = ImageCache.sharedInstance().getImage(url: image.smallScaledUrl, loadPolicy: .Memory)
+            imageView.imageUrl = image.scaledUrl
+        case .Large:
+            // Using large image; use a smaller image as a placeholder if one is available in the in-memory cache
+            if let mediumImage = ImageCache.sharedInstance().getImage(url: image.mediumScaledUrl, loadPolicy: .Memory) {
+                imageView.placeholderImage = mediumImage
+            } else {
+                imageView.placeholderImage = ImageCache.sharedInstance().getImage(url: image.smallScaledUrl, loadPolicy: .Memory)
+            }            
+            imageView.imageUrl = image.scaledUrl
+        }
+        
         if imageSize == .Small {
             imageView.imageUrl = image.smallScaledUrl
         } else {
-            // Using large image; use a smaller image as a placeholder if one is available in the in-memory cache
-            imageView.placeholderImage = ImageCache.sharedInstance().getImage(url: image.smallScaledUrl, loadPolicy: .Memory)
-            imageView.imageUrl = image.scaledUrl
         }
         
         if imageView.placeholderImage == nil {

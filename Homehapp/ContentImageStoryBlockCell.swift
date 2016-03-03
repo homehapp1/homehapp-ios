@@ -43,8 +43,9 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             
             descriptionLabel.text = storyBlock?.mainText
             
-            mainImageView.imageUrl = storyBlock?.image?.scaledUrl
+            mainImageView.imageUrl = storyBlock?.image?.mediumScaledUrl
             mainImageView.thumbnailData = storyBlock?.image?.thumbnailData
+            
             if let fadeInColor = storyBlock?.image?.backgroundColor {
                 mainImageView.fadeInColor = UIColor(hexString: fadeInColor)
             }
