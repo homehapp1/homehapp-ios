@@ -23,7 +23,6 @@ class UnwindHomeStorySegue: UIStoryboardSegue {
         let maskView = UIView(frame: imageView.frame)
         maskView.translatesAutoresizingMaskIntoConstraints = true
         maskView.clipsToBounds = true
-        maskView.backgroundColor = UIColor.yellowColor()
         
         maskView.addSubview(imageView)
         
