@@ -84,6 +84,10 @@ class DataManager {
             user!.lastName = json["lastname"] as? String
             user!.phoneNumber = json["contact"]?["phone"] as? String
             
+            if user!.displayName == nil || user!.displayName?.length == 0 {
+                user!.displayName = "\(user!.firstName) \(user!.lastName)"
+            }
+            
             user!.facebookUserId = json["fbUserId"] as? String
             if let profileImageJson = json["profileImage"] {
                 let profileImage = Image.fromJSON(profileImageJson)
