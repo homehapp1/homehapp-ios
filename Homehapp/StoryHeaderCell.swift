@@ -62,7 +62,7 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
                 if !image.url.contains("london-view") {
                     
                     //Start loading proper image for header
-                    mainImageView.imageUrl = image.scaledCoverImageUrl
+                    mainImageView.imageUrl = image.scaledUrl
                     
                     //prior that display small scaled image that is used also in main screen list
                     mainImageView.placeholderImage = ImageCache.sharedInstance().getImage(url: image.smallScaledUrl, loadPolicy: .Memory)
@@ -78,7 +78,7 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
             } else {
                 
                 //Start loading proper image for header
-                mainImageView.imageUrl = storyObject?.coverImage?.scaledCoverImageUrl
+                mainImageView.imageUrl = storyObject?.coverImage?.scaledUrl
                 
                 //prior that display small scaled image that is used also in main screen list
                 if let smallScaledUrl = storyObject?.coverImage?.smallScaledUrl {
