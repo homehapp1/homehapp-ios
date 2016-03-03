@@ -38,6 +38,8 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
     
     var playFullscreenCallback: (Void -> Void)?
     
+    var playButtonPressedTime: NSDate? = nil
+    
     // Flag defining if the play was paused by the user
     private var pausedByUser = false
     private let kRotationAnimationKey = "com.homehapp.loadingAnimationKey"
@@ -130,6 +132,8 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
                 player?.volume = 0.0
                 videoView.layer.addSublayer(playerLayer!)
                 playerItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options:NSKeyValueObservingOptions(), context: nil)
+                
+                playButtonPressedTime = NSDate()
             }
         }
                 
@@ -218,6 +222,14 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
             
             playerLayer!.frame = videoView.bounds
             player?.play()
+            
+            // Send analytics event measuring how long the video buffering took
+            if let playButtonPressedTime = playButtonPressedTime {
+                let tracker = GAI.sharedInstance().defaultTracker
+                let analyticsEventDictionary = GAIDictionaryBuilder.createTimingWithCategory("video", interval: NSDate().timeIntervalSinceDate(playButtonPressedTime), name: "video upload time", label: nil).build() as [NSObject : AnyObject]
+                tracker.send(analyticsEventDictionary)
+            }
+            
         } else {
            showLoading()
         }
