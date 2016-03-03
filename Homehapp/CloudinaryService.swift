@@ -64,12 +64,13 @@ public class CloudinaryService {
         }
     }
     
-    /*
+    /// Return Cloudinary public id for the image. Cloudinary public id is the identifier before file ending
     private func getPublicId(url: String) -> String {
-        // TODO
-        return url
+        let urlWithoutFileFormat = url.split(".jpg")[0]
+        let urlParts = urlWithoutFileFormat.split("/")
+        let publicId = urlParts[urlParts.count - 1]
+        return publicId
     }
-    */
     
     // MARK: Public methods
     
@@ -232,7 +233,7 @@ public class CloudinaryService {
             log.error("Error fetching unset images: \(error)")
         }
     }
-    /*
+
     /// Remove Image or Video from Cloudinary based on it's url
     func removeAsset(url: String) {
         
@@ -241,10 +242,9 @@ public class CloudinaryService {
         
         let uploader = CLUploader(cloudinary, delegate: nil)
         
-        // TODO check if this destroys derivatives as well?
+        // Destroy image from Cloudinary and all it's derivatives
         uploader.destroy(publicId, options: nil)
     }
-    */
     
     // MARK: Lifecycle etc
     

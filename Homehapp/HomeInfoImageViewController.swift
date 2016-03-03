@@ -77,7 +77,7 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
         
             // Remove image from Cloudinary
             if let url = image?.url where url.contains("http") {
-                //cloudStorage.removeAsset(url)
+                cloudStorage.removeAsset(url)
             }
         
             // Animate image removal
@@ -88,6 +88,7 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
                     self.imageView.image = nil
                     self.imageView.alpha = 1.0
                     self.deleteButton.enabled = true
+                    self.deleteButton.hidden = true
             }
         }
     }
@@ -113,6 +114,7 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
     
                     self?.uploadProgressView.hidden = true
                     self?.editImageButton.hidden = false
+                    self?.deleteButton.hidden = false
                     
                     if success {
                         pickedImage.url = url!
@@ -122,7 +124,9 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
                     } else {
                         pickedImage.local = true
                     }
-                
+
+                    self?.image = pickedImage
+                    
                     dataManager.performUpdates({
                         if let pickingMode = self?.pickingMode {
                             switch pickingMode {
@@ -179,6 +183,6 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
         }
         
         editImageButton.hidden = (!appstate.mostRecentlyOpenedHome!.isMyHome() || editMode == false)
-        deleteButton.hidden = (!appstate.mostRecentlyOpenedHome!.isMyHome() || editMode == false)
+        deleteButton.hidden = (!appstate.mostRecentlyOpenedHome!.isMyHome() || editMode == false) || image == nil
     }
 }

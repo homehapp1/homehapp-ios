@@ -41,6 +41,7 @@
             <string>Roboto-Light</string>
             <string>Roboto-Light</string>
             <string>Roboto-Light</string>
+            <string>Roboto-Light</string>
         </mutableArray>
         <mutableArray key="Roboto-Medium.ttf">
             <string>Roboto-Medium</string>
@@ -2384,8 +2385,9 @@ YOU BELONG TO</string>
                                             <constraint firstAttribute="height" constant="70" id="ZfP-yb-4dt"/>
                                             <constraint firstAttribute="width" constant="70" id="z3m-bX-ddK"/>
                                         </constraints>
-                                        <inset key="contentEdgeInsets" minX="20" minY="10" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" image="button_close_white"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="15" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="delete"/>
                                         <connections>
                                             <action selector="deleteButtonPressed:" destination="eo5-9X-1c7" eventType="touchUpInside" id="5br-Cb-Paa"/>
                                         </connections>
