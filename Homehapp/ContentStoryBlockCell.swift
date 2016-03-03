@@ -241,5 +241,6 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         titleLabelOriginalTopMarginConstraint = titleLabelTopConstraint.constant
         
         layer.shouldRasterize = true
+        layer.rasterizationScale = 2.0
     }
 }
