@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Describes the available text editing modes for home story cells
+/// Defines if we're watching EPC of Floorplans
 enum ImagePickingMode: String {
     case EPC = "EPC"
     case FloorPlan = "FloorPlan"
@@ -21,6 +21,9 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
     
     /// Change image button
     @IBOutlet weak var editImageButton: UIButton!
+    
+    /// Delete button
+    @IBOutlet weak var deleteButton: UIButton!
     
     /// Progress indicator for image upload
     @IBOutlet private weak var uploadProgressView: UIProgressView!
@@ -54,6 +57,39 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
     
     @IBAction func closeButtonPressed(button: UIButton) {
         self.performSegueWithIdentifier(self.segueIdhomeInfoImageToHomeInfo, sender: self)
+    }
+    
+    @IBAction func deleteButtonPressed(button: UIButton) {
+        if appstate.mostRecentlyOpenedHome!.isMyHome() {
+            deleteButton.enabled = false
+        
+            // Remove image fom local database
+            switch pickingMode {
+            case .EPC:
+                dataManager.performUpdates({
+                    appstate.mostRecentlyOpenedHome!.epc = nil
+                })
+            case .FloorPlan:
+                dataManager.performUpdates({
+                    appstate.mostRecentlyOpenedHome!.floorPlans.removeAll() // TODO support for multiple floorplans
+                })
+            }
+        
+            // Remove image from Cloudinary
+            if let url = image?.url where url.contains("http") {
+                //cloudStorage.removeAsset(url)
+            }
+        
+            // Animate image removal
+            UIView.animateWithDuration(0.4, animations: {
+                self.imageView.alpha = 0.0
+                }) { finished in
+                    self.image = nil
+                    self.imageView.image = nil
+                    self.imageView.alpha = 1.0
+                    self.deleteButton.enabled = true
+            }
+        }
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
@@ -143,5 +179,6 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
         }
         
         editImageButton.hidden = (!appstate.mostRecentlyOpenedHome!.isMyHome() || editMode == false)
+        deleteButton.hidden = (!appstate.mostRecentlyOpenedHome!.isMyHome() || editMode == false)
     }
 }

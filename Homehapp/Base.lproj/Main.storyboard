@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bYx-nF-ALB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bYx-nF-ALB">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
@@ -2378,6 +2378,18 @@ YOU BELONG TO</string>
                                             <action selector="closeButtonPressed:" destination="eo5-9X-1c7" eventType="touchUpInside" id="Jz9-IZ-Heo"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipL-QF-Aug">
+                                        <rect key="frame" x="530" y="0.0" width="70" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="ZfP-yb-4dt"/>
+                                            <constraint firstAttribute="width" constant="70" id="z3m-bX-ddK"/>
+                                        </constraints>
+                                        <inset key="contentEdgeInsets" minX="20" minY="10" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" image="button_close_white"/>
+                                        <connections>
+                                            <action selector="deleteButtonPressed:" destination="eo5-9X-1c7" eventType="touchUpInside" id="5br-Cb-Paa"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfK-e5-MRs">
                                         <rect key="frame" x="260" y="260" width="80" height="80"/>
                                         <constraints>
@@ -2404,6 +2416,7 @@ YOU BELONG TO</string>
                                     <constraint firstItem="9aZ-1e-8zx" firstAttribute="top" secondItem="ZfK-e5-MRs" secondAttribute="bottom" constant="30" id="EYz-Aw-S2R"/>
                                     <constraint firstItem="l6T-Gc-d40" firstAttribute="leading" secondItem="RiN-o6-Sfm" secondAttribute="leading" id="FLf-g4-86D"/>
                                     <constraint firstAttribute="trailing" secondItem="l6T-Gc-d40" secondAttribute="trailing" id="GiP-ln-RFP"/>
+                                    <constraint firstAttribute="trailing" secondItem="ipL-QF-Aug" secondAttribute="trailing" id="HC5-uH-Yzc"/>
                                     <constraint firstItem="ynp-V0-RQi" firstAttribute="leading" secondItem="RiN-o6-Sfm" secondAttribute="leading" id="N0q-Ty-Fn9"/>
                                     <constraint firstItem="ewr-8s-7Ah" firstAttribute="centerY" secondItem="RiN-o6-Sfm" secondAttribute="centerY" id="T5x-jf-XZj"/>
                                     <constraint firstItem="ynp-V0-RQi" firstAttribute="top" secondItem="RiN-o6-Sfm" secondAttribute="top" id="WLQ-4S-gLK"/>
@@ -2413,6 +2426,7 @@ YOU BELONG TO</string>
                                     <constraint firstAttribute="trailing" secondItem="9aZ-1e-8zx" secondAttribute="trailing" constant="74" id="l3s-dp-KFE"/>
                                     <constraint firstItem="ewr-8s-7Ah" firstAttribute="centerX" secondItem="RiN-o6-Sfm" secondAttribute="centerX" id="mhR-Tg-Wf6"/>
                                     <constraint firstAttribute="bottom" secondItem="l6T-Gc-d40" secondAttribute="bottom" id="pEO-Rw-tOB"/>
+                                    <constraint firstItem="ipL-QF-Aug" firstAttribute="top" secondItem="RiN-o6-Sfm" secondAttribute="top" id="v0f-Ag-VGw"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2425,6 +2439,7 @@ YOU BELONG TO</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="deleteButton" destination="ipL-QF-Aug" id="5c8-xp-iBX"/>
                         <outlet property="editImageButton" destination="ZfK-e5-MRs" id="yMY-xZ-hqf"/>
                         <outlet property="imageView" destination="fH9-Q2-Gdm" id="PfW-kM-hnI"/>
                         <outlet property="loadingIndicator" destination="ewr-8s-7Ah" id="vGL-5q-uYs"/>

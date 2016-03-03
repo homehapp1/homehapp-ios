@@ -64,6 +64,13 @@ public class CloudinaryService {
         }
     }
     
+    /*
+    private func getPublicId(url: String) -> String {
+        // TODO
+        return url
+    }
+    */
+    
     // MARK: Public methods
     
     /// Returns a shared (singleton) instance.
@@ -98,6 +105,8 @@ public class CloudinaryService {
     
     private func uploadImage(imageData: NSData, progressCallback: (Float -> Void), completionCallback: (UploadResponse -> Void)) {
         log.verbose("Starting Cloudinary image upload..")
+        
+        // TODO should we do uploader per upload?
         let uploader = CLUploader(cloudinary, delegate: nil)
         let options = ["tags": "ios_upload"]
         
@@ -223,6 +232,19 @@ public class CloudinaryService {
             log.error("Error fetching unset images: \(error)")
         }
     }
+    /*
+    /// Remove Image or Video from Cloudinary based on it's url
+    func removeAsset(url: String) {
+        
+        // Obtain asset public id from url
+        let publicId = getPublicId(url)
+        
+        let uploader = CLUploader(cloudinary, delegate: nil)
+        
+        // TODO check if this destroys derivatives as well?
+        uploader.destroy(publicId, options: nil)
+    }
+    */
     
     // MARK: Lifecycle etc
     

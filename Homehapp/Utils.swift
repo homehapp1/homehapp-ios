@@ -71,9 +71,8 @@ func scaledCloudinaryUrl(width width: Int, height: Int, url: String, maxSize: CG
     if (width < maxSize.width) && (height < maxSize.height) {
         
         // Let's always make sure exif information and orientation considered if we dont't scale image in cloudinary
-        let scaledUrl = url.stringByReplacingOccurrencesOfString("/upload/", withString: "/upload/a_exif")
-        
-        return scaledUrl
+        let rotatedUrl = url.stringByReplacingOccurrencesOfString("/upload/", withString: "/upload/a_exif/")
+        return rotatedUrl
     }
 
     let widthRatio = width / maxSize.width
@@ -95,7 +94,8 @@ func scaledCloudinaryCoverImageUrl(width width: Int, height: Int, url: String) -
     let screenPixels = CGSizeMake(screenBounds.size.width * screenScale, max(1000, screenBounds.size.height * screenScale));
     
     if (width < screenPixels.width) && (height < screenPixels.height) {
-        return url
+        let rotatedUrl = url.stringByReplacingOccurrencesOfString("/upload/", withString: "/upload/a_exif/")
+        return rotatedUrl
     }
     
     let widthRatio = width / screenPixels.width
