@@ -14,6 +14,8 @@ class AppState {
     private let keyAccessToken = "accessToken"
     private let keyAuthUserId = "keyAuthUserId"
     private let keyHomesLastUpdated = "homesLastUpdated"
+    private let keyTutorialShown = "tutorialShown"
+    private let keyOnboardingShown = "onboardingShown"
 
     /// Singleton instance
     private static let singletonInstance = AppState()
@@ -71,6 +73,24 @@ class AppState {
             } else {
                 userDefaults.removeObjectForKey(keyHomesLastUpdated)
             }
+        }
+    }
+    
+    var tutorialShown: String? {
+        get {
+            return userDefaults.stringForKey(keyTutorialShown)
+        }
+        set {
+            userDefaults.setObject(newValue, forKey: keyTutorialShown)
+        }
+    }
+    
+    var onboardingShown: String? {
+        get {
+            return userDefaults.stringForKey(keyOnboardingShown)
+        }
+        set {
+            userDefaults.setObject(newValue, forKey: keyOnboardingShown)
         }
     }
 }

@@ -142,6 +142,8 @@
 		4BC036871BE157C50021A30E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC036841BE157C50021A30E /* User.swift */; };
 		4BCEC1281C0C289F00190888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BCEC1271C0C289F00190888 /* GoogleService-Info.plist */; };
 		4BD36E591C29EDEC00B24F15 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD36E581C29EDEC00B24F15 /* ProfileViewController.swift */; };
+		4BD6FE6B1C8F475400AA1953 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD6FE6A1C8F475400AA1953 /* TutorialView.swift */; };
+		4BD6FE6D1C8F476100AA1953 /* TutorialView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BD6FE6C1C8F476100AA1953 /* TutorialView.xib */; };
 		4BED43241C5D68E3002B1500 /* HomeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BED43231C5D68E3002B1500 /* HomeInfoViewController.swift */; };
 		4BEF146B1BE4CBED003CAA97 /* CloudinaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BEF146A1BE4CBED003CAA97 /* CloudinaryService.swift */; };
 		648225B41C10C182002BB5F3 /* FjallaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 648225B11C10C182002BB5F3 /* FjallaOne-Regular.ttf */; };
@@ -315,6 +317,8 @@
 		4BC036841BE157C50021A30E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4BCEC1271C0C289F00190888 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4BD36E581C29EDEC00B24F15 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		4BD6FE6A1C8F475400AA1953 /* TutorialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
+		4BD6FE6C1C8F476100AA1953 /* TutorialView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialView.xib; sourceTree = "<group>"; };
 		4BED43231C5D68E3002B1500 /* HomeInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfoViewController.swift; sourceTree = "<group>"; };
 		4BEF146A1BE4CBED003CAA97 /* CloudinaryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudinaryService.swift; sourceTree = "<group>"; };
 		648225B11C10C182002BB5F3 /* FjallaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FjallaOne-Regular.ttf"; sourceTree = "<group>"; };
@@ -533,6 +537,7 @@
 		49293C841BCFCF4B008BF9C6 /* Custom views */ = {
 			isa = PBXGroup;
 			children = (
+				4BD6FE691C8F474200AA1953 /* Tutorial */,
 				490BBC181C353CDB0061E69A /* TextEditorModeSelectionView */,
 				49516BB91C13239B00C56FDC /* Toast */,
 				4977898F1BEA38E5003A7962 /* Parallax content view */,
@@ -745,6 +750,15 @@
 			name = Profile;
 			sourceTree = "<group>";
 		};
+		4BD6FE691C8F474200AA1953 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				4BD6FE6A1C8F475400AA1953 /* TutorialView.swift */,
+				4BD6FE6C1C8F476100AA1953 /* TutorialView.xib */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
 		4BED43221C5D68BE002B1500 /* HomeInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,6 +931,7 @@
 				4B1567E11C5DF5FA00067B22 /* HomeMapView.xib in Resources */,
 				4B5C36751BE661B700281E73 /* Localizable.strings in Resources */,
 				49293C9E1BD2566C008BF9C6 /* HomeCell.xib in Resources */,
+				4BD6FE6D1C8F476100AA1953 /* TutorialView.xib in Resources */,
 				499BFDC51BDEADAB00B5BB83 /* GalleryImageCell.xib in Resources */,
 				4B1132801C6563E20081A06A /* HomeFeaturesView.xib in Resources */,
 				490B368B1C242C710067DF51 /* ContentStoryBlockCell.xib in Resources */,
@@ -1047,6 +1062,7 @@
 				49293C8E1BD00944008BF9C6 /* DataManager.swift in Sources */,
 				648D227A1C102A3D0059431D /* ShareController.swift in Sources */,
 				4BC036851BE157C50021A30E /* User.swift in Sources */,
+				4BD6FE6B1C8F475400AA1953 /* TutorialView.swift in Sources */,
 				4BA638E61C710AD400408406 /* HomeFeatureCell.swift in Sources */,
 				49293C561BCFC806008BF9C6 /* HomesViewController.swift in Sources */,
 				4B7113831C4B0B3400156B2C /* HomeSettingsViewController.swift in Sources */,

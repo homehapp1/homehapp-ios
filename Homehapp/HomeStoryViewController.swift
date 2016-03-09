@@ -108,11 +108,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     /// Last change to bottom bar height due to table view scrolling
     private var bottomBarLatestChange: CGFloat?
     
-    // TODO document me
+    /// Defines if bottom bar is originally hidden and should be animated up while view appears
     var hideBottomBarOriginally = true
     
-    // TODO document me. also name me properly.
-    var animationStarted = false
+    /// Defines if image selection animation is started. Helps us to disable re-seletion during animation
+    var imageSelectionAnimationStarted = false
     
     // TODO wow so elegant. - matti
     private var createThumbnailData = false
@@ -603,6 +603,17 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             playerViewController.player!.play()
         }
     }
+    
+    private func showTutorial() {
+        let tutorialView = TutorialView.instanceFromNib() as! TutorialView
+        tutorialView.frame = view.bounds
+        view.addSubview(tutorialView)
+        tutorialView.show(.WelcomeTutorial) { [weak self] (tutorialType) -> Void in
+            if tutorialType == .EditTutorial {
+                self?.editButtonPressed(self!.editButton)
+            }
+        }
+    }
 
     // MARK: 'Protected' methods
     
@@ -1018,8 +1029,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             if let galleryCell = storyBlockCell as? GalleryStoryBlockCell {
                 galleryCell.imageSelectedCallback = { [weak self] (imageIndex, imageView) in
                     if let strongSelf = self {
-                        if !strongSelf.animationStarted {
-                            strongSelf.animationStarted = true
+                        if !strongSelf.imageSelectionAnimationStarted {
+                            strongSelf.imageSelectionAnimationStarted = true
                             strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeStoryToGalleryBrowser, sender: GallerySegueData(storyBlock: storyBlock, imageIndex: imageIndex, imageView: imageView))
                         }
                     }
@@ -1087,8 +1098,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 
                 contentImageCell.imageSelectedCallback = { [weak self] (imageIndex, imageView) in
                     if let strongSelf = self {
-                        if !strongSelf.animationStarted {
-                            strongSelf.animationStarted = true
+                        if !strongSelf.imageSelectionAnimationStarted {
+                            strongSelf.imageSelectionAnimationStarted = true
                             strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeStoryToGalleryBrowser, sender: GallerySegueData(storyBlock: storyBlock, imageIndex: imageIndex, imageView: imageView))
                         }
                     }
@@ -1166,8 +1177,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        //image selection while we're back or first time in this screen
-        animationStarted = false
+        imageSelectionAnimationStarted = false
         
         tableViewScrollPosition = tableView.contentOffset
         bottomBarLatestChange = 0.0
@@ -1190,6 +1200,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         
         // Enable swipe back when no navigation bar
         navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
+        // Show tutorial if it is not shown yet and user opens her home
+        //if appstate.tutorialShown == nil && allowEditMode {
+            showTutorial()
+        //}
     }
 
     deinit {
@@ -1251,7 +1266,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Add insets so that there is empty space on bottom of the table view to match the height of the bottom bar
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomBarHeight, right: 0)
         
-        // Enable longpress -initiated drag reordering
+        // Enable or disable longpress -initiated drag reordering
         tableView.allowLongPressReordering = false
         
         // Enable neighbourhood if home has it and neighbourhood story has story blocks or story is mine
@@ -1261,6 +1276,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 neighborhoodButton.enabled = true
             }
         }
-      
+       
     }
 }
