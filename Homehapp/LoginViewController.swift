@@ -246,6 +246,7 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
         GIDSignIn.sharedInstance().delegate = self
         
         if appstate.onboardingShown == nil {
+            appstate.onboardingShown = "true"
             showOnboarding()
         }
     }
