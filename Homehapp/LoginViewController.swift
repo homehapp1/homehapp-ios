@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import Onboard
 
 let loginSuccessNotification = "loginSuccessNotification"
 
@@ -115,6 +116,12 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
                 self.removeFromParentViewController()
         }
     }
+    
+    private func showOnboarding() {
+        let firstPage = OnboardingContentViewController(title: "Page Title", body: "Page body goes here.", image: UIImage(named: "icon"), buttonText: "Text For Button") { () -> Void in
+            // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
+        }
+    }
 
     // MARK: - IBOutlets
     
@@ -212,6 +219,10 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
         self.welcomeText.text = nil
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
+        
+        if appstate.onboardingShown == nil {
+            showOnboarding()
+        }
     }
     
     private func setStartConstraint(start: Bool) {

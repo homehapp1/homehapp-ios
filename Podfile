@@ -20,6 +20,7 @@ pod 'Google/Analytics'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'GoogleMaps'
+pod 'Onboard'
 
 # For generating the Acknowledgements
 post_install do | installer |
