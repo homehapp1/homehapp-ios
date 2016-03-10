@@ -1201,10 +1201,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Enable swipe back when no navigation bar
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         
-        // Show tutorial if it is not shown yet and user opens her home
-        //if appstate.tutorialShown == nil && allowEditMode {
+        // Show tutorial if it is not shown yet and user opens her own home
+        if appstate.tutorialShown == nil && allowEditMode {
             showTutorial()
-        //}
+        }
     }
 
     deinit {

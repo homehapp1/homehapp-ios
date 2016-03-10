@@ -21,6 +21,9 @@ class TutorialView: UIView {
     /// Black background to dim the view behind
     @IBOutlet private weak var dimmerView: UIView!
     
+    /// View where all the content is inside 
+    @IBOutlet private weak var contentView: UIView!
+    
     /// Dimmer view top constraint
     @IBOutlet private var dimmerViewTopConstraint: NSLayoutConstraint!
 
@@ -41,6 +44,15 @@ class TutorialView: UIView {
     
     /// First description label
     @IBOutlet private weak var descriptionLabel1: UILabel!
+
+    /// Second description label
+    @IBOutlet private weak var descriptionLabel2: UILabel!
+
+    /// Third description label
+    @IBOutlet private weak var descriptionLabel3: UILabel!
+    
+    /// Fourth description label
+    @IBOutlet private weak var descriptionLabel4: UILabel!
     
     /// Button that closes tutorial View
     @IBOutlet private weak var closeButton: UIButton!
@@ -51,6 +63,12 @@ class TutorialView: UIView {
     /// Close button bottom constraint
     @IBOutlet private var closeButtonBottomConstraint: NSLayoutConstraint!
     
+    /// Welcome tutorial extra content view height
+    //@IBOutlet private var welcomeContentViewHeightConstraint: NSLayoutConstraint!
+    
+    /// Welcome tutorial extra content view
+    @IBOutlet private var welcomeContentView: UIView!
+    
     /// Animation time to show or hide view
     private let animationTime = 0.4
     
@@ -60,11 +78,17 @@ class TutorialView: UIView {
     /// Botton bar height
     private let bottomBarHeight: CGFloat = 50.0
     
+    /// Margin for things
+    private let margin: CGFloat = 20.0
+    
     /// Original value of title top constraint
     private var originalTitletopConstraint: CGFloat = 0.0
     
     /// Original value of close button bottom constraint
     private var originalCloseButtonBottomConstraint: CGFloat = 0.0
+    
+    /// Original value of welcome content view height
+    private var originalWelcomeContentViewHeight: CGFloat = 0.0
     
     /// Callback called when user presses close button
     var closeCallback: (TutorialType -> Void)?
@@ -82,11 +106,16 @@ class TutorialView: UIView {
             contentViewTopConstraint.active = false
             titleTopConstraint.constant = originalTitletopConstraint
             closeButtonBottomConstraint.constant = originalCloseButtonBottomConstraint
+            //welcomeContentViewHeightConstraint.constant = margin
+            welcomeContentView.alpha = 0.0
             
             switch tutorialType {
             case .WelcomeTutorial:
                 titleLabel.text = NSLocalizedString("tutorial:home-title", comment: "")
                 descriptionLabel1.text = NSLocalizedString("tutorial:home-label-1", comment: "")
+                descriptionLabel2.text = NSLocalizedString("tutorial:home-label-2", comment: "")
+                descriptionLabel3.text = NSLocalizedString("tutorial:home-label-3", comment: "")
+                descriptionLabel4.text = NSLocalizedString("tutorial:home-label-4", comment: "")
                 closeButton.setTitle(NSLocalizedString("tutorial:home-button", comment: ""), forState: .Normal)
                 backgroundImageView.image = UIImage(named: "tutorial_bg_bubble_down")
                 contentViewTopConstraint.active = false
@@ -94,6 +123,8 @@ class TutorialView: UIView {
                 contentViewBottomConstraint.constant = bottomBarHeight
                 dimmerViewBottomConstraint.constant = bottomBarHeight
                 closeButtonBottomConstraint.constant = originalCloseButtonBottomConstraint + 10
+                //welcomeContentViewHeightConstraint.constant = originalWelcomeContentViewHeight
+                welcomeContentView.alpha = 1.0
             case .AddContentTutorial:
                 titleLabel.text = NSLocalizedString("tutorial:content-title", comment: "")
                 descriptionLabel1.text = NSLocalizedString("tutorial:content-label", comment: "")
@@ -112,7 +143,7 @@ class TutorialView: UIView {
                 contentViewTopConstraint.active = true
                 contentViewBottomConstraint.active = false
                 contentViewTopConstraint.constant = self.height / 2 + 10
-                titleTopConstraint.constant = originalTitletopConstraint + 20
+                titleTopConstraint.constant = originalTitletopConstraint + margin
             case .DoneTutorial:
                 dimmerViewTopConstraint.constant = topBarHeight
                 titleLabel.text = NSLocalizedString("tutorial:done-title", comment: "")
@@ -122,8 +153,23 @@ class TutorialView: UIView {
                 contentViewTopConstraint.active = true
                 contentViewBottomConstraint.active = false
                 contentViewTopConstraint.constant = topBarHeight
-                titleTopConstraint.constant = originalTitletopConstraint + 20
+                titleTopConstraint.constant = originalTitletopConstraint + margin
             case .EditTutorial:
+                
+                // Remove welcome contents ..... and 
+                // add constraint from descriptionLabel to Button so that bubble height stays correct
+                welcomeContentView.removeFromSuperview()
+                
+                contentView.addConstraint(NSLayoutConstraint(
+                    item:descriptionLabel1,
+                    attribute:NSLayoutAttribute.BottomMargin,
+                    relatedBy:NSLayoutRelation.Equal,
+                    toItem:closeButton,
+                    attribute:NSLayoutAttribute.Top,
+                    multiplier:1,
+                    constant:-margin - 5))
+                
+                
                 dimmerViewTopConstraint.constant = topBarHeight
                 titleLabel.text = NSLocalizedString("tutorial:edit-title", comment: "")
                 descriptionLabel1.text = NSLocalizedString("tutorial:edit-label", comment: "")
@@ -132,22 +178,12 @@ class TutorialView: UIView {
                 contentViewTopConstraint.active = true
                 contentViewBottomConstraint.active = false
                 contentViewTopConstraint.constant = topBarHeight
-                titleTopConstraint.constant = originalTitletopConstraint + 20
+                titleTopConstraint.constant = originalTitletopConstraint + margin
+           
             }
             layoutIfNeeded()
         }
     }
-    
-    /*
-    
-    "tutorial:home-title" = "HI THERE!";
-    "tutorial:home-label-1" = "This is where you can create your home and neighbourhood moments and stories";
-    "tutorial:home-label-2" = "Here you can freely express all the unique and lovely aspects of your home";
-    "tutorial:home-label-3" = "Showcase your surroundings and highlight the best things in your neighbourhood";
-    "tutorial:home-label-4" = "Add all the details about your home including location, floor plan, features, etc.";
-    "tutorial:home-button" = "OK!";
-    
-    */
     
     /// Close tutorial if last screen is shown or move to next screen
     @IBAction func closeButtonPressed(sender: UIButton) {
@@ -185,6 +221,7 @@ class TutorialView: UIView {
         self.alpha = 0
         originalTitletopConstraint = titleTopConstraint.constant
         originalCloseButtonBottomConstraint = closeButtonBottomConstraint.constant
+        //originalWelcomeContentViewHeight = welcomeContentViewHeightConstraint.constant
     }
     
     class func instanceFromNib() -> UIView {

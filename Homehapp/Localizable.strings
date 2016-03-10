@@ -51,9 +51,9 @@
 "homefeatures:appliances" = "APPLIANCES";
 
 "tutorial:home-title" = "HI THERE!";
-"tutorial:home-label-1" = "This is where you can create your home and neighbourhood moments and stories";
-"tutorial:home-label-2" = "Here you can freely express all the unique and lovely aspects of your home";
-"tutorial:home-label-3" = "Showcase your surroundings and highlight the best things in your neighbourhood";
+"tutorial:home-label-1" = "This is where you can create your home and neighbourhood moments and stories.";
+"tutorial:home-label-2" = "Here you can freely express all the unique and lovely aspects of your home.";
+"tutorial:home-label-3" = "Showcase your surroundings and highlight the best things in your neighbourhood.";
 "tutorial:home-label-4" = "Add all the details about your home including location, floor plan, features, etc.";
 "tutorial:home-button" = "OK!";
 
@@ -66,7 +66,7 @@
 "tutorial:cover-button" = "UNDERSTOOD!";
 
 "tutorial:content-title" = "TO ADD CONTENT";
-"tutorial:content-label" = "Tap on the buttons below to add photos, videos and text to your story";
+"tutorial:content-label" = "Tap on the buttons below to add photos, videos and text to your story.";
 "tutorial:content-button" = "GOT IT!";
 
 "tutorial:done-title" = "WHEN YOU'RE DONE";
