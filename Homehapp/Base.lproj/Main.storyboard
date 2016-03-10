@@ -254,6 +254,7 @@ YOU BELONG TO</string>
                             </mask>
                         </variation>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="background" destination="l16-hT-kij" id="aND-ww-dRB"/>
                         <outlet property="continueButton" destination="9e0-Eg-O0t" id="fE3-ci-ja3"/>
@@ -2482,7 +2483,7 @@ YOU BELONG TO</string>
         <image name="icon_profile" width="20" height="23"/>
         <image name="icon_profile_active" width="20" height="23"/>
         <image name="polygon_homehapp" width="94" height="94"/>
-        <image name="splash" width="544" height="568"/>
+        <image name="splash" width="375" height="667"/>
         <image name="tab_info" width="24" height="24"/>
         <image name="tab_messages" width="26" height="19"/>
         <image name="tab_profile" width="22" height="26"/>

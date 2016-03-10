@@ -73,3 +73,7 @@
 "tutorial:done-label" = "Tap Done when you're done with the story. You can always come back to edit it.\n\nThat's it, now it's your turn!";
 "tutorial:done-button" = "LET'S GO!";
 
+"onboarding:1" = "Homehapp is the place where you can create, store and share your home stories.";
+"onboarding:2" = "Find homes for sale and rent or get inspired.";
+"onboarding:3" = "And when the time comes for you to move on, homehapp will help you Sell or Rent your home out.";
+

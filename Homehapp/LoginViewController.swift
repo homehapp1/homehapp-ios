@@ -26,6 +26,8 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
     @IBOutlet var defaultConstraints: [NSLayoutConstraint]!
     @IBOutlet var startConstraints: [NSLayoutConstraint]!
     
+    private var onboardingViewController: OnboardingViewController? = nil
+    
     private let profileImageWidth = 160
     
     // MARK: - Private
@@ -118,9 +120,32 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
     }
     
     private func showOnboarding() {
-        let firstPage = OnboardingContentViewController(title: "Page Title", body: "Page body goes here.", image: UIImage(named: "icon"), buttonText: "Text For Button") { () -> Void in
-            // do something here when users press the button, like ask for location services permissions, register for push notifications, connect to social media, or finish the onboarding process
+        let firstPage = OnboardingContentViewController(title: "", body: NSLocalizedString("onboarding:1", comment: ""), image: UIImage(named: "onboarding_write"), buttonText: "") { () -> Void in }
+
+        let secondPage = OnboardingContentViewController(title: "", body: NSLocalizedString("onboarding:2", comment: ""), image: UIImage(named: "onboarding_heart"), buttonText: "") { () -> Void in }
+
+        let thirdPage = OnboardingContentViewController(title: "", body: NSLocalizedString("onboarding:3", comment: ""), image: UIImage(named: "onboarding_homehapp"), buttonText: "Sign in!") { () -> Void in
+        
+            UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
+                self.onboardingViewController?.view.alpha = 0
+                }, completion: { finished in
+                    self.onboardingViewController?.view.removeFromSuperview()
+            })
+            
         }
+            
+        onboardingViewController = OnboardingViewController(backgroundImage: UIImage(named: "onboarding_background"), contents: [firstPage, secondPage, thirdPage])
+        
+        onboardingViewController!.topPadding = self.view.height / 2 - 140
+        onboardingViewController!.underTitlePadding = 40;
+        onboardingViewController!.bodyFontSize = 22;
+        onboardingViewController!.fontName = "Roboto";
+        onboardingViewController!.shouldMaskBackground = false;
+        onboardingViewController!.fadePageControlOnLastPage = true
+        onboardingViewController!.bottomPadding = 40;
+
+        self.view.addSubview(onboardingViewController!.view)
+        
     }
 
     // MARK: - IBOutlets
