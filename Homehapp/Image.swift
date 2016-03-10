@@ -19,8 +19,8 @@ class Image: DeletableObject {
     dynamic var uploadProgress: Float = 1.0 // upload progress value in range 0..1 when user uploads image
     dynamic var backgroundColor: String? = nil // Background color of the image as a HEX string. 
 
-    // Max image size for small images used in lists etc; max size is half of iPhone6 screen width.
-    static let smallImageMaxDimensions = CGSize(width: 375, height: 375)
+    // Max image size for small images used in lists etc; max size is 500 x 500
+    static let smallImageMaxDimensions = CGSize(width: 500, height: 500)
     
     // Max image size for medium images used in lists etc; max width is the iPhone6 screen width, height 1.5x width
     static let mediumImageMaxDimensions = CGSize(width: 750, height: 750*1.5)

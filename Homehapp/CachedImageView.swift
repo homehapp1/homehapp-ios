@@ -142,7 +142,7 @@ public class CachedImageView: QvikImageView {
             // No image yet; show a placeholder / thumbnail image if present
             if let placeholderImage = placeholderImage {
                 if placeholderImageView == nil {
-                    placeholderImageView = UIImageView(frame: self.frame)
+                    placeholderImageView = UIImageView(frame: self.bounds)
                     placeholderImageView!.contentMode = self.contentMode
                     placeholderImageView!.image = placeholderImage
                     image = placeholderImageView!.image
@@ -155,7 +155,7 @@ public class CachedImageView: QvikImageView {
                 }
             } else if let thumbnailData = thumbnailData {
                 if placeholderImageView == nil {
-                    placeholderImageView = UIImageView(frame: self.frame)
+                    placeholderImageView = UIImageView(frame: self.bounds)
                     placeholderImageView!.contentMode = self.contentMode
                     placeholderImageView!.image = jpegThumbnailDataToImage(data: thumbnailData, maxSize: self.frame.size)
                     image = placeholderImageView!.image
@@ -169,7 +169,7 @@ public class CachedImageView: QvikImageView {
             } else if let fadeInColor = fadeInColor where placeholderImageView == nil {
                 if fadeInView == nil {
                     // No thumbnail data set; show a colored fade-in view
-                    fadeInView = UIView(frame: self.frame)
+                    fadeInView = UIView(frame: self.bounds)
                     fadeInView!.backgroundColor = fadeInColor
                     insertSubview(fadeInView!, atIndex: 0)
                 } else {

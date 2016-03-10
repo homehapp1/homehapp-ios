@@ -72,11 +72,6 @@ class GalleryImageCell: UICollectionViewCell {
             imageView.imageUrl = image.scaledUrl
         }
         
-        if imageSize == .Small {
-            imageView.imageUrl = image.smallScaledUrl
-        } else {
-        }
-        
         if imageView.placeholderImage == nil {
             imageView.thumbnailData = image.thumbnailData
         }
