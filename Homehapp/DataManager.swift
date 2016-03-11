@@ -80,12 +80,14 @@ class DataManager {
             
             user!.displayName = json["displayName"] as? String
             user!.email = json["email"] as? String
+            user!.phoneNumber = json["contact"]?["phone"] as? String
             user!.firstName = json["firstname"] as? String
             user!.lastName = json["lastname"] as? String
-            user!.phoneNumber = json["contact"]?["phone"] as? String
             
             if user!.displayName == nil || user!.displayName?.length == 0 {
-                user!.displayName = "\(user!.firstName) \(user!.lastName)"
+                if let firstName = json["firstname"] as? String, lastName = json["lastname"] as? String {
+                    user!.displayName = "\(firstName) \(lastName)"
+                }
             }
             
             user!.facebookUserId = json["fbUserId"] as? String
