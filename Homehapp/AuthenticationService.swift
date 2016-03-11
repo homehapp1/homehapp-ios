@@ -95,5 +95,10 @@ class AuthenticationService {
             GIDSignIn.sharedInstance().disconnect()
             //GIDSignIn.sharedInstance().signOut()
         }
+        
+        // show tutorial and onboarding again on subsequent logins
+        appstate.onboardingShown = nil
+        appstate.tutorialShown = nil
+        
     }
 }
