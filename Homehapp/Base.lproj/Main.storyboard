@@ -2,13 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bYx-nF-ALB">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FjallaOne-Regular.ttf">
+            <string>FjallaOne-Regular</string>
             <string>FjallaOne-Regular</string>
             <string>FjallaOne-Regular</string>
             <string>FjallaOne-Regular</string>
@@ -42,11 +41,8 @@
             <string>Roboto-Light</string>
             <string>Roboto-Light</string>
             <string>Roboto-Light</string>
-        </mutableArray>
-        <mutableArray key="Roboto-Medium.ttf">
-            <string>Roboto-Medium</string>
-            <string>Roboto-Medium</string>
-            <string>Roboto-Medium</string>
+            <string>Roboto-Light</string>
+            <string>Roboto-Light</string>
         </mutableArray>
         <mutableArray key="Roboto-MediumItalic.ttf">
             <string>Roboto-MediumItalic</string>
@@ -91,11 +87,23 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="l16-hT-kij">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="homehapp_splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="SH9-WW-NFG">
+                                <rect key="frame" x="180" y="80" width="240" height="128"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Discover the place you belong to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBO-8k-rXu">
+                                <rect key="frame" x="50" y="200" width="500" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="X2E-XA-ZsD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="16"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X7S-GP-kqx">
-                                <rect key="frame" x="0.0" y="252" width="600" height="348"/>
+                                <rect key="frame" x="0.0" y="370" width="600" height="230"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3k-jm-NjS">
-                                        <rect key="frame" x="104" y="37" width="393" height="53"/>
+                                        <rect key="frame" x="104" y="-90" width="393" height="53"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="53" id="mY2-89-jHE"/>
                                             <constraint firstAttribute="width" constant="393" id="wlp-Cg-eQx"/>
@@ -104,18 +112,18 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Gd-hk-fQC">
-                                        <rect key="frame" x="50" y="157" width="500" height="40"/>
-                                        <color key="backgroundColor" red="0.23137254901960785" green="0.18823529411764706" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Gd-hk-fQC">
+                                        <rect key="frame" x="50" y="28" width="500" height="50"/>
+                                        <color key="backgroundColor" red="0.23137254901960785" green="0.18823529411764706" blue="0.19215686274509802" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="MgH-hr-E1u"/>
+                                            <constraint firstAttribute="height" constant="50" id="MgH-hr-E1u"/>
                                             <constraint firstAttribute="width" constant="220" id="YQo-zJ-ct7"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="14"/>
                                         <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Sign in with Facebook" image="icon_fb">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="SIGN IN WITH FACEBOOK" backgroundImage="button_onboarding">
+                                            <color key="titleColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -126,38 +134,35 @@
                                             <action selector="facebookLoginTapped:" destination="71E-bu-eG4" eventType="touchUpInside" id="4QN-3g-Hb8"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9j0-hR-Ju1">
-                                        <rect key="frame" x="50" y="202" width="500" height="40"/>
-                                        <color key="backgroundColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9j0-hR-Ju1">
+                                        <rect key="frame" x="50" y="85" width="500" height="50"/>
+                                        <color key="backgroundColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="qM1-vN-YF8"/>
+                                            <constraint firstAttribute="height" constant="50" id="qM1-vN-YF8"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="14"/>
                                         <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Sign in with Google" image="icon_google">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="SIGN IN WITH GOOGLE" backgroundImage="button_onboarding">
+                                            <color key="titleColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="googleLoginTapped:" destination="71E-bu-eG4" eventType="touchUpInside" id="lHh-c5-aVa"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9e0-Eg-O0t">
-                                        <rect key="frame" x="50" y="247" width="500" height="41"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <rect key="frame" x="50" y="142" width="500" height="41"/>
+                                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="41" id="UWD-jb-Vd9"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="14"/>
                                         <state key="normal" title="Try without Login">
                                             <color key="titleColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -165,13 +170,13 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ee8-l3-CWQ">
-                                        <rect key="frame" x="50" y="306" width="500" height="27"/>
+                                        <rect key="frame" x="50" y="188" width="500" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="gWG-kE-KcG"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Italic" family="Roboto" pointSize="12"/>
-                                        <state key="normal" title="Terms &amp; Conditions">
-                                            <color key="titleColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="By signing in you accept Terms &amp; Conditions">
+                                            <color key="titleColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="0.5" colorSpace="calibratedRGB"/>
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -182,74 +187,52 @@
                                             <action selector="termsTapped:" destination="71E-bu-eG4" eventType="touchUpInside" id="1fw-uV-aAG"/>
                                         </connections>
                                     </button>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="divider_gray" translatesAutoresizingMaskIntoConstraints="NO" id="cnc-y3-YgQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="13"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="13" id="jPm-Ua-Vpa"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="polygon_homehapp" translatesAutoresizingMaskIntoConstraints="NO" id="rIK-Rl-xX9">
-                                        <rect key="frame" x="253" y="-46" width="94" height="94"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="94" id="ZvQ-nJ-CD4"/>
-                                            <constraint firstAttribute="height" constant="94" id="lZ3-O1-DPZ"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBO-8k-rXu">
-                                        <rect key="frame" x="50" y="57" width="500" height="84"/>
-                                        <string key="text">DISCOVER THE PLACE 
-YOU BELONG TO</string>
-                                        <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="29"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.95686274509803915" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="ee8-l3-CWQ" firstAttribute="top" secondItem="9e0-Eg-O0t" secondAttribute="bottom" constant="18" id="13N-Dp-1pf"/>
+                                    <constraint firstItem="ee8-l3-CWQ" firstAttribute="top" secondItem="9e0-Eg-O0t" secondAttribute="bottom" constant="5" id="13N-Dp-1pf"/>
                                     <constraint firstItem="9j0-hR-Ju1" firstAttribute="centerX" secondItem="X7S-GP-kqx" secondAttribute="centerX" id="5Lo-2y-9a2"/>
                                     <constraint firstItem="9e0-Eg-O0t" firstAttribute="top" secondItem="9j0-hR-Ju1" secondAttribute="bottom" constant="5" id="5Sq-uN-iZY"/>
                                     <constraint firstItem="ee8-l3-CWQ" firstAttribute="leading" secondItem="9e0-Eg-O0t" secondAttribute="leading" id="6F7-Ei-JYt"/>
                                     <constraint firstItem="H3k-jm-NjS" firstAttribute="centerX" secondItem="3Gd-hk-fQC" secondAttribute="centerX" id="7hV-Bu-ZxY"/>
                                     <constraint firstItem="3Gd-hk-fQC" firstAttribute="leading" secondItem="X7S-GP-kqx" secondAttribute="leading" constant="50" id="8n6-Ua-ha3"/>
-                                    <constraint firstItem="rIK-Rl-xX9" firstAttribute="centerX" secondItem="X7S-GP-kqx" secondAttribute="centerX" id="CTi-PY-BtT"/>
                                     <constraint firstAttribute="trailing" secondItem="3Gd-hk-fQC" secondAttribute="trailing" constant="50" id="Ce6-8e-fFV"/>
-                                    <constraint firstItem="cnc-y3-YgQ" firstAttribute="leading" secondItem="X7S-GP-kqx" secondAttribute="leading" id="Fbu-I9-pNN"/>
-                                    <constraint firstAttribute="height" constant="348" id="FnZ-Y2-jrv"/>
-                                    <constraint firstItem="9j0-hR-Ju1" firstAttribute="top" secondItem="3Gd-hk-fQC" secondAttribute="bottom" constant="5" id="Gal-LD-BGV"/>
-                                    <constraint firstItem="cnc-y3-YgQ" firstAttribute="top" secondItem="X7S-GP-kqx" secondAttribute="top" id="GxX-5K-QoD"/>
-                                    <constraint firstItem="rIK-Rl-xX9" firstAttribute="top" secondItem="X7S-GP-kqx" secondAttribute="top" constant="-46" id="M1T-Wy-2Uc"/>
-                                    <constraint firstItem="gBO-8k-rXu" firstAttribute="trailing" secondItem="3Gd-hk-fQC" secondAttribute="trailing" id="QEM-Ax-2TB"/>
+                                    <constraint firstAttribute="height" constant="230" id="FnZ-Y2-jrv"/>
+                                    <constraint firstItem="9j0-hR-Ju1" firstAttribute="top" secondItem="3Gd-hk-fQC" secondAttribute="bottom" constant="7" id="Gal-LD-BGV"/>
                                     <constraint firstItem="9j0-hR-Ju1" firstAttribute="leading" secondItem="3Gd-hk-fQC" secondAttribute="leading" id="QFO-Nt-xSO"/>
                                     <constraint firstAttribute="bottom" secondItem="ee8-l3-CWQ" secondAttribute="bottom" constant="15" id="S75-uV-Lzx"/>
-                                    <constraint firstItem="gBO-8k-rXu" firstAttribute="firstBaseline" secondItem="H3k-jm-NjS" secondAttribute="baseline" constant="1" id="Tga-QP-k5f"/>
                                     <constraint firstItem="ee8-l3-CWQ" firstAttribute="trailing" secondItem="9e0-Eg-O0t" secondAttribute="trailing" id="Vfa-Fh-DFf"/>
                                     <constraint firstItem="3Gd-hk-fQC" firstAttribute="top" secondItem="H3k-jm-NjS" secondAttribute="bottom" constant="67" id="XkB-YE-8iy"/>
-                                    <constraint firstItem="3Gd-hk-fQC" firstAttribute="top" secondItem="gBO-8k-rXu" secondAttribute="bottom" constant="16" id="bdN-KX-Ax7"/>
                                     <constraint firstItem="9j0-hR-Ju1" firstAttribute="leading" secondItem="9e0-Eg-O0t" secondAttribute="leading" id="iH1-vw-OzV"/>
                                     <constraint firstItem="ee8-l3-CWQ" firstAttribute="centerX" secondItem="9e0-Eg-O0t" secondAttribute="centerX" id="j6R-9W-Ibd"/>
                                     <constraint firstItem="9e0-Eg-O0t" firstAttribute="trailing" secondItem="9j0-hR-Ju1" secondAttribute="trailing" id="jnH-8g-10P"/>
-                                    <constraint firstAttribute="trailing" secondItem="cnc-y3-YgQ" secondAttribute="trailing" id="ldb-gc-PtL"/>
                                     <constraint firstItem="9j0-hR-Ju1" firstAttribute="trailing" secondItem="3Gd-hk-fQC" secondAttribute="trailing" id="mMV-Sf-thV"/>
-                                    <constraint firstItem="gBO-8k-rXu" firstAttribute="leading" secondItem="3Gd-hk-fQC" secondAttribute="leading" id="pUA-ye-gUk"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="l16-hT-kij" firstAttribute="top" secondItem="Sxt-EQ-3Ev" secondAttribute="top" id="4D3-Et-SMS"/>
+                            <constraint firstItem="gBO-8k-rXu" firstAttribute="leading" secondItem="Sxt-EQ-3Ev" secondAttribute="leadingMargin" id="7QK-p2-grE"/>
+                            <constraint firstItem="X7S-GP-kqx" firstAttribute="top" secondItem="gBO-8k-rXu" secondAttribute="bottom" constant="8" id="89W-ey-ICb"/>
+                            <constraint firstItem="gBO-8k-rXu" firstAttribute="centerX" secondItem="Sxt-EQ-3Ev" secondAttribute="centerX" id="9qz-G0-WY3"/>
                             <constraint firstItem="X7S-GP-kqx" firstAttribute="top" secondItem="l16-hT-kij" secondAttribute="bottom" id="BYR-Sd-VuD"/>
                             <constraint firstAttribute="trailing" secondItem="l16-hT-kij" secondAttribute="trailing" id="Ctn-9K-TXp"/>
                             <constraint firstItem="mnd-bN-3QV" firstAttribute="top" secondItem="X7S-GP-kqx" secondAttribute="bottom" id="GWk-89-LpB"/>
                             <constraint firstItem="X7S-GP-kqx" firstAttribute="trailing" secondItem="l16-hT-kij" secondAttribute="trailing" id="Mdb-uc-aBV"/>
                             <constraint firstItem="mnd-bN-3QV" firstAttribute="top" secondItem="l16-hT-kij" secondAttribute="bottom" id="aWc-ri-7NO"/>
+                            <constraint firstItem="SH9-WW-NFG" firstAttribute="centerX" secondItem="Sxt-EQ-3Ev" secondAttribute="centerX" id="ans-0t-EPh"/>
+                            <constraint firstItem="gBO-8k-rXu" firstAttribute="top" secondItem="SH9-WW-NFG" secondAttribute="bottom" id="bcN-LT-dvN"/>
                             <constraint firstItem="l16-hT-kij" firstAttribute="bottom" secondItem="mnd-bN-3QV" secondAttribute="top" id="eDc-rq-zBf"/>
                             <constraint firstItem="l16-hT-kij" firstAttribute="leading" secondItem="Sxt-EQ-3Ev" secondAttribute="leading" id="op6-Gh-bfh"/>
+                            <constraint firstItem="X7S-GP-kqx" firstAttribute="top" secondItem="SH9-WW-NFG" secondAttribute="bottom" constant="45" id="rLw-rw-O0R"/>
                             <constraint firstItem="l16-hT-kij" firstAttribute="leading" secondItem="X7S-GP-kqx" secondAttribute="leading" id="yh3-zO-Uim"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gBO-8k-rXu" secondAttribute="trailing" id="zN8-Uc-RLf"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="eDc-rq-zBf"/>
+                                <exclude reference="89W-ey-ICb"/>
                                 <exclude reference="GWk-89-LpB"/>
                             </mask>
                         </variation>
@@ -2468,21 +2451,19 @@ YOU BELONG TO</string>
         <image name="button_back" width="10" height="17"/>
         <image name="button_back_white" width="36" height="36"/>
         <image name="button_close_white" width="22" height="22"/>
+        <image name="button_onboarding" width="281" height="50"/>
         <image name="default_profile_image" width="85" height="85"/>
-        <image name="divider_gray" width="320" height="13"/>
+        <image name="homehapp_splash_logo" width="230" height="118"/>
         <image name="icon_add_picture" width="23" height="23"/>
         <image name="icon_add_text" width="30" height="21"/>
         <image name="icon_camera" width="66" height="66"/>
         <image name="icon_close" width="10" height="17"/>
-        <image name="icon_fb" width="18" height="18"/>
-        <image name="icon_google" width="22" height="14"/>
         <image name="icon_homehapp_no_text" width="29" height="28"/>
         <image name="icon_homehapp_no_text_active" width="29" height="28"/>
         <image name="icon_info" width="22" height="22"/>
         <image name="icon_next" width="9" height="14"/>
         <image name="icon_profile" width="20" height="23"/>
         <image name="icon_profile_active" width="20" height="23"/>
-        <image name="polygon_homehapp" width="94" height="94"/>
         <image name="splash" width="375" height="667"/>
         <image name="tab_info" width="24" height="24"/>
         <image name="tab_messages" width="26" height="19"/>

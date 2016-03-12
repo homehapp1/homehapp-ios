@@ -3,7 +3,7 @@
 "0fi-C7-m3Y.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Sign in with Facebook"; ObjectID = "3Gd-hk-fQC"; */
-"3Gd-hk-fQC.normalTitle" = "Sign in with Facebook";
+"3Gd-hk-fQC.normalTitle" = "SIGN IN WITH FACEBOOK";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "400-ac-S7R"; */
 "400-ac-S7R.normalTitle" = "Button";
@@ -18,7 +18,7 @@
 "9e0-Eg-O0t.normalTitle" = "Try without Login";
 
 /* Class = "UIButton"; normalTitle = "Sign in with Google"; ObjectID = "9j0-hR-Ju1"; */
-"9j0-hR-Ju1.normalTitle" = "Sign in with Google";
+"9j0-hR-Ju1.normalTitle" = "SIGN IN WITH GOOGLE";
 
 /* Class = "UILabel"; text = "Welcome"; ObjectID = "H3k-jm-NjS"; */
 "H3k-jm-NjS.text" = "Welcome";
@@ -42,10 +42,10 @@
 "cMN-Qb-ofU.text" = "LOGGED IN WITH";
 
 /* Class = "UIButton"; normalTitle = "Terms & Conditions"; ObjectID = "ee8-l3-CWQ"; */
-"ee8-l3-CWQ.normalTitle" = "Terms & Conditions";
+"ee8-l3-CWQ.normalTitle" = "By signing in you accept Terms & Conditions";
 
 /* Class = "UILabel"; text = "DISCOVER THE PLACE \nYOU BELONG TO"; ObjectID = "gBO-8k-rXu"; */
-"gBO-8k-rXu.text" = "DISCOVER THE PLACE \nYOU BELONG TO";
+"gBO-8k-rXu.text" = "Discover the place you belong to";
 
 /* Class = "UILabel"; text = "ALLOW PUSH NOTIFICATIONS"; ObjectID = "gKF-no-D7t"; */
 "gKF-no-D7t.text" = "ALLOW PUSH NOTIFICATIONS";
