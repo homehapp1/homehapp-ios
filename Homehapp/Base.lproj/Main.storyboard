@@ -314,8 +314,8 @@
                                             <action selector="profileButtonPressed:" destination="o0K-eL-iVa" eventType="touchUpInside" id="e5N-9K-1Id"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOMEHAPP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgN-K6-adQ">
-                                        <rect key="frame" x="265" y="32" width="70.5" height="21.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="h o m e h a p p" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgN-K6-adQ">
+                                        <rect key="frame" x="252.5" y="32.5" width="95" height="21.5"/>
                                         <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="17"/>
                                         <color key="textColor" red="0.2274509804" green="0.19215686269999999" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2470,11 +2470,11 @@
         <image name="tab_profile" width="22" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tLn-3J-sXe"/>
-        <segue reference="dGe-dO-Sax"/>
-        <segue reference="2oZ-Kv-ZPv"/>
         <segue reference="1ZR-xE-oZE"/>
-        <segue reference="I1G-aj-zTu"/>
+        <segue reference="2oZ-Kv-ZPv"/>
+        <segue reference="Had-Eu-IhF"/>
+        <segue reference="tLn-3J-sXe"/>
         <segue reference="ZHq-AG-WSJ"/>
+        <segue reference="I1G-aj-zTu"/>
     </inferredMetricsTieBreakers>
 </document>

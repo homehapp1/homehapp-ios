@@ -8,7 +8,7 @@
 
 "loginviewcontroller:login-failed-title" = "Login failed";
 "loginviewcontroller:fb-login-failed-title" = "Facebook login failed";
-"loginviewcontroller:login-failed-message" = "Could not connect homehapp. Please check your network connection and try again later.";
+"loginviewcontroller:login-failed-message" = "Could not connect to homehapp. Please check your network connection and try again later.";
 "loginviewcontroller:fb-login-failed-message" = "Could not connect to Facebook. Please try again later.";
 
 "cancel" = "Cancel";

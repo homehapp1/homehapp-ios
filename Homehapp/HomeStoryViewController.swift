@@ -241,16 +241,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     /// Animatedly removes a row in the table view
     private func removeStoryBlockTableViewRow(storyBlockIndex: Int) {
-        //TODO check that this index is calculated correctly; the table view seems to jump.
-        
         let deletedIndexPath = NSIndexPath(forRow: storyBlockIndex + 1, inSection: 0)
         
         CATransaction.begin()
-        
         CATransaction.setCompletionBlock() {
             log.debug("delete CATransaction completed")
-            //TODO to avoid table view 'twitching' when deleting a row from the end of the table,
-            // check here whether were past end of contentSize and smoothly scroll to the last items bottom instead.
         }
         
         tableView.beginUpdates()
@@ -830,7 +825,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         
         // Add new Content block
         dataManager.performUpdates {
-            storyObject.storyBlocks.insert(StoryBlock(template: .ContentBlock), atIndex: position - 1)
+            let storyBlock = StoryBlock(template: .ContentBlock)
+
+            // TODO here we can change the format of content block
+            
+            storyObject.storyBlocks.insert(storyBlock, atIndex: position - 1)
         }
         
         // Animate the addition of the new row in the table view
