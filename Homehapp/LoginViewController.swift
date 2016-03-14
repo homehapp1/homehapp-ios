@@ -26,6 +26,9 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
     @IBOutlet var defaultConstraints: [NSLayoutConstraint]!
     @IBOutlet var startConstraints: [NSLayoutConstraint]!
     
+    @IBOutlet weak var logo: UIImageView!
+    @IBOutlet weak var tagLine: UILabel!
+    
     private var onboardingViewController: OnboardingViewController? = nil
     
     private let profileImageWidth = 160
@@ -126,9 +129,10 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
 
         let thirdPage = OnboardingContentViewController(title: "", body: NSLocalizedString("onboarding:3", comment: ""), image: UIImage(named: "onboarding_homehapp"), buttonText: "Sign in!") { () -> Void in
         
-            UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
+            UIView.animateWithDuration(0.5, animations: {
                 self.onboardingViewController?.view.alpha = 0
                 }, completion: { finished in
+                    appstate.onboardingShown = "true"
                     self.onboardingViewController?.view.removeFromSuperview()
             })
             
@@ -143,8 +147,20 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
         onboardingViewController!.shouldMaskBackground = false;
         onboardingViewController!.fadePageControlOnLastPage = true
         onboardingViewController!.bottomPadding = 40;
+        onboardingViewController!.shouldFadeTransitions = true
 
         self.view.addSubview(onboardingViewController!.view)
+        onboardingViewController?.view.alpha = 0
+        logo.hidden = true
+        tagLine.hidden = true
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.onboardingViewController?.view.alpha = 1.0
+            }, completion: { finished in
+                self.logo.hidden = false
+                self.tagLine.hidden = false
+                self.showLoginContainer()
+        })
         
     }
 
@@ -246,7 +262,6 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
         GIDSignIn.sharedInstance().delegate = self
         
         if appstate.onboardingShown == nil {
-            appstate.onboardingShown = "true"
             showOnboarding()
         }
     }
@@ -263,6 +278,12 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        if appstate.onboardingShown != nil {
+            showLoginContainer()
+        }
+    }
+    
+    private func showLoginContainer() {
         self.view.layoutIfNeeded()
         self.setStartConstraint(false)
         UIView.animateWithDuration(0.4) {

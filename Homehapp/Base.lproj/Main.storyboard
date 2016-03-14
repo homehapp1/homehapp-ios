@@ -243,6 +243,8 @@
                         <outlet property="continueButton" destination="9e0-Eg-O0t" id="fE3-ci-ja3"/>
                         <outlet property="fbLoginButton" destination="3Gd-hk-fQC" id="GxL-KC-2sI"/>
                         <outlet property="googleLoginButton" destination="9j0-hR-Ju1" id="Qb1-vr-UaC"/>
+                        <outlet property="logo" destination="SH9-WW-NFG" id="G2u-R3-S15"/>
+                        <outlet property="tagLine" destination="gBO-8k-rXu" id="ibW-fp-PoL"/>
                         <outlet property="termsButton" destination="ee8-l3-CWQ" id="AR1-gn-0fw"/>
                         <outlet property="welcomeText" destination="H3k-jm-NjS" id="y7q-Bw-Hn7"/>
                         <outletCollection property="startConstraints" destination="aWc-ri-7NO" collectionClass="NSMutableArray" id="G7S-s8-8sx"/>
