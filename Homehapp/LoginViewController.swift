@@ -261,9 +261,6 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
         
-        if appstate.onboardingShown == nil {
-            showOnboarding()
-        }
     }
     
     private func setStartConstraint(start: Bool) {
@@ -280,6 +277,8 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
         
         if appstate.onboardingShown != nil {
             showLoginContainer()
+        } else {
+            showOnboarding()
         }
     }
     

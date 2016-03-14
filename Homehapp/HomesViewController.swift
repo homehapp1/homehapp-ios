@@ -94,6 +94,7 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
         if appstate.accessToken != nil {
             self.performSegueWithIdentifier(segueIdHomesToProfile, sender: self)
         } else {
+            AuthenticationService.sharedInstance().logoutUser()
             showLoginRequested()
         }
     }
