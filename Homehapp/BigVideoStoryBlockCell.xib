@@ -27,7 +27,7 @@
                                 <rect key="frame" x="205" y="50" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="AsS-Zx-fDc"/>
-                                    <constraint firstAttribute="height" constant="150" id="JGM-v8-a5a"/>
+                                    <constraint firstAttribute="height" priority="999" constant="150" id="JGM-v8-a5a"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bQ-au-H6K">
@@ -82,7 +82,7 @@
                             <constraint firstItem="Qfc-G3-rcg" firstAttribute="centerX" secondItem="MaF-C6-z5f" secondAttribute="centerX" id="GTX-Cz-fcn"/>
                             <constraint firstAttribute="trailing" secondItem="HYN-bR-caX" secondAttribute="trailing" constant="3" id="Gke-Bs-lVU"/>
                             <constraint firstItem="Qgt-kx-3jv" firstAttribute="bottom" secondItem="MaF-C6-z5f" secondAttribute="bottom" constant="-5" id="IsO-vD-oYs"/>
-                            <constraint firstItem="HYN-bR-caX" firstAttribute="height" secondItem="q2I-CA-KAT" secondAttribute="height" id="NDe-o7-rdB"/>
+                            <constraint firstItem="HYN-bR-caX" firstAttribute="height" secondItem="q2I-CA-KAT" secondAttribute="height" priority="999" id="NDe-o7-rdB"/>
                             <constraint firstAttribute="trailing" secondItem="q2I-CA-KAT" secondAttribute="trailing" constant="3" id="Q1d-IP-RWW"/>
                             <constraint firstItem="HYN-bR-caX" firstAttribute="top" secondItem="MaF-C6-z5f" secondAttribute="top" constant="3" id="T3g-ky-igM"/>
                             <constraint firstAttribute="trailing" secondItem="F39-k4-uj8" secondAttribute="trailing" constant="74" id="WS8-jF-4DO"/>
@@ -92,7 +92,7 @@
                             <constraint firstItem="Qgt-kx-3jv" firstAttribute="centerX" secondItem="MaF-C6-z5f" secondAttribute="centerX" id="kj4-nx-a6H"/>
                             <constraint firstAttribute="trailing" secondItem="5bQ-au-H6K" secondAttribute="trailing" id="pPe-gl-M57"/>
                             <constraint firstAttribute="bottom" secondItem="5bQ-au-H6K" secondAttribute="bottom" id="q0S-ai-Kex"/>
-                            <constraint firstAttribute="height" constant="250" id="yeK-Ny-DP5"/>
+                            <constraint firstAttribute="height" priority="999" constant="250" id="yeK-Ny-DP5"/>
                             <constraint firstItem="q2I-CA-KAT" firstAttribute="leading" secondItem="MaF-C6-z5f" secondAttribute="leading" constant="3" id="zf7-wV-uoN"/>
                         </constraints>
                     </view>
