@@ -20,6 +20,12 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     /// Height of the top bar, in units
     private let topBarHeight: CGFloat = 65
     
+    /// Width / height of the insertion cursor, in units
+    private let insertionCursorSize: CGFloat = 30
+    
+    /// Duration (in seconds) of insertion cursor fade in/out animation
+    private let insertionCursorAnimationDuration: NSTimeInterval = 0.4
+
     /// Height of the bottom bar, in units
     let bottomBarHeight: CGFloat = 48
     
@@ -98,6 +104,12 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     /// Whether the view controller is currently in edit mode
     var editMode = false
+
+    /// Current position (as an index to the table view) of the insertion cursor (where new block cells are inserted)
+    private var insertionCursorPosition: Int? = 0
+    
+    /// Current insertion cursor image view 
+    private var insertionCursorImageView: UIImageView!
     
     /// Height of the keyboard + any text edit mode selection view, if they are showing.
     private var keyboardHeight: CGFloat? = nil
@@ -114,7 +126,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     /// Defines if image selection animation is started. Helps us to disable re-seletion during animation
     var imageSelectionAnimationStarted = false
     
-    // TODO wow so elegant. - matti
+    // TODO wow so elegant, such BDD. - matti
     private var createThumbnailData = false
     
     /// Returns the main home image view from the header, or nil if the header is not visible (enough)
@@ -202,6 +214,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         if newIndexPath == nil {
             newIndexPath = NSIndexPath(forRow: storyObject.storyBlocks.count, inSection: 0)
         }
+        
         return min(newIndexPath!.row + 1, storyObject.storyBlocks.count + 1)
     }
     
@@ -562,7 +575,14 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 editableCell.setEditMode(editMode, animated: true)
             }
         }
-
+    
+        // Invalidate edit mode cursor
+        insertionCursorImageView.removeFromSuperview()
+        insertionCursorPosition = nil
+        if editMode {
+            manageInsertionCursor()
+        }
+        
         // Uncomment to hide home owner cell in edit mode. See numberOfRowsInSection also
         //editModeChanged()
     }
@@ -610,6 +630,33 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         }
     }
 
+    /// Manages the position / visibility of the edit mode insertion cursor.
+    private func manageInsertionCursor() {
+        let currentInsertCursorPosition = calculateCellInsertPosition()
+        
+        if currentInsertCursorPosition != insertionCursorPosition {
+            insertionCursorPosition = currentInsertCursorPosition
+            
+            // Fade out current cursor
+            UIView.animateWithDuration(insertionCursorAnimationDuration, animations: {
+                self.insertionCursorImageView.alpha = 0
+                }, completion: { finished in
+                    if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: currentInsertCursorPosition, inSection: 0)) {
+                        // Position insertion cursor in the middle of the top edge of the cell
+                        let cursorOrigin = CGPoint(x: (cell.bounds.width - self.insertionCursorSize) / 2, y: cell.frame.origin.y - (self.insertionCursorSize / 2))
+                        self.insertionCursorImageView.frame.origin = cursorOrigin
+                        cell.superview?.addSubview(self.insertionCursorImageView)
+                        
+                        UIView.animateWithDuration(self.insertionCursorAnimationDuration, animations: {
+                            self.insertionCursorImageView.alpha = 1
+                            }, completion: { finished in
+                                // No action
+                        })
+                    }
+            })
+        }
+    }
+    
     // MARK: 'Protected' methods
     
     func editModeChanged() {
@@ -956,6 +1003,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     // Manages the bottom bar visibility based on the table view scroll
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        if editMode {
+            // Manage the edit mode insertion cursor
+            manageInsertionCursor()
+        }
+        
         let diff = scrollView.contentOffset.y - tableViewScrollPosition.y
         tableViewScrollPosition = scrollView.contentOffset
         
@@ -1018,7 +1070,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
         let cell = implTableView(tableView, cellForRowAtIndexPath: indexPath)
 
         if let storyBlockCell = cell as? BaseStoryBlockCell {
@@ -1261,6 +1312,9 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             }
         }
         view.addSubview(textEditModeSelectionView)
+
+        insertionCursorImageView = UIImageView(image: UIImage(named: "icon_add_here"))
+        insertionCursorImageView.frame = CGRect(x: 0, y: 0, width: insertionCursorSize, height: insertionCursorSize)
 
         // Add insets so that there is empty space on bottom of the table view to match the height of the bottom bar
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomBarHeight, right: 0)
