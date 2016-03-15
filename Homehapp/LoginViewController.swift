@@ -140,13 +140,13 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
             
         onboardingViewController = OnboardingViewController(backgroundImage: UIImage(named: "onboarding_background"), contents: [firstPage, secondPage, thirdPage])
         
-        onboardingViewController!.topPadding = self.view.height / 2 - 60
+        onboardingViewController!.topPadding = self.view.height / 2 - 100
         onboardingViewController!.underTitlePadding = 40;
-        onboardingViewController!.bodyFontSize = 22;
+        onboardingViewController!.bodyFontSize = 21;
         onboardingViewController!.fontName = "Roboto";
         onboardingViewController!.shouldMaskBackground = false;
         onboardingViewController!.fadePageControlOnLastPage = true
-        onboardingViewController!.bottomPadding = 40;
+        onboardingViewController!.bottomPadding = 30;
         onboardingViewController!.shouldFadeTransitions = true
 
         self.view.addSubview(onboardingViewController!.view)
