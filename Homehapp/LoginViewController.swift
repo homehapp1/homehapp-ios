@@ -140,7 +140,7 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
             
         onboardingViewController = OnboardingViewController(backgroundImage: UIImage(named: "onboarding_background"), contents: [firstPage, secondPage, thirdPage])
         
-        onboardingViewController!.topPadding = self.view.height / 2 - 140
+        onboardingViewController!.topPadding = self.view.height / 2 - 60
         onboardingViewController!.underTitlePadding = 40;
         onboardingViewController!.bodyFontSize = 22;
         onboardingViewController!.fontName = "Roboto";
@@ -151,8 +151,6 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
 
         self.view.addSubview(onboardingViewController!.view)
         onboardingViewController?.view.alpha = 0
-        logo.hidden = true
-        tagLine.hidden = true
         
         UIView.animateWithDuration(0.5, animations: {
             self.onboardingViewController?.view.alpha = 1.0
@@ -260,6 +258,11 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
         self.welcomeText.text = nil
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
+        
+        if appstate.onboardingShown == nil {
+            logo.hidden = true
+            tagLine.hidden = true
+        }
         
     }
     
