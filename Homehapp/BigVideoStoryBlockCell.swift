@@ -9,6 +9,26 @@
 import UIKit
 import AVFoundation
 
+class PlayerView: UIView {
+    var player: AVPlayer? {
+        get {
+            return playerLayer.player
+        }
+        
+        set {
+            playerLayer.player = newValue
+        }
+    }
+    
+    var playerLayer: AVPlayerLayer {
+        return layer as! AVPlayerLayer
+    }
+    
+    override class func layerClass() -> AnyClass {
+        return AVPlayerLayer.self
+    }
+}
+
 /**
  Displays a single video player.
 */
@@ -19,7 +39,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
 
     @IBOutlet private weak var playPauseImageView: UIImageView!
-    @IBOutlet private weak var videoView: UIView!
+    @IBOutlet private weak var videoView: PlayerView!
     @IBOutlet private weak var addVideoButton: UIButton!
     @IBOutlet private weak var volumeButton: UIButton!
     @IBOutlet private weak var fullScreenButton: UIButton!
@@ -30,7 +50,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
     /// Video URL the player was constructed with.
     var videoURL: NSURL?
 
-    private var playerLayer: AVPlayerLayer?
+    //private var playerLayer: AVPlayerLayer?
     private var player: AVPlayer?
     private var playerItem: AVPlayerItem?
     
@@ -100,7 +120,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
     // MARK: Public methods
 
     func playEnded(notification: NSNotification) {
-        guard let player = playerLayer?.player else {
+        guard let player = videoView?.player else {
             log.error("No player set!");
             return
         }
@@ -127,17 +147,16 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
                 playerItem = AVPlayerItem(URL: url)
                 player = AVPlayer(playerItem: playerItem!)
                 player!.actionAtItemEnd = .None
-                playerLayer = AVPlayerLayer(player: player)
-                playerLayer!.frame = videoView.bounds
                 player?.volume = 0.0
-                videoView.layer.addSublayer(playerLayer!)
+                videoView.player = player
+                videoView.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
                 playerItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options:NSKeyValueObservingOptions(), context: nil)
                 
                 playButtonPressedTime = NSDate()
             }
         }
                 
-        guard let player = playerLayer?.player else {
+        guard let player = videoView?.player else {
             log.debug("No player set, cannot play");
             return
         }
@@ -220,7 +239,6 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
                     self.playPauseImageView.image = UIImage(named: "icon_play")
             })
             
-            playerLayer!.frame = videoView.bounds
             player?.play()
             
             // Send analytics event measuring how long the video buffering took
@@ -278,10 +296,6 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
     }
     
     // MARK: Lifecycle etc.
-    
-    deinit {
-        playerLayer?.removeFromSuperlayer()
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
