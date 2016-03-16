@@ -21,7 +21,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     private let topBarHeight: CGFloat = 65
     
     /// Width / height of the insertion cursor, in units
-    private let insertionCursorSize: CGFloat = 30
+    private let insertionCursorSize: CGFloat = 14
     
     /// Duration (in seconds) of insertion cursor fade in/out animation
     private let insertionCursorAnimationDuration: NSTimeInterval = 0.4
