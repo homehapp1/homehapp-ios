@@ -39,8 +39,6 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     
     var imageSizes: [CGSize] = []
     
-    var editMode = false
-    
     override var deleteCallback: (Void -> Void)? {
         didSet {
             // We don't use the block-level delete button, but instead each image has its own delete button
@@ -246,7 +244,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     override func setEditMode(editMode: Bool, animated: Bool) {
         super.setEditMode(editMode, animated: animated)
         
-        self.editMode = editMode
+//        self.editMode = editMode
         
         for cell in collectionView.visibleCells() {
             if let galleryCell = cell as? GalleryImageCell {

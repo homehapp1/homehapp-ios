@@ -13,36 +13,42 @@ import UIKit
  */
 class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     let imageMargin: CGFloat = 3.0
-    private let titleMargin: CGFloat = 40
+   // private let titleMargin: CGFloat = 40
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet private weak var editTitleTextView: ExpandingTextView!
     @IBOutlet private weak var mainImageView: CachedImageView!
-    @IBOutlet private weak var descriptionLabel: UILabel!
     
-    @IBOutlet private weak var titleTopMarginConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var titleHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var titleBottomMarginConstraint: NSLayoutConstraint!
+    @IBOutlet private var titleContainerViewHeightConstraint: NSLayoutConstraint!
+    
+//    @IBOutlet private weak var titleTopMarginConstraint: NSLayoutConstraint!
+//    @IBOutlet private weak var titleHeightConstraint: NSLayoutConstraint!
+//    @IBOutlet private weak var titleBottomMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var addImageButton: UIButton!
     
     // Progress indicator for image upload
     @IBOutlet private weak var uploadProgressView: UIProgressView!
     
-    var titleLabelOriginalTopMarginConstraint: CGFloat = 0
+//    var titleLabelOriginalTopMarginConstraint: CGFloat = 0
     
     /// Image selected -callback; can be used to open a full screen view
     var imageSelectedCallback: ((imageIndex: Int, imageView: UIImageView) -> Void)?
     
+    override var resizeCallback: (Void -> Void)? {
+        didSet {
+            editTitleTextView.resizeCallback = resizeCallback
+         }
+    }
+
     override var storyBlock: StoryBlock? {
         didSet {
             titleLabel.text = storyBlock?.title?.uppercaseString
             editTitleTextView.text = storyBlock?.title?.uppercaseString
 
-            updateUI(editMode: false)
-            
-            descriptionLabel.text = storyBlock?.mainText
-            
+//            updateUI(editMode: false)
+//            setNeedsUpdateConstraints()
+
             mainImageView.imageUrl = storyBlock?.image?.mediumScaledUrl
             mainImageView.thumbnailData = storyBlock?.image?.thumbnailData
             
@@ -72,20 +78,34 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     }
     
     private func updateUI(editMode editMode: Bool) {
-        if (storyBlock?.title?.length > 0) && !editMode {
-            titleHeightConstraint.constant = 31
-            titleBottomMarginConstraint.constant = titleMargin
-            if removeTopMargin {
-                titleTopMarginConstraint.constant = 0
-            } else {
-                titleTopMarginConstraint.constant = titleMargin
-            }
+        if (storyBlock?.title?.length > 0) || editMode {
+            titleContainerViewHeightConstraint.active = false
+//            log.debug("ACTIVE = FALSE")
+          //  titleHeightConstraint.constant = 31
+            // titleBottomMarginConstraint.constant = titleMargin
+//            if removeTopMargin {
+//                titleTopMarginConstraint.constant = 0
+//            } else {
+//                titleTopMarginConstraint.constant = titleMargin
+//            }
         } else {
-            titleHeightConstraint.constant = 0
-            titleBottomMarginConstraint.constant = 0
-            titleTopMarginConstraint.constant = 3
+             titleContainerViewHeightConstraint.active = true
+//            log.debug("ACTIVE = TRUE")
+//            titleHeightConstraint.constant = 0
+//            titleBottomMarginConstraint.constant = 0
+//            titleTopMarginConstraint.constant = 3
         }
     }
+    
+//    override func updateConstraints() {
+//        if (storyBlock?.title?.length > 0) || editMode {
+//            titleContainerViewHeightConstraint.active = false
+//        } else {
+//            titleContainerViewHeightConstraint.active = true
+//        }
+//        
+//        super.updateConstraints()
+//    }
     
     // MARK: Public methods
     
@@ -93,6 +113,7 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         super.setEditMode(editMode, animated: animated)
         
         updateUI(editMode: editMode)
+//        setNeedsUpdateConstraints()
         
         // Sets hidden attributes of the controls according to state
         func setControlVisibility(allVisible allVisible: Bool = false) {
@@ -151,6 +172,7 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
                 storyBlock?.title = editTitleTextView.text
             }
             
+//            setNeedsLayout()
             updateCallback?()
         }
     }
@@ -182,10 +204,12 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         super.awakeFromNib()
 
         editTitleTextView.placeholderText = NSLocalizedString("edithomestory:content:image-title-placeholder", comment: "")
-        titleLabelOriginalTopMarginConstraint = titleTopMarginConstraint.constant
+//        titleLabelOriginalTopMarginConstraint = titleTopMarginConstraint.constant
         
         let singleTap = UITapGestureRecognizer(target: self, action:"tapDetected")
         mainImageView.userInteractionEnabled = true
         mainImageView.addGestureRecognizer(singleTap)
+        
+        titleContainerViewHeightConstraint.active = true
     }
 }

@@ -1171,6 +1171,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 }
             }
         }
+
+        cell.layoutIfNeeded()
         
         return cell
     }
@@ -1203,13 +1205,13 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         switch result.rawValue {
         case MFMailComposeResultCancelled.rawValue:
-            print("Cancelled")
+            log.debug("Cancelled")
         case MFMailComposeResultSaved.rawValue:
-            print("Saved")
+            log.debug("Saved")
         case MFMailComposeResultSent.rawValue:
-            print("Sent")
+            log.debug("Sent")
         case MFMailComposeResultFailed.rawValue:
-            print("Error: \(error?.localizedDescription)")
+            log.debug("Error: \(error?.localizedDescription)")
         default:
             break
         }

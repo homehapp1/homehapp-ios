@@ -68,7 +68,6 @@ public class ExpandingTextView: UITextView {
     
     func textDidChange(notification: NSNotification) {
         updatePlaceholder()
-        log.debug("Calling from textDidChange")
         updateSize()
     }
     

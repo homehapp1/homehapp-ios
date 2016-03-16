@@ -8,9 +8,6 @@
             <string>FjallaOne-Regular</string>
             <string>FjallaOne-Regular</string>
         </mutableArray>
-        <mutableArray key="Roboto-Regular.ttf">
-            <string>Roboto-Regular</string>
-        </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -25,37 +22,58 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QML-WX-BEy" userLabel="Container view">
                         <rect key="frame" x="0.0" y="0.0" width="574" height="329.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Story block title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWI-EZ-ol4">
-                                <rect key="frame" x="10" y="20" width="554" height="175"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3m-PF-MpH" userLabel="Title container view">
+                                <rect key="frame" x="0.0" y="0.0" width="574" height="47"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Editable story block title" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3Vf-WX-F6P" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="574" height="47"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="bPi-c0-IHZ" id="y2A-y3-MK1"/>
+                                        </connections>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Story block title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWI-EZ-ol4">
+                                        <rect key="frame" x="0.0" y="0.0" width="574" height="47"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="5Br-68-zsl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="26"/>
+                                        <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="5Br-68-zsl"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="5Br-68-zsl"/>
+                                    <constraint firstItem="3Vf-WX-F6P" firstAttribute="top" secondItem="J3m-PF-MpH" secondAttribute="top" id="3km-y5-xZD"/>
+                                    <constraint firstItem="cWI-EZ-ol4" firstAttribute="top" secondItem="J3m-PF-MpH" secondAttribute="top" priority="999" id="Dhc-lX-TZa"/>
+                                    <constraint firstAttribute="height" constant="3" id="Guq-gS-Ngd"/>
+                                    <constraint firstAttribute="bottom" secondItem="cWI-EZ-ol4" secondAttribute="bottom" priority="999" id="MKE-jh-FEp"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Vf-WX-F6P" secondAttribute="trailing" id="UTT-hV-O0b"/>
+                                    <constraint firstAttribute="bottom" secondItem="3Vf-WX-F6P" secondAttribute="bottom" id="ncn-SW-kiP"/>
+                                    <constraint firstItem="cWI-EZ-ol4" firstAttribute="leading" secondItem="J3m-PF-MpH" secondAttribute="leading" id="uhr-OQ-tTW"/>
+                                    <constraint firstItem="3Vf-WX-F6P" firstAttribute="leading" secondItem="J3m-PF-MpH" secondAttribute="leading" id="wBp-Mb-JMd"/>
+                                    <constraint firstAttribute="trailing" secondItem="cWI-EZ-ol4" secondAttribute="trailing" id="wpK-sb-fQr"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="26"/>
-                                <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="5Br-68-zsl"/>
+                                        <exclude reference="Guq-gS-Ngd"/>
                                     </mask>
                                 </variation>
-                            </label>
+                            </view>
                             <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gEf-Dg-BQi" customClass="CachedImageView" customModule="Homehapp" customModuleProvider="target">
-                                <rect key="frame" x="3" y="215" width="568" height="114"/>
+                                <rect key="frame" x="3" y="47" width="568" height="282"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="999" constant="200" id="VB3-Py-Hdg"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="block title" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3Vf-WX-F6P" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                <rect key="frame" x="30" y="242" width="514" height="47"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="textColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="24"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
-                                <connections>
-                                    <outlet property="delegate" destination="bPi-c0-IHZ" id="y2A-y3-MK1"/>
-                                </connections>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GaE-fS-Fzg">
                                 <rect key="frame" x="272" y="294" width="30" height="30"/>
                                 <constraints>
@@ -67,13 +85,6 @@
                                     <action selector="addImageButtonPressed:" destination="bPi-c0-IHZ" eventType="touchUpInside" id="hwV-OI-JJJ"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykq-PW-C2L">
-                                <rect key="frame" x="3" y="215" width="568" height="114"/>
-                                <string key="text">The kitchen flows into the living area, making this a sociable space, perfect for parties and dinners. Double doors offer privacy when you need it.</string>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
-                                <color key="textColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fKV-eH-94K">
                                 <rect key="frame" x="74" y="253" width="426" height="2"/>
                                 <color key="progressTintColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -82,27 +93,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="J3m-PF-MpH" firstAttribute="leading" secondItem="QML-WX-BEy" secondAttribute="leading" id="273-ZF-WZJ"/>
                             <constraint firstAttribute="bottom" secondItem="fKV-eH-94K" secondAttribute="bottom" constant="74" id="83v-Of-6nk"/>
-                            <constraint firstItem="GaE-fS-Fzg" firstAttribute="top" secondItem="3Vf-WX-F6P" secondAttribute="bottom" constant="5" id="9QV-r3-Mjk"/>
-                            <constraint firstItem="3Vf-WX-F6P" firstAttribute="top" secondItem="gEf-Dg-BQi" secondAttribute="top" constant="27" id="9fZ-I0-32m"/>
+                            <constraint firstItem="gEf-Dg-BQi" firstAttribute="top" secondItem="J3m-PF-MpH" secondAttribute="bottom" id="9rH-Y2-kX0"/>
                             <constraint firstItem="fKV-eH-94K" firstAttribute="centerX" secondItem="QML-WX-BEy" secondAttribute="centerX" id="D1I-jY-JOB"/>
                             <constraint firstItem="fKV-eH-94K" firstAttribute="centerY" secondItem="QML-WX-BEy" secondAttribute="centerY" id="EIC-lt-c7d"/>
-                            <constraint firstItem="ykq-PW-C2L" firstAttribute="trailing" secondItem="gEf-Dg-BQi" secondAttribute="trailing" id="IQW-XO-Nte"/>
+                            <constraint firstItem="J3m-PF-MpH" firstAttribute="top" secondItem="QML-WX-BEy" secondAttribute="top" id="IFc-hi-vHN"/>
+                            <constraint firstAttribute="trailing" secondItem="J3m-PF-MpH" secondAttribute="trailing" id="Nnb-bR-QnT"/>
                             <constraint firstAttribute="trailing" secondItem="fKV-eH-94K" secondAttribute="trailing" constant="74" id="PDA-EK-0ly"/>
-                            <constraint firstItem="ykq-PW-C2L" firstAttribute="top" secondItem="gEf-Dg-BQi" secondAttribute="top" id="Q5Q-Or-eSi"/>
                             <constraint firstItem="gEf-Dg-BQi" firstAttribute="leading" secondItem="QML-WX-BEy" secondAttribute="leading" constant="3" id="SkW-0n-p2j"/>
-                            <constraint firstItem="gEf-Dg-BQi" firstAttribute="top" secondItem="cWI-EZ-ol4" secondAttribute="bottom" constant="20" id="bJ8-pg-5sY"/>
-                            <constraint firstItem="ykq-PW-C2L" firstAttribute="leading" secondItem="gEf-Dg-BQi" secondAttribute="leading" id="bSv-Mb-TZ6"/>
                             <constraint firstAttribute="trailing" secondItem="gEf-Dg-BQi" secondAttribute="trailing" constant="3" id="d2V-ir-Oob"/>
-                            <constraint firstAttribute="trailing" secondItem="3Vf-WX-F6P" secondAttribute="trailing" constant="30" id="fcV-Iy-YXe"/>
                             <constraint firstItem="GaE-fS-Fzg" firstAttribute="bottom" secondItem="QML-WX-BEy" secondAttribute="bottom" constant="-5" id="gB4-g6-9s2"/>
-                            <constraint firstItem="3Vf-WX-F6P" firstAttribute="leading" secondItem="QML-WX-BEy" secondAttribute="leading" constant="30" id="jPh-qo-giu"/>
                             <constraint firstItem="GaE-fS-Fzg" firstAttribute="centerX" secondItem="QML-WX-BEy" secondAttribute="centerX" id="mrZ-eJ-cOS"/>
-                            <constraint firstAttribute="trailing" secondItem="cWI-EZ-ol4" secondAttribute="trailing" constant="10" id="nti-yL-RjH"/>
-                            <constraint firstItem="cWI-EZ-ol4" firstAttribute="top" secondItem="QML-WX-BEy" secondAttribute="top" constant="20" id="od2-DM-aL8"/>
                             <constraint firstItem="fKV-eH-94K" firstAttribute="leading" secondItem="QML-WX-BEy" secondAttribute="leading" constant="74" id="p7e-7X-jAG"/>
-                            <constraint firstItem="cWI-EZ-ol4" firstAttribute="leading" secondItem="QML-WX-BEy" secondAttribute="leading" constant="10" id="rnI-9Z-2hZ"/>
-                            <constraint firstItem="ykq-PW-C2L" firstAttribute="bottom" secondItem="gEf-Dg-BQi" secondAttribute="bottom" id="sHE-6y-8fO"/>
                             <constraint firstAttribute="bottom" secondItem="gEf-Dg-BQi" secondAttribute="bottom" id="wEb-mk-vef"/>
                         </constraints>
                         <variation key="default">
@@ -125,14 +128,11 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="addImageButton" destination="GaE-fS-Fzg" id="bf4-Vj-Swa"/>
-                <outlet property="descriptionLabel" destination="ykq-PW-C2L" id="zSL-NT-kdp"/>
                 <outlet property="editTitleTextView" destination="3Vf-WX-F6P" id="gBX-3A-m9M"/>
                 <outlet property="imageHeightConstraint" destination="VB3-Py-Hdg" id="nyd-52-cCW"/>
                 <outlet property="mainImageView" destination="gEf-Dg-BQi" id="edT-Q8-kvX"/>
-                <outlet property="titleBottomMarginConstraint" destination="bJ8-pg-5sY" id="ulm-me-amG"/>
-                <outlet property="titleHeightConstraint" destination="5Br-68-zsl" id="9lL-73-4sh"/>
+                <outlet property="titleContainerViewHeightConstraint" destination="Guq-gS-Ngd" id="hV7-Es-XDb"/>
                 <outlet property="titleLabel" destination="cWI-EZ-ol4" id="rCF-47-4M6"/>
-                <outlet property="titleTopMarginConstraint" destination="od2-DM-aL8" id="a1N-ur-5Yq"/>
                 <outlet property="uploadProgressView" destination="fKV-eH-94K" id="wJH-O3-YdW"/>
             </connections>
             <point key="canvasLocation" x="404" y="285"/>

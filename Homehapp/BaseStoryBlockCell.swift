@@ -40,8 +40,12 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
     /// previous cell had bottom margin
     var removeTopMargin = false
     
+    private(set) var editMode = false
+    
     /// Base class implementation manages adding the delete button.
     func setEditMode(editMode: Bool, animated: Bool) {
+        self.editMode = editMode
+        
         if editMode {
             deleteButton = QvikButton.button(frame: CGRect(x: deleteButtonMargin, y: deleteButtonMargin, width: deleteButtonSize, height: deleteButtonSize), type: .Custom) { [weak self] in
                 self?.deleteCallback?()
@@ -133,8 +137,8 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
         selectionStyle = .None
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//
+//    }
 }
