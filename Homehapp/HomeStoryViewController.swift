@@ -1172,7 +1172,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             }
         }
 
-        cell.layoutIfNeeded()
+        //cell.layoutIfNeeded()
         
         return cell
     }
