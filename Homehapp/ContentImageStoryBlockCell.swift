@@ -97,16 +97,6 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         }
     }
     
-//    override func updateConstraints() {
-//        if (storyBlock?.title?.length > 0) || editMode {
-//            titleContainerViewHeightConstraint.active = false
-//        } else {
-//            titleContainerViewHeightConstraint.active = true
-//        }
-//        
-//        super.updateConstraints()
-//    }
-    
     // MARK: Public methods
     
     override func setEditMode(editMode: Bool, animated: Bool) {
@@ -200,6 +190,13 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     
     // MARK: Lifecycle
 
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//        
+//        log.debug("\(unsafeAddressOf(self)) - titleContainerViewHeightConstraint.active = \(titleContainerViewHeightConstraint.active)")
+//        titleContainerViewHeightConstraint.active = true
+//    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -210,6 +207,7 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         mainImageView.userInteractionEnabled = true
         mainImageView.addGestureRecognizer(singleTap)
         
-        titleContainerViewHeightConstraint.active = true
+//        titleContainerViewHeightConstraint.active = true
+//        log.debug("\(unsafeAddressOf(self)) - CELL LOADED")
     }
 }
