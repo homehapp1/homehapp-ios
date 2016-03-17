@@ -47,6 +47,9 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
     /// Cell instance for calculating sizes
     private let sizingCell = HomeCell.loadFromNib()
     
+    /// Pull to refresh
+    private var refreshControl: UIRefreshControl?
+    
     // MARK: Private methods
     
     private func updateData() {
@@ -180,6 +183,20 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
         return fittingSize.height
     }
     
+    func pullRefresh() {
+        remoteService.fetchHomes() { [weak self] response in
+            self?.refreshControl?.endRefreshing()
+            if let message = localizedErrorMessage(response) {
+                Toast.show(message: message)
+            } else {
+                // animate after a bit of delay to hiden pull to refresh with animation
+                runOnMainThreadAfter(delay: 0.4, task: {
+                    self?.updateData()
+                })
+            }
+        }
+    }
+    
     // MARK: From UIViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -247,5 +264,11 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
                 Toast.show(message: message)
             }
         }
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector("pullRefresh"), forControlEvents: UIControlEvents.ValueChanged)
+        self.collectionView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
+        self.collectionView.alwaysBounceVertical = true
     }
 }

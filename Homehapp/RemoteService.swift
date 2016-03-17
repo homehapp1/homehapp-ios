@@ -182,6 +182,7 @@ class RemoteService: BaseRemoteService {
                     homesJson = json["homes"] as? [[String: AnyObject]] {
                         if homesJson.count == 0 {
                             log.debug("No homes in response.")
+                            completionCallback?(response)
                             return
                         }
                         
