@@ -455,6 +455,7 @@ class DataManager {
         return singletonInstance
     }
     
+    /// Find home by given id
     func findHomeById(homeId: String) -> Home? {
         do {
             let realm = try Realm()
@@ -468,6 +469,7 @@ class DataManager {
         return nil
     }
     
+    /// Find neighbourhood by given id
     func findNeighbourhoodById(neighborhoodId: String) -> Neighborhood? {
         do {
             let realm = try Realm()
@@ -481,6 +483,7 @@ class DataManager {
         return nil
     }
     
+    /// Store homes based on given json array
     func storeHomes(homes: NSArray) {
         guard let homes = homes as? [[String: AnyObject]] else {
             return
