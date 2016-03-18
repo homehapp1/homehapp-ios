@@ -77,7 +77,7 @@ class HomeInfoImageViewController: BaseViewController, UIScrollViewDelegate, UII
         
             // Remove image from Cloudinary
             if let url = image?.url where url.contains("http") {
-                cloudStorage.removeAsset(url)
+                cloudStorage.removeAsset(url, type: "image")
             }
         
             // Animate image removal
