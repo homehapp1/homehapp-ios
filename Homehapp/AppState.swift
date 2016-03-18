@@ -14,6 +14,8 @@ class AppState {
     private let keyAccessToken = "accessToken"
     private let keyAuthUserId = "keyAuthUserId"
     private let keyHomesLastUpdated = "homesLastUpdated"
+    private let keyHomesLastDeleted = "homesLastDeleted"
+    private let keyNeighborhoodsLastDeleted = "neighborhoodsLastDeleted"
     private let keyTutorialShown = "tutorialShown"
     private let keyOnboardingShown = "onboardingShown"
 
@@ -72,6 +74,42 @@ class AppState {
                 userDefaults.setDouble(value.timeIntervalSince1970, forKey: keyHomesLastUpdated)
             } else {
                 userDefaults.removeObjectForKey(keyHomesLastUpdated)
+            }
+        }
+    }
+    
+    var homesLastDeleted: NSDate? {
+        get {
+            let value = userDefaults.doubleForKey(keyHomesLastDeleted)
+            if value > 0 {
+                return NSDate(timeIntervalSince1970: value)
+            } else {
+                return NSDate() // return current time if one is not stored
+            }
+        }
+        set {
+            if let value = newValue {
+                userDefaults.setDouble(value.timeIntervalSince1970, forKey: keyHomesLastDeleted)
+            } else {
+                userDefaults.removeObjectForKey(keyHomesLastDeleted)
+            }
+        }
+    }
+    
+    var neighborhoodsLastDeleted: NSDate? {
+        get {
+            let value = userDefaults.doubleForKey(keyNeighborhoodsLastDeleted)
+            if value > 0 {
+                return NSDate(timeIntervalSince1970: value)
+            } else {
+                return NSDate() // return current time if one is not stored
+            }
+        }
+        set {
+            if let value = newValue {
+                userDefaults.setDouble(value.timeIntervalSince1970, forKey: keyNeighborhoodsLastDeleted)
+            } else {
+                userDefaults.removeObjectForKey(keyNeighborhoodsLastDeleted)
             }
         }
     }

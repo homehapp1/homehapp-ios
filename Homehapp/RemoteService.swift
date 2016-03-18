@@ -150,6 +150,40 @@ class RemoteService: BaseRemoteService {
         return ["home": homeJson]
     }
     
+    /// /// Fetch homes that are deleted after timestamp homesLastDeleted in appstate
+    private func fetchDeletedHomes() {
+        let sentTime = NSDate()
+        if let lastUpdated = appstate.homesLastDeleted {
+            let lastUpdatedString = dateFormatter.stringFromDate(lastUpdated)
+            let url = "\(baseUrl)/api/deleted/home?since=\(lastUpdatedString)"
+            request(.GET, url, parameters: nil, encoding: .URL, headers: nil) { response in
+                appstate.homesLastDeleted = sentTime
+                if response.success {
+                    if let json = response.parsedJson, items = json["items"] as? NSArray where items.count > 0 {
+                        dataManager.softDeleteHomes(items)
+                    }
+                }
+            }
+        }
+    }
+    
+    /// Fetch neighborhoods that are deleted after timestamp neighborhoodsLastDeleted in appstate
+    private func fetchDeletedNeighbourHoods() {
+        let sentTime = NSDate()
+        if let lastUpdated = appstate.neighborhoodsLastDeleted {
+            let lastUpdatedString = dateFormatter.stringFromDate(lastUpdated)
+            let url = "\(baseUrl)/api/deleted/neighborhood?since=\(lastUpdatedString)"
+            request(.GET, url, parameters: nil, encoding: .URL, headers: nil) { response in
+                if response.success {
+                    appstate.neighborhoodsLastDeleted = sentTime
+                    if let json = response.parsedJson, items = json["items"] as? NSArray where items.count > 0 {
+                        dataManager.softDeleteNeighbourHoods(items)
+                    }
+                }
+            }
+        }
+    }
+    
     // MARK: Public methods
     
     /// Returns a singleton instance.
@@ -167,6 +201,13 @@ class RemoteService: BaseRemoteService {
     
     /// Retrieves all the homes / stories
     func fetchHomes(completionCallback: (RemoteResponse -> Void)? = nil) {
+        
+        // fetch deleted homes
+        fetchDeletedHomes()
+        
+        // fetch deleted neighbourhoods
+        fetchDeletedNeighbourHoods()
+        
         log.debug("Fetching homes..")
         
         var params: [String: AnyObject] = [:]
@@ -207,7 +248,7 @@ class RemoteService: BaseRemoteService {
             completionCallback?(response)
         }
     }
-
+    
     /// Sends my home object to server and updates it
     func updateMyHomeOnServer(completionCallback: (RemoteResponse -> Void)? = nil) {
         guard let home = dataManager.findMyHome() else {

@@ -447,12 +447,38 @@ class DataManager {
         }
         log.debug("Removing soft-deleted objects took \(-start.timeIntervalSinceNow) seconds.")
     }
-
+    
     // MARK: Public methods
 
     /// Returns a singleton instance.
     class func sharedInstance() -> DataManager {
         return singletonInstance
+    }
+    
+    func findHomeById(homeId: String) -> Home? {
+        do {
+            let realm = try Realm()
+            let results = realm.objects(Home).filter("id = %@", homeId)
+            if results.count > 0 {
+                return results.first
+            }
+        } catch let error {
+            log.error("Fetching my home failed: \(error)")
+        }
+        return nil
+    }
+    
+    func findNeighbourhoodById(neighborhoodId: String) -> Neighborhood? {
+        do {
+            let realm = try Realm()
+            let results = realm.objects(Neighborhood).filter("id = %@", neighborhoodId)
+            if results.count > 0 {
+                return results.first
+            }
+        } catch let error {
+            log.error("Fetching my home failed: \(error)")
+        }
+        return nil
     }
     
     func storeHomes(homes: NSArray) {
@@ -590,6 +616,29 @@ class DataManager {
         }
     }
 
+    /// Mark homes as deleted for future deletion
+    func softDeleteHomes(homeIds: NSArray) {
+        for homeId in homeIds {
+            if let home = findHomeById(homeId as! String) {
+                log.debug("deleting home with id: \(homeId)")
+                performUpdates({
+                    home.deleted = true
+                })
+            }
+        }
+    }
+    
+    func softDeleteNeighbourHoods(neighborhoodIds: NSArray) {
+        for neighborhoodId in neighborhoodIds {
+            if let neighborhood = findNeighbourhoodById(neighborhoodId as! String) {
+                log.debug("deleting neighborhood with id: \(neighborhoodId)")
+                performUpdates({
+                    neighborhood.deleted = true
+                })
+            }
+        }
+    }
+    
     /**
      Soft-deletes a given StoryBlock. Does not remove it from any references. Must be called from within
      a write transaction.
