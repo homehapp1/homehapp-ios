@@ -157,8 +157,8 @@ class RemoteService: BaseRemoteService {
             let lastUpdatedString = dateFormatter.stringFromDate(lastUpdated)
             let url = "\(baseUrl)/api/deleted/home?since=\(lastUpdatedString)"
             request(.GET, url, parameters: nil, encoding: .URL, headers: nil) { response in
-                appstate.homesLastDeleted = sentTime
                 if response.success {
+                    appstate.homesLastDeleted = sentTime
                     if let json = response.parsedJson, items = json["items"] as? NSArray where items.count > 0 {
                         dataManager.softDeleteHomes(items)
                     }
