@@ -85,6 +85,10 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                     image.deleted = true
                     storyBlock!.galleryImages.removeAtIndex(myIndex)
                 }
+                
+                // Delete image also from Cloudinary
+                cloudStorage.removeAsset(image.url, type: "image")
+                
                 calculateImageSizes()
                 imagesChangedCallback?()
                 resizeCallback?()
