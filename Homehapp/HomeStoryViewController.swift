@@ -1160,6 +1160,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 baseCell.deleteCallback = { [weak self] in
                     if let storyBlock = baseCell.storyBlock,
                         storyBlockIndex = self?.storyObject.storyBlocks.indexOf(storyBlock) {
+                            
+                            // Remove storyBlock assets from Cloudinary
+                            cloudStorage.removeAssetsFromStoryBlock(storyBlock)
+                            
                             dataManager.performUpdates {
                                 self?.storyObject.storyBlocks.removeAtIndex(storyBlockIndex)
                                 dataManager.softDeleteStoryBlock(storyBlock)
@@ -1171,8 +1175,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 }
             }
         }
-
-        //cell.layoutIfNeeded()
         
         return cell
     }

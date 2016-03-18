@@ -66,7 +66,14 @@ public class CloudinaryService {
     
     /// Return Cloudinary public id for the image. Cloudinary public id is the identifier before file ending
     private func getPublicId(url: String) -> String {
-        let urlWithoutFileFormat = url.split(".jpg")[0]
+        
+        var urlWithoutFileFormat = ""
+        if url.contains(".jpg") {
+            urlWithoutFileFormat = url.split(".jpg")[0]
+        } else if url.contains(".mp4") {
+            urlWithoutFileFormat = url.split(".mp4")[0]
+        }
+        
         let urlParts = urlWithoutFileFormat.split("/")
         let publicId = urlParts[urlParts.count - 1]
         return publicId
@@ -235,7 +242,7 @@ public class CloudinaryService {
     }
 
     /// Remove Image or Video from Cloudinary based on it's url
-    func removeAsset(url: String) {
+    func removeAsset(url: String, type: String) {
         
         // Obtain asset public id from url
         let publicId = getPublicId(url)
@@ -243,7 +250,17 @@ public class CloudinaryService {
         let uploader = CLUploader(cloudinary, delegate: nil)
         
         // Destroy image from Cloudinary and all it's derivatives
-        uploader.destroy(publicId, options: nil)
+        uploader.destroy(publicId, options: ["resource_type" : type])
+    }
+    
+    func removeAssetsFromStoryBlock(storyBlock: StoryBlock) {
+        if let image = storyBlock.image {
+            removeAsset(image.url, type: "image")
+        }
+        
+        if let video = storyBlock.video {
+            removeAsset(video.url, type: "video")
+        }
     }
     
     // MARK: Lifecycle etc
