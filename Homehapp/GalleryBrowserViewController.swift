@@ -19,7 +19,7 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     @IBOutlet private weak var backgroundView: UIView!
     @IBOutlet private weak var closeButton: UIButton!
     
-    var storyBlock: StoryBlock!
+    var images: [Image]? = nil
     var currentImageIndex = 0
     var selectedImage : Image?
     let scrollClosingDistance : CGFloat = 35 // Distance that user bounces and this view will close
@@ -34,12 +34,12 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     // MARK: UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return getImageCount()
+        return images!.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GalleryImageCell", forIndexPath: indexPath) as! GalleryImageCell
-        cell.populate(getStoryBlockImageAtIndex(indexPath.row), contentMode: UIViewContentMode.ScaleAspectFit)
+        cell.populate(images![indexPath.row], contentMode: UIViewContentMode.ScaleAspectFit)
         if selectedImage != nil && indexPath.row == currentImageIndex {
             cell.setImageMargin(0)
         } else {
@@ -59,7 +59,7 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         }
         
         if selectedImage == nil {
-            selectedImage = getStoryBlockImageAtIndex(indexPath.row)
+            selectedImage = images![indexPath.row]
         } else {
             selectedImage = nil
         }
@@ -98,7 +98,7 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
             return
         }
         
-        if getImageCount() != 1 {
+        if images!.count != 1 {
             if let indexPath = collectionView.indexPathForItemAtPoint(CGPointMake(collectionView.contentOffset.x + (self.view.width / 2), self.view.height/2)) {
                 currentImageIndex = indexPath.row
             }
@@ -120,7 +120,7 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
             let size = getSizeForOpenedImage()
             
             //reset collectionview contentSize after image has been opened
-            collectionView.contentSize = CGSizeMake(size.width + CGFloat(getImageCount() - 1) * self.view.width, collectionView.contentSize.height)
+            collectionView.contentSize = CGSizeMake(size.width + CGFloat(images!.count - 1) * self.view.width, collectionView.contentSize.height)
             return size
         } else {
             return CGSizeMake(self.view.width, self.view.height)
@@ -168,20 +168,6 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         return newSize
     }
     
-    /// Return image with given index
-    private func getStoryBlockImageAtIndex(index: Int) -> Image {
-        if storyBlock.galleryImages.count > 0 {
-            return storyBlock.galleryImages[index]
-        } else {
-            return storyBlock.image!
-        }
-    }
-    
-    /// Return count of image we display, either gallery image count or single image
-    private func getImageCount() -> Int {
-        return storyBlock.galleryImages.count != 0 ? storyBlock.galleryImages.count : 1
-    }
-    
     // MARK: From UIViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -189,7 +175,7 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
             let openImageSegue = segue as! OpenImageSegue
             let cell = self.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: currentImageIndex, inSection: 0)) as! GalleryImageCell
             openImageSegue.openedImageView = cell.imageView
-            openImageSegue.currentImage = getStoryBlockImageAtIndex(currentImageIndex)
+            openImageSegue.currentImage = images![currentImageIndex]
             openImageSegue.blackBackgroundAlpha = self.backgroundView.alpha
             openImageSegue.unwinding = true
             
