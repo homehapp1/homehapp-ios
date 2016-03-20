@@ -756,13 +756,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             let storyBlock = home.storyBlocks[indexPath.row - 1]
             let cellReuseIdentifier = cellIdentifierForStoryBlock(storyBlock)
             cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath)
-            
-            /*
-            if let galleryCell = cell as? GalleryStoryBlockCell {
-                let storyBlock = home.storyBlocks[indexPath.row - 1]
-                galleryCell.storyBlock = storyBlock
-            }
-            */
         }
         
         // Top margin should be removed if cell is first cell if the story or

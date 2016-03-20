@@ -127,7 +127,7 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
 
         let secondPage = OnboardingContentViewController(title: "", body: NSLocalizedString("onboarding:2", comment: ""), image: UIImage(named: "onboarding_heart"), buttonText: "") { () -> Void in }
 
-        let thirdPage = OnboardingContentViewController(title: "", body: NSLocalizedString("onboarding:3", comment: ""), image: UIImage(named: "onboarding_homehapp"), buttonText: "Sign in!") { () -> Void in
+        let thirdPage = OnboardingContentViewController(title: "", body: NSLocalizedString("onboarding:3", comment: ""), image: UIImage(named: "onboarding_homehapp"), buttonText: NSLocalizedString("onboarding:get-started", comment: "")) { () -> Void in
         
             UIView.animateWithDuration(0.5, animations: {
                 self.onboardingViewController?.view.alpha = 0

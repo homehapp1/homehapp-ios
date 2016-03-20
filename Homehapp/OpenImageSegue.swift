@@ -128,7 +128,6 @@ class OpenImageSegue: UIStoryboardSegue {
             
             let galleryBrowserVC = src as! GalleryBrowserViewController
             
-            // Calculate source image frame
             var sourceImageFrame = CGRectZero
             let srcViewAspectRatio = (src.view.width - 2 * imageMargin) / src.view.height
             let imageAspectRatio = openedImageView!.image!.width / openedImageView!.image!.height

@@ -48,10 +48,12 @@ class NeighborhoodViewController: HomeStoryViewController {
             let cellReuseIdentifier = cellIdentifierForStoryBlock(storyBlock)
             cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath)
             
+            /*
             if let galleryCell = cell as? GalleryStoryBlockCell {
                 let storyBlock = storyObject.storyBlocks[indexPath.row - 1]
                 galleryCell.storyBlock = storyBlock
             }
+            */
         }
         
         assert(cell != nil, "Must have allocated a cell here")

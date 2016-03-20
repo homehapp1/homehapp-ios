@@ -144,8 +144,12 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                 
                 // Define row height
                 let imageRowHeight = heightForImageRow(image, imagesForLine: imagesInLine)
-                totalHeight += imageRowHeight
-
+                if totalHeight > 0 {
+                    totalHeight += imageRowHeight + GalleryStoryBlockCell.margin
+                } else {
+                    totalHeight += imageRowHeight
+                }
+                
                 //Divide images for line based on proportional widths
                 var widthSumForLine: CGFloat = 0
                 for var i = 0; i < imagesInLine; i++ {
