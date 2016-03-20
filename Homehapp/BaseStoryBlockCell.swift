@@ -8,8 +8,8 @@
 
 import UIKit
 
-private let deleteButtonSize : CGFloat = 60
-private let deleteButtonMargin : CGFloat = 10
+private let deleteButtonSize : CGFloat = 30
+private let deleteButtonMargin : CGFloat = 8
 
 /**
  Common base class for all story block cell.
@@ -47,7 +47,7 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
         self.editMode = editMode
         
         if editMode {
-            deleteButton = QvikButton.button(frame: CGRect(x: deleteButtonMargin, y: deleteButtonMargin, width: deleteButtonSize, height: deleteButtonSize), type: .Custom) { [weak self] in
+            deleteButton = QvikButton.button(frame: CGRect(x: 0, y: 0, width: deleteButtonSize, height: deleteButtonSize), type: .Custom) { [weak self] in
                 self?.deleteCallback?()
             }
             deleteButton!.setImage(UIImage(named: "icon_delete"), forState: .Normal)
@@ -62,8 +62,8 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
                 deleteButton?.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                 
                 // Constrain the delete button so that it will stay in the upper right corner of the cell
-                let topConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: 0)
-                let rightConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1, constant: 0)
+                let topConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: deleteButtonMargin)
+                let rightConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1, constant: -deleteButtonMargin)
                 let widthConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: deleteButtonSize)
                 let heightConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: deleteButtonSize)
                 

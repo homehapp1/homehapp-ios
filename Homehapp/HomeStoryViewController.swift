@@ -21,7 +21,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     private let topBarHeight: CGFloat = 65
     
     /// Width / height of the insertion cursor, in units
-    private let insertionCursorSize: CGFloat = 14
+    private let insertionCursorSize: CGFloat = 29
     
     /// Duration (in seconds) of insertion cursor fade in/out animation
     private let insertionCursorAnimationDuration: NSTimeInterval = 0.4
@@ -126,7 +126,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     /// Defines if image selection animation is started. Helps us to disable re-seletion during animation
     var imageSelectionAnimationStarted = false
     
-    // TODO wow so elegant, such BDD. - matti
+    /// Should we create thumbnail data from image or not. Currently client side generation not is use
     private var createThumbnailData = false
     
     /// Returns the main home image view from the header, or nil if the header is not visible (enough)
