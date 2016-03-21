@@ -583,8 +583,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             manageInsertionCursor()
         }
         
-        // Uncomment to hide home owner cell in edit mode. See numberOfRowsInSection also
-        //editModeChanged()
     }
     
     private func toggleAddContentControls() {
@@ -1029,13 +1027,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     // MARK: From UITableViewDataSource
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Uncomment to hide home owner cell in edit mode. See setEditMode also
-        //var count = editMode ? 1 : 2
-        
-        var count = 2
-        count += storyObject.storyBlocks.count
-
-        return count
+        return storyObject.storyBlocks.count + 2
     }
     
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
