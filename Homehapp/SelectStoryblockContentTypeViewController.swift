@@ -247,7 +247,7 @@ class SelectStoryblockContentTypeViewController: UIViewController, UICollectionV
             return cell
         }
         
-        requestAssetImage(asset, scaleFactor: 0.25) { image in
+        requestAssetImage(asset, scaleFactor: 0.5) { image in
             cell.image = image
         }
         
