@@ -211,7 +211,7 @@ class SelectStoryblockContentTypeViewController: UIViewController, UICollectionV
             
             switch asset.mediaType {
             case .Image:
-                requestAssetImage(asset, scaleFactor: 0.5) { image in
+                requestAssetImage(asset, scaleFactor: 0.6) { image in
                     assert(NSThread.isMainThread(), "Must be called on the main thread")
                     if let image = image {
                         pickedPhotos.append(image)
@@ -247,7 +247,7 @@ class SelectStoryblockContentTypeViewController: UIViewController, UICollectionV
             return cell
         }
         
-        requestAssetImage(asset, scaleFactor: 0.5) { image in
+        requestAssetImage(asset, scaleFactor: 0.6) { image in
             cell.image = image
         }
         
