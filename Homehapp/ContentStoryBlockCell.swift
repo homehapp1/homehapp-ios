@@ -85,6 +85,8 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
 //            editTitleTextView.updateSize(notify: false)
             editMainTextView.shouldResize = false
             editMainTextView.heightConstraint.constant = 0
+            editMainTextView.placeholderText = ""
+            editMainTextView.hidden = true
             
             return editTitleTextView
         case .Body:

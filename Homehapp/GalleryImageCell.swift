@@ -74,10 +74,10 @@ class GalleryImageCell: UICollectionViewCell {
         
         if imageView.placeholderImage == nil {
             imageView.thumbnailData = image.thumbnailData
+            imageView.fadeInColor = image.backgroundColor != nil ? UIColor(hexString: image.backgroundColor!) : UIColor.whiteColor()
         }
-        
-        imageView.imageFadeInDuration = 1.0
-        imageView.fadeInColor = image.backgroundColor != nil ? UIColor(hexString: image.backgroundColor!) : UIColor.whiteColor()
+
+        imageView.imageFadeInDuration = 0.5
         imageView.contentMode = contentMode
         
         if image.uploadProgress < 1.0 {

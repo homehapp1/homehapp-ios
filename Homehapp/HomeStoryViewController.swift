@@ -158,7 +158,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     }
     
     /// Text editor selection controls view
-    private let textEditModeSelectionView = TextEditorModeSelectionView()
+    //private let textEditModeSelectionView = TextEditorModeSelectionView()
     
     // MARK: Private methods
     
@@ -524,13 +524,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             return
         }
         
-        let keyboardTotalHeight = keyboardHeight + (!textEditModeSelectionView.hidden ? textEditModeSelectionView.height : 0)
-        
         // Calculate the space below the text view to the bottom of the screen, compensating for the current tableview translation
         let spaceBelow = view.height - textViewFrame.maxY - (-tableView.transform.ty)
         
         // Aim to position the lower edge of the text view slightly above the top of the keyboard
-        let diff = keyboardTotalHeight - spaceBelow + 10
+        let diff = keyboardHeight - spaceBelow + 10
         
         if diff <= 0 {
             // Nothing to do!
@@ -552,7 +550,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             let contentOffsetY = tableView.contentSize.height - tableView.bounds.height
             tableView.setContentOffset(CGPoint(x: 0, y: contentOffsetY), animated: true)
             
-            let translation = keyboardTotalHeight - addControlsContainerView.height
+            let translation = keyboardHeight - addControlsContainerView.height
             
             UIView.animateWithDuration(0.25) {
                 self.tableView.transform = CGAffineTransformMakeTranslation(0, -translation)
@@ -740,8 +738,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                                 let mail = MFMailComposeViewController()
                                 mail.mailComposeDelegate = self
                                 mail.setToRecipients([email])
-                                mail.setSubject("TODO, copy needed for this")
-                                mail.setMessageBody("TODO, copy needed for this as well", isHTML: true)
+                                mail.setSubject("")
+                                mail.setMessageBody("", isHTML: true)
                                 strongSelf.presentViewController(mail, animated: true, completion: nil)
                             } else {
                                 // TODO give feedback to the user
@@ -855,7 +853,19 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         openImagePicker()
     }
     
-    @IBAction func addTextButtonPressed(sender: UIButton) {
+    @IBAction func addTextTitleButtonPressed(sender: UIButton) {
+        addTextBlock(.Title)
+    }
+    
+    @IBAction func addTextTitleAndBodyButtonPressed(sender: UIButton) {
+        addTextBlock(.TitleAndBody)
+    }
+    
+    @IBAction func addTextBodyButtonPressed(sender: UIButton) {
+        addTextBlock(.Body)
+    }
+    
+    private func addTextBlock(layout: StoryBlock.Layout) {
         UIResponder.resignCurrentFirstResponder()
         
         // Calculate position where to add new storyBlock
@@ -864,8 +874,9 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Add new Content block
         dataManager.performUpdates {
             let storyBlock = StoryBlock(template: .ContentBlock)
-
+            
             // TODO here we can change the format of content block
+            storyBlock.layout = layout
             
             storyObject.storyBlocks.insert(storyBlock, atIndex: position - 1)
         }
@@ -891,13 +902,14 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
 
     // MARK: Notification handlers
     
+    
     func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue(),
-            keyboardAnimationDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
-            keyboardAnimationCurve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
+            //keyboardAnimationDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
+            //keyboardAnimationCurve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
                 // Mark the keyboard height for adjusting tableview when different text views receive first responder
                 keyboardHeight = keyboardSize.height
-                
+                /*
                 if let control = UIResponder.getCurrentFirstResponder() as? UIView,
                     parentCell = findParentCell(forView: control) where textEditModeSelectionView.hidden {
                         let modes = parentCell.supportedTextEditModes
@@ -916,11 +928,13 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                                     
                             })
                         }
-                }
+
+                }*/
         }
         
         log.debug("Keyboard will show; keyboardHeight = \(keyboardHeight)")
     }
+    
     
     func keyboardWillHide(notification: NSNotification) {
         keyboardHeight = 0
@@ -931,10 +945,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 UIView.animateWithDuration(keyboardAnimationDuration, delay: 0, options: options, animations: { () -> Void in
                     log.debug("reseting tableView transform..")
                     self.tableView.transform = CGAffineTransformIdentity
-                    self.textEditModeSelectionView.transform = CGAffineTransformIdentity
-                    self.textEditModeSelectionView.alpha = 0.0
+//                    self.textEditModeSelectionView.transform = CGAffineTransformIdentity
+//                    self.textEditModeSelectionView.alpha = 0.0
                     }, completion: { finished in
-                        self.textEditModeSelectionView.hidden = true
+//                        self.textEditModeSelectionView.hidden = true
                 })
         }
         log.debug("Keyboard will hide")
@@ -946,6 +960,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         }
         
         // Adjust the visibility + available text edit mode buttons on the textEditModeSelectionView
+        /*
         if let cell = findParentCell(forView: textView) {
             let modes = cell.supportedTextEditModes
             if modes.count > 1 {
@@ -961,6 +976,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 textEditModeSelectionView.hidden = true
             }
         }
+        */
         scrollTextViewIntoView(textView)
     }
 
@@ -1063,10 +1079,12 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             
             if let galleryCell = storyBlockCell as? GalleryStoryBlockCell {
                 galleryCell.imageSelectedCallback = { [weak self] (imageIndex, imageView) in
-                    if let strongSelf = self {
-                        if !strongSelf.imageSelectionAnimationStarted {
-                            strongSelf.imageSelectionAnimationStarted = true
-                            strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeStoryToGalleryBrowser, sender: GallerySegueData(storyBlock: storyBlock, imageIndex: imageIndex, imageView: imageView))
+                    if imageView.image != nil {
+                        if let strongSelf = self {
+                            if !strongSelf.imageSelectionAnimationStarted {
+                                strongSelf.imageSelectionAnimationStarted = true
+                                strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeStoryToGalleryBrowser, sender: GallerySegueData(storyBlock: storyBlock, imageIndex: imageIndex, imageView: imageView))
+                            }
                         }
                     }
                 }
@@ -1294,10 +1312,12 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             addControlsContainerViewHeightConstraint.constant = 0
         }
         
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("textViewEditingStarted:"), name: UITextViewTextDidBeginEditingNotification, object: nil)
     
+        /*
         textEditModeSelectionView.hidden = true
         textEditModeSelectionView.modeSelectedCallback = { [weak self] mode in
             if let control = UIResponder.getCurrentFirstResponder() as? UIView,
@@ -1306,6 +1326,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             }
         }
         view.addSubview(textEditModeSelectionView)
+        */
 
         insertionCursorImageView = UIImageView(image: UIImage(named: "icon_add_here"))
         insertionCursorImageView.frame = CGRect(x: 0, y: 0, width: insertionCursorSize, height: insertionCursorSize)

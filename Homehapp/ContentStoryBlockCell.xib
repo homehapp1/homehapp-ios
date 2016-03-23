@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
@@ -26,7 +26,7 @@
                     <view contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="3OI-xO-5J8" userLabel="Container view">
                         <rect key="frame" x="0.0" y="0.0" width="591" height="304.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" text="HEADER TEXT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVR-gE-LN6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" misplaced="YES" text="HEADER TEXT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVR-gE-LN6">
                                 <rect key="frame" x="30" y="37" width="531" height="21.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="ssL-8a-eUA"/>
@@ -40,12 +40,11 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zu2-7o-f0l">
-                                <rect key="frame" x="30" y="68.5" width="531" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="999" verticalCompressionResistancePriority="999" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zu2-7o-f0l">
+                                <rect key="frame" x="30" y="68" width="531" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="weK-CK-FNe"/>
                                 </constraints>
-                                <string key="text">As quintessentially London as black cabs, Routemaster buses and Fortnum’s, the stucco-fronted townhouse is the dream to which every city-dweller aspires.</string>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -56,7 +55,7 @@
                                 </variation>
                             </label>
                             <textView opaque="NO" contentMode="left" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-b0-djd" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                <rect key="frame" x="30" y="30.5" width="531" height="56"/>
+                                <rect key="frame" x="25" y="30" width="541" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="999" constant="56" id="li6-iJ-CeO"/>
                                 </constraints>
@@ -73,7 +72,7 @@
                                 </connections>
                             </textView>
                             <textView opaque="NO" contentMode="left" verticalHuggingPriority="249" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NBz-86-1kG" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                <rect key="frame" x="30" y="86.5" width="531" height="188"/>
+                                <rect key="frame" x="25" y="86" width="541" height="188"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="188" id="khY-5q-0ip"/>
                                 </constraints>
@@ -85,7 +84,7 @@
                                         <color key="value" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="minimumHeight">
-                                        <real key="value" value="60"/>
+                                        <real key="value" value="36"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -101,12 +100,12 @@
                             <constraint firstAttribute="trailing" secondItem="zu2-7o-f0l" secondAttribute="trailing" constant="30" id="RcM-JA-nyL"/>
                             <constraint firstItem="zu2-7o-f0l" firstAttribute="top" secondItem="KVR-gE-LN6" secondAttribute="bottom" priority="999" constant="10" id="WrZ-xc-n3g"/>
                             <constraint firstItem="KVR-gE-LN6" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="ZdK-SZ-SZG"/>
-                            <constraint firstAttribute="trailing" secondItem="NBz-86-1kG" secondAttribute="trailing" constant="30" id="eAJ-HG-khB"/>
+                            <constraint firstAttribute="trailing" secondItem="NBz-86-1kG" secondAttribute="trailing" constant="25" id="eAJ-HG-khB"/>
                             <constraint firstItem="qRK-b0-djd" firstAttribute="top" secondItem="3OI-xO-5J8" secondAttribute="top" priority="999" constant="30" id="eGK-cd-eHy"/>
                             <constraint firstAttribute="bottom" secondItem="zu2-7o-f0l" secondAttribute="bottom" priority="998" constant="30" id="gpg-Fd-Nsp"/>
-                            <constraint firstItem="NBz-86-1kG" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="hKy-VU-8J9"/>
-                            <constraint firstItem="qRK-b0-djd" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="hUO-Tk-KG9"/>
-                            <constraint firstAttribute="trailing" secondItem="qRK-b0-djd" secondAttribute="trailing" constant="30" id="j12-ZJ-obK"/>
+                            <constraint firstItem="NBz-86-1kG" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="25" id="hKy-VU-8J9"/>
+                            <constraint firstItem="qRK-b0-djd" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="25" id="hUO-Tk-KG9"/>
+                            <constraint firstAttribute="trailing" secondItem="qRK-b0-djd" secondAttribute="trailing" constant="25" id="j12-ZJ-obK"/>
                             <constraint firstItem="zu2-7o-f0l" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="qMZ-Lb-6Fb"/>
                             <constraint firstAttribute="trailing" secondItem="KVR-gE-LN6" secondAttribute="trailing" constant="30" id="snd-31-kEW"/>
                         </constraints>
