@@ -1267,6 +1267,17 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         if appstate.tutorialShown == nil && allowEditMode {
             showTutorial()
         }
+        
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        // Preload user neighbourhood cover image
+        if let neightborhoodCoverImageURL = appstate.mostRecentlyOpenedHome?.userNeighborhood?.image?.scaledUrl {
+            if neightborhoodCoverImageURL != "" && !ImageCache.sharedInstance().availableInMemory(url:neightborhoodCoverImageURL) {
+                ImageCache.sharedInstance().getImage(url: neightborhoodCoverImageURL, loadPolicy: .Network)
+            }
+        }
     }
 
     deinit {
