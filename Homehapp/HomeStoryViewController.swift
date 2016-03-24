@@ -24,7 +24,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     private let insertionCursorSize: CGFloat = 29
     
     /// Duration (in seconds) of insertion cursor fade in/out animation
-    private let insertionCursorAnimationDuration: NSTimeInterval = 0.4
+    private let insertionCursorAnimationDuration: NSTimeInterval = 0.3
 
     /// Height of the bottom bar, in units
     let bottomBarHeight: CGFloat = 48
@@ -632,6 +632,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         
         if currentInsertCursorPosition != insertionCursorPosition {
             insertionCursorPosition = currentInsertCursorPosition
+            self.insertionCursorImageView.layer.removeAllAnimations()
             
             // Fade out current cursor
             UIView.animateWithDuration(insertionCursorAnimationDuration, animations: {
@@ -648,6 +649,9 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                             }, completion: { finished in
                                 // No action
                         })
+                    } else {
+                        // cell not in sight. clear insert position so that sign is drawn when cell appears
+                        self.insertionCursorPosition = 0
                     }
             })
         }
@@ -1171,6 +1175,9 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                                 self?.storyObject.storyBlocks.removeAtIndex(storyBlockIndex)
                                 dataManager.softDeleteStoryBlock(storyBlock)
                                 self?.storyObject.localChanges = true
+                                
+                                // TODO should we remove story block from home storyblock as well?
+                                
                             }
                             
                             self?.removeStoryBlockTableViewRow(storyBlockIndex)
