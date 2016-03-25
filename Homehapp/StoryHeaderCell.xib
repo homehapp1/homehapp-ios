@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FjallaOne-Regular.ttf">
@@ -55,7 +55,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lgQ-HO-ZUZ">
-                                        <rect key="frame" x="74" y="157.5" width="282" height="2"/>
+                                        <rect key="frame" x="74" y="157" width="282" height="2"/>
                                         <color key="progressTintColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="trackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </progressView>
@@ -121,8 +121,8 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AuU-k0-vsV" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="30" width="400" height="170"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AuU-k0-vsV" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
+                                        <rect key="frame" x="15" y="20" width="400" height="180"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="999" constant="175" id="Nej-gh-eU6"/>
@@ -172,7 +172,7 @@
                                     <constraint firstItem="fbJ-T0-Ro0" firstAttribute="leading" secondItem="wfy-KW-pkl" secondAttribute="leading" constant="17" id="AGE-xk-ySe"/>
                                     <constraint firstAttribute="trailing" secondItem="Wru-jp-P7A" secondAttribute="trailing" constant="20" id="EF1-3x-xrA"/>
                                     <constraint firstItem="MlF-G9-cnP" firstAttribute="trailing" secondItem="Wru-jp-P7A" secondAttribute="trailing" id="RrO-Ba-dgS"/>
-                                    <constraint firstItem="AuU-k0-vsV" firstAttribute="top" secondItem="wfy-KW-pkl" secondAttribute="top" constant="30" id="TlL-29-jfP"/>
+                                    <constraint firstItem="AuU-k0-vsV" firstAttribute="top" secondItem="wfy-KW-pkl" secondAttribute="top" constant="20" id="TlL-29-jfP"/>
                                     <constraint firstAttribute="height" constant="220" identifier="Bottom part height" id="Vaq-ip-ca6"/>
                                     <constraint firstItem="Wru-jp-P7A" firstAttribute="leading" secondItem="wfy-KW-pkl" secondAttribute="leading" constant="20" id="aP7-Ie-xlb"/>
                                     <constraint firstItem="Wru-jp-P7A" firstAttribute="top" secondItem="wfy-KW-pkl" secondAttribute="top" constant="19" id="ag6-Ao-1g0"/>
