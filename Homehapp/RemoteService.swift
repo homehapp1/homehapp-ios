@@ -150,7 +150,7 @@ class RemoteService: BaseRemoteService {
         return ["home": homeJson]
     }
     
-    /// /// Fetch homes that are deleted after timestamp homesLastDeleted in appstate
+    /// Fetch homes that are deleted after timestamp homesLastDeleted in appstate
     private func fetchDeletedHomes() {
         let sentTime = NSDate()
         if let lastUpdated = appstate.homesLastDeleted {
@@ -210,9 +210,10 @@ class RemoteService: BaseRemoteService {
         
         log.debug("Fetching homes..")
         
-        var params: [String: AnyObject] = [:]
+        var params: [String: AnyObject]? = nil
         if let lastUpdated = appstate.homesLastUpdated {
-            params["updatedSince"] = dateFormatter.stringFromDate(lastUpdated)
+            params = [:]
+            params!["updatedSince"] = dateFormatter.stringFromDate(lastUpdated)
         }
         
         let url = "\(baseUrl)/api/homes"
