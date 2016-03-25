@@ -130,19 +130,23 @@ class OpenImageSegue: UIStoryboardSegue {
             
             var sourceImageFrame = CGRectZero
             let srcViewAspectRatio = (src.view.width - 2 * imageMargin) / src.view.height
-            let imageAspectRatio = openedImageView!.image!.width / openedImageView!.image!.height
+            
+            let imageWidth: CGFloat = openedImageView!.image != nil ? openedImageView!.image!.width : openedImageView!.width
+            let imageHeight: CGFloat = openedImageView!.image != nil ? openedImageView!.image!.height : openedImageView!.height
+            let imageAspectRatio = imageWidth / imageHeight
+            
             let sourceImageContainerFrame = openedImageView!.superview!.convertRect(openedImageView!.frame, toView: window)
             
             // Calculate source image frame
             if srcViewAspectRatio < imageAspectRatio {
                 let width = galleryBrowserVC.isCurrentImageOpened() ? galleryBrowserVC.getSizeForOpenedImage().width : src.view.width - 2 * imageMargin
 
-                let height = galleryBrowserVC.isCurrentImageOpened() ? min(src.view.height, openedImageView!.image!.height) : (width / openedImageView!.image!.width) * openedImageView!.image!.height
+                let height = galleryBrowserVC.isCurrentImageOpened() ? min(src.view.height, imageHeight) : (width / imageWidth) * imageHeight
                 let startX = sourceImageContainerFrame.x != 3 ? sourceImageContainerFrame.x : imageMargin
                 sourceImageFrame = CGRectMake(startX, (src.view.height - height) / 2, width, height)
             } else {
                 let height = src.view.height
-                let width = min(((height / openedImageView!.image!.height) * openedImageView!.image!.width), src.view.width - 2 * imageMargin)
+                let width = min(((height / imageHeight) * imageWidth), src.view.width - 2 * imageMargin)
                 let startX = sourceImageContainerFrame.x != 3 ? sourceImageContainerFrame.x : max(imageMargin,(src.view.width - width) / 2)
                 sourceImageFrame = CGRectMake(startX, (src.view.height - height) / 2, width, height)
             }

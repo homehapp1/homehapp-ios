@@ -26,9 +26,6 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     
     var titleLabelOriginalTopMarginConstraint: CGFloat = 0
     
-    /// Callback that's called whenever an image is added or removed.
-    var imagesChangedCallback: (Void -> Void)?
-    
     /// Image selected -callback; can be used to open a full screen view
     var imageSelectedCallback: ((imageIndex: Int, imageView: UIImageView) -> Void)?
     
@@ -81,16 +78,19 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                 // Delete selected image
                 let image = storyBlock!.galleryImages[myIndex]
                 
+                let home = dataManager.findMyHome()
+                
                 dataManager.performUpdates {
                     image.deleted = true
                     storyBlock!.galleryImages.removeAtIndex(myIndex)
+                    home?.localChanges = true
                 }
                 
                 // Delete image also from Cloudinary
                 cloudStorage.removeAsset(image.url, type: "image")
                 
+                // Re-calculate gallery layout
                 calculateImageSizes()
-                imagesChangedCallback?()
                 resizeCallback?()
                 
                 collectionView.performBatchUpdates({ [weak self] in

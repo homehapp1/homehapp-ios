@@ -805,6 +805,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         return nil
     }
     
+    /// Hide image cell that was selected during the animation start
     func hideSelectedImageCell(image: Image) {
         for cell in tableView.visibleCells {
             if let galleryCell = cell as? GalleryStoryBlockCell {
@@ -878,10 +879,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Add new Content block
         dataManager.performUpdates {
             let storyBlock = StoryBlock(template: .ContentBlock)
-            
-            // TODO here we can change the format of content block
             storyBlock.layout = layout
-            
             storyObject.storyBlocks.insert(storyBlock, atIndex: position - 1)
         }
         
@@ -1175,9 +1173,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                                 self?.storyObject.storyBlocks.removeAtIndex(storyBlockIndex)
                                 dataManager.softDeleteStoryBlock(storyBlock)
                                 self?.storyObject.localChanges = true
-                                
-                                // TODO should we remove story block from home storyblock as well?
-                                
                             }
                             
                             self?.removeStoryBlockTableViewRow(storyBlockIndex)
