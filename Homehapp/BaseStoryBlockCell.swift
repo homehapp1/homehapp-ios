@@ -40,6 +40,9 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
     /// previous cell had bottom margin
     var removeTopMargin = false
     
+    /// Keyboard height, value updated when keyboard appears
+    var keyboardHeight: CGFloat = 0.0
+    
     private(set) var editMode = false
     
     /// Base class implementation manages adding the delete button.
@@ -106,6 +109,12 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
     
     func keyboardWillShow(notification: NSNotification) {
         addGestureRecognizer(tapRecognizer!)
+        
+        let info  = notification.userInfo!
+        let value: AnyObject = info[UIKeyboardFrameEndUserInfoKey]!
+        
+        let rawFrame = value.CGRectValue
+        keyboardHeight = rawFrame.height
     }
     
     func keyboardWillHide(notification: NSNotification) {
@@ -137,8 +146,4 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
         selectionStyle = .None
     }
     
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//
-//    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FjallaOne-Regular.ttf">
@@ -26,16 +26,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="574" height="3"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Editable story block title" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3Vf-WX-F6P" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="574" height="3"/>
+                                        <rect key="frame" x="25" y="0.0" width="524" height="3"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="24"/>
+                                        <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="26"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                         <connections>
                                             <outlet property="delegate" destination="bPi-c0-IHZ" id="y2A-y3-MK1"/>
                                         </connections>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="1000" text="Story block title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWI-EZ-ol4">
-                                        <rect key="frame" x="0.0" y="0.0" width="574" height="3"/>
+                                        <rect key="frame" x="30" y="0.0" width="514" height="3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="5Br-68-zsl"/>
                                         </constraints>
@@ -55,11 +55,11 @@
                                     <constraint firstItem="cWI-EZ-ol4" firstAttribute="top" secondItem="J3m-PF-MpH" secondAttribute="top" id="Dhc-lX-TZa"/>
                                     <constraint firstAttribute="height" constant="3" id="Guq-gS-Ngd"/>
                                     <constraint firstAttribute="bottom" secondItem="cWI-EZ-ol4" secondAttribute="bottom" id="MKE-jh-FEp"/>
-                                    <constraint firstAttribute="trailing" secondItem="3Vf-WX-F6P" secondAttribute="trailing" id="UTT-hV-O0b"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Vf-WX-F6P" secondAttribute="trailing" constant="25" id="UTT-hV-O0b"/>
                                     <constraint firstAttribute="bottom" secondItem="3Vf-WX-F6P" secondAttribute="bottom" id="ncn-SW-kiP"/>
-                                    <constraint firstItem="cWI-EZ-ol4" firstAttribute="leading" secondItem="J3m-PF-MpH" secondAttribute="leading" id="uhr-OQ-tTW"/>
-                                    <constraint firstItem="3Vf-WX-F6P" firstAttribute="leading" secondItem="J3m-PF-MpH" secondAttribute="leading" id="wBp-Mb-JMd"/>
-                                    <constraint firstAttribute="trailing" secondItem="cWI-EZ-ol4" secondAttribute="trailing" id="wpK-sb-fQr"/>
+                                    <constraint firstItem="cWI-EZ-ol4" firstAttribute="leading" secondItem="J3m-PF-MpH" secondAttribute="leading" constant="30" id="uhr-OQ-tTW"/>
+                                    <constraint firstItem="3Vf-WX-F6P" firstAttribute="leading" secondItem="J3m-PF-MpH" secondAttribute="leading" constant="25" id="wBp-Mb-JMd"/>
+                                    <constraint firstAttribute="trailing" secondItem="cWI-EZ-ol4" secondAttribute="trailing" constant="30" id="wpK-sb-fQr"/>
                                 </constraints>
                             </view>
                             <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gEf-Dg-BQi" customClass="CachedImageView" customModule="Homehapp" customModuleProvider="target">

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="FjallaOne-Regular.ttf">
+            <string>FjallaOne-Regular</string>
+            <string>FjallaOne-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ContentTitleStoryBlockCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContentTitleStoryBlockCell" rowHeight="100" id="ENx-a7-oMs" customClass="ContentTitleStoryBlockCell" customModule="Homehapp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ENx-a7-oMs" id="ptW-zc-4Dt">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLk-lw-D3A">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1i-Bs-FXs">
+                                <rect key="frame" x="30" y="30" width="260" height="39.5"/>
+                                <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="scu-f5-cw7">
+                                <rect key="frame" x="25" y="30" width="270" height="39.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="ENx-a7-oMs" id="XVy-j0-ZVE"/>
+                                </connections>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="d1i-Bs-FXs" firstAttribute="top" secondItem="cLk-lw-D3A" secondAttribute="top" constant="30" id="07G-4a-dpP"/>
+                            <constraint firstAttribute="bottom" secondItem="d1i-Bs-FXs" secondAttribute="bottom" constant="30" id="4xd-Pz-cNq"/>
+                            <constraint firstAttribute="trailing" secondItem="d1i-Bs-FXs" secondAttribute="trailing" constant="30" id="MWy-w3-VtM"/>
+                            <constraint firstItem="scu-f5-cw7" firstAttribute="leading" secondItem="cLk-lw-D3A" secondAttribute="leading" constant="25" id="Vg0-er-YxA"/>
+                            <constraint firstAttribute="trailing" secondItem="scu-f5-cw7" secondAttribute="trailing" constant="25" id="W4h-7H-FnF"/>
+                            <constraint firstItem="d1i-Bs-FXs" firstAttribute="leading" secondItem="cLk-lw-D3A" secondAttribute="leading" constant="30" id="ccR-OT-62l"/>
+                            <constraint firstItem="scu-f5-cw7" firstAttribute="top" secondItem="cLk-lw-D3A" secondAttribute="top" constant="30" id="fXc-nt-cNV"/>
+                            <constraint firstAttribute="bottom" secondItem="scu-f5-cw7" secondAttribute="bottom" constant="30" id="gwN-Is-2eZ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cLk-lw-D3A" firstAttribute="top" secondItem="ptW-zc-4Dt" secondAttribute="top" id="VQN-Kk-B0D"/>
+                    <constraint firstItem="cLk-lw-D3A" firstAttribute="leading" secondItem="ptW-zc-4Dt" secondAttribute="leading" id="YHx-QH-ZOA"/>
+                    <constraint firstAttribute="bottom" secondItem="cLk-lw-D3A" secondAttribute="bottom" id="gze-UX-w8l"/>
+                    <constraint firstAttribute="trailing" secondItem="cLk-lw-D3A" secondAttribute="trailing" id="rCP-vw-lE9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="titleLabel" destination="d1i-Bs-FXs" id="LxY-Qh-bFv"/>
+                <outlet property="titleTextView" destination="scu-f5-cw7" id="bP0-hs-c6D"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

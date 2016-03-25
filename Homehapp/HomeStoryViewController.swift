@@ -679,7 +679,12 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         case "BigVideo":
             return "BigVideoStoryBlockCell"
         case "ContentBlock":
-            return "ContentStoryBlockCell"
+            switch storyBlock.layout {
+            case .Title:
+                return "ContentTitleStoryBlockCell"
+            default:
+                return "ContentStoryBlockCell"
+            }
         case "Gallery":
             return "GalleryStoryBlockCell"
         default:
@@ -907,31 +912,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
-            //keyboardAnimationDuration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
-            //keyboardAnimationCurve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? UInt {
-                // Mark the keyboard height for adjusting tableview when different text views receive first responder
-                keyboardHeight = keyboardSize.height
-                /*
-                if let control = UIResponder.getCurrentFirstResponder() as? UIView,
-                    parentCell = findParentCell(forView: control) where textEditModeSelectionView.hidden {
-                        let modes = parentCell.supportedTextEditModes
-                        if modes.count > 1 {
-                            // Show text edit mode selection dialog
-                            textEditModeSelectionView.setModes(modes)
-                            textEditModeSelectionView.hidden = false
-                            self.textEditModeSelectionView.alpha = 0.0
-                            let displacement = keyboardSize.height
-                            
-                            let options = UIViewAnimationOptions(rawValue: keyboardAnimationCurve)
-                            UIView.animateWithDuration(keyboardAnimationDuration, delay: 0, options: options, animations: { () -> Void in
-                                self.textEditModeSelectionView.transform = CGAffineTransformMakeTranslation(0, -displacement)
-                                self.textEditModeSelectionView.alpha = 1.0
-                                }, completion: { finished in
-                                    
-                            })
-                        }
-
-                }*/
+            keyboardHeight = keyboardSize.height
         }
         
         log.debug("Keyboard will show; keyboardHeight = \(keyboardHeight)")
@@ -947,10 +928,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 UIView.animateWithDuration(keyboardAnimationDuration, delay: 0, options: options, animations: { () -> Void in
                     log.debug("reseting tableView transform..")
                     self.tableView.transform = CGAffineTransformIdentity
-//                    self.textEditModeSelectionView.transform = CGAffineTransformIdentity
-//                    self.textEditModeSelectionView.alpha = 0.0
                     }, completion: { finished in
-//                        self.textEditModeSelectionView.hidden = true
                 })
         }
         log.debug("Keyboard will hide")
@@ -960,25 +938,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         guard let textView = notification.object as? ExpandingTextView else {
             return
         }
-        
-        // Adjust the visibility + available text edit mode buttons on the textEditModeSelectionView
-        /*
-        if let cell = findParentCell(forView: textView) {
-            let modes = cell.supportedTextEditModes
-            if modes.count > 1 {
-                //textEditModeSelectionView.setModes(modes)
-                textEditModeSelectionView.setCurrentMode(cell.getTextEditMode())
-                if textEditModeSelectionView.hidden {
-                    textEditModeSelectionView.transform = CGAffineTransformMakeTranslation(0, -keyboardHeight!)
-                }
-                textEditModeSelectionView.hidden = false
-            } else {
-                if !textEditModeSelectionView.hidden {
-                }
-                textEditModeSelectionView.hidden = true
-            }
-        }
-        */
         scrollTextViewIntoView(textView)
     }
 
@@ -1296,7 +1255,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         allowEditMode = (appstate.authUserId == appstate.mostRecentlyOpenedHome?.createdBy?.id)
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 250
+        tableView.estimatedRowHeight = 44
         
         tableView.registerNib(UINib(nibName: "HomeOwnerInfoCell", bundle: nil), forCellReuseIdentifier: "HomeOwnerInfoCell")
         tableView.registerNib(UINib(nibName: "BigVideoStoryBlockCell", bundle: nil), forCellReuseIdentifier: "BigVideoStoryBlockCell")
@@ -1305,7 +1264,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         tableView.registerNib(UINib(nibName: "HomeStoryFooterCell", bundle: nil), forCellReuseIdentifier: "HomeStoryFooterCell")
         tableView.registerNib(UINib(nibName: "StoryHeaderCell", bundle: nil), forCellReuseIdentifier: "StoryHeaderCell")
         tableView.registerNib(UINib(nibName: "ContentStoryBlockCell", bundle: nil), forCellReuseIdentifier: "ContentStoryBlockCell")
-
+        tableView.registerNib(UINib(nibName: "ContentTitleStoryBlockCell", bundle: nil), forCellReuseIdentifier: "ContentTitleStoryBlockCell")
+        
         bottomBarOriginalHeight = bottomBarViewHeightConstraint.constant
         
         // Originally hide the bottom bar
@@ -1329,17 +1289,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("textViewEditingStarted:"), name: UITextViewTextDidBeginEditingNotification, object: nil)
-    
-        /*
-        textEditModeSelectionView.hidden = true
-        textEditModeSelectionView.modeSelectedCallback = { [weak self] mode in
-            if let control = UIResponder.getCurrentFirstResponder() as? UIView,
-                parentCell = self?.findParentCell(forView: control) {
-                    parentCell.setTextEditMode(mode)
-            }
-        }
-        view.addSubview(textEditModeSelectionView)
-        */
 
         insertionCursorImageView = UIImageView(image: UIImage(named: "icon_add_here"))
         insertionCursorImageView.frame = CGRect(x: 0, y: 0, width: insertionCursorSize, height: insertionCursorSize)

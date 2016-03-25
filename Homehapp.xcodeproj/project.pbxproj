@@ -119,6 +119,7 @@
 		4B1567E11C5DF5FA00067B22 /* HomeMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B1567E01C5DF5FA00067B22 /* HomeMapView.xib */; };
 		4B1567E31C5DF61400067B22 /* HomeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1567E21C5DF61400067B22 /* HomeMapView.swift */; };
 		4B1567E51C5FFA6C00067B22 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1567E41C5FFA6C00067B22 /* LocationService.swift */; };
+		4B252C6B1CA40B2E00C844CC /* GalleryBrowserFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B252C6A1CA40B2E00C844CC /* GalleryBrowserFlowLayout.swift */; };
 		4B4634101C4C26730090815D /* ChangePhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B46340F1C4C26730090815D /* ChangePhoneNumberViewController.swift */; };
 		4B4634131C4F80ED0090815D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4634111C4F80AF0090815D /* CoreLocation.framework */; };
 		4B4E17A31C2B03E600C8A21E /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E17A21C2B03E600C8A21E /* MessagesViewController.swift */; };
@@ -132,6 +133,8 @@
 		4B5C36751BE661B700281E73 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B5C36741BE661B700281E73 /* Localizable.strings */; };
 		4B6C5FFD1C6C9637000F3607 /* HomeDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6C5FFC1C6C9637000F3607 /* HomeDescriptionView.swift */; };
 		4B6C5FFF1C6C9642000F3607 /* HomeDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B6C5FFE1C6C9642000F3607 /* HomeDescriptionView.xib */; };
+		4B6F2B9B1CA56CFF00F20167 /* ContentTitleStoryBlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6F2B9A1CA56CFF00F20167 /* ContentTitleStoryBlockCell.swift */; };
+		4B6F2B9D1CA56E8C00F20167 /* ContentTitleStoryBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B6F2B9C1CA56E8C00F20167 /* ContentTitleStoryBlockCell.xib */; };
 		4B7113831C4B0B3400156B2C /* HomeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7113821C4B0B3400156B2C /* HomeSettingsViewController.swift */; };
 		4B7113851C4B0EB500156B2C /* ReplaceSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7113841C4B0EB500156B2C /* ReplaceSegue.swift */; };
 		4BA638E41C710AA000408406 /* HomeFeatureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BA638E31C710AA000408406 /* HomeFeatureCell.xib */; };
@@ -294,6 +297,7 @@
 		4B1567E01C5DF5FA00067B22 /* HomeMapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeMapView.xib; sourceTree = "<group>"; };
 		4B1567E21C5DF61400067B22 /* HomeMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeMapView.swift; sourceTree = "<group>"; };
 		4B1567E41C5FFA6C00067B22 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		4B252C6A1CA40B2E00C844CC /* GalleryBrowserFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryBrowserFlowLayout.swift; sourceTree = "<group>"; };
 		4B46340F1C4C26730090815D /* ChangePhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumberViewController.swift; sourceTree = "<group>"; };
 		4B4634111C4F80AF0090815D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4B4E17A01C2AC44000C8A21E /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -309,6 +313,8 @@
 		4B5C36741BE661B700281E73 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		4B6C5FFC1C6C9637000F3607 /* HomeDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDescriptionView.swift; sourceTree = "<group>"; };
 		4B6C5FFE1C6C9642000F3607 /* HomeDescriptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeDescriptionView.xib; sourceTree = "<group>"; };
+		4B6F2B9A1CA56CFF00F20167 /* ContentTitleStoryBlockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTitleStoryBlockCell.swift; sourceTree = "<group>"; };
+		4B6F2B9C1CA56E8C00F20167 /* ContentTitleStoryBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentTitleStoryBlockCell.xib; sourceTree = "<group>"; };
 		4B7113821C4B0B3400156B2C /* HomeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSettingsViewController.swift; sourceTree = "<group>"; };
 		4B7113841C4B0EB500156B2C /* ReplaceSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplaceSegue.swift; sourceTree = "<group>"; };
 		4BA638E31C710AA000408406 /* HomeFeatureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeFeatureCell.xib; sourceTree = "<group>"; };
@@ -452,6 +458,8 @@
 				490B369F1C269E300067DF51 /* GalleryStoryBlockCell.xib */,
 				499BFDC21BDEACEB00B5BB83 /* GalleryImageCell.swift */,
 				499BFDC41BDEADAB00B5BB83 /* GalleryImageCell.xib */,
+				4B6F2B9A1CA56CFF00F20167 /* ContentTitleStoryBlockCell.swift */,
+				4B6F2B9C1CA56E8C00F20167 /* ContentTitleStoryBlockCell.xib */,
 			);
 			name = "StoryBlock cells";
 			sourceTree = "<group>";
@@ -734,6 +742,7 @@
 			isa = PBXGroup;
 			children = (
 				4BC036821BE0F2190021A30E /* GalleryBrowserViewController.swift */,
+				4B252C6A1CA40B2E00C844CC /* GalleryBrowserFlowLayout.swift */,
 			);
 			name = GalleryBrowser;
 			sourceTree = "<group>";
@@ -917,6 +926,7 @@
 				49B691CC1C82F60C0076F680 /* ios-jpegheader-q30.data in Resources */,
 				4980E3F51C3EA69E00BC15F1 /* Roboto-Light.ttf in Resources */,
 				4980E3F61C3EA69E00BC15F1 /* Roboto-LightItalic.ttf in Resources */,
+				4B6F2B9D1CA56E8C00F20167 /* ContentTitleStoryBlockCell.xib in Resources */,
 				4980E3F71C3EA69E00BC15F1 /* Roboto-Bold.ttf in Resources */,
 				4B6C5FFF1C6C9642000F3607 /* HomeDescriptionView.xib in Resources */,
 				4980E3F81C3EA69E00BC15F1 /* Roboto-BoldItalic.ttf in Resources */,
@@ -1041,6 +1051,7 @@
 				49B691B81C804B650076F680 /* ArrayExtensions.swift in Sources */,
 				49B691B01C804B650076F680 /* Download.swift in Sources */,
 				49B691C81C804B650076F680 /* UIResponderExtensions.swift in Sources */,
+				4B252C6B1CA40B2E00C844CC /* GalleryBrowserFlowLayout.swift in Sources */,
 				49B691C11C804B650076F680 /* NSDateFormatterExtensions.swift in Sources */,
 				49B691B51C804B650076F680 /* QvikNetwork.swift in Sources */,
 				49293C961BD120BA008BF9C6 /* HomeCell.swift in Sources */,
@@ -1059,6 +1070,7 @@
 				4B1567DD1C5D86EB00067B22 /* HomeInfoHeaderView.swift in Sources */,
 				4B1352731C612E59000E337E /* Agent.swift in Sources */,
 				4B132F041C2DC7B800EB0E57 /* PushFromLeftSegue.swift in Sources */,
+				4B6F2B9B1CA56CFF00F20167 /* ContentTitleStoryBlockCell.swift in Sources */,
 				49293C8E1BD00944008BF9C6 /* DataManager.swift in Sources */,
 				648D227A1C102A3D0059431D /* ShareController.swift in Sources */,
 				4BC036851BE157C50021A30E /* User.swift in Sources */,

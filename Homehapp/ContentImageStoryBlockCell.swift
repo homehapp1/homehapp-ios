@@ -37,8 +37,8 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
 
     override var storyBlock: StoryBlock? {
         didSet {
-            titleLabel.text = storyBlock?.title?.uppercaseString
-            editTitleTextView.text = storyBlock?.title?.uppercaseString
+            titleLabel.text = storyBlock?.title
+            editTitleTextView.text = storyBlock?.title
 
             mainImageView.imageUrl = storyBlock?.image?.mediumScaledUrl
             mainImageView.thumbnailData = storyBlock?.image?.thumbnailData
@@ -133,7 +133,7 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     // MARK: From UITextViewDelegate
     
     func textViewDidEndEditing(textView: UITextView) {
-        titleLabel.text = editTitleTextView.text.uppercaseString
+        titleLabel.text = editTitleTextView.text
         
         if storyBlock?.title != editTitleTextView.text {
             dataManager.performUpdates {
