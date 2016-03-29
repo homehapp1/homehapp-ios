@@ -78,13 +78,13 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                 // Delete selected image
                 let image = storyBlock!.galleryImages[myIndex]
                 
-                let home = dataManager.findMyHome()
-                
                 dataManager.performUpdates {
                     image.deleted = true
                     storyBlock!.galleryImages.removeAtIndex(myIndex)
-                    home?.localChanges = true
                 }
+                
+                // Mark this home or neighbourhood as updated
+                updateCallback?()
                 
                 // Delete image also from Cloudinary
                 cloudStorage.removeAsset(image.url, type: "image")
@@ -373,6 +373,10 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
         
         collectionView.registerNib(UINib(nibName: "GalleryImageCell", bundle: nil), forCellWithReuseIdentifier: "GalleryImageCell")
         titleLabelOriginalTopMarginConstraint = titleTopMarginConstraint.constant
+    }
+    
+    class func instanceFromNib() -> UIView {
+        return UINib(nibName: "GalleryStoryBlockCell", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! GalleryStoryBlockCell
     }
     
 }

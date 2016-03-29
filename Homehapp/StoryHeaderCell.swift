@@ -290,14 +290,12 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
         
         if storyObject?.title != titleTextView.text {
             
-            let home = dataManager.findMyHome()
-            
             // Save the home title
             dataManager.performUpdates {
                 storyObject?.title = titleTextView.text
                 
                 // Mark local changes so that home is sent to server
-                home?.localChanges = true
+                storyObject?.localChanges = true
             }
             
             updateCallback?()
