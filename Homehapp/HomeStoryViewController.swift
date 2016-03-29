@@ -751,7 +751,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                                 mail.setMessageBody("", isHTML: true)
                                 strongSelf.presentViewController(mail, animated: true, completion: nil)
                             } else {
-                                // TODO give feedback to the user
+                                let url = NSURL(string: "mailto:\(email)")
+                                UIApplication.sharedApplication().openURL(url!)
                             }
                         }
                     }
