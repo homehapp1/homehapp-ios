@@ -191,10 +191,19 @@ class DataManager {
         }
 
         home.coverImage = Image.fromJSON(json["mainImage"])
-        home.image = Image.fromJSON(json["image"])
+        home.image = Image.fromJSON(json["image"]) // home cover image
         home.announcementType = (json["announcementType"] as? String) ?? ""
         home.homeDescription = (json["description"] as? String) ?? ""
         home.slug = (json["slug"] as? String) ?? ""
+        
+        // Home info images
+        if let homeImages = json["images"] as? NSArray {
+            for homeImageJSON in homeImages {
+                if let homeImage = Image.fromJSON(homeImageJSON) {
+                    home.images.append(homeImage)
+                }
+            }
+        }
         
         // Costs if home for sale or for let
         if let costsJson = json["costs"] as? NSDictionary {
@@ -585,8 +594,22 @@ class DataManager {
         
         return nil
     }
+    
+    /// Return home that has user neighborhood with given id
+    func findHomeForUserNeighborhood(neighborhoodId: String) -> Home? {
+        do {
+            let realm = try Realm()
+            let results = realm.objects(Home).filter("userNeighborhood.id = %@", neighborhoodId)
+            if results.count > 0 {
+                return results.first
+            }
+        } catch let error {
+            log.error("Fetching home for user neighborhood failed: \(error)")
+        }
+        return nil
+    }
 
-    /** 
+    /**
      Update current app user based on given userJSON
      If currentUser cannot be found, one is created based on userJSON
      */

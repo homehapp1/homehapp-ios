@@ -180,6 +180,16 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
     
+    private func addHomeImagesView() {
+        let home = appstate.mostRecentlyOpenedHome!
+        if home.isMyHome() || home.images.count == 0 { // TODO Lari logical operator change
+            let homeImagesView = GalleryStoryBlockCell.instanceFromNib() as! GalleryStoryBlockCell
+            stackView.addArrangedSubview(homeImagesView)
+            
+            // TODO Lari
+        }
+    }
+    
     /// Map section
     private func addMapSection() {
         let homeMapView = HomeMapView.instanceFromNib() as! HomeMapView
@@ -246,6 +256,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         
         addHeaderView()
         addRoomsView()
+        addHomeImagesView()
         addDescriptionView()
         addFeaturesView()
         addMapSection()

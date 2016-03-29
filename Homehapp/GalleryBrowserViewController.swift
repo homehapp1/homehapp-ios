@@ -22,14 +22,39 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     var images: [Image]? = nil
     var currentImageIndex = 0
     var selectedImage : Image?
-    let scrollClosingDistance : CGFloat = 35 // Distance that user bounces and this view will close
+    let scrollClosingDistance : CGFloat = 35 // Distance user bounces and this view will close
     var willClose = false
     var closingOffset : CGFloat = 0
     
     /// Indicates whether the content offset was already once set according to currentImageIndex
     private var didAdjustContentOffset = false
     
+    /// Margin between images and View boundaries when image not opened / enlarged
     private let imageMargin: CGFloat = 3
+    
+    func isCurrentImageOpened() -> Bool {
+        if selectedImage != nil {
+            let cell = collectionView(self.collectionView, cellForItemAtIndexPath: NSIndexPath(forRow: currentImageIndex, inSection: 0)) as! GalleryImageCell
+            if cell.width != self.view.width {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func getSizeForOpenedImage() -> CGSize {
+        if selectedImage == nil {
+            return CGSizeZero
+        }
+        
+        var newSize = CGSizeMake(self.view.width, self.view.height)
+        if CGFloat(selectedImage!.height) > self.view.height {
+            newSize = CGSizeMake(max((self.view.height / CGFloat(selectedImage!.height)) * CGFloat(selectedImage!.width), self.view.width), self.view.height)
+        } else {
+            newSize = CGSizeMake(max(CGFloat(selectedImage!.width), self.view.width), max(CGFloat(selectedImage!.height), self.view.height))
+        }
+        return newSize
+    }
     
     // MARK: UICollectionViewDelegate
     
@@ -52,18 +77,19 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
         // Disable selection when gallery in landscape mode
         if self.view.width > self.view.height {
             return
         }
         
+        // Select or deselect image
         if selectedImage == nil {
             selectedImage = images![indexPath.row]
         } else {
             selectedImage = nil
         }
 
+        // Reload collectionView and set correct contentOffset
         collectionView.reloadData()
         
         if selectedImage != nil {
@@ -134,38 +160,11 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
             collectionView.reloadData()
         }
     }
-    
-    func isCurrentImageOpened() -> Bool {
-        if selectedImage != nil {
-            let cell = collectionView(self.collectionView, cellForItemAtIndexPath: NSIndexPath(forRow: currentImageIndex, inSection: 0)) as! GalleryImageCell
-            if cell.width != self.view.width {
-                return true
-            }
-        }
-        return false
-    }
 
     // MARK: IBAction handlers
     
     @IBAction func closeButtonPressed(button: UIButton) {
         performSegueWithIdentifier(segueIdUnwindHomeStoryToGalleryBrowser, sender: self)
-    }
-    
-    // MARK: Private methods
-    
-    func getSizeForOpenedImage() -> CGSize {
-        
-        if selectedImage == nil {
-            return CGSizeZero
-        }
-        
-        var newSize = CGSizeMake(self.view.width, self.view.height)
-        if CGFloat(selectedImage!.height) > self.view.height {
-            newSize = CGSizeMake(max((self.view.height / CGFloat(selectedImage!.height)) * CGFloat(selectedImage!.width), self.view.width), self.view.height)
-        } else {
-            newSize = CGSizeMake(max(CGFloat(selectedImage!.width), self.view.width), max(CGFloat(selectedImage!.height), self.view.height))
-        }
-        return newSize
     }
     
     // MARK: From UIViewController
@@ -193,6 +192,10 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return [.Portrait, .LandscapeLeft, .LandscapeRight]
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true;
     }
 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -251,8 +254,8 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         super.viewDidLoad()
         
         collectionView.registerNib(UINib(nibName: "GalleryImageCell", bundle: nil), forCellWithReuseIdentifier: "GalleryImageCell")
-        self.selectedImage = nil
-        self.collectionView.alwaysBounceHorizontal = true
+        selectedImage = nil
+        collectionView.alwaysBounceHorizontal = true
         closeButton.alpha = 0
     }
 
@@ -269,7 +272,4 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         })
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true;
-    }
 }

@@ -22,7 +22,8 @@ class Home: DeletableObject, StoryObject {
     
     // Home image
     dynamic var image: Image? = nil // 'Main' image for the home
-    dynamic var coverImage: Image? = nil // 'Virtual' property by backend; a selected 'cover' image for the home
+    dynamic var coverImage: Image? = nil // 'Virtual' property by backend; a selected 'cover' image
+    let images = List<Image>()
     
     // Home neighborhood
     dynamic var neighborhood: Neighborhood? = nil // This is the 'professional' / 'official' Neighborhood object

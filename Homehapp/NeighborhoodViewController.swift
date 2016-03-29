@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import MessageUI
 
 /**
  Displays a Neighborhood story and provides an edit mode.
@@ -32,6 +33,7 @@ class NeighborhoodViewController: HomeStoryViewController {
     /// Order of cells is:
     /// - header
     /// - story blocks
+    /// - home owner
     override func implTableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell?
         
@@ -43,10 +45,54 @@ class NeighborhoodViewController: HomeStoryViewController {
             headerCell.storyObject = storyObject
             
             cell = headerCell
-        } else {
+        } else if indexPath.row < storyObject.storyBlocks.count + 1 {
             let storyBlock = storyObject.storyBlocks[indexPath.row - 1]
             let cellReuseIdentifier = cellIdentifierForStoryBlock(storyBlock)
             cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath)
+        } else {
+            cell = tableView.dequeueReusableCellWithIdentifier("HomeOwnerInfoCell", forIndexPath: indexPath)
+            if let ownerCell = cell as? HomeOwnerInfoCell {
+                
+                if let home = dataManager.findHomeForUserNeighborhood((storyObject as! Neighborhood).id) {
+                    ownerCell.creator = home.createdBy
+                    ownerCell.agent = home.agent
+                    ownerCell.likeCount = home.likes
+                    ownerCell.iHaveLiked = home.iHaveLiked
+                    ownerCell.shareCallback = { [weak self] in
+                        if let strongSelf = self {
+                            let shareController = ShareController.newController(home)
+                            strongSelf.presentViewController(shareController, animated: true, completion: nil)
+                        }
+                    }
+                    ownerCell.likeCallback = {
+                        dataManager.performUpdates({
+                            if home.iHaveLiked {
+                                home.likes = home.likes - 1
+                            } else {
+                                home.likes = home.likes + 1
+                            }
+                            home.iHaveLiked = !home.iHaveLiked
+                        })
+                        ownerCell.likeCount = home.likes
+                        RemoteService.sharedInstance().likeHome(home, completionCallback: nil)
+                    }
+                    ownerCell.emailPressedCallback = { [weak self] in
+                        if let strongSelf = self, email = home.agent?.email {
+                            if MFMailComposeViewController.canSendMail() {
+                                let mail = MFMailComposeViewController()
+                                mail.mailComposeDelegate = self
+                                mail.setToRecipients([email])
+                                mail.setSubject("")
+                                mail.setMessageBody("", isHTML: true)
+                                strongSelf.presentViewController(mail, animated: true, completion: nil)
+                            } else {
+                                let url = NSURL(string: "mailto:\(email)")
+                                UIApplication.sharedApplication().openURL(url!)
+                            }
+                        }
+                    }
+                }
+            }
         }
         
         assert(cell != nil, "Must have allocated a cell here")
@@ -97,8 +143,8 @@ class NeighborhoodViewController: HomeStoryViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Header + story blocks
-        return storyObject.storyBlocks.count + 1
+        // Header + story blocks + home owner info cell
+        return storyObject.storyBlocks.count + 2
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
