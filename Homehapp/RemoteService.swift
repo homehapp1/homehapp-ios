@@ -357,7 +357,7 @@ class RemoteService: BaseRemoteService {
             if response.success {
                 if let json = response.parsedJson {
                     log.debug("Server returned features: \(json)")
-                    // TODO add capability to server side
+                    // TODO add capability to server side in the future to decide which home features are valid options
                 }
             }
         }

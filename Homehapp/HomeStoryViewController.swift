@@ -474,9 +474,12 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             log.debug("videoFilePath = \(videoFilePath)")
             
             cloudStorage.uploadVideo(videoFilePath, progressCallback: {  (progress) -> Void in
+                // Video is only fully ready when comletionCallback is called
+                if progress < 0.98 {
                     dataManager.performUpdates {
                         video.uploadProgress = progress
                     }
+                }
                 }, completionCallback: { (success, url, width, height) in
                     if success {
                         log.debug("Video upload successful; url: \(url)")
@@ -498,6 +501,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                             dataManager.performUpdates {
                                 video.url = url
                                 video.local = false
+                                video.uploadProgress = 1.00
+                                self.storyObject.localChanges = true
                             }
                             
                             if let thumbnailUrl = video.scaledThumbnailUrl {
@@ -661,6 +666,17 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                         self.insertionCursorPosition = 0
                     }
             })
+        }
+    }
+    
+    /// Attempt to send the modified storyObject info to the server
+    private func sendStoryObjectToServer() {
+        if storyObject.localChanges {
+            if storyObject is Home {
+                remoteService.updateMyHomeOnServer()
+            } else {
+                remoteService.updateMyNeighborhood(storyObject as! Neighborhood)
+            }
         }
     }
     
@@ -834,14 +850,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Clear content blocks that have no content
         removeEmptyContentBlocks()
         
-        // Attempt to send the modified info to the server
-        if storyObject.localChanges {
-            if storyObject is Home {
-                remoteService.updateMyHomeOnServer()
-            } else {
-                remoteService.updateMyNeighborhood(storyObject as! Neighborhood)
-            }
-        }
+        // Send updates to server
+        sendStoryObjectToServer()
     }
     
     @IBAction func backButtonPressed(button: UIButton) {

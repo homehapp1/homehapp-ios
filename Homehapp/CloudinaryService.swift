@@ -240,6 +240,10 @@ public class CloudinaryService {
             log.error("Error fetching unset images: \(error)")
         }
     }
+    
+    func uploadUnsentVideos() {
+        // TODO
+    }
 
     /// Remove Image or Video from Cloudinary based on it's url
     func removeAsset(url: String, type: String) {
