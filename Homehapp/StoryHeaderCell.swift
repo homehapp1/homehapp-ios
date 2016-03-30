@@ -323,7 +323,6 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
     }
     
     override func awakeFromNib() {
