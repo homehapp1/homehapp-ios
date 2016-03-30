@@ -235,10 +235,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         
         CATransaction.begin()
         
-        if scroll {
-            CATransaction.setCompletionBlock() {
+        CATransaction.setCompletionBlock() {
+            if scroll {
                 self.tableView.scrollToRowAtIndexPath(newIndexPath, atScrollPosition: .Middle, animated: true)
             }
+            self.manageInsertionCursor(true)
         }
         
         tableView.beginUpdates()
@@ -259,6 +260,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         CATransaction.begin()
         CATransaction.setCompletionBlock() {
             log.debug("delete CATransaction completed")
+            self.manageInsertionCursor(true)
         }
         
         tableView.beginUpdates()
@@ -578,7 +580,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         insertionCursorImageView.removeFromSuperview()
         insertionCursorPosition = nil
         if editMode {
-            manageInsertionCursor()
+            manageInsertionCursor(false)
         }
         
     }
@@ -627,7 +629,12 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     }
 
     /// Manages the position / visibility of the edit mode insertion cursor.
-    private func manageInsertionCursor() {
+    private func manageInsertionCursor(forceRefresh: Bool) {
+        
+        if forceRefresh {
+            insertionCursorPosition = -1
+        }
+        
         let currentInsertCursorPosition = calculateCellInsertPosition()
         
         if currentInsertCursorPosition != insertionCursorPosition {
@@ -655,22 +662,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                     }
             })
         }
-    }
-    
-    // MARK: 'Protected' methods
-    
-    func editModeChanged() {
-        tableView.beginUpdates()
-        if editMode {
-            // Remove home owner info cell from table view and trigger table view to resize its cells
-            let homeOwnerCellIndexPath = NSIndexPath(forRow: storyObject.storyBlocks.count + 1, inSection: 0)
-            tableView.deleteRowsAtIndexPaths([homeOwnerCellIndexPath], withRowAnimation: .Automatic)
-        } else {
-            // Add home owner info cell from table view and trigger table view to resize its cells
-            let homeOwnerCellIndexPath = NSIndexPath(forRow: storyObject.storyBlocks.count + 1, inSection: 0)
-            tableView.insertRowsAtIndexPaths([homeOwnerCellIndexPath], withRowAnimation: .Automatic)
-        }
-        tableView.endUpdates()
     }
     
     /// Maps a StoryBlock to a corresponding cell identifier
@@ -974,7 +965,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if editMode {
             // Manage the edit mode insertion cursor
-            manageInsertionCursor()
+            manageInsertionCursor(false)
         }
         
         let diff = scrollView.contentOffset.y - tableViewScrollPosition.y

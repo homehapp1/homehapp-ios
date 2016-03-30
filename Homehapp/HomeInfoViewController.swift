@@ -180,6 +180,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         }
     }
     
+    /// Home info images
     private func addHomeImagesView() {
         let home = appstate.mostRecentlyOpenedHome!
         if home.isMyHome() || home.images.count == 0 { // TODO Lari logical operator change

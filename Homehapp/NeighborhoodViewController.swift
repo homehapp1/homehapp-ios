@@ -18,17 +18,6 @@ class NeighborhoodViewController: HomeStoryViewController {
     private let segueIdNeighborhoodToHomeSettings = "NeighborhoodToHomeSettings"
     private let segueIdNeighborhoodToHomeInfo = "NeighborhoodToHomeInfo"
     
-    // MARK: Overridden methods
-    
-    // Hide back button when editing
-    override func editModeChanged() {
-        if editMode {
-            backButton.hidden = true
-        } else {
-            backButton.hidden = false
-        }
-    }
-    
     /// Handles loading table view cells from their respective nibs. Override this method in inheriting classes to change behavior.
     /// Order of cells is:
     /// - header
