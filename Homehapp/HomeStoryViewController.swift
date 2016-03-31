@@ -157,9 +157,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         return nil
     }
     
-    /// Text editor selection controls view
-    //private let textEditModeSelectionView = TextEditorModeSelectionView()
-    
     // MARK: Private methods
     
     /// Remove empty content blocks from the current story under editing
@@ -218,56 +215,31 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         return min(newIndexPath!.row + 1, storyObject.storyBlocks.count + 1)
     }
     
-    /** 
-     Animatedly adds a row to the table view and scrolls to the new row when done
-    */
+    //Animatedly adds a row to the table view
     private func addStoryBlockTableViewRow(position: Int) {
-        
         let newIndexPath = NSIndexPath(forRow: position, inSection: 0)
-        
-        // Scroll only if the cell would be otherwise invisible
-        // TODO calculate scroll amount based on the cell that was added?
-        // If text block, probably the best position would be in the screen so that keyboard just opens below
-        let rectOfCellInTableView: CGRect = tableView.rectForRowAtIndexPath(NSIndexPath(forRow: position - 1, inSection: 0))
-        let rectOfCellInSuperview: CGRect = tableView.convertRect(rectOfCellInTableView, toView: tableView.superview)
-        let marginFromBottom: CGFloat = 160 // We scroll if block was added within 160px up from bottom bar
-        let scroll = rectOfCellInSuperview.y + rectOfCellInSuperview.height > view.height - bottomBarHeight - marginFromBottom
-        
-        CATransaction.begin()
-        
-        CATransaction.setCompletionBlock() {
-            if scroll {
-                self.tableView.scrollToRowAtIndexPath(newIndexPath, atScrollPosition: .Middle, animated: true)
-            }
-            self.manageInsertionCursor(true)
-        }
-        
-        tableView.beginUpdates()
+        insertionCursorImageView.alpha = 0
         tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
-        tableView.endUpdates()
-        
-        CATransaction.commit()
+        tableView.scrollToRowAtIndexPath(newIndexPath, atScrollPosition: .Middle, animated: true)
         
         dataManager.performUpdates {
-            self.storyObject.localChanges = true
+            storyObject.localChanges = true
         }
+        
+        runOnMainThreadAfter(delay: 0.5, task: {
+            self.manageInsertionCursor(true)
+        })
     }
     
-    /// Animatedly removes a row in the table view
+    /// Animatedly removes a row from the table view
     private func removeStoryBlockTableViewRow(storyBlockIndex: Int) {
         let deletedIndexPath = NSIndexPath(forRow: storyBlockIndex + 1, inSection: 0)
         
-        CATransaction.begin()
-        CATransaction.setCompletionBlock() {
-            log.debug("delete CATransaction completed")
-            self.manageInsertionCursor(true)
-        }
-        
-        tableView.beginUpdates()
+        insertionCursorImageView.alpha = 0
         tableView.deleteRowsAtIndexPaths([deletedIndexPath], withRowAnimation: .Automatic)
-        tableView.endUpdates()
-        
-        CATransaction.commit()
+        runOnMainThreadAfter(delay: 0.5, task: {
+            self.manageInsertionCursor(true)
+        })
     }
     
     private func openImagePicker(maxSelections maxSelections: Int? = nil, editingCell: EditableStoryCell? = nil) {
@@ -636,19 +608,18 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     /// Manages the position / visibility of the edit mode insertion cursor.
     private func manageInsertionCursor(forceRefresh: Bool) {
         
-        if forceRefresh {
-            insertionCursorPosition = -1
-        }
-        
         let currentInsertCursorPosition = calculateCellInsertPosition()
+        let initialInsertionCursorPosition = insertionCursorPosition
         
-        if currentInsertCursorPosition != insertionCursorPosition {
+        if currentInsertCursorPosition != insertionCursorPosition || forceRefresh {
             insertionCursorPosition = currentInsertCursorPosition
             self.insertionCursorImageView.layer.removeAllAnimations()
             
             // Fade out current cursor
             UIView.animateWithDuration(insertionCursorAnimationDuration, animations: {
-                self.insertionCursorImageView.alpha = 0
+                    if initialInsertionCursorPosition != currentInsertCursorPosition {
+                        self.insertionCursorImageView.alpha = 0
+                    }
                 }, completion: { finished in
                     if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: currentInsertCursorPosition, inSection: 0)) {
                         // Position insertion cursor in the middle of the top edge of the cell
