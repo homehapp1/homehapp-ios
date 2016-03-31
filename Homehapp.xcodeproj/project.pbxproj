@@ -104,6 +104,9 @@
 		49E97C9A1BDCEE3900AEEB5D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E97C991BDCEE3900AEEB5D /* Utils.swift */; };
 		4B040FBB1C6179B200A82B3D /* EditableHomeInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B040FBA1C6179B200A82B3D /* EditableHomeInfoView.swift */; };
 		4B05A87D1C7F7A0D007891CF /* HomeInfoImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B05A87C1C7F7A0D007891CF /* HomeInfoImageViewController.swift */; };
+		4B0CD52A1CADC1F400AABCBB /* ContentDescriptionStoryBlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0CD5291CADC1F400AABCBB /* ContentDescriptionStoryBlockCell.swift */; };
+		4B0CD52C1CADC25100AABCBB /* TextContentStoryBlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0CD52B1CADC25100AABCBB /* TextContentStoryBlockCell.swift */; };
+		4B0CD52E1CADC75B00AABCBB /* ContentDescriptionStoryBlockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B0CD52D1CADC75B00AABCBB /* ContentDescriptionStoryBlockCell.xib */; };
 		4B1132701C6526440081A06A /* FadeInSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B11326F1C6526440081A06A /* FadeInSegue.swift */; };
 		4B1132721C6526D10081A06A /* FadeOutSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1132711C6526D10081A06A /* FadeOutSegue.swift */; };
 		4B1132761C653F640081A06A /* HomeRoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1132751C653F640081A06A /* HomeRoomsView.swift */; };
@@ -282,6 +285,9 @@
 		49E97C991BDCEE3900AEEB5D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4B040FBA1C6179B200A82B3D /* EditableHomeInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableHomeInfoView.swift; sourceTree = "<group>"; };
 		4B05A87C1C7F7A0D007891CF /* HomeInfoImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfoImageViewController.swift; sourceTree = "<group>"; };
+		4B0CD5291CADC1F400AABCBB /* ContentDescriptionStoryBlockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentDescriptionStoryBlockCell.swift; sourceTree = "<group>"; };
+		4B0CD52B1CADC25100AABCBB /* TextContentStoryBlockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextContentStoryBlockCell.swift; sourceTree = "<group>"; };
+		4B0CD52D1CADC75B00AABCBB /* ContentDescriptionStoryBlockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentDescriptionStoryBlockCell.xib; sourceTree = "<group>"; };
 		4B11326F1C6526440081A06A /* FadeInSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeInSegue.swift; sourceTree = "<group>"; };
 		4B1132711C6526D10081A06A /* FadeOutSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeOutSegue.swift; sourceTree = "<group>"; };
 		4B1132751C653F640081A06A /* HomeRoomsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRoomsView.swift; sourceTree = "<group>"; };
@@ -460,6 +466,9 @@
 				499BFDC41BDEADAB00B5BB83 /* GalleryImageCell.xib */,
 				4B6F2B9A1CA56CFF00F20167 /* ContentTitleStoryBlockCell.swift */,
 				4B6F2B9C1CA56E8C00F20167 /* ContentTitleStoryBlockCell.xib */,
+				4B0CD5291CADC1F400AABCBB /* ContentDescriptionStoryBlockCell.swift */,
+				4B0CD52D1CADC75B00AABCBB /* ContentDescriptionStoryBlockCell.xib */,
+				4B0CD52B1CADC25100AABCBB /* TextContentStoryBlockCell.swift */,
 			);
 			name = "StoryBlock cells";
 			sourceTree = "<group>";
@@ -954,6 +963,7 @@
 				4B1132781C653FC90081A06A /* HomeRoomsView.xib in Resources */,
 				490B36951C25D62C0067DF51 /* HomeStoryFooterCell.xib in Resources */,
 				4B58860E1C67C35B004FCE90 /* HomeFeatureSelectionCell.xib in Resources */,
+				4B0CD52E1CADC75B00AABCBB /* ContentDescriptionStoryBlockCell.xib in Resources */,
 				490B369D1C269C3D0067DF51 /* ContentImageStoryBlockCell.xib in Resources */,
 				490B36A11C269E300067DF51 /* GalleryStoryBlockCell.xib in Resources */,
 				4913DC051C0F36D800A1ADF1 /* SelectStoryblockContentTypeViewController.xib in Resources */,
@@ -1057,6 +1067,7 @@
 				49293C961BD120BA008BF9C6 /* HomeCell.swift in Sources */,
 				49B691C31C804B650076F680 /* QvikImageView.swift in Sources */,
 				648D22751C077A980059431D /* LoginViewController.swift in Sources */,
+				4B0CD52A1CADC1F400AABCBB /* ContentDescriptionStoryBlockCell.swift in Sources */,
 				49293C921BD00A12008BF9C6 /* StoryBlock.swift in Sources */,
 				49293C8A1BCFCFCC008BF9C6 /* AppState.swift in Sources */,
 				49D546551BF5F73E007A1383 /* ParallaxView.swift in Sources */,
@@ -1129,6 +1140,7 @@
 				649B33ED1BE3A81E0012D2B1 /* OpenImageSegue.swift in Sources */,
 				49B691B41C804B650076F680 /* JpegThumbnails.swift in Sources */,
 				491E85531C1AEAE9004003C7 /* ExpandingTextView.swift in Sources */,
+				4B0CD52C1CADC25100AABCBB /* TextContentStoryBlockCell.swift in Sources */,
 				49B691C71C804B650076F680 /* UIImageExtensions.swift in Sources */,
 				4B4E17A51C2B040700C8A21E /* InfoViewController.swift in Sources */,
 				49B691AF1C804B650076F680 /* CachedImageView.swift in Sources */,

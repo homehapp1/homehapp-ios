@@ -660,6 +660,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             switch storyBlock.layout {
             case .Title:
                 return "ContentTitleStoryBlockCell"
+            case .Body:
+                return "ContentDescriptionStoryBlockCell"
             default:
                 return "ContentStoryBlockCell"
             }
@@ -1238,6 +1240,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         tableView.registerNib(UINib(nibName: "StoryHeaderCell", bundle: nil), forCellReuseIdentifier: "StoryHeaderCell")
         tableView.registerNib(UINib(nibName: "ContentStoryBlockCell", bundle: nil), forCellReuseIdentifier: "ContentStoryBlockCell")
         tableView.registerNib(UINib(nibName: "ContentTitleStoryBlockCell", bundle: nil), forCellReuseIdentifier: "ContentTitleStoryBlockCell")
+        tableView.registerNib(UINib(nibName: "ContentDescriptionStoryBlockCell", bundle: nil), forCellReuseIdentifier: "ContentDescriptionStoryBlockCell")
+        
         
         bottomBarOriginalHeight = bottomBarViewHeightConstraint.constant
         

@@ -1,43 +1,43 @@
 //
-//  ContentTitleStoryBlockCell.swift
+//  ContentDescriptionStoryBlockCell.swift
 //  Homehapp
 //
-//  Created by Lari Tuominen on 25.3.2016.
+//  Created by Lari Tuominen on 31.3.2016.
 //  Copyright © 2016 Homehapp. All rights reserved.
 //
 
 import UIKit
 
-class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate {
+class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate {
 
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var titleTextView: UITextView!
-    
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var descriptionTextView: UITextView!
+ 
     override var storyBlock: StoryBlock? {
         didSet {
-            if let title = storyBlock?.title {
-                titleLabel.text = title
-                titleTextView.text = title
+            if let mainText = storyBlock?.mainText {
+                descriptionLabel.text = mainText
+                descriptionTextView.text = mainText
             } else {
-                titleLabel.text = ""
-                titleTextView.text = ""
+                descriptionLabel.text = ""
+                descriptionTextView.text = ""
             }
         }
     }
     
     override func setEditMode(editMode: Bool, animated: Bool) {
         super.setEditMode(editMode, animated: animated)
-    
+        
         // Sets hidden attributes of the controls according to state
         func setControlVisibility(allVisible allVisible: Bool = false) {
-            titleLabel.hidden = !(allVisible || !editMode)
-            titleTextView.hidden = !(allVisible || editMode)
+            descriptionLabel.hidden = !(allVisible || !editMode)
+            descriptionTextView.hidden = !(allVisible || editMode)
         }
         
         // Sets alpha attributes of the controls according to state
         func setControlAlphas() {
-            titleLabel.alpha = editMode ? 0.0 : 1.0
-            titleTextView.alpha = editMode ? 1.0 : 0.0
+            descriptionLabel.alpha = editMode ? 0.0 : 1.0
+            descriptionTextView.alpha = editMode ? 1.0 : 0.0
         }
         
         if !animated {
@@ -58,12 +58,12 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
     // MARK: From UITextViewDelegate
     
     func textViewDidEndEditing(textView: UITextView) {
-        titleLabel.text = titleTextView.text
+        descriptionLabel.text = descriptionTextView.text
         
-        if storyBlock?.title != titleTextView.text {
-            // Save the story block title
+        if storyBlock?.mainText != descriptionTextView.text {
+            // Save the storyBlock main text
             dataManager.performUpdates {
-                storyBlock?.title = titleTextView.text
+                storyBlock?.mainText = descriptionTextView.text
             }
             
             updateCallback?()
@@ -94,11 +94,11 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
             // TODO
             
             //if textViewFrameInWindow.y + calcHeight > tv.height - keyboardHeight {
-                let textViewFrameInTableView = tv.convertRect(textView.frame, fromView:textView.superview)
-                tv.setContentOffset(CGPointMake(0, textViewFrameInTableView.y - tableView!.height + keyboardHeight + calcHeight), animated: false)
+            let textViewFrameInTableView = tv.convertRect(textView.frame, fromView:textView.superview)
+            tv.setContentOffset(CGPointMake(0, textViewFrameInTableView.y - tableView!.height + keyboardHeight + calcHeight), animated: false)
             //}
             
-            updateBorder(titleTextView.bounds)
+            updateBorder(descriptionTextView.bounds)
             
             UIView.setAnimationsEnabled(true)
         }
@@ -121,14 +121,14 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
         //titleTextView.placeholderText = NSLocalizedString("edithomestory:content:title-placeholder", comment: "")
         layer.shouldRasterize = true
         layer.rasterizationScale = 2.0
-      
-        titleTextView.layer.addSublayer(borderLayer)
+        
+        descriptionTextView.layer.addSublayer(borderLayer)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        updateBorder(titleTextView.bounds)
+        updateBorder(descriptionTextView.bounds)
     }
     
 }
