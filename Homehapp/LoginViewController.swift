@@ -59,7 +59,7 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
                                 strongSelf.welcomeText.text = "\(firstName) \(lastName)"
                             }
                             strongSelf.preloadFacebookProfileImage(token.userID)
-                            strongSelf.exitView(2)
+                            strongSelf.exitView()
                         }
                     } else {
                         self?.showLoginFailedMessage(NSLocalizedString("loginviewcontroller:login-failed-title", comment: ""), message: NSLocalizedString("loginviewcontroller:login-failed-message", comment: ""))
@@ -140,13 +140,13 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
             
         onboardingViewController = OnboardingViewController(backgroundImage: UIImage(named: "onboarding_background"), contents: [firstPage, secondPage, thirdPage])
         
-        onboardingViewController!.topPadding = self.view.height / 2 - 100
+        onboardingViewController!.topPadding = self.view.height / 2 - 120
         onboardingViewController!.underTitlePadding = 40;
         onboardingViewController!.bodyFontSize = 21;
         onboardingViewController!.fontName = "Roboto";
         onboardingViewController!.shouldMaskBackground = false;
         onboardingViewController!.fadePageControlOnLastPage = true
-        onboardingViewController!.bottomPadding = 30;
+        onboardingViewController!.bottomPadding = 20;
         onboardingViewController!.shouldFadeTransitions = true
 
         self.view.addSubview(onboardingViewController!.view)
@@ -235,7 +235,7 @@ class LoginViewController: BaseViewController, GIDSignInUIDelegate, GIDSignInDel
                             strongSelf.welcomeText.text = "\(firstName) \(lastName)"
                         }
                         strongSelf.preloadGoogleProfileImage()
-                        strongSelf.exitView(2)
+                        strongSelf.exitView()
                     }
                 } else {
                     self?.showLoginFailedMessage(NSLocalizedString("loginviewcontroller:login-failed-title", comment: ""), message: NSLocalizedString("loginviewcontroller:login-failed-message", comment: ""))

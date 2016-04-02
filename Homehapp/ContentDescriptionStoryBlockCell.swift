@@ -129,6 +129,7 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
         super.layoutSubviews()
         
         updateBorder(descriptionTextView.bounds)
+        //descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(200)
     }
     
 }

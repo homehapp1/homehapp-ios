@@ -14,6 +14,7 @@ enum TutorialType: Int {
     case AddCoverPhotoTutorial
     case AddContentTutorial
     case DoneTutorial
+    case CloseNeighborhoodTutorial
 }
 
 class TutorialView: UIView {
@@ -94,7 +95,7 @@ class TutorialView: UIView {
     var closeCallback: (TutorialType -> Void)?
     
     /// Set tutorial type to configure view and contents to show in it
-    private var tutorialType: TutorialType = .WelcomeTutorial {
+    var tutorialType: TutorialType = .WelcomeTutorial {
         didSet {
             
             // Reset things first and then reveal based on tutorial type
@@ -106,7 +107,6 @@ class TutorialView: UIView {
             contentViewTopConstraint.active = false
             titleTopConstraint.constant = originalTitletopConstraint
             closeButtonBottomConstraint.constant = originalCloseButtonBottomConstraint
-            //welcomeContentViewHeightConstraint.constant = margin
             welcomeContentView.alpha = 0.0
             
             switch tutorialType {
@@ -123,7 +123,6 @@ class TutorialView: UIView {
                 contentViewBottomConstraint.constant = bottomBarHeight
                 dimmerViewBottomConstraint.constant = bottomBarHeight
                 closeButtonBottomConstraint.constant = originalCloseButtonBottomConstraint + 10
-                //welcomeContentViewHeightConstraint.constant = originalWelcomeContentViewHeight
                 welcomeContentView.alpha = 1.0
             case .AddContentTutorial:
                 titleLabel.text = NSLocalizedString("tutorial:content-title", comment: "")
@@ -154,7 +153,7 @@ class TutorialView: UIView {
                 contentViewBottomConstraint.active = false
                 contentViewTopConstraint.constant = topBarHeight
                 titleTopConstraint.constant = originalTitletopConstraint + margin
-            case .EditTutorial:
+            case .EditTutorial, .CloseNeighborhoodTutorial:
                 
                 // Remove welcome contents ..... and 
                 // add constraint from descriptionLabel to Button so that bubble height stays correct
@@ -179,7 +178,6 @@ class TutorialView: UIView {
                 contentViewBottomConstraint.active = false
                 contentViewTopConstraint.constant = topBarHeight
                 titleTopConstraint.constant = originalTitletopConstraint + margin
-           
             }
             layoutIfNeeded()
         }
@@ -188,13 +186,12 @@ class TutorialView: UIView {
     /// Close tutorial if last screen is shown or move to next screen
     @IBAction func closeButtonPressed(sender: UIButton) {
         self.closeCallback?(self.tutorialType)
-        if tutorialType != TutorialType.DoneTutorial {
+        if tutorialType != TutorialType.DoneTutorial && tutorialType != .CloseNeighborhoodTutorial {
             tutorialType = TutorialType(rawValue: tutorialType.rawValue + 1)!
         } else {
             UIView.animateWithDuration(animationTime, animations: {
                 self.alpha = 0
                 }, completion: { finished in
-                    appstate.tutorialShown = "yes"
                     self.removeFromSuperview()
             })
         }
@@ -208,8 +205,6 @@ class TutorialView: UIView {
         self.tutorialType = tutorialType
         UIView.animateWithDuration(animationTime, animations: {
             self.alpha = 1.0
-            }, completion: { finished in
-                
         })
     }
     

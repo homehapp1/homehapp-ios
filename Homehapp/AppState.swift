@@ -18,6 +18,7 @@ class AppState {
     private let keyNeighborhoodsLastDeleted = "neighborhoodsLastDeleted"
     private let keyTutorialShown = "tutorialShown"
     private let keyOnboardingShown = "onboardingShown"
+    private let keyNeighborhoodTutorialShown = "neighborhoodTutorialShown"
 
     /// Singleton instance
     private static let singletonInstance = AppState()
@@ -120,6 +121,15 @@ class AppState {
         }
         set {
             userDefaults.setObject(newValue, forKey: keyTutorialShown)
+        }
+    }
+    
+    var neighborhoodTutorialShown: String? {
+        get {
+            return userDefaults.stringForKey(keyNeighborhoodTutorialShown)
+        }
+        set {
+            userDefaults.setObject(newValue, forKey: keyNeighborhoodTutorialShown)
         }
     }
     

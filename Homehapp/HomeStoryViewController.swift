@@ -594,13 +594,23 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         }
     }
     
-    private func showTutorial() {
+    private func showTutorial(firstTutorial: TutorialType) {
         let tutorialView = TutorialView.instanceFromNib() as! TutorialView
         tutorialView.frame = view.bounds
         view.addSubview(tutorialView)
-        tutorialView.show(.WelcomeTutorial) { [weak self] (tutorialType) -> Void in
+        
+        if storyObject is Home {
+            appstate.tutorialShown = "yes"
+        } else {
+            appstate.neighborhoodTutorialShown = "yes"
+        }
+        
+        tutorialView.show(firstTutorial) { [weak self] (tutorialType) -> Void in
             if tutorialType == .EditTutorial {
                 self?.editButtonPressed(self!.editButton)
+            }
+            if self?.storyObject is Neighborhood {
+                tutorialView.tutorialType = .CloseNeighborhoodTutorial
             }
         }
     }
@@ -1200,11 +1210,14 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         
         // Show tutorial if it is not shown yet and user opens her own home
-        if appstate.tutorialShown == nil && allowEditMode {
-            showTutorial()
+        if storyObject is Home && appstate.tutorialShown == nil && allowEditMode && storyObject.storyBlocks.count == 0 {
+            showTutorial(.WelcomeTutorial)
         }
         
-        
+        // Show edit tutorial in neighborhood story if not shown yet
+        if storyObject is Neighborhood && appstate.neighborhoodTutorialShown == nil && allowEditMode && storyObject.storyBlocks.count == 0 {
+            showTutorial(.EditTutorial)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -1230,7 +1243,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         allowEditMode = (appstate.authUserId == appstate.mostRecentlyOpenedHome?.createdBy?.id)
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 44
+        tableView.estimatedRowHeight = 100
         
         tableView.registerNib(UINib(nibName: "HomeOwnerInfoCell", bundle: nil), forCellReuseIdentifier: "HomeOwnerInfoCell")
         tableView.registerNib(UINib(nibName: "BigVideoStoryBlockCell", bundle: nil), forCellReuseIdentifier: "BigVideoStoryBlockCell")
