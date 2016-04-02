@@ -369,6 +369,7 @@ class DataManager {
             }()
             
             neighborhood.image = Image.fromJSON(mainImage)
+            neighborhood.title = title
 
             if let locationJson = json["location"] as? [String: AnyObject] {
                 log.debug("locationJson = \(locationJson)")
