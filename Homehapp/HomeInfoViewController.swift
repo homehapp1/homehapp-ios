@@ -103,6 +103,12 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         editMode = false
         
         setSubviewEditModes()
+        
+        let home = appstate.mostRecentlyOpenedHome
+        dataManager.performUpdates({
+            home?.localChanges = true
+        })
+        remoteService.updateMyHomeOnServer()
     }
     
     @IBAction func backButtonPressed(button: UIButton) {

@@ -284,10 +284,10 @@ class DataManager {
             if let bedrooms = rooms["bedrooms"] as? Int {
                 home.bedrooms = bedrooms
             }
-            if let bathrooms = json["bathrooms"] as? Int {
+            if let bathrooms = rooms["bathrooms"] as? Int {
                 home.bathrooms = bathrooms
             }
-            if let otherRooms = json["otherRooms"] as? Int {
+            if let otherRooms = rooms["otherRooms"] as? Int {
                 home.otherRooms = otherRooms
             }
         }
