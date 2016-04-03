@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FjallaOne-Regular.ttf">
@@ -160,27 +160,35 @@
                                         </variation>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKr-og-mC9">
-                                        <rect key="frame" x="97" y="92" width="30" height="22"/>
+                                        <rect key="frame" x="87" y="73" width="50" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="hUl-By-NmZ"/>
+                                            <constraint firstAttribute="width" constant="50" id="wsr-76-WXo"/>
+                                        </constraints>
                                         <state key="normal" image="button_message"/>
                                         <connections>
                                             <action selector="messageButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Twi-Pa-auF"/>
                                         </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mail" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tr6-vn-N86">
-                                        <rect key="frame" x="99" y="120" width="27" height="16.5"/>
+                                        <rect key="frame" x="99" y="128" width="27" height="16.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                         <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAY-XB-JtG">
-                                        <rect key="frame" x="287" y="89" width="27" height="27"/>
+                                        <rect key="frame" x="277" y="72.5" width="50" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="H8X-MC-8jy"/>
+                                            <constraint firstAttribute="width" constant="50" id="Ujd-vv-c23"/>
+                                        </constraints>
                                         <state key="normal" image="button_call"/>
                                         <connections>
                                             <action selector="callButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="um1-hB-rfC"/>
                                         </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Call" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbN-RM-ndA">
-                                        <rect key="frame" x="288" y="122" width="24" height="16.5"/>
+                                        <rect key="frame" x="289.5" y="127.5" width="24" height="16.5"/>
                                         <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                         <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -191,14 +199,14 @@
                                     <constraint firstItem="eCN-Tj-C0l" firstAttribute="top" secondItem="9k1-9F-q2p" secondAttribute="top" constant="28" id="1qf-7H-VCI"/>
                                     <constraint firstItem="bdL-ap-j0X" firstAttribute="top" secondItem="5PB-ev-XPj" secondAttribute="bottom" constant="20" id="3uP-QS-ndq"/>
                                     <constraint firstItem="eCN-Tj-C0l" firstAttribute="centerX" secondItem="9k1-9F-q2p" secondAttribute="centerX" id="CBO-3v-It7"/>
-                                    <constraint firstItem="GAY-XB-JtG" firstAttribute="leading" secondItem="5PB-ev-XPj" secondAttribute="trailing" constant="50" id="E5r-86-Dp0"/>
+                                    <constraint firstItem="GAY-XB-JtG" firstAttribute="leading" secondItem="5PB-ev-XPj" secondAttribute="trailing" constant="40" id="E5r-86-Dp0"/>
                                     <constraint firstItem="eKr-og-mC9" firstAttribute="centerY" secondItem="5PB-ev-XPj" secondAttribute="centerY" constant="2" id="Euk-e1-gLE"/>
                                     <constraint firstItem="5PB-ev-XPj" firstAttribute="top" secondItem="eCN-Tj-C0l" secondAttribute="bottom" constant="19" id="LiB-gN-BJz"/>
-                                    <constraint firstItem="tr6-vn-N86" firstAttribute="top" secondItem="eKr-og-mC9" secondAttribute="bottom" constant="6" id="N1g-ab-G8V"/>
-                                    <constraint firstItem="gbN-RM-ndA" firstAttribute="top" secondItem="GAY-XB-JtG" secondAttribute="bottom" constant="6" id="Npt-GT-8dm"/>
+                                    <constraint firstItem="tr6-vn-N86" firstAttribute="top" secondItem="eKr-og-mC9" secondAttribute="bottom" constant="-5" id="N1g-ab-G8V"/>
+                                    <constraint firstItem="gbN-RM-ndA" firstAttribute="top" secondItem="GAY-XB-JtG" secondAttribute="bottom" constant="-5" id="Npt-GT-8dm"/>
                                     <constraint firstItem="gbN-RM-ndA" firstAttribute="centerX" secondItem="GAY-XB-JtG" secondAttribute="centerX" id="SfE-UF-McH"/>
                                     <constraint firstItem="bdL-ap-j0X" firstAttribute="centerX" secondItem="9k1-9F-q2p" secondAttribute="centerX" id="bLi-tL-N41"/>
-                                    <constraint firstItem="5PB-ev-XPj" firstAttribute="leading" secondItem="eKr-og-mC9" secondAttribute="trailing" constant="50" id="drI-Q4-PuM"/>
+                                    <constraint firstItem="5PB-ev-XPj" firstAttribute="leading" secondItem="eKr-og-mC9" secondAttribute="trailing" constant="40" id="drI-Q4-PuM"/>
                                     <constraint firstItem="GAY-XB-JtG" firstAttribute="centerY" secondItem="5PB-ev-XPj" secondAttribute="centerY" constant="2" id="jar-Lr-1fQ"/>
                                     <constraint firstAttribute="height" constant="202" id="nUt-3B-TwH"/>
                                     <constraint firstItem="tr6-vn-N86" firstAttribute="centerX" secondItem="eKr-og-mC9" secondAttribute="centerX" id="oeM-kf-abI"/>

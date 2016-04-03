@@ -162,7 +162,6 @@ class NeighborhoodViewController: HomeStoryViewController {
         super.viewDidLoad()
 
         storyObject = appstate.mostRecentlyOpenedHome!.userNeighborhood!
-        
     }
     
     override func viewWillAppear(animated: Bool) {
