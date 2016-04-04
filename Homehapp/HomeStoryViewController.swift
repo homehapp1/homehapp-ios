@@ -661,6 +661,17 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         }
     }
     
+    /// Check if there's videos playing in visible cells and stop playing if so
+    private func stopAllVideos() {
+        for cell in tableView.visibleCells {
+            if let videoCell = cell as? BigVideoStoryBlockCell {
+                videoCell.clearPlayer()
+            }
+        }
+    }
+    
+    // MARK: Public Methods
+    
     /// Maps a StoryBlock to a corresponding cell identifier
     func cellIdentifierForStoryBlock(storyBlock: StoryBlock) -> String {
         switch storyBlock.template {
@@ -771,8 +782,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         return cell!
     }
     
-    // MARK: Public methods
-    
     func getCurrentFrameForGalleryImage(image: Image) -> CGRect? {
         let window = UIApplication.sharedApplication().keyWindow
         for cell in tableView.visibleCells {
@@ -808,15 +817,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 if galleryCell.hasImage(image) {
                     cell.hidden = true
                 }
-            }
-        }
-    }
-    
-    /// Check if there's videos playing in visible cells and pause playing if so
-    func pauseAllVideos() {
-        for cell in tableView.visibleCells {
-            if let videoCell = cell as? BigVideoStoryBlockCell {
-                videoCell.pauseVideo()
             }
         }
     }
@@ -893,7 +893,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {}
 
     // MARK: Notification handlers
-    
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
@@ -1180,6 +1179,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         super.viewDidDisappear(animated)
         
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        stopAllVideos()
     }
     
     override func viewWillAppear(animated: Bool) {

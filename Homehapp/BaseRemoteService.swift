@@ -138,10 +138,10 @@ public class BaseRemoteService {
         let jsonResponse = result.value as? NSDictionary
         log.debug("Status code: \(response?.statusCode)")
         
+        var remoteError = RemoteResponse.RemoteError.ServerError
+        
         if let code = response?.statusCode where code < 200 || code >= 300 {
             log.debug("Got non-success HTTP response: \(code)")
-            
-            var remoteError = RemoteResponse.RemoteError.ServerError
             
             switch code {
             case 401:
@@ -152,14 +152,14 @@ public class BaseRemoteService {
                 remoteError = .ServerError
             }
 
-            if let error = error as? NSError where error.code == NSURLErrorTimedOut {
-                remoteError = .NetworkTimeout
-            }
-            
             let nsError = NSError(domain: remoteServiceErrorDomain, code: code, userInfo: nil)
             let remoteResponse = RemoteResponse(nsError: nsError, remoteError: remoteError, json: jsonResponse)
             
             return remoteResponse
+        }
+        
+        if let error = error as? NSError where error.code == NSURLErrorTimedOut {
+            remoteError = .NetworkTimeout
         }
         
         if let jsonResponse = jsonResponse {
@@ -168,7 +168,7 @@ public class BaseRemoteService {
         } else {
             log.debug("Received invalid or empty JSON response: \(result.value)")
             let nsError = NSError(domain: remoteServiceErrorDomain, code: 0, userInfo: nil)
-            return RemoteResponse(nsError: nsError, remoteError: .ServerError, json: nil)
+            return RemoteResponse(nsError: nsError, remoteError: remoteError, json: nil)
         }
     }
     

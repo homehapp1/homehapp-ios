@@ -20,11 +20,14 @@ class GalleryImageCell: UICollectionViewCell {
         /// Image size setting for fullscreen etc. large gallery images
         case Large
     }
-    
+
+    /// Image displayed in cell
     @IBOutlet weak var imageView: CachedImageView!
 
+    /// Button to delete given image
     @IBOutlet weak var deleteButton: UIButton!
     
+    /// Cell's leading and trailing constraints
     @IBOutlet private weak var leadingConstraint: NSLayoutConstraint!
     @IBOutlet private weak var trailingConstraint: NSLayoutConstraint!
     

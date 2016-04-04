@@ -14,7 +14,7 @@ Displays a toast message.
 class Toast: UIView {
     // Constants
     private static let animationDuration = 0.3 // The amount of time it takes the toast to appear/disappear
-    private static let animationDelay = 1.5 // The amount of time the toast lingers in view
+    private static let animationDelay = 2.0 // The amount of time the toast lingers in view
 
     // IBOutlets
     @IBOutlet weak var messageLabel: UILabel!

@@ -39,9 +39,9 @@
 "profileviewcontroller:logged-id" = "LOGGED IN WITH";
 "profileviewcontroller:add-neighbourhood" = "Add neighbourhood";
 
-"errormsg:network" = "Network error";
-"errormsg:network-timeout" = "Network timeout";
-"errormsg:server" = "Server error";
+"errormsg:network" = "Failed to connect homehapp. Please try again shortly";
+"errormsg:network-timeout" = "Internet connection appears to be offline";
+"errormsg:server" = "Oops, error ocurred. We're working on it!";
 "errormsg:videoenc-failed" = "Video encoding failed";
 
 "homeownerinfocell:agent-title" = "CONTACT AGENT";
