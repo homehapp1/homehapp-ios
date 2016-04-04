@@ -67,15 +67,17 @@ class GalleryImageCell: UICollectionViewCell {
             imageView.imageUrl = image.scaledUrl
         case .Large:
             // Using large image; use a smaller image as a placeholder if one is available in the in-memory cache
-            if let mediumImage = ImageCache.sharedInstance().getImage(url: image.mediumScaledUrl, loadPolicy: .Memory) {
-                imageView.placeholderImage = mediumImage
-            } else {
-                imageView.placeholderImage = ImageCache.sharedInstance().getImage(url: image.smallScaledUrl, loadPolicy: .Memory)
-            }            
             imageView.imageUrl = image.scaledUrl
+            if imageView.image == nil {
+                if let mediumImage = ImageCache.sharedInstance().getImage(url: image.mediumScaledUrl, loadPolicy: .Memory) {
+                    imageView.placeholderImage = mediumImage
+                } else {
+                    imageView.placeholderImage = ImageCache.sharedInstance().getImage(url: image.smallScaledUrl, loadPolicy: .Memory)
+                }
+            }
         }
         
-        if imageView.placeholderImage == nil {
+        if imageView.image == nil && imageView.placeholderImage == nil {
             imageView.thumbnailData = image.thumbnailData
             imageView.fadeInColor = image.backgroundColor != nil ? UIColor(hexString: image.backgroundColor!) : UIColor.whiteColor()
         }

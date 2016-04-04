@@ -150,6 +150,31 @@ public class CachedImageView: QvikImageView {
                     
                     // Discard reference to the placeholder image to deallocate it when actual image has loaded
                     self.placeholderImage = nil
+                    
+                    // Add constraints
+                    let leadingConstraint = NSLayoutConstraint(item: placeholderImageView!, attribute:
+                        .LeadingMargin, relatedBy: .Equal, toItem: self,
+                                        attribute: .LeadingMargin, multiplier: 1.0,
+                                        constant: 0)
+                    
+                    let trailingConstraint = NSLayoutConstraint(item: placeholderImageView!, attribute:
+                        .TrailingMargin, relatedBy: .Equal, toItem: self,
+                                        attribute: .TrailingMargin, multiplier: 1.0,
+                                        constant: 0)
+                    
+                    let topConstraint = NSLayoutConstraint(item: placeholderImageView!, attribute:
+                        .TopMargin, relatedBy: .Equal, toItem: self,
+                                         attribute: .TopMargin, multiplier: 1.0,
+                                         constant: 0)
+                    
+                    let bottomConstraint = NSLayoutConstraint(item: placeholderImageView!, attribute:
+                        .BottomMargin, relatedBy: .Equal, toItem: self,
+                                    attribute: .BottomMargin, multiplier: 1.0,
+                                    constant: 0)
+                    
+                    placeholderImageView!.translatesAutoresizingMaskIntoConstraints = false
+                    NSLayoutConstraint.activateConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
+                    
                 } else {
                     placeholderImageView!.frame = self.frame
                 }

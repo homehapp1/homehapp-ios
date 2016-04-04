@@ -152,13 +152,13 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                 
                 //Divide images for line based on proportional widths
                 var widthSumForLine: CGFloat = 0
-                for var i = 0; i < imagesInLine; i++ {
+                for i in 0...imagesInLine - 1 {
                     let aspectRatio = CGFloat(images[index + i].width) / CGFloat(images[index + i].height)
                     widthSumForLine += aspectRatio
                 }
                 
                 var widthUsed: CGFloat = 0
-                for var j = 0; j < imagesInLine; j++ {
+                for j in 0...imagesInLine - 1 {
                     let aspectRatio = CGFloat(images[index].width) / CGFloat(images[index].height)
                     if j == imagesInLine - 1 {
                         // Last image takes always all the remaining space from the line
@@ -169,7 +169,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                         imageSizes.append(size)
                         widthUsed += size.width + GalleryStoryBlockCell.margin
                     }
-                    index++
+                    index += 1
                 }
                
                 if index >= images.count {
@@ -200,9 +200,9 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
         // If we have three images in line. we only allow one to be landscape (device is quite narrow)
         if amount == 3 && index + 2 < images.count {
             var landScapeCount = 0
-            for var i = index; i < index + 3; ++i {
+            for i in index...index + 2 {
                 if images[i].isLandscape() {
-                    ++landScapeCount
+                    landScapeCount += 1
                 }
             }
             if landScapeCount > 1 {
