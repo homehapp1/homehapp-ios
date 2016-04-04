@@ -43,6 +43,7 @@ class Toast: UIView {
                 f.origin.y = -f.height
                 toast.frame = f
                 }) { finished in
+                    toast.removeFromSuperview()
                     completionCallback?()
             }
         }
