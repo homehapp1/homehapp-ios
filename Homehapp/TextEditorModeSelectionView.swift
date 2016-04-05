@@ -89,7 +89,7 @@ class TextEditorModeSelectionView: UIView {
             if mode == currentMode {
                 buttons[index].tintColor = UIColor.homehappColorActive()
             }
-            index++
+            index += 1
         }
     }
     

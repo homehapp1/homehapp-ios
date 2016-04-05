@@ -65,7 +65,7 @@ private func findMarker(marker: UInt8, startIndex: Int, data: UnsafePointer<UInt
         }
 
         previousByte = currentByte
-        index++
+        index += 1
     }
     
     return nil
