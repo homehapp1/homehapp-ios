@@ -177,7 +177,7 @@ class HomeCell: UICollectionViewCell {
         parallaxView.parallaxScale = 1.05
         parallaxView.accelerometerMagnitude = 0
 
-        let tapHandler = UITapGestureRecognizer(target: self, action: "cellTapped")
+        let tapHandler = UITapGestureRecognizer(target: self, action: #selector(cellTapped))
         addGestureRecognizer(tapHandler)
     }
 }

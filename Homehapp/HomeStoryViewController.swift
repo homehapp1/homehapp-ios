@@ -360,7 +360,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             addStoryBlockTableViewRow(position)
         }
         
-        for var i = 0; i < selectedImages.count; ++i {
+        for i in 0...selectedImages.count - 1 {
             let selectedImage = selectedImages[i]
             
             cloudStorage.uploadImage(selectedImage, progressCallback: { (progress) -> Void in

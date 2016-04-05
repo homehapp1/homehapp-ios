@@ -46,13 +46,13 @@ public class CloudinaryService {
     
     private func operationStarted() {
         ongoingOperationsCountLock.withWriteLock {
-            self.ongoingOperationsCount++
+            self.ongoingOperationsCount += 1
         }
     }
     
     private func operationCompleted() -> Bool {
         return ongoingOperationsCountLock.withWriteLock {
-            self.ongoingOperationsCount--
+            self.ongoingOperationsCount -= 1
 
             return (self.ongoingOperationsCount == 0)
         }

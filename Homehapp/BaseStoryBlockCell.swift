@@ -137,7 +137,7 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        tapRecognizer = UITapGestureRecognizer(target: self, action: "tapped")
+        tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)

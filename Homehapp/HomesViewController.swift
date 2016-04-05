@@ -104,11 +104,11 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
     
     // MARK: Notification handlers
     
-    func homesUpdated(notification: NSNotification) {
+    func homesUpdated() {
         updateData()
     }
     
-    func userLoggedIn(notification: NSNotification) {
+    func userLoggedIn() {
         updateData()
         
         remoteService.fetchHomes() { response in
@@ -247,9 +247,9 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showLoginRequested", name: userLogoutNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "homesUpdated:", name: homesUpdatedNotification, object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLoggedIn:", name: loginSuccessNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(showLoginRequested), name: userLogoutNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(homesUpdated), name: homesUpdatedNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(userLoggedIn), name: loginSuccessNotification, object: nil);
         
         navigationController?.navigationBarHidden = true
         collectionView.registerNib(UINib(nibName: "HomeCell", bundle: nil), forCellWithReuseIdentifier: "HomeCell")
@@ -266,7 +266,7 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
         }
         
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: Selector("pullRefresh"), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(pullRefresh), forControlEvents: UIControlEvents.ValueChanged)
         self.collectionView.addSubview(refreshControl)
         self.refreshControl = refreshControl
         self.collectionView.alwaysBounceVertical = true
