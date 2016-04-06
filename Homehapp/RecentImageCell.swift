@@ -43,7 +43,7 @@ class RecentImageCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: "imageTapped")
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(RecentImageCell.imageTapped))
         thumbnailImageView!.addGestureRecognizer(tapRecognizer)
     }
 }

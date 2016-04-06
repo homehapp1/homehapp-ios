@@ -205,7 +205,7 @@ public class CachedImageView: QvikImageView {
     }
     
     private func commonInit() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "imageLoadedNotification:", name: ImageCache.cacheImageLoadedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CachedImageView.imageLoadedNotification(_:)), name: ImageCache.cacheImageLoadedNotification, object: nil)
     }
 
     required public init?(coder: NSCoder) {

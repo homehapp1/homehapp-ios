@@ -129,7 +129,7 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
     // MARK: Private methods
     
     func tapped() {
-        UIApplication.sharedApplication().sendAction("resignFirstResponder", to: nil, from: nil, forEvent: nil)
+        UIApplication.sharedApplication().sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, forEvent: nil)
     }
     
     /// Returns the UITableView this view is part of, if any
@@ -330,7 +330,7 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
 
         mainImageView.fadeInColor = UIColor.whiteColor()
         
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: "tapped")
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(StoryHeaderCell.tapped))
         addGestureRecognizer(tapRecognizer)
     }
 }

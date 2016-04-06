@@ -52,7 +52,7 @@ public class TouchDetectView: UIView {
         userInteractionEnabled = true
         
         // Add tap recognizer for the image
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: "tapped")
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(TouchDetectView.tapped))
         addGestureRecognizer(tapRecognizer)
     }
     

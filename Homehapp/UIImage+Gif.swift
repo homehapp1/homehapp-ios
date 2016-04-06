@@ -9,47 +9,73 @@
 import UIKit
 import ImageIO
 
-//TODO yeah use this from the pod once he fixes it ..
-
 extension UIImage {
     
     public class func gifWithData(data: NSData) -> UIImage? {
+        // Create source from data
         guard let source = CGImageSourceCreateWithData(data, nil) else {
             print("SwiftGif: Source for the image does not exist")
             return nil
         }
+        
         return UIImage.animatedImageWithSource(source)
     }
     
-    public class func gifWithName(name: String) -> UIImage? {
-        guard let bundleURL = NSBundle.mainBundle().URLForResource(name, withExtension: "gif") else {
-            print("SwiftGif: This image named \"\(name)\" does not exist")
+    public class func gifWithURL(gifUrl:String) -> UIImage? {
+        // Validate URL
+        guard let bundleURL:NSURL? = NSURL(string: gifUrl)
+            else {
+                print("SwiftGif: This image named \"\(gifUrl)\" does not exist")
+                return nil
+        }
+        
+        // Validate data
+        guard let imageData = NSData(contentsOfURL: bundleURL!) else {
+            print("SwiftGif: Cannot turn image named \"\(gifUrl)\" into NSData")
             return nil
         }
+        
+        return gifWithData(imageData)
+    }
+    
+    public class func gifWithName(name: String) -> UIImage? {
+        // Check for existance of gif
+        guard let bundleURL = NSBundle.mainBundle()
+            .URLForResource(name, withExtension: "gif") else {
+                print("SwiftGif: This image named \"\(name)\" does not exist")
+                return nil
+        }
+        
+        // Validate data
         guard let imageData = NSData(contentsOfURL: bundleURL) else {
             print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
             return nil
         }
+        
         return gifWithData(imageData)
     }
     
     class func delayForImageAtIndex(index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
         
-        guard let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil) as? NSDictionary,
-            gifProperties = cfProperties[kCGImagePropertyGIFDictionary as NSString] as? NSDictionary else {
-                return delay
-        }
-
-        var delayTime = gifProperties[kCGImagePropertyGIFUnclampedDelayTime as NSString]
+        // Get dictionaries
+        let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
+        let gifProperties: CFDictionaryRef = unsafeBitCast(
+            CFDictionaryGetValue(cfProperties,
+                unsafeAddressOf(kCGImagePropertyGIFDictionary)),
+            CFDictionary.self)
         
-        if delayTime?.doubleValue == 0.0 {
-            delayTime = gifProperties[kCGImagePropertyGIFDelayTime as NSString]
+        // Get delay time
+        var delayObject: AnyObject = unsafeBitCast(
+            CFDictionaryGetValue(gifProperties,
+                unsafeAddressOf(kCGImagePropertyGIFUnclampedDelayTime)),
+            AnyObject.self)
+        if delayObject.doubleValue == 0 {
+            delayObject = unsafeBitCast(CFDictionaryGetValue(gifProperties,
+                unsafeAddressOf(kCGImagePropertyGIFDelayTime)), AnyObject.self)
         }
         
-        if let delayTime = delayTime {
-            delay = delayTime.doubleValue
-        }
+        delay = delayObject as! Double
         
         if delay < 0.1 {
             delay = 0.1 // Make sure they're not too fast
@@ -58,7 +84,9 @@ extension UIImage {
         return delay
     }
     
-    class func gcdForPair(var a: Int?, var _ b: Int?) -> Int {
+    class func gcdForPair(a: Int?, _ b: Int?) -> Int {
+        var a = a
+        var b = b
         // Check if one of them is nil
         if b == nil || a == nil {
             if b != nil {
@@ -110,8 +138,6 @@ extension UIImage {
         var images = [CGImageRef]()
         var delays = [Int]()
         
-        log.debug("\(count) images in GIF")
-        
         // Fill arrays
         for i in 0..<count {
             // Add image
@@ -121,7 +147,7 @@ extension UIImage {
             
             // At it's delay in cs
             let delaySeconds = UIImage.delayForImageAtIndex(Int(i),
-                source: source)
+                                                            source: source)
             delays.append(Int(delaySeconds * 1000.0)) // Seconds to ms
         }
         
@@ -134,7 +160,7 @@ extension UIImage {
             }
             
             return sum
-            }()
+        }()
         
         // Get frames
         let gcd = gcdForArray(delays)
@@ -153,8 +179,9 @@ extension UIImage {
         
         // Heyhey
         let animation = UIImage.animatedImageWithImages(frames,
-            duration: Double(duration) / 1000.0)
+                                                        duration: Double(duration) / 1000.0)
         
         return animation
-    }    
+    }
+    
 }

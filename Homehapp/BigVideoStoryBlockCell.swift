@@ -217,7 +217,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
             log.debug("Playing video, playback likely to keep up");
             
             NSNotificationCenter.defaultCenter().removeObserver(self)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "playEnded:", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BigVideoStoryBlockCell.playEnded(_:)), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
             
             if videoView.hidden {
                 videoView.alpha = 0.0
@@ -300,7 +300,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let tapHandler = UITapGestureRecognizer(target: self, action: "playPauseButtonPressed")
+        let tapHandler = UITapGestureRecognizer(target: self, action: #selector(BigVideoStoryBlockCell.playPauseButtonPressed))
         addGestureRecognizer(tapHandler)
     }
 }

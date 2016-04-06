@@ -61,7 +61,7 @@ class SelectStoryblockContentTypeViewController: UIViewController, UICollectionV
         dimmerView!.alpha = 0.0
         view.insertSubview(dimmerView!, belowSubview: selectionView)
 
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: "dimmerTapped")
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(SelectStoryblockContentTypeViewController.dimmerTapped))
         dimmerView!.addGestureRecognizer(tapRecognizer)
 
         selectionView.transform = CGAffineTransformMakeTranslation(0, selectionView.bounds.height)
