@@ -217,8 +217,8 @@ class SelectStoryblockContentTypeViewController: UIViewController, UICollectionV
                         pickedPhotos.append(image)
                         pickedOriginalURLs.append(getJPGAssetUrl(asset))
                     }
-                    
-                    if --remaining == 0 {
+                    remaining -= 1
+                    if remaining == 0 {
                         self.imageCallback?(images: pickedPhotos, originalImageAssetUrls: pickedOriginalURLs)
                     }
                 }

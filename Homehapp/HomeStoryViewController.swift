@@ -161,7 +161,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     /// Remove empty content blocks from the current story under editing
     private func removeEmptyContentBlocks() {
-        for var index = storyObject.storyBlocks.count - 1; index >= 0; --index {
+        for index in (storyObject.storyBlocks.count - 1).stride(through: 0, by: -1) {
             let storyBlock = storyObject.storyBlocks[index]
             if storyBlock.template == StoryBlock.Template.ContentBlock.rawValue {
                 if storyBlock.title == nil && storyBlock.mainText == nil ||
