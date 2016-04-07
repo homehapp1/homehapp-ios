@@ -1048,17 +1048,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             editableCell.setEditMode(editMode, animated: false)
             
             editableCell.resizeCallback = { [weak self] in
-                let contentOffset = tableView.contentOffset
                 UIView.setAnimationsEnabled(false)
                 tableView.beginUpdates()
                 tableView.endUpdates()
                 tableView.contentSize = tableView.sizeThatFits(CGSize(width: tableView.bounds.width, height: CGFloat.max))
-                
-                // Preserve content offset, but do not exceed the bottom of the tableview
-                let maxOffsetY = tableView.contentSize.height - tableView.bounds.height
-                let offsetY = min(maxOffsetY, contentOffset.y)
-                tableView.contentOffset = CGPoint(x: 0, y: offsetY)
-
                 UIView.setAnimationsEnabled(true)
                 
                 if let textView = UIResponder.getCurrentFirstResponder() as? ExpandingTextView {

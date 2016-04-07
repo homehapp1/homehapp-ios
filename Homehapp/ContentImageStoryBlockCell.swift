@@ -170,7 +170,7 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
 
         editTitleTextView.placeholderText = NSLocalizedString("edithomestory:content:image-title-placeholder", comment: "")
         
-        let singleTap = UITapGestureRecognizer(target: self, action:"tapDetected")
+        let singleTap = UITapGestureRecognizer(target: self, action:#selector(ContentImageStoryBlockCell.tapDetected))
         mainImageView.userInteractionEnabled = true
         mainImageView.addGestureRecognizer(singleTap)
         
