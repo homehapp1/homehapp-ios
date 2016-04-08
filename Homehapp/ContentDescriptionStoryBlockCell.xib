@@ -22,14 +22,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ai-E0-W07">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQ8-jL-B1G">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQ8-jL-B1G">
                                 <rect key="frame" x="30" y="30" width="260" height="40"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xXN-pp-iX3">
-                                <rect key="frame" x="25" y="30" width="270" height="40"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xXN-pp-iX3">
+                                <rect key="frame" x="25" y="22" width="270" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,9 +47,9 @@
                             <constraint firstAttribute="trailing" secondItem="XQ8-jL-B1G" secondAttribute="trailing" constant="30" id="HwM-cV-kqv"/>
                             <constraint firstAttribute="trailing" secondItem="xXN-pp-iX3" secondAttribute="trailing" constant="25" id="bHX-v7-a3A"/>
                             <constraint firstItem="xXN-pp-iX3" firstAttribute="leading" secondItem="8Ai-E0-W07" secondAttribute="leading" constant="25" id="eyA-Os-Okv"/>
-                            <constraint firstItem="xXN-pp-iX3" firstAttribute="top" secondItem="8Ai-E0-W07" secondAttribute="top" constant="30" id="hdO-fK-kSy"/>
+                            <constraint firstItem="xXN-pp-iX3" firstAttribute="top" secondItem="8Ai-E0-W07" secondAttribute="top" constant="22" id="hdO-fK-kSy"/>
                             <constraint firstItem="XQ8-jL-B1G" firstAttribute="top" secondItem="8Ai-E0-W07" secondAttribute="top" constant="30" id="kP1-65-reU"/>
-                            <constraint firstAttribute="bottom" secondItem="xXN-pp-iX3" secondAttribute="bottom" constant="30" id="uyz-Av-I7S"/>
+                            <constraint firstAttribute="bottom" secondItem="xXN-pp-iX3" secondAttribute="bottom" constant="20" id="uyz-Av-I7S"/>
                         </constraints>
                     </view>
                 </subviews>

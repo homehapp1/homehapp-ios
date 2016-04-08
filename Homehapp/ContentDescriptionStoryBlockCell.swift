@@ -17,16 +17,23 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
         didSet {
             if let mainText = storyBlock?.mainText {
                 descriptionLabel.text = mainText
-                descriptionTextView.text = mainText
             } else {
                 descriptionLabel.text = ""
                 descriptionTextView.text = ""
             }
+            descriptionTextView.scrollEnabled = true
         }
     }
     
     override func setEditMode(editMode: Bool, animated: Bool) {
         super.setEditMode(editMode, animated: animated)
+        
+        descriptionTextView.scrollEnabled = !editMode
+        if editMode {
+            descriptionTextView.text = descriptionLabel.text
+        } else {
+            descriptionTextView.text = ""
+        }
         
         // Sets hidden attributes of the controls according to state
         func setControlVisibility(allVisible allVisible: Bool = false) {
@@ -34,20 +41,12 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
             descriptionTextView.hidden = !(allVisible || editMode)
         }
         
-        // Sets alpha attributes of the controls according to state
-        func setControlAlphas() {
-            descriptionLabel.alpha = editMode ? 0.0 : 1.0
-            descriptionTextView.alpha = editMode ? 1.0 : 0.0
-        }
-        
         if !animated {
             setControlVisibility()
-            setControlAlphas()
         } else {
             setControlVisibility(allVisible: true)
             
             UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
-                setControlAlphas()
                 self.layoutIfNeeded()
                 }, completion: { finished in
                     setControlVisibility()
@@ -67,6 +66,7 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
             }
             
             updateCallback?()
+            resizeCallback?()
         }
     }
     
@@ -119,8 +119,8 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
         super.awakeFromNib()
         
         //titleTextView.placeholderText = NSLocalizedString("edithomestory:content:title-placeholder", comment: "")
-        layer.shouldRasterize = true
-        layer.rasterizationScale = 2.0
+        //layer.shouldRasterize = true
+        //layer.rasterizationScale = 2.0
         
         descriptionTextView.layer.addSublayer(borderLayer)
     }
@@ -129,7 +129,6 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
         super.layoutSubviews()
         
         updateBorder(descriptionTextView.bounds)
-        //descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(200)
     }
     
 }

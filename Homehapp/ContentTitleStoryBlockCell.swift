@@ -17,7 +17,6 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
         didSet {
             if let title = storyBlock?.title {
                 titleLabel.text = title
-                titleTextView.text = title
             } else {
                 titleLabel.text = ""
                 titleTextView.text = ""
@@ -28,26 +27,25 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
     override func setEditMode(editMode: Bool, animated: Bool) {
         super.setEditMode(editMode, animated: animated)
     
+        titleTextView.scrollEnabled = !editMode
+        if editMode {
+            titleTextView.text = titleLabel.text
+        } else {
+            titleTextView.text = ""
+        }
+        
         // Sets hidden attributes of the controls according to state
         func setControlVisibility(allVisible allVisible: Bool = false) {
             titleLabel.hidden = !(allVisible || !editMode)
             titleTextView.hidden = !(allVisible || editMode)
         }
         
-        // Sets alpha attributes of the controls according to state
-        func setControlAlphas() {
-            titleLabel.alpha = editMode ? 0.0 : 1.0
-            titleTextView.alpha = editMode ? 1.0 : 0.0
-        }
-        
         if !animated {
             setControlVisibility()
-            setControlAlphas()
         } else {
             setControlVisibility(allVisible: true)
             
             UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
-                setControlAlphas()
                 self.layoutIfNeeded()
                 }, completion: { finished in
                     setControlVisibility()
@@ -67,6 +65,7 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
             }
             
             updateCallback?()
+            resizeCallback?()
         }
     }
     
@@ -119,8 +118,8 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
         super.awakeFromNib()
         
         //titleTextView.placeholderText = NSLocalizedString("edithomestory:content:title-placeholder", comment: "")
-        layer.shouldRasterize = true
-        layer.rasterizationScale = 2.0
+        //layer.shouldRasterize = true
+        //layer.rasterizationScale = 2.0
       
         titleTextView.layer.addSublayer(borderLayer)
     }
