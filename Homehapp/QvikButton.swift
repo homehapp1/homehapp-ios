@@ -36,7 +36,7 @@ public class QvikButton: UIButton {
         let button = QvikButton(type: type)
         button.frame = frame
         button.pressedCallback = pressedCallback
-        button.addTarget(button, action: "pressed:", forControlEvents: .TouchUpInside)
+        button.addTarget(button, action: #selector(QvikButton.pressed(_:)), forControlEvents: .TouchUpInside)
         
         return button
     }

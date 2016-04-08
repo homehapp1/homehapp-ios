@@ -1239,7 +1239,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         allowEditMode = (appstate.authUserId == appstate.mostRecentlyOpenedHome?.createdBy?.id)
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 80
         
         tableView.registerNib(UINib(nibName: "HomeOwnerInfoCell", bundle: nil), forCellReuseIdentifier: "HomeOwnerInfoCell")
         tableView.registerNib(UINib(nibName: "BigVideoStoryBlockCell", bundle: nil), forCellReuseIdentifier: "BigVideoStoryBlockCell")

@@ -134,9 +134,9 @@ public class ExpandingTextView: UITextView {
             heightConstraint!.active = true
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "editingDidChange:", name: UITextViewTextDidBeginEditingNotification, object: self)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "editingDidChange:", name: UITextViewTextDidEndEditingNotification, object: self)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "textDidChange:", name: UITextViewTextDidChangeNotification,
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ExpandingTextView.editingDidChange(_:)), name: UITextViewTextDidBeginEditingNotification, object: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ExpandingTextView.editingDidChange(_:)), name: UITextViewTextDidEndEditingNotification, object: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(UITextInputDelegate.textDidChange(_:)), name: UITextViewTextDidChangeNotification,
             object: self)
         
         if placeholderLabel == nil {

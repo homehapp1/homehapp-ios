@@ -95,7 +95,7 @@ public extension UITableView {
             state.longPressRecognizer = nil
             
             if newValue {
-                let recognizer = UILongPressGestureRecognizer(target: self, action: "cellReorderLongPressHandler:")
+                let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(UITableView.cellReorderLongPressHandler(_:)))
                 recognizer.delaysTouchesBegan = true
                 recognizer.delaysTouchesEnded = true
                 state.delegateImpl = DelegateImpl()
