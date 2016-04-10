@@ -165,7 +165,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             let storyBlock = storyObject.storyBlocks[index]
             if storyBlock.template == StoryBlock.Template.ContentBlock.rawValue {
                 if storyBlock.title == nil && storyBlock.mainText == nil ||
-                    (storyBlock.title?.length == 0 && storyBlock.mainText?.length == 0)
+                    ((storyBlock.title == nil || storyBlock.title?.length == 0) &&
+                        (storyBlock.mainText == nil || storyBlock.mainText?.length == 0))
                 {
                     dataManager.performUpdates {
                         storyObject.storyBlocks.removeAtIndex(index)
