@@ -22,6 +22,7 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
                 descriptionTextView.text = ""
             }
             descriptionTextView.scrollEnabled = true
+            descriptionTextView.contentSize = descriptionTextView.bounds.size
         }
     }
     
@@ -118,11 +119,9 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        //titleTextView.placeholderText = NSLocalizedString("edithomestory:content:title-placeholder", comment: "")
-        //layer.shouldRasterize = true
-        //layer.rasterizationScale = 2.0
-        
         descriptionTextView.layer.addSublayer(borderLayer)
+        descriptionTextView.layoutManager.allowsNonContiguousLayout = true
+        descriptionTextView.dataDetectorTypes = .None
     }
     
     override func layoutSubviews() {

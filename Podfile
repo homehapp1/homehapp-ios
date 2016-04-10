@@ -21,6 +21,7 @@ pod 'Fabric'
 pod 'Crashlytics'
 pod 'GoogleMaps'
 pod 'Onboard'
+pod 'KMPlaceholderTextView', '~> 1.2.0'
 
 # For generating the Acknowledgements
 post_install do | installer |

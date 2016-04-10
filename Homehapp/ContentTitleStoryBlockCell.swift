@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import KMPlaceholderTextView
 
 class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate {
 
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var titleTextView: UITextView!
+    @IBOutlet private weak var titleTextView: KMPlaceholderTextView!
     
     override var storyBlock: StoryBlock? {
         didSet {
@@ -21,6 +22,8 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
                 titleLabel.text = ""
                 titleTextView.text = ""
             }
+            titleTextView.scrollEnabled = true
+            titleTextView.contentSize = titleTextView.bounds.size
         }
     }
     
@@ -117,10 +120,6 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        //titleTextView.placeholderText = NSLocalizedString("edithomestory:content:title-placeholder", comment: "")
-        //layer.shouldRasterize = true
-        //layer.rasterizationScale = 2.0
-      
         titleTextView.layer.addSublayer(borderLayer)
     }
     

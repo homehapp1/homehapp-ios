@@ -32,8 +32,8 @@
 
 "edithomestory:header-placeholder" = "ADD TITLE FOR YOUR HOME STORY";
 "editneighborhoodstory:header-placeholder" = "ADD TITLE FOR YOUR NEIGHBORHOOD";
-"edithomestory:content:title-placeholder" = "TITLE FOR YOUR POST";
-"edithomestory:content:image-title-placeholder" = "TITLE FOR THE IMAGE";
+"edithomestory:content:title-placeholder" = "Title for your post";
+"edithomestory:content:image-title-placeholder" = "Title for the image";
 "edithomestory:content:maintext-placeholder" = "Write something about your home or the pictures you post – what is your home life like?";
 
 "profileviewcontroller:logged-id" = "LOGGED IN WITH";

@@ -31,7 +31,6 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xXN-pp-iX3">
                                 <rect key="frame" x="25" y="22" width="270" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
@@ -62,7 +61,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptionLabel" destination="XQ8-jL-B1G" id="Bd5-dS-vmS"/>
-                <outlet property="descriptionTextView" destination="xXN-pp-iX3" id="g2V-wN-Gjy"/>
+                <outlet property="descriptionTextView" destination="xXN-pp-iX3" id="0c2-e2-nfu"/>
             </connections>
             <point key="canvasLocation" x="212" y="152"/>
         </tableViewCell>
