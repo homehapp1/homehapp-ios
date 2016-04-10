@@ -50,6 +50,9 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
     /// Pull to refresh
     private var refreshControl: UIRefreshControl?
     
+    /// Avoid multiple cell selection simultaneously with this flag
+    private var cellSelected = false
+    
     // MARK: Private methods
     
     private func updateData() {
@@ -139,10 +142,13 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
         
         cell.cellTappedCallback = { [weak self] in
             if let strongSelf = self {
-                if cell.isMyHomeCell && ((cell.home == nil) || !authService.isUserLoggedIn()) {
-                    strongSelf.showLoginRequested()
-                } else {
-                    strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomesToHomeStory, sender: cell)
+                if !strongSelf.cellSelected {
+                    strongSelf.cellSelected = true
+                    if cell.isMyHomeCell && ((cell.home == nil) || !authService.isUserLoggedIn()) {
+                        strongSelf.showLoginRequested()
+                    } else {
+                        strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomesToHomeStory, sender: cell)
+                    }
                 }
             }
         }
@@ -223,8 +229,14 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        cellSelected = false
+        
         topBarView.userInteractionEnabled = true
         topBarView.transform = CGAffineTransformIdentity
+        
+        // There's a bug in refrehsControl. Call end refreshing to avoid that
+        // http://stackoverflow.com/questions/24341192/uirefreshcontrol-stuck-after-switching-tabs-in-uitabbarcontroller
+        self.refreshControl?.endRefreshing()
         
         // Reload last selected cell since it may have been changed
         if appstate.accessToken != nil {
@@ -269,6 +281,7 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
         refreshControl.addTarget(self, action: #selector(pullRefresh), forControlEvents: UIControlEvents.ValueChanged)
         self.collectionView.addSubview(refreshControl)
         self.refreshControl = refreshControl
+        self.refreshControl!.layer.zPosition = -1;
         self.collectionView.alwaysBounceVertical = true
     }
 }
