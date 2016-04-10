@@ -477,6 +477,9 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                                 self.storyObject.localChanges = true
                             }
                             
+                            // Send updates to server if needed
+                            remoteService.sendAllUpdatesToServer(false)
+                            
                             if let thumbnailUrl = video.scaledThumbnailUrl {
                                 // Start retrieving the remote video thumbnail
                                 log.debug("Fetching thumbnail URL into the image cache: \(thumbnailUrl)")

@@ -375,6 +375,29 @@ class RemoteService: BaseRemoteService {
         })
     }
     
+    /** 
+     Send all modifications user made to server
+     @param forceSend if set to true, send updates to server regardles if 
+     localchanges have been marked to user objects
+    */
+    func sendAllUpdatesToServer(forceSend: Bool) {
+        if forceSend {
+            remoteService.updateCurrentUserOnServer()
+        }
+        if let home = dataManager.findMyHome() {
+            
+            if forceSend || home.localChanges {
+                remoteService.updateMyHomeOnServer()
+            }
+            
+            if let neighborhood = home.neighborhood {
+                if forceSend || neighborhood.localChanges {
+                    remoteService.updateMyNeighborhood(neighborhood)
+                }
+            }
+        }
+    }
+    
     init() {
         var additionalHeaders = [
             "X-Homehapp-Api-Key": "aa43ef70-85e6-4e98-b8fd-9494fd6c02a0",
