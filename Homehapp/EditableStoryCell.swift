@@ -27,7 +27,5 @@ protocol EditableStoryCell {
     var addImagesCallback: (Int? -> Void)? { get set } // Parameter is max number of images to add; nil = unlimited
 
     func setEditMode(editMode: Bool, animated: Bool)
-    func setTextEditMode(mode: StoryTextEditMode)
-    func getTextEditMode() -> StoryTextEditMode
 }
 

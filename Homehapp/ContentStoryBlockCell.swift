@@ -51,8 +51,6 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             mainTextLabel.text = storyBlock?.mainText
             editMainTextView.text = storyBlock?.mainText
             
-//            updateLayoutState()
-            
             // If content block is first cell, it should not have top margin
             if removeTopMargin {
                 titleLabelTopConstraint.constant = 0
@@ -72,50 +70,15 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     - returns: The text view that should become the next first responder, or nil if first responder should not change.
     */
     private func updateLayoutState() -> ExpandingTextView? {
-//        log.debug("updateLayoutState()")
-        
-        switch storyBlock!.layout {
-        case .Title:
-            // Show only title
-            titleLabelHeightConstraint.active = false
-            mainTextLabelHeightConstraint.active = true
-            editMainTextTopMarginConstraint.constant = 0
-            
-            editTitleTextView.shouldResize = true
-//            editTitleTextView.updateSize(notify: false)
-            editMainTextView.shouldResize = false
-            editMainTextView.heightConstraint.constant = 0
-            editMainTextView.placeholderText = ""
-            editMainTextView.hidden = true
-            
-            return editTitleTextView
-        case .Body:
-            // Show only main text
-            titleLabelHeightConstraint.active = true
-            mainTextLabelHeightConstraint.active = false
-            editMainTextTopMarginConstraint.constant = 0
-            mainTextLabelTopMarginConstraint.constant = 0
+        titleLabelHeightConstraint.active = false
+        mainTextLabelHeightConstraint.active = false
+        editMainTextTopMarginConstraint.constant = 0
+        mainTextLabelTopMarginConstraint.constant = 10
 
-            editTitleTextView.shouldResize = false
-            editTitleTextView.heightConstraint.constant = 0
-            editMainTextView.shouldResize = true
-//            editMainTextView.updateSize(notify: false)
+        editTitleTextView.shouldResize = true
+        editMainTextView.shouldResize = true
             
-            return editMainTextView
-        default:
-            // Show both
-            titleLabelHeightConstraint.active = false
-            mainTextLabelHeightConstraint.active = false
-            editMainTextTopMarginConstraint.constant = 0
-            mainTextLabelTopMarginConstraint.constant = 10
-
-            editTitleTextView.shouldResize = true
-//            editTitleTextView.updateSize(notify: false)
-            editMainTextView.shouldResize = true
-//            editMainTextView.updateSize(notify: false)
-            
-            return nil
-        }
+        return nil
     }
     
     // MARK: Public methods
@@ -161,45 +124,6 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         }
     }
     
-    override func setTextEditMode(mode: StoryTextEditMode) {
-        dataManager.performUpdates {
-            switch mode {
-            case .HeaderOnly:
-                storyBlock?.layout = .Title
-            case .BodyTextOnly:
-                storyBlock?.layout = .Body
-            case .HeaderAndBodyText:
-                storyBlock?.layout = .TitleAndBody
-            }
-        }
-
-        if let nextFirstResponder = updateLayoutState() {
-            nextFirstResponder.becomeFirstResponder()
-        }
-        
-        setNeedsLayout()
-        
-        UIView.animateWithDuration(toggleEditModeAnimationDuration) {
-            self.layoutIfNeeded()
-        }
-        
-        resizeCallback?()
-    }
-    
-    override func getTextEditMode() -> StoryTextEditMode {
-        if let layout = storyBlock?.layout {
-            switch layout {
-            case .Title:
-                return .HeaderOnly
-            case .Body:
-                return .BodyTextOnly
-            case .TitleAndBody:
-                return .HeaderAndBodyText
-            }
-        }
-        return .HeaderAndBodyText
-    }
-    
     // MARK: From UITextViewDelegate
 
     func textViewDidEndEditing(textView: UITextView) {
@@ -214,6 +138,7 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             }
             
             updateCallback?()
+            //resizeCallback?()
         }
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 /**
  Displays home information that user can edit
@@ -108,7 +109,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         dataManager.performUpdates({
             home?.localChanges = true
         })
-        remoteService.updateMyHomeOnServer()
+        remoteService.updateMyHomeOnServer()  
     }
     
     @IBAction func backButtonPressed(button: UIButton) {
@@ -189,10 +190,28 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     /// Home info images
     private func addHomeImagesView() {
         let home = appstate.mostRecentlyOpenedHome!
-        if home.isMyHome() || home.images.count == 0 { // TODO Lari logical operator change
-            let homeImagesView = GalleryStoryBlockCell.instanceFromNib() as! GalleryStoryBlockCell
-            stackView.addArrangedSubview(homeImagesView)
+        if home.isMyHome() || home.images.count == 0 {
             
+            let homeImagesView = GalleryStoryBlockCell.instanceFromNib() as! GalleryStoryBlockCell
+            
+            stackView.addArrangedSubview(homeImagesView.contentView)
+            
+            // TODO remove just for testing
+            var gallery = List<Image>()
+            for block in home.storyBlocks {
+                if block.galleryImages.count > 0 {
+                    gallery = block.galleryImages
+                    break
+                }
+            }
+                
+            homeImagesView.show(.HomeInfo, images: gallery, title: "asdasd")
+            
+            
+            
+            
+            
+            // print("moi")
             // TODO Lari
         }
     }
@@ -263,7 +282,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         
         addHeaderView()
         addRoomsView()
-        addHomeImagesView()
+        //addHomeImagesView()
         addDescriptionView()
         addFeaturesView()
         addMapSection()
@@ -287,7 +306,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         bottomBarOriginalHeight = bottomBarViewHeightConstraint.constant
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "applicationWillResignActive:",
+            selector: #selector(HomeInfoViewController.applicationWillResignActive(_:)),
             name: "UIApplicationWillResignActiveNotification",
             object: nil)
     }

@@ -344,6 +344,7 @@
 		649B33EC1BE3A81E0012D2B1 /* OpenImageSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenImageSegue.swift; sourceTree = "<group>"; };
 		C5B4FE95B335476C6A5A2C70 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C696D9379466B577BF5B7760 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E5E38CCA6CE4D76380509CEF /* Pods.profiling (release).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.profiling (release).xcconfig"; path = "Pods/Target Support Files/Pods/Pods.profiling (release).xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -379,6 +380,7 @@
 			children = (
 				0443B7053F4A60CA339C2566 /* Pods.debug.xcconfig */,
 				C696D9379466B577BF5B7760 /* Pods.release.xcconfig */,
+				E5E38CCA6CE4D76380509CEF /* Pods.profiling (release).xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1213,6 +1215,7 @@
 /* Begin XCBuildConfiguration section */
 		49293C761BCFC806008BF9C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0443B7053F4A60CA339C2566 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1262,6 +1265,7 @@
 		};
 		49293C771BCFC806008BF9C6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C696D9379466B577BF5B7760 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1430,7 +1434,7 @@
 		};
 		4947DEF61C871E9C00FF7FFA /* Profiling (release) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C696D9379466B577BF5B7760 /* Pods.release.xcconfig */;
+			baseConfigurationReference = E5E38CCA6CE4D76380509CEF /* Pods.profiling (release).xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

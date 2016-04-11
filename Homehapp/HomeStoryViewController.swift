@@ -563,7 +563,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         if editMode {
             manageInsertionCursor(false)
         }
-        
     }
     
     private func toggleAddContentControls() {
@@ -771,7 +770,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         
         // Top margin should be removed if cell is first cell if the story or
         // If there is two subsequent content blocks (from latter top margin is removed)
-        if cell is ContentStoryBlockCell || cell is ContentImageStoryBlockCell || cell is GalleryStoryBlockCell {
+        if cell is ContentStoryBlockCell || cell is ContentImageStoryBlockCell || cell is GalleryStoryBlockCell  || cell is ContentDescriptionStoryBlockCell || cell is ContentTitleStoryBlockCell {
             if let marginCell = cell as? BaseStoryBlockCell {
                 if indexPath.row == 1 || (!home.isMyHome() && (indexPath.row > 1 && home.storyBlocks[indexPath.row - 2].template == "ContentBlock")) {
                     marginCell.removeTopMargin = true
@@ -839,6 +838,16 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         
         // Send updates to server
         sendStoryObjectToServer()
+        
+        UIView.setAnimationsEnabled(false)
+        tableView.beginUpdates()
+        tableView.endUpdates()
+        tableView.contentSize = tableView.sizeThatFits(CGSize(width: tableView.bounds.width, height: CGFloat.max))
+        UIView.setAnimationsEnabled(true)
+        
+        //if let textView = UIResponder.getCurrentFirstResponder() as? ExpandingTextView {
+        //    self.scrollTextViewIntoView(textView)
+        //}
     }
     
     @IBAction func backButtonPressed(button: UIButton) {

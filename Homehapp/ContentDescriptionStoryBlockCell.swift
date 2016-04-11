@@ -12,6 +12,12 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
 
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var descriptionTextView: UITextView!
+    
+    @IBOutlet private weak var descriptionLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var descriptionTextViewTopConstraint: NSLayoutConstraint!
+    
+    var descriptionLabelOriginalTopMarginConstraint: CGFloat = 0
+    var descriptionTextviewOriginalTopMarginConstraint: CGFloat = 0
  
     override var storyBlock: StoryBlock? {
         didSet {
@@ -23,6 +29,20 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
             }
             descriptionTextView.scrollEnabled = true
             descriptionTextView.contentSize = descriptionTextView.bounds.size
+            updateBorder(descriptionTextView.bounds)
+            
+            // If content block is first cell, it should not have top margin
+            /*
+            if removeTopMargin {
+                descriptionLabelTopConstraint.constant = 0
+                descriptionTextViewTopConstraint.constant = 0
+            } else {
+                descriptionLabelTopConstraint.constant = descriptionLabelOriginalTopMarginConstraint
+                descriptionTextViewTopConstraint.constant = descriptionTextviewOriginalTopMarginConstraint
+            }
+            setNeedsLayout()
+            layoutIfNeeded()
+             */
         }
     }
     
@@ -122,6 +142,9 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
         descriptionTextView.layer.addSublayer(borderLayer)
         descriptionTextView.layoutManager.allowsNonContiguousLayout = true
         descriptionTextView.dataDetectorTypes = .None
+        
+        //descriptionLabelOriginalTopMarginConstraint = descriptionLabelTopConstraint.constant
+        //descriptionTextviewOriginalTopMarginConstraint = descriptionTextViewTopConstraint.constant
     }
     
     override func layoutSubviews() {

@@ -97,15 +97,6 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
             }
         }
     }
-
-    func setTextEditMode(mode: StoryTextEditMode) {
-        // Base class implementation does nothing
-    }
-    
-    func getTextEditMode() -> StoryTextEditMode {
-        // Base class implementation does nothing
-        return .HeaderAndBodyText
-    }
     
     func keyboardWillShow(notification: NSNotification) {
         addGestureRecognizer(tapRecognizer!)

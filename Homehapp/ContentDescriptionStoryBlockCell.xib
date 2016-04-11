@@ -61,7 +61,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptionLabel" destination="XQ8-jL-B1G" id="Bd5-dS-vmS"/>
+                <outlet property="descriptionLabelTopConstraint" destination="kP1-65-reU" id="v8e-7l-SpJ"/>
                 <outlet property="descriptionTextView" destination="xXN-pp-iX3" id="0c2-e2-nfu"/>
+                <outlet property="descriptionTextViewTopConstraint" destination="hdO-fK-kSy" id="lXw-SA-m23"/>
             </connections>
             <point key="canvasLocation" x="212" y="152"/>
         </tableViewCell>

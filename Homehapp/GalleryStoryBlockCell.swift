@@ -13,16 +13,28 @@ import RealmSwift
  Displays a list of images.
  */
 class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    // Gallery image margin
-    private static let margin: CGFloat = 3.0
+    
+    enum GalleryType {
+        case Story
+        case HomeInfo
+    }
+    
+    /// Where we are displaying this gallery
+    var galleryType: GalleryType = .Story
+    
+    /// Gallery image margin
+    private let margin: CGFloat = 3.0
+    
+    /// How many images are horizontally next to each other
     private let maxImagesPerLine: Int = 3
 
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet private weak var titleTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet private weak var titleBottomMarginConstraint: NSLayoutConstraint!
     @IBOutlet private weak var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var addImageButton: UIButton!
+    @IBOutlet weak var containerView: UIView!
     
     var titleLabelOriginalTopMarginConstraint: CGFloat = 0
     
@@ -34,6 +46,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     let twoImageRowHeights: [CGFloat] = [150, 180, 200, 220, 240, 260]
     let threeImageRowHeights: [CGFloat] = [140, 170, 200, 230, 260]
     
+    var images: List<Image>? = nil
     var imageSizes: [CGSize] = []
     
     override var deleteCallback: (Void -> Void)? {
@@ -43,44 +56,54 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
             deleteButton = nil
         }
     }
-
+    
     override var storyBlock: StoryBlock? {
         didSet {
             if storyBlock != nil {
-                if storyBlock?.title?.length > 0 {
-                    titleLabel.text = storyBlock?.title?.uppercaseString
-                    titleBottomMarginConstraint.constant = 40;
-                    if removeTopMargin {
-                        titleTopMarginConstraint.constant = 0;
-                    } else {
-                        titleTopMarginConstraint.constant = 40;
-                    }
-                } else {
-                    titleLabel.text = ""
-                    titleBottomMarginConstraint.constant = 0;
-                    titleTopMarginConstraint.constant = 3;
-                }
-                if storyBlock?.galleryImages.count > 0 {
-                    calculateImageSizes()
-                }
-                collectionView.reloadData()
+                show(.Story, images: storyBlock!.galleryImages, title: storyBlock!.title)
             }
         }
+    }
+    
+    func show(galleryType: GalleryType, images: List<Image>, title: String?) {
+        self.galleryType = galleryType
+        self.images = images
+        if let title = title where title.length > 0 {
+            titleLabel.text = title
+            titleBottomMarginConstraint.constant = 40;
+            if removeTopMargin {
+                titleTopMarginConstraint.constant = 0;
+            } else {
+                titleTopMarginConstraint.constant = 40;
+            }
+        } else {
+            titleLabel.text = ""
+            titleBottomMarginConstraint.constant = 0;
+            titleTopMarginConstraint.constant = 3;
+        }
+        if images.count > 0 {
+            calculateImageSizes()
+        }
+        collectionView.reloadData()
     }
     
     // MARK: Private methods
     
     /// Deletes one image from the gallery; if the last image is deleted, the block-level delete callback is called
     private func handleImageDeletion(image: Image) {
-        if storyBlock!.galleryImages.count > 1 {
+        if images!.count > 1 {
             // Find my index - we cannot use captured indexPath as its values are not necessarily correct any more
-            if let myIndex = storyBlock!.galleryImages.indexOf(image) {
+            if let myIndex = images!.indexOf(image) {
                 // Delete selected image
-                let image = storyBlock!.galleryImages[myIndex]
+                let image = images![myIndex]
                 
                 dataManager.performUpdates {
                     image.deleted = true
-                    storyBlock!.galleryImages.removeAtIndex(myIndex)
+                    if galleryType == .Story {
+                        storyBlock!.galleryImages.removeAtIndex(myIndex)
+                    } else {
+                        appstate.mostRecentlyOpenedHome?.images.removeAtIndex(myIndex)
+                    }
                 }
                 
                 // Mark this home or neighbourhood as updated
@@ -93,10 +116,10 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                 calculateImageSizes()
                 resizeCallback?()
                 
-                collectionView.performBatchUpdates({ [weak self] in
-                    self?.collectionView.deleteItemsAtIndexPaths([NSIndexPath(forRow: myIndex, inSection: 0)])
-                    }, completion: { success in
-                })
+                //collectionView.performBatchUpdates({ [weak self] in
+                    collectionView.deleteItemsAtIndexPaths([NSIndexPath(forRow: myIndex, inSection: 0)])
+                //    }, completion: { success in
+                //})
             }
         } else {
             // Delete entire block with the remaining single image
@@ -113,76 +136,95 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
         
         // TODO remove and get collectionView width properly, not from screen!
         let bounds = UIScreen.mainScreen().bounds
-        let collectionViewWidth = bounds.size.width - 2 * GalleryStoryBlockCell.margin
+        let collectionViewWidth = bounds.size.width - 2 * margin
         
         var totalHeight: CGFloat = 0
         var imagesLeft = true
         var index = 0
         var imagesInLine = 0
         
-        if let images = storyBlock?.galleryImages {
-            while imagesLeft {
+        while imagesLeft {
                 
-                let image = images[index]
+            let image = images![index]
                 
-                // Maximum number of images in line
-                var imageAmount = defineImagesInLine(images, index: index)
+            // Maximum number of images in line
+            var imageAmount = defineImagesInLine(images!, index: index)
                 
-                // lets be careful on the overflow
-                if imageAmount > images.count - index {
-                    imageAmount = images.count - index
+            // lets be careful on the overflow
+            if imageAmount > images!.count - index {
+                imageAmount = images!.count - index
+            }
+                
+            // Two subsequent lines should not have same amount of images (if enough images left)
+            if imageAmount != imagesInLine {
+                imagesInLine = imageAmount
+            } else {
+                if imageAmount != 1 {
+                    imagesInLine = imageAmount - 1
                 }
+            }
                 
-                // Two subsequent lines should not have same amount of images (if enough images left)
-                if imageAmount != imagesInLine {
-                    imagesInLine = imageAmount
+            // Define row height
+            let imageRowHeight = heightForImageRow(image, imagesForLine: imagesInLine)
+            if totalHeight > 0 {
+                totalHeight += imageRowHeight + margin
+            } else {
+                totalHeight += imageRowHeight
+            }
+                
+            //Divide images for line based on proportional widths
+            var widthSumForLine: CGFloat = 0
+            for i in 0...imagesInLine - 1 {
+                let aspectRatio = CGFloat(images![index + i].width) / CGFloat(images![index + i].height)
+                widthSumForLine += aspectRatio
+            }
+                
+            var widthUsed: CGFloat = 0
+            for j in 0...imagesInLine - 1 {
+                let aspectRatio = CGFloat(images![index].width) / CGFloat(images![index].height)
+                if j == imagesInLine - 1 {
+                    // Last image takes always all the remaining space from the line
+                    let size = CGSizeMake(collectionViewWidth - widthUsed, imageRowHeight)
+                    imageSizes.append(size)
                 } else {
-                    if imageAmount != 1 {
-                        imagesInLine = imageAmount - 1
-                    }
+                    let size = CGSizeMake(floor((collectionViewWidth - CGFloat(imagesInLine - 1) * margin) * aspectRatio / widthSumForLine), imageRowHeight)
+                    imageSizes.append(size)
+                    widthUsed += size.width + margin
                 }
-                
-                // Define row height
-                let imageRowHeight = heightForImageRow(image, imagesForLine: imagesInLine)
-                if totalHeight > 0 {
-                    totalHeight += imageRowHeight + GalleryStoryBlockCell.margin
-                } else {
-                    totalHeight += imageRowHeight
-                }
-                
-                //Divide images for line based on proportional widths
-                var widthSumForLine: CGFloat = 0
-                for i in 0...imagesInLine - 1 {
-                    let aspectRatio = CGFloat(images[index + i].width) / CGFloat(images[index + i].height)
-                    widthSumForLine += aspectRatio
-                }
-                
-                var widthUsed: CGFloat = 0
-                for j in 0...imagesInLine - 1 {
-                    let aspectRatio = CGFloat(images[index].width) / CGFloat(images[index].height)
-                    if j == imagesInLine - 1 {
-                        // Last image takes always all the remaining space from the line
-                        let size = CGSizeMake(collectionViewWidth - widthUsed, imageRowHeight)
-                        imageSizes.append(size)
-                    } else {
-                        let size = CGSizeMake(floor((collectionViewWidth - CGFloat(imagesInLine - 1) * GalleryStoryBlockCell.margin) * aspectRatio / widthSumForLine), imageRowHeight)
-                        imageSizes.append(size)
-                        widthUsed += size.width + GalleryStoryBlockCell.margin
-                    }
-                    index += 1
-                }
+                index += 1
+            }
                
-                if index >= images.count {
-                    imagesLeft = false
-                }
+            if index >= images!.count {
+                imagesLeft = false
             }
         }
         
         collectionViewHeightConstraint.constant = totalHeight
+        if galleryType == .HomeInfo {
+            
+            // Add height constraint for content view
+            let heightConstraint = NSLayoutConstraint(
+                item: contentView,
+                attribute: NSLayoutAttribute.Height,
+                relatedBy: NSLayoutRelation.Equal,
+                toItem: nil,
+                attribute: NSLayoutAttribute.NotAnAttribute,
+                multiplier: 1,
+                constant: totalHeight)
+            
+            //contentView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activateConstraints([heightConstraint])
+            
+        }
     }
     
     /// Define how many images there is in line starting with image index
     private func defineImagesInLine(images: List<Image>, index: Int) -> Int {
+        
+        if galleryType == .HomeInfo {
+            return 3
+        }
+        
         var amount = 0
         if let thumbnail = images[index].thumbnailData {
             amount = thumbnail.arrayOfBytes().count % maxImagesPerLine
@@ -216,6 +258,11 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     /// Get height for image row starting with given image
     /// See widthPointsForImage method for reference
     private func heightForImageRow(image: Image, imagesForLine: Int) -> CGFloat {
+        
+        if galleryType == .HomeInfo {
+            return self.width / 3
+        }
+        
         var index = 0
         if let thumbnail = image.thumbnailData {
             index = thumbnail.arrayOfBytes().count % 15
@@ -239,7 +286,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     }
     
     private func indexPathForImage(image: Image) -> NSIndexPath? {
-        if let imageIndex = storyBlock?.galleryImages.indexOf(image) {
+        if let imageIndex = images!.indexOf(image) {
             return NSIndexPath(forRow: imageIndex, inSection: 0)
         } else {
             log.error("Image not found!")
@@ -277,12 +324,8 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     
     /// Returns true if this galleryBlock has given image
     func hasImage(image: Image) -> Bool {
-        guard let storyBlock = storyBlock else {
-            return false
-        }
-        
-        if storyBlock.galleryImages.count > 0 {
-            for blockImage in storyBlock.galleryImages {
+        if images!.count > 0 {
+            for blockImage in images! {
                 if image == blockImage {
                     return true
                 }
@@ -297,7 +340,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
         if let indexPath = indexPathForImage(image) {
             let layoutAttributes = collectionView.layoutAttributesForItemAtIndexPath(indexPath)
             let imageFrameInCollectionView = layoutAttributes!.frame
-            let imageFrame = CGRectMake(imageFrameInCollectionView.x + GalleryStoryBlockCell.margin, imageFrameInCollectionView.y + titleBottomMarginConstraint.constant + titleTopMarginConstraint.constant + titleLabel.height, imageFrameInCollectionView.width, imageFrameInCollectionView.height)
+            let imageFrame = CGRectMake(imageFrameInCollectionView.x + margin, imageFrameInCollectionView.y + titleBottomMarginConstraint.constant + titleTopMarginConstraint.constant + titleLabel.height, imageFrameInCollectionView.width, imageFrameInCollectionView.height)
             return imageFrame
         } else {
             return CGRectZero
@@ -313,19 +356,11 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     // MARK: From UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let storyBlock = storyBlock else {
-            return 0
-        }
-        
-        return storyBlock.galleryImages.count
+        return images!.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GalleryImageCell", forIndexPath: indexPath) as! GalleryImageCell
-
-        guard let storyBlock = storyBlock else {
-            return cell
-        }
         
         let imageSizeOption: GalleryImageCell.ImageSize
         let imageSize = imageSizes[indexPath.row]
@@ -335,7 +370,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
             imageSizeOption = .Medium
         }
         
-        cell.populate(storyBlock.galleryImages[indexPath.row], imageSize: imageSizeOption)
+        cell.populate(images![indexPath.row], imageSize: imageSizeOption)
         
         if editMode {
             cell.deleteCallback = { [weak self] in
@@ -356,7 +391,6 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     }
     
     override func prepareForReuse() {
-        storyBlock = nil
         super.prepareForReuse()
     }
     

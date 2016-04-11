@@ -30,7 +30,7 @@
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="999" verticalCompressionResistancePriority="1000" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="egG-0e-GY0">
                                 <rect key="frame" x="3" y="53" width="539" height="206.5"/>
-                                <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="0.0" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="999" constant="208" id="a6j-2B-LKD"/>
                                 </constraints>
@@ -57,7 +57,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.97647064920000004" green="0.10588236149999999" blue="0.47843140360000003" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="egG-0e-GY0" firstAttribute="leading" secondItem="ctV-Vu-ens" secondAttribute="leading" constant="3" id="DRl-rh-JlG"/>
                             <constraint firstItem="GJ4-sO-WFA" firstAttribute="top" secondItem="ctV-Vu-ens" secondAttribute="top" constant="10" id="Hn6-RG-Sx5"/>
@@ -88,6 +88,7 @@
                 <outlet property="addImageButton" destination="zzb-8K-wWx" id="Vmq-Q0-NhE"/>
                 <outlet property="collectionView" destination="egG-0e-GY0" id="o7P-gg-XZX"/>
                 <outlet property="collectionViewHeightConstraint" destination="a6j-2B-LKD" id="aDJ-37-dW7"/>
+                <outlet property="containerView" destination="ctV-Vu-ens" id="27e-bj-HUt"/>
                 <outlet property="titleBottomMarginConstraint" destination="Sdp-Jm-bIh" id="NqX-0y-tUG"/>
                 <outlet property="titleLabel" destination="GJ4-sO-WFA" id="hAk-09-3Cc"/>
                 <outlet property="titleTopMarginConstraint" destination="Hn6-RG-Sx5" id="Vjz-v3-Owj"/>

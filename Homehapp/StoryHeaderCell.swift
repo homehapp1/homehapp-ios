@@ -259,14 +259,6 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
         }
     }
     
-    func setTextEditMode(mode: StoryTextEditMode) {
-        // No implementation; only one mode supported.
-    }
-
-    func getTextEditMode() -> StoryTextEditMode {
-        return .HeaderAndBodyText
-    }
-    
     // MARK: From NSKeyValueObserving
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -305,6 +297,9 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             textView.resignFirstResponder()
+        }
+        if textView.text.length > 80 && text != "" {
+            return false
         }
         return true
     }
