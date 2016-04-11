@@ -145,7 +145,7 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         if self.selectedImage != nil && indexPath.row == currentImageIndex {
             let size = getSizeForOpenedImage()
             
-            //reset collectionview contentSize after image has been opened
+            // Reset collectionview contentSize after image has been opened
             collectionView.contentSize = CGSizeMake(size.width + CGFloat(images!.count - 1) * self.view.width, collectionView.contentSize.height)
             return size
         } else {
