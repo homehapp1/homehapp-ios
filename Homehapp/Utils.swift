@@ -202,6 +202,7 @@ func requestImageDataForAssetUrl(url: NSURL, callback: ((imageData: NSData) -> V
 func requestAssetVideoUrl(asset: PHAsset, callback: (assetUrl: NSURL?, error: NSError?) -> Void) {
     let options = PHVideoRequestOptions()
     options.deliveryMode = .HighQualityFormat
+    options.version = .Original
     
     // enable access to iCloud if video is only there
     options.networkAccessAllowed = true
