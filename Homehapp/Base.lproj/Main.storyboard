@@ -1010,7 +1010,7 @@
                                 <rect key="frame" x="-540" y="-540" width="1680" height="1680"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="t8I-Hc-H2r">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="t8I-Hc-H2r">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.97647064920000004" green="0.10588236149999999" blue="0.47843140360000003" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Emk-Gg-8ef" customClass="GalleryBrowserFlowLayout" customModule="Homehapp" customModuleProvider="target">
@@ -2562,11 +2562,11 @@
         <image name="tab_profile" width="22" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2oZ-Kv-ZPv"/>
+        <segue reference="I1G-aj-zTu"/>
         <segue reference="xcZ-UC-jSK"/>
         <segue reference="ZHq-AG-WSJ"/>
-        <segue reference="tLn-3J-sXe"/>
-        <segue reference="I1G-aj-zTu"/>
+        <segue reference="RfA-h3-Lwk"/>
+        <segue reference="2oZ-Kv-ZPv"/>
         <segue reference="1ZR-xE-oZE"/>
     </inferredMetricsTieBreakers>
 </document>

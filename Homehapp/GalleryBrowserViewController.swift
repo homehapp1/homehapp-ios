@@ -152,12 +152,16 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
             return CGSizeMake(self.view.width, self.view.height)
         }
     }
-    
+
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         // Close opened image if currently displayed is not the one that is open
-        if selectedImage != nil && !isCurrentImageOpened() {
-            selectedImage = nil
+        if let _ = selectedImage where !isCurrentImageOpened() {
+            self.selectedImage = nil
             collectionView.reloadData()
+            log.debug("Collection view reloaded.")
+
+            // Recalculate content offset to compensate in case a large "opened" image had offset it
+            collectionView.contentOffset = CGPoint(x: collectionView.width * CGFloat(currentImageIndex), y: 0)
         }
     }
 

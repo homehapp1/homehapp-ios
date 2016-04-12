@@ -9,6 +9,8 @@
 import UIKit
 
 class GalleryBrowserFlowLayout: UICollectionViewFlowLayout {
+    /// Velocity threshold for a "flick" for changing a page
+    private let flickVelocity: CGFloat = 0.3
 
     override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         log.debug("contentOffset = \(collectionView!.contentOffset), proposedContentOffset = \(proposedContentOffset), velocity = \(velocity)")
@@ -18,15 +20,28 @@ class GalleryBrowserFlowLayout: UICollectionViewFlowLayout {
         let attributesArray = layoutAttributesForElementsInRect(collectionView!.bounds)!.filter { $0.representedElementCategory == .Cell }
 
         if attributesArray.count == 1 {
-            // Only one cell visible; use the proposed content offset (no snapping)
-            return proposedContentOffset
+            // Only one cell visible; use the proposed content offset but limit it to the edges of the visible cell
+            let attributes = attributesArray.first!
+            let maxRight = attributes.frame.maxX - collectionView!.width
+            let snapOffset = min(max(proposedContentOffset.x, attributes.frame.minX), maxRight)
+
+            log.debug("Within large single cell; snapping to snapOffset: \(snapOffset)")
+
+            return CGPoint(x: snapOffset, y: 0)
         }
 
         var maxIntersect = CGFloat.min
         var snapOffset: CGFloat = 0
+        var leftmostAttributes: UICollectionViewLayoutAttributes? = nil
+        var rightmostAttributes: UICollectionViewLayoutAttributes? = nil
 
         // Several cells visible; find where to snap
         for attributes in attributesArray {
+            if leftmostAttributes == nil {
+                leftmostAttributes = attributes
+            }
+            rightmostAttributes = attributes
+
             // See how much of the attributes (cell) is visible on screen. The cell which has most visible part
             // is snapped to.
             let intersect = collectionView!.bounds.intersect(attributes.frame)
@@ -42,6 +57,12 @@ class GalleryBrowserFlowLayout: UICollectionViewFlowLayout {
 
                 maxIntersect = intersect.width
             }
+        }
+
+        if fabs(velocity.x) >= flickVelocity {
+            // Flick gesture, change to next page
+            snapOffset = (velocity.x > 0) ? rightmostAttributes!.frame.minX : leftmostAttributes!.frame.minX
+            log.debug("Flicked; snapping to snapOffset: \(snapOffset)")
         }
 
         return CGPoint(x: snapOffset, y: 0)
