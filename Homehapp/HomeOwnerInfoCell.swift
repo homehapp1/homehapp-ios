@@ -83,6 +83,9 @@ class HomeOwnerInfoCell: UITableViewCell {
                 likeCountLabel.hidden = false
                 likeCountLabel.text = "\(likeCount)"
             }
+            
+            // Enable like button only if user is logged in
+            likeButton.enabled = authService.isUserLoggedIn()
         }
     }
     
