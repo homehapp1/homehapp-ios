@@ -158,6 +158,7 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         if selectedImage != nil && !isCurrentImageOpened() {
             selectedImage = nil
             collectionView.reloadData()
+            log.debug("Collection view reloaded.")
         }
     }
 
