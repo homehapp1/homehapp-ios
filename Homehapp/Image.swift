@@ -9,7 +9,11 @@
 import Foundation
 import RealmSwift
 
-class Image: DeletableObject {
+func == (lhs: Image, rhs: Image) -> Bool {
+    return lhs === rhs
+}
+
+class Image: DeletableObject, Equatable {
     dynamic var width: Int = 0
     dynamic var height: Int = 0
     dynamic var url: String = ""
