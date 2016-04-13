@@ -126,6 +126,8 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        titleLabel.preferredMaxLayoutWidth = titleLabel.frame.size.width
+        super.layoutSubviews()
         updateBorder(titleTextView.bounds)
     }
     

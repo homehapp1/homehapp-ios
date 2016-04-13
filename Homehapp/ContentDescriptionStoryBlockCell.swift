@@ -13,8 +13,11 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var descriptionTextView: UITextView!
     
-    @IBOutlet private weak var descriptionLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var descriptionTextViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var descriptionLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var descriptionLabelBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private var descriptionTextViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var descriptionTextViewBottomConstraint: NSLayoutConstraint!
     
     var descriptionLabelOriginalTopMarginConstraint: CGFloat = 0
     var descriptionTextviewOriginalTopMarginConstraint: CGFloat = 0
@@ -28,8 +31,6 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
                 descriptionTextView.text = ""
             }
             descriptionTextView.scrollEnabled = true
-            descriptionTextView.contentSize = descriptionTextView.bounds.size
-            updateBorder(descriptionTextView.bounds)
             
             // If content block is first cell, it should not have top margin
             /*
@@ -52,8 +53,18 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
         descriptionTextView.scrollEnabled = !editMode
         if editMode {
             descriptionTextView.text = descriptionLabel.text
+            descriptionTextViewTopConstraint.active = true
+            descriptionTextViewBottomConstraint.active = true
+            descriptionLabelTopConstraint.active = false
+            descriptionLabelBottomConstraint.active = false
+            descriptionTextView.contentSize = descriptionTextView.bounds.size
+            updateBorder(descriptionTextView.bounds)
         } else {
             descriptionTextView.text = ""
+            descriptionTextViewTopConstraint.active = false
+            descriptionTextViewBottomConstraint.active = false
+            descriptionLabelTopConstraint.active = true
+            descriptionLabelBottomConstraint.active = true
         }
         
         // Sets hidden attributes of the controls according to state
@@ -65,13 +76,9 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
         if !animated {
             setControlVisibility()
         } else {
-            setControlVisibility(allVisible: true)
-            
-            UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
-                self.layoutIfNeeded()
-                }, completion: { finished in
-                    setControlVisibility()
-            })
+            self.layoutIfNeeded()
+            self.updateBorder(self.descriptionTextView.bounds)
+            setControlVisibility()
         }
     }
     
