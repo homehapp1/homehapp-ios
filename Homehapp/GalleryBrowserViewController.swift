@@ -31,7 +31,27 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     
     /// Margin between images and View boundaries when image not opened / enlarged
     private let imageMargin: CGFloat = 3
-    
+
+    private func imageSelected(image: Image) {
+        // Disable selection when gallery in landscape mode
+        if self.view.width > self.view.height {
+            return
+        }
+
+        // Select or deselect image
+        selectedImage = (selectedImage == nil) ? image : nil
+
+        // Reload collectionView and set correct contentOffset
+        collectionView.reloadData()
+
+        if selectedImage != nil {
+            let newSize = getSizeForOpenedImage()
+            collectionView.setContentOffset(CGPointMake(self.collectionView.contentOffset.x + (newSize.width - self.view.width) / 2, self.collectionView.contentOffset.y), animated: false)
+        } else {
+            collectionView.setContentOffset(CGPointMake(CGFloat(currentImageIndex) * self.view.width, 0), animated: false)
+        }
+    }
+
     func isCurrentImageOpened() -> Bool {
         if selectedImage != nil {
             let cell = collectionView(self.collectionView, cellForItemAtIndexPath: NSIndexPath(forRow: currentImageIndex, inSection: 0)) as! GalleryImageCell
@@ -65,6 +85,13 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GalleryImageCell", forIndexPath: indexPath) as! GalleryImageCell
         cell.populate(images![indexPath.row], contentMode: UIViewContentMode.ScaleAspectFit)
+        cell.enablePinchZoom = true
+        cell.tappedCallback = { [weak self] in
+            if let image = self?.images?[indexPath.row] {
+                self?.imageSelected(image)
+            }
+        }
+        
         if selectedImage != nil && indexPath.row == currentImageIndex {
             cell.setImageMargin(0)
         } else {
@@ -75,31 +102,31 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         
         return cell
     }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // Disable selection when gallery in landscape mode
-        if self.view.width > self.view.height {
-            return
-        }
-        
-        // Select or deselect image
-        if selectedImage == nil {
-            selectedImage = images![indexPath.row]
-        } else {
-            selectedImage = nil
-        }
 
-        // Reload collectionView and set correct contentOffset
-        collectionView.reloadData()
-        
-        if selectedImage != nil {
-            let newSize = getSizeForOpenedImage()
-            collectionView.setContentOffset(CGPointMake(self.collectionView.contentOffset.x + (newSize.width - self.view.width) / 2, self.collectionView.contentOffset.y), animated: false)
-        } else {
-            collectionView.setContentOffset(CGPointMake(CGFloat(currentImageIndex) * self.view.width, 0), animated: false)
-        }
-    }
-    
+//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        // Disable selection when gallery in landscape mode
+//        if self.view.width > self.view.height {
+//            return
+//        }
+//        
+//        // Select or deselect image
+//        if selectedImage == nil {
+//            selectedImage = images![indexPath.row]
+//        } else {
+//            selectedImage = nil
+//        }
+//
+//        // Reload collectionView and set correct contentOffset
+//        collectionView.reloadData()
+//        
+//        if selectedImage != nil {
+//            let newSize = getSizeForOpenedImage()
+//            collectionView.setContentOffset(CGPointMake(self.collectionView.contentOffset.x + (newSize.width - self.view.width) / 2, self.collectionView.contentOffset.y), animated: false)
+//        } else {
+//            collectionView.setContentOffset(CGPointMake(CGFloat(currentImageIndex) * self.view.width, 0), animated: false)
+//        }
+//    }
+
     // Dismiss view when user bounces enough from the edges
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if scrollView.contentSize.width > 0 &&

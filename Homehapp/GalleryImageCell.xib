@@ -16,10 +16,25 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsN-Ha-i6m">
                         <rect key="frame" x="0.0" y="0.0" width="358" height="324"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eo0-gA-hvl" customClass="CachedImageView" customModule="Homehapp" customModuleProvider="target">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="xhQ-ep-1x5">
                                 <rect key="frame" x="0.0" y="0.0" width="358" height="324"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eo0-gA-hvl" customClass="CachedImageView" customModule="Homehapp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="358" height="324"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="358" id="FzW-uI-ern"/>
+                                            <constraint firstAttribute="height" constant="324" id="W8C-48-615"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Eo0-gA-hvl" secondAttribute="bottom" id="AlM-ib-Eq0"/>
+                                    <constraint firstItem="Eo0-gA-hvl" firstAttribute="top" secondItem="xhQ-ep-1x5" secondAttribute="top" id="X04-Iz-R45"/>
+                                    <constraint firstItem="Eo0-gA-hvl" firstAttribute="leading" secondItem="xhQ-ep-1x5" secondAttribute="leading" id="g4f-V6-Uof"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eo0-gA-hvl" secondAttribute="trailing" id="ncA-at-I0O"/>
+                                </constraints>
+                            </scrollView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUc-82-thg">
                                 <rect key="frame" x="323" y="5" width="30" height="30"/>
                                 <constraints>
@@ -39,17 +54,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Eo0-gA-hvl" firstAttribute="top" secondItem="hsN-Ha-i6m" secondAttribute="top" id="6IZ-uT-RrQ"/>
+                            <constraint firstItem="xhQ-ep-1x5" firstAttribute="top" secondItem="hsN-Ha-i6m" secondAttribute="top" id="5uu-kb-dB0"/>
                             <constraint firstAttribute="trailing" secondItem="tUc-82-thg" secondAttribute="trailing" constant="5" id="LMx-Yq-Vzc"/>
                             <constraint firstItem="tgT-Ig-lko" firstAttribute="centerY" secondItem="hsN-Ha-i6m" secondAttribute="centerY" id="Poa-2G-AfK"/>
-                            <constraint firstItem="Eo0-gA-hvl" firstAttribute="leading" secondItem="hsN-Ha-i6m" secondAttribute="leading" id="Tex-tD-LwK"/>
+                            <constraint firstAttribute="trailing" secondItem="xhQ-ep-1x5" secondAttribute="trailing" id="TZ8-1q-OyQ"/>
+                            <constraint firstAttribute="bottom" secondItem="xhQ-ep-1x5" secondAttribute="bottom" id="Tg8-Ii-cbj"/>
                             <constraint firstAttribute="bottom" secondItem="tgT-Ig-lko" secondAttribute="bottom" constant="74" id="XsP-hf-OZa"/>
                             <constraint firstItem="tUc-82-thg" firstAttribute="top" secondItem="hsN-Ha-i6m" secondAttribute="top" constant="5" id="fGd-d8-r1L"/>
                             <constraint firstItem="tgT-Ig-lko" firstAttribute="leading" secondItem="hsN-Ha-i6m" secondAttribute="leading" constant="40" id="jBg-Ki-uIT"/>
-                            <constraint firstAttribute="bottom" secondItem="Eo0-gA-hvl" secondAttribute="bottom" id="kH2-iS-C08"/>
-                            <constraint firstAttribute="trailing" secondItem="Eo0-gA-hvl" secondAttribute="trailing" id="pkD-3P-vaB"/>
                             <constraint firstItem="tgT-Ig-lko" firstAttribute="centerX" secondItem="hsN-Ha-i6m" secondAttribute="centerX" id="qEc-r1-kwk"/>
                             <constraint firstAttribute="trailing" secondItem="tgT-Ig-lko" secondAttribute="trailing" constant="40" id="wrg-bk-a2X"/>
+                            <constraint firstItem="xhQ-ep-1x5" firstAttribute="leading" secondItem="hsN-Ha-i6m" secondAttribute="leading" id="zpY-T4-rwp"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -69,9 +84,12 @@
             <size key="customSize" width="358" height="324"/>
             <connections>
                 <outlet property="deleteButton" destination="tUc-82-thg" id="PQU-Jq-2Zj"/>
+                <outlet property="imageHeightConstraint" destination="W8C-48-615" id="7PO-EU-fXQ"/>
                 <outlet property="imageView" destination="Eo0-gA-hvl" id="tFT-xA-qki"/>
-                <outlet property="leadingConstraint" destination="Tex-tD-LwK" id="PZ2-6z-Pg9"/>
-                <outlet property="trailingConstraint" destination="pkD-3P-vaB" id="4KV-Vt-eux"/>
+                <outlet property="imageWidthConstraint" destination="FzW-uI-ern" id="Ovs-RC-QLJ"/>
+                <outlet property="leadingConstraint" destination="zpY-T4-rwp" id="b6c-nn-ok0"/>
+                <outlet property="scrollView" destination="xhQ-ep-1x5" id="U0W-BI-S5f"/>
+                <outlet property="trailingConstraint" destination="TZ8-1q-OyQ" id="7cH-af-TEW"/>
                 <outlet property="uploadProgressView" destination="tgT-Ig-lko" id="JZH-le-Shi"/>
             </connections>
             <point key="canvasLocation" x="173" y="118"/>

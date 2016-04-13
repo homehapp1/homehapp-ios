@@ -11,7 +11,7 @@ import UIKit
 /**
  Displays a single image in the gallery image grid.
 */
-class GalleryImageCell: UICollectionViewCell {
+class GalleryImageCell: UICollectionViewCell, UIScrollViewDelegate {
     enum ImageSize {
         /// Image size for small gallery items
         case Small
@@ -26,14 +26,29 @@ class GalleryImageCell: UICollectionViewCell {
 
     /// Button to delete given image
     @IBOutlet weak var deleteButton: UIButton!
-    
+
+    @IBOutlet private weak var scrollView: UIScrollView!
+
     /// Cell's leading and trailing constraints
     @IBOutlet private weak var leadingConstraint: NSLayoutConstraint!
     @IBOutlet private weak var trailingConstraint: NSLayoutConstraint!
-    
+
+    /// Image height + width constraints. These are in place for the scroll view.
+    @IBOutlet private weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var imageWidthConstraint: NSLayoutConstraint!
+
     /// Progress indicator for image upload
     @IBOutlet private weak var uploadProgressView: UIProgressView!
-    
+
+    /// Whether pinch-zoom is active on the cell
+    var enablePinchZoom = false {
+        didSet {
+            scrollView.delegate = enablePinchZoom ? self : nil
+        }
+    }
+
+    var tappedCallback: (Void -> Void)?
+
     private let imageMargin: CGFloat = 3
     
     private(set) var image: Image?
@@ -44,13 +59,24 @@ class GalleryImageCell: UICollectionViewCell {
         }
     }
     
-    // MARK: IBActions
-    
-    @IBAction func deleteButtonPressed(sender: UIButton) {
-        log.debug("gallery image delete button pressed")
-        deleteCallback?()
+    // MARK: Private methods
+
+    func tapped() {
+        tappedCallback?()
     }
-    
+
+    private func updateProgressBar() {
+        if let image = image where image.uploadProgress < 1.0 {
+            uploadProgressView.hidden = false
+            uploadProgressView.progress = image.uploadProgress
+            runOnMainThreadAfter(delay: 0.3, task: {
+                self.updateProgressBar()
+            })
+        } else {
+            uploadProgressView.hidden = true
+        }
+    }
+
     // MARK: Public methods
     
     func populate(image: Image, imageSize: ImageSize = .Large, contentMode: UIViewContentMode = UIViewContentMode.ScaleAspectFill) {
@@ -113,19 +139,36 @@ class GalleryImageCell: UICollectionViewCell {
             }
         })
     }
+
+    // MARK: IBActions
+
+    @IBAction func deleteButtonPressed(sender: UIButton) {
+        log.debug("gallery image delete button pressed")
+        deleteCallback?()
+    }
     
-    // MARK: Private methods
-    
-    private func updateProgressBar() {
-        if let image = image where image.uploadProgress < 1.0 {
-            uploadProgressView.hidden = false
-            uploadProgressView.progress = image.uploadProgress
-            runOnMainThreadAfter(delay: 0.3, task: {
-                self.updateProgressBar()
-            })
-        } else {
-            uploadProgressView.hidden = true
-        }
+    // MARK: From UIScrollViewDelegate
+
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return imageView
     }
 
+    // Lifecycle, etc.
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        log.debug("setting image size to \(width) x \(height)")
+        
+        imageWidthConstraint.constant = width
+        imageHeightConstraint.constant = height
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        addGestureRecognizer(tapRecognizer)
+    }
 }

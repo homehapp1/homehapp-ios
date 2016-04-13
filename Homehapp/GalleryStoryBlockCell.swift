@@ -361,7 +361,11 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GalleryImageCell", forIndexPath: indexPath) as! GalleryImageCell
-        
+
+        cell.tappedCallback = { [weak self] in
+            self?.imageSelectedCallback?(imageIndex: indexPath.row, imageView: cell.imageView)
+        }
+
         let imageSizeOption: GalleryImageCell.ImageSize
         let imageSize = imageSizes[indexPath.row]
         if imageSize.width <= Image.smallImageMaxDimensions.width && imageSize.height <= Image.smallImageMaxDimensions.height {
@@ -385,11 +389,11 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
 
     // MARK: From UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! GalleryImageCell
-        imageSelectedCallback?(imageIndex: indexPath.row, imageView: cell.imageView)
-    }
-    
+//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! GalleryImageCell
+//        imageSelectedCallback?(imageIndex: indexPath.row, imageView: cell.imageView)
+//    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
     }
