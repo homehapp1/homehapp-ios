@@ -14,6 +14,12 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var titleTextView: KMPlaceholderTextView!
     
+    @IBOutlet private var titleLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var titleLabelBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private var titleTextViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var titleTextViewBottomConstraint: NSLayoutConstraint!
+    
     override var storyBlock: StoryBlock? {
         didSet {
             if let title = storyBlock?.title {
@@ -23,7 +29,6 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
                 titleTextView.text = ""
             }
             titleTextView.scrollEnabled = true
-            titleTextView.contentSize = titleTextView.bounds.size
         }
     }
     
@@ -33,8 +38,18 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
         titleTextView.scrollEnabled = !editMode
         if editMode {
             titleTextView.text = titleLabel.text
+            titleTextViewTopConstraint.active = true
+            titleTextViewBottomConstraint.active = true
+            titleLabelTopConstraint.active = false
+            titleLabelBottomConstraint.active = false
+            titleTextView.contentSize = titleTextView.bounds.size
+            updateBorder(titleTextView.bounds)
         } else {
             titleTextView.text = ""
+            titleTextViewTopConstraint.active = false
+            titleTextViewBottomConstraint.active = false
+            titleLabelTopConstraint.active = true
+            titleLabelBottomConstraint.active = true
         }
         
         // Sets hidden attributes of the controls according to state
@@ -46,13 +61,9 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
         if !animated {
             setControlVisibility()
         } else {
-            setControlVisibility(allVisible: true)
-            
-            UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
-                self.layoutIfNeeded()
-                }, completion: { finished in
-                    setControlVisibility()
-            })
+            self.layoutIfNeeded()
+            self.updateBorder(self.titleTextView.bounds)
+            setControlVisibility()
         }
     }
     

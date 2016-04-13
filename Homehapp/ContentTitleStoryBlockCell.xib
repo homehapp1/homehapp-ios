@@ -29,7 +29,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="scu-f5-cw7" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
-                                <rect key="frame" x="25" y="22" width="270" height="57.5"/>
+                                <rect key="frame" x="25" y="22" width="270" height="55.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="17"/>
@@ -51,7 +51,7 @@
                             <constraint firstAttribute="trailing" secondItem="scu-f5-cw7" secondAttribute="trailing" constant="25" id="W4h-7H-FnF"/>
                             <constraint firstItem="d1i-Bs-FXs" firstAttribute="leading" secondItem="cLk-lw-D3A" secondAttribute="leading" constant="30" id="ccR-OT-62l"/>
                             <constraint firstItem="scu-f5-cw7" firstAttribute="top" secondItem="cLk-lw-D3A" secondAttribute="top" constant="22" id="fXc-nt-cNV"/>
-                            <constraint firstAttribute="bottom" secondItem="scu-f5-cw7" secondAttribute="bottom" constant="20" id="gwN-Is-2eZ"/>
+                            <constraint firstAttribute="bottom" secondItem="scu-f5-cw7" secondAttribute="bottom" constant="22" id="gwN-Is-2eZ"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -64,7 +64,11 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="titleLabel" destination="d1i-Bs-FXs" id="LxY-Qh-bFv"/>
-                <outlet property="titleTextView" destination="scu-f5-cw7" id="SNl-XH-R9R"/>
+                <outlet property="titleLabelBottomConstraint" destination="4xd-Pz-cNq" id="TKP-9I-Tf6"/>
+                <outlet property="titleLabelTopConstraint" destination="07G-4a-dpP" id="z3Y-V6-Zug"/>
+                <outlet property="titleTextView" destination="scu-f5-cw7" id="h9V-67-ACB"/>
+                <outlet property="titleTextViewBottomConstraint" destination="gwN-Is-2eZ" id="RnM-2r-1uB"/>
+                <outlet property="titleTextViewTopConstraint" destination="fXc-nt-cNV" id="sua-Gc-iNj"/>
             </connections>
         </tableViewCell>
     </objects>

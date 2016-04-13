@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import KMPlaceholderTextView
 
 class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate {
 
     @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var descriptionTextView: UITextView!
+    @IBOutlet private weak var descriptionTextView: KMPlaceholderTextView!
     
     @IBOutlet private var descriptionLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet private var descriptionLabelBottomConstraint: NSLayoutConstraint!

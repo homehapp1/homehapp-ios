@@ -28,14 +28,17 @@
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xXN-pp-iX3">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xXN-pp-iX3" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
                                 <rect key="frame" x="25" y="22" width="270" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Write something about your home..."/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="delegate" destination="Spn-Is-oIa" id="uQP-u8-Kw0"/>
+                                    <outlet property="delegate" destination="Spn-Is-oIa" id="9OE-Gy-PuS"/>
                                 </connections>
                             </textView>
                         </subviews>
@@ -60,10 +63,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="descriptionLabel" destination="XQ8-jL-B1G" id="Bd5-dS-vmS"/>
+                <outlet property="descriptionLabel" destination="XQ8-jL-B1G" id="2Ug-dO-Sal"/>
                 <outlet property="descriptionLabelBottomConstraint" destination="5Ac-WE-rRK" id="hj2-uc-IuT"/>
                 <outlet property="descriptionLabelTopConstraint" destination="kP1-65-reU" id="v8e-7l-SpJ"/>
-                <outlet property="descriptionTextView" destination="xXN-pp-iX3" id="0c2-e2-nfu"/>
+                <outlet property="descriptionTextView" destination="xXN-pp-iX3" id="wAj-hl-t3p"/>
                 <outlet property="descriptionTextViewBottomConstraint" destination="uyz-Av-I7S" id="PBj-ui-Oyq"/>
                 <outlet property="descriptionTextViewTopConstraint" destination="hdO-fK-kSy" id="lXw-SA-m23"/>
             </connections>
