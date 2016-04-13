@@ -141,7 +141,7 @@ public class BaseRemoteService {
         var remoteError = RemoteResponse.RemoteError.ServerError
         
         if let code = response?.statusCode where code < 200 || code >= 300 {
-            log.debug("Got non-success HTTP response: \(code)")
+            log.debug("Got non-success HTTP response: \(code) for call \(response?.URL?.absoluteString)")
             
             switch code {
             case 401:

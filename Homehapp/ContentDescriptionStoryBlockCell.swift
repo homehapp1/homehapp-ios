@@ -150,6 +150,8 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        descriptionLabel.preferredMaxLayoutWidth = descriptionLabel.frame.size.width
+        super.layoutSubviews()
         updateBorder(descriptionTextView.bounds)
     }
     

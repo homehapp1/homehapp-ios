@@ -97,7 +97,7 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
     }
     
     @IBAction func profileButtonPressed(sender: UIButton) {
-        if appstate.accessToken != nil {
+        if authService.isUserLoggedIn() {
             self.performSegueWithIdentifier(segueIdHomesToProfile, sender: self)
         } else {
             AuthenticationService.sharedInstance().logoutUser()
@@ -239,7 +239,7 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
         self.refreshControl?.endRefreshing()
         
         // Reload last selected cell since it may have been changed
-        if appstate.accessToken != nil {
+        if authService.isUserLoggedIn() {
             for cell in collectionView.visibleCells() {
                 let homeCell = cell as! HomeCell
                 if homeCell.home == appstate.mostRecentlyOpenedHome {

@@ -119,6 +119,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
     
     // MARK: Public methods
 
+    /// Notification received when playing video ended
     func playEnded(notification: NSNotification) {
         guard let player = videoView?.player else {
             log.error("No player set!");
@@ -139,6 +140,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
         }
     }
     
+    /// Called when play or pause button (same button) is pressed
     func playPauseButtonPressed() {        
         if player == nil {
             if let url = videoURL {
@@ -170,6 +172,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
         }
     }
     
+    /// Pause video and clear player item
     func clearPlayer() {
         playerItem?.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp", context: nil)
         pauseVideo()
@@ -178,6 +181,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
         playerItem = nil
     }
     
+    /// Pause playing video
     func pauseVideo() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
         player?.pause()
@@ -187,6 +191,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
         }
     }
     
+    /// Show loading indicator with animation
     func showLoading() {
         playPauseImageView.image = UIImage(named: "icon_loading")
         if playPauseImageView.layer.animationForKey(kRotationAnimationKey) == nil {
@@ -199,6 +204,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
         }
     }
     
+    /// Hide loading indicator with animation
     func hideLoading() {
         if playPauseImageView.layer.animationForKey(kRotationAnimationKey) != nil {
             UIView.animateWithDuration(0.4, animations: {
@@ -212,6 +218,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
     
     // MARK: Private methods
     
+    /// Starts video playback or show loading indicator
     private func playVideo() {
         if player?.rate == 0.0 && (playerItem?.playbackLikelyToKeepUp == true || playerItem?.playbackBufferFull == true) {
             log.debug("Playing video, playback likely to keep up");
@@ -253,6 +260,7 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
         }
     }
     
+    /// When video is uploaded, update progressbar in UI
     private func updateProgressBar() {
         if let video = storyBlock?.video where video.uploadProgress < 1.0 {
             uploadProgressView.hidden = false
