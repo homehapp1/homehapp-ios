@@ -194,8 +194,6 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
             
             let homeImagesView = GalleryStoryBlockCell.instanceFromNib() as! GalleryStoryBlockCell
             
-            stackView.addArrangedSubview(homeImagesView.contentView)
-            
             // TODO remove just for testing
             var gallery = List<Image>()
             for block in home.storyBlocks {
@@ -204,14 +202,12 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
                     break
                 }
             }
-                
+            log.debug("There are \(gallery.count) images")
             homeImagesView.show(.HomeInfo, images: gallery, title: "asdasd")
+            let content = homeImagesView.contentView
+            content.removeFromSuperview()
+            stackView.addArrangedSubview(content)
             
-            
-            
-            
-            
-            // print("moi")
             // TODO Lari
         }
     }
