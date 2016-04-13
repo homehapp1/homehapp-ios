@@ -34,7 +34,7 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
             descriptionTextView.scrollEnabled = true
             
             // If content block is first cell, it should not have top margin
-            /*
+            
             if removeTopMargin {
                 descriptionLabelTopConstraint.constant = 0
                 descriptionTextViewTopConstraint.constant = 0
@@ -42,9 +42,6 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
                 descriptionLabelTopConstraint.constant = descriptionLabelOriginalTopMarginConstraint
                 descriptionTextViewTopConstraint.constant = descriptionTextviewOriginalTopMarginConstraint
             }
-            setNeedsLayout()
-            layoutIfNeeded()
-             */
         }
     }
     
@@ -151,8 +148,8 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
         descriptionTextView.layoutManager.allowsNonContiguousLayout = true
         descriptionTextView.dataDetectorTypes = .None
         
-        //descriptionLabelOriginalTopMarginConstraint = descriptionLabelTopConstraint.constant
-        //descriptionTextviewOriginalTopMarginConstraint = descriptionTextViewTopConstraint.constant
+        descriptionLabelOriginalTopMarginConstraint = descriptionLabelTopConstraint.constant
+        descriptionTextviewOriginalTopMarginConstraint = descriptionTextViewTopConstraint.constant
     }
     
     override func layoutSubviews() {

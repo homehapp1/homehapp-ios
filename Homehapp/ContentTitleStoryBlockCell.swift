@@ -20,6 +20,9 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
     @IBOutlet private var titleTextViewTopConstraint: NSLayoutConstraint!
     @IBOutlet private var titleTextViewBottomConstraint: NSLayoutConstraint!
     
+    var titleLabelOriginalTopMarginConstraint: CGFloat = 0
+    var titleTextviewOriginalTopMarginConstraint: CGFloat = 0
+    
     override var storyBlock: StoryBlock? {
         didSet {
             if let title = storyBlock?.title {
@@ -29,6 +32,14 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
                 titleTextView.text = ""
             }
             titleTextView.scrollEnabled = true
+            
+            if removeTopMargin {
+                titleLabelTopConstraint.constant = 0
+                titleTextViewTopConstraint.constant = 0
+            } else {
+                titleLabelTopConstraint.constant = titleLabelOriginalTopMarginConstraint
+                titleTextViewTopConstraint.constant = titleTextviewOriginalTopMarginConstraint
+            }
         }
     }
     
@@ -132,6 +143,9 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
         super.awakeFromNib()
         
         titleTextView.layer.addSublayer(borderLayer)
+        
+        titleLabelOriginalTopMarginConstraint = titleLabelTopConstraint.constant
+        titleTextviewOriginalTopMarginConstraint = titleTextViewTopConstraint.constant
     }
     
     override func layoutSubviews() {
