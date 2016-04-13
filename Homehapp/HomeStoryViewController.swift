@@ -839,11 +839,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Send updates to server
         sendStoryObjectToServer()
         
-        UIView.setAnimationsEnabled(false)
+        //UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
         tableView.endUpdates()
         tableView.contentSize = tableView.sizeThatFits(CGSize(width: tableView.bounds.width, height: CGFloat.max))
-        UIView.setAnimationsEnabled(true)
+        //UIView.setAnimationsEnabled(true)
         
         //if let textView = UIResponder.getCurrentFirstResponder() as? ExpandingTextView {
         //    self.scrollTextViewIntoView(textView)
@@ -1061,11 +1061,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             editableCell.setEditMode(editMode, animated: false)
             
             editableCell.resizeCallback = { [weak self] in
-                UIView.setAnimationsEnabled(false)
+                //UIView.setAnimationsEnabled(false)
                 tableView.beginUpdates()
                 tableView.endUpdates()
                 tableView.contentSize = tableView.sizeThatFits(CGSize(width: tableView.bounds.width, height: CGFloat.max))
-                UIView.setAnimationsEnabled(true)
+                //UIView.setAnimationsEnabled(true)
                 
                 if let textView = UIResponder.getCurrentFirstResponder() as? ExpandingTextView {
                     self?.scrollTextViewIntoView(textView)
