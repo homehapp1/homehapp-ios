@@ -92,6 +92,21 @@ class Image: DeletableObject, Equatable {
         return width >= height
     }
     
+    /// Return Cloudinary public id for the image. Cloudinary public id is the identifier before file ending
+    static func getPublicId(url: String) -> String {
+        
+        var urlWithoutFileFormat = ""
+        if url.contains(".jpg") {
+            urlWithoutFileFormat = url.split(".jpg")[0]
+        } else if url.contains(".mp4") {
+            urlWithoutFileFormat = url.split(".mp4")[0]
+        }
+        
+        let urlParts = urlWithoutFileFormat.split("/")
+        let publicId = urlParts[urlParts.count - 1]
+        return publicId
+    }
+    
     /// Create Image object from JSON data
     static func fromJSON(imageJsonObject: AnyObject?) -> Image? {
         if let imageJson = imageJsonObject as? NSDictionary,

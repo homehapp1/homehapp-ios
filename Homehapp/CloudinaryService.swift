@@ -64,21 +64,6 @@ public class CloudinaryService {
         }
     }
     
-    /// Return Cloudinary public id for the image. Cloudinary public id is the identifier before file ending
-    private func getPublicId(url: String) -> String {
-        
-        var urlWithoutFileFormat = ""
-        if url.contains(".jpg") {
-            urlWithoutFileFormat = url.split(".jpg")[0]
-        } else if url.contains(".mp4") {
-            urlWithoutFileFormat = url.split(".mp4")[0]
-        }
-        
-        let urlParts = urlWithoutFileFormat.split("/")
-        let publicId = urlParts[urlParts.count - 1]
-        return publicId
-    }
-    
     // MARK: Public methods
     
     /// Returns a shared (singleton) instance.
@@ -243,8 +228,8 @@ public class CloudinaryService {
     /// Remove Image or Video from Cloudinary based on it's url
     func removeAsset(url: String, type: String) {
         
-        // Obtain asset public id from url
-        let publicId = getPublicId(url)
+        // Obtain asset public id from url. Image and video have similar public url form in Cloudinary
+        let publicId = Image.getPublicId(url)
         
         let uploader = CLUploader(cloudinary, delegate: nil)
         

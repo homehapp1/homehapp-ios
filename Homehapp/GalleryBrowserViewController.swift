@@ -261,6 +261,8 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         selectedImage = nil
         collectionView.alwaysBounceHorizontal = true
         closeButton.alpha = 0
+        
+        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
     }
 
     override func viewWillAppear(animated: Bool) {

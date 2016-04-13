@@ -118,7 +118,12 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     
     /// Returns true if this galleryBlock has given image
     func hasImage(image: Image) -> Bool {
-        return storyBlock?.image == image
+        if let img = storyBlock?.image {
+            if Image.getPublicId(img.url) == Image.getPublicId(image.url) {
+                return true
+            }
+        }
+        return false
     }
     
     /// Return current frame for given image

@@ -326,7 +326,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     func hasImage(image: Image) -> Bool {
         if images!.count > 0 {
             for blockImage in images! {
-                if image == blockImage {
+                if Image.getPublicId(image.url) == Image.getPublicId(blockImage.url) {
                     return true
                 }
             }

@@ -14,7 +14,7 @@ class GalleryBrowserFlowLayout: UICollectionViewFlowLayout {
 
     override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         log.debug("contentOffset = \(collectionView!.contentOffset), proposedContentOffset = \(proposedContentOffset), velocity = \(velocity)")
-
+        
         // Go through the layout attributes to find out the positioning of the cells. There is one attribute per
         // cell, so in our case, 1 or 2 at a time.
         let attributesArray = layoutAttributesForElementsInRect(collectionView!.bounds)!.filter { $0.representedElementCategory == .Cell }
