@@ -147,6 +147,17 @@ class RemoteService: BaseRemoteService {
             homeJson["floorplans"] = floorPlansJson
         }
         
+        // Images
+        if home.images.count > 0 {
+            var imagesJson = [AnyObject]()
+            for image in home.images {
+                if let imageJson = image.toJSON() {
+                    imagesJson.append(imageJson)
+                }
+            }
+            homeJson["images"] = imagesJson
+        }
+        
         return ["home": homeJson]
     }
     

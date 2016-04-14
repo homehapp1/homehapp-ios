@@ -86,14 +86,12 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     }
     
     @IBAction func editButtonPressed(sender: UIButton) {
-        backButton.hidden = true
-        saveButton.hidden = false
-        editButton.hidden = true
-        editMode = true
-        for view in stackView.subviews {
-            if let editableView = view as? EditableHomeInfoView {
-                editableView.setEditMode(true, animated: false)
-            }
+        if appstate.mostRecentlyOpenedHome!.isMyHome() { // just sanity check
+            backButton.hidden = true
+            saveButton.hidden = false
+            editButton.hidden = true
+            editMode = true
+            setSubviewEditModes()
         }
     }
     
@@ -123,6 +121,8 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         for view in stackView.subviews {
             if let editableView = view as? EditableHomeInfoView {
                 editableView.setEditMode(editMode, animated: false)
+            } else if let galleryView = view as? GalleryStoryBlockCell {
+                galleryView.setEditMode(editMode, animated: false)
             }
         }
     }
@@ -190,21 +190,111 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     /// Home info images
     private func addHomeImagesView() {
         let home = appstate.mostRecentlyOpenedHome!
-        if home.isMyHome() || home.images.count == 0 { // TODO change 0 when ready
+        if home.isMyHome() || home.images.count > 0 {
             let homeImagesView = GalleryStoryBlockCell.instanceFromNib() as! GalleryStoryBlockCell
             stackView.addArrangedSubview(homeImagesView)
             
-            // TODO remove just for testing
-            var gallery = List<Image>()
-            for block in home.storyBlocks {
-                if block.galleryImages.count > 0 {
-                    gallery = block.galleryImages
-                    break
-                }
-            }
-                
-            homeImagesView.show(.HomeInfo, images: gallery, title: "Home images")
+            homeImagesView.show(.HomeInfo, images: home.images, title: NSLocalizedString("gallerycell:home-images", comment: ""))
             
+            homeImagesView.addImagesCallback = { [weak self] maxImages in
+                self?.openImagePicker(maxSelections: maxImages, galleryView: homeImagesView)
+            }
+        }
+    }
+    
+    /// Image selection
+    private func openImagePicker(maxSelections maxSelections: Int? = nil, galleryView: GalleryStoryBlockCell? = nil) {
+        let selectController = SelectStoryblockContentTypeViewController.create()
+        
+        selectController.maxSelections = maxSelections
+        selectController.mediaType = .Image
+        
+        selectController.imageCallback = { [weak self] (images: [UIImage], originalImageAssetUrls: [String]?) in
+            assert(NSThread.isMainThread(), "Must be called on the main thread!")
+            
+            log.debug("selected \(images.count) images")
+            self?.imagesSelected(selectedImages: images, originalURLs: originalImageAssetUrls, galleryView: galleryView)
+        }
+        
+        navigationController!.pushViewController(selectController, animated: false)
+    }
+    
+    /// Upload images to cloudinary and assign image objects to home
+    private func imagesSelected(selectedImages selectedImages: [UIImage], originalURLs: [String]?, galleryView: GalleryStoryBlockCell?) {
+        assert(NSThread.isMainThread(), "Must be called on the main thread")
+        
+        var images = [Image]()
+        var imageMap = [UIImage: Image]()
+        
+        // Insert all the selected local images into the image cache
+        for selectedImage in selectedImages {
+            // Create a random UUID to represent the image's 'url'
+            let fakeUrl = NSUUID().UUIDString
+            
+            // Insert the image data into the image cache
+            ImageCache.sharedInstance().putImage(image: selectedImage, url: fakeUrl, storeOnDisk: true)
+            
+            // Create a new Image entry with the local-only data
+            let width = Int(selectedImage.width * selectedImage.scale)
+            let height = Int(selectedImage.height * selectedImage.scale)
+            var localUrl: String? = nil
+            if originalURLs != nil {
+                localUrl = originalURLs![selectedImages.indexOf(selectedImage)!]
+            }
+            
+            let image = Image(url: fakeUrl, width: width, height: height, local: true, localUrl: localUrl, backgroundColor: selectedImage.averageColor().hexColor())
+            image.uploadProgress = 0.0
+            images.append(image)
+            
+            // Leave a mapping from the original UIImage to the Image object created
+            imageMap[selectedImage] = image
+        }
+        
+        dataManager.performUpdatesInRealm { realm in
+            realm.add(images)
+        }
+        
+        dataManager.performUpdates {
+            appstate.mostRecentlyOpenedHome!.images.appendContentsOf(images)
+        }
+        
+        // Redraw after images added to image gallery
+        addSubviews()
+        
+        // Upload images to cloud
+        for i in 0...selectedImages.count - 1 {
+            let selectedImage = selectedImages[i]
+            
+            cloudStorage.uploadImage(selectedImage, progressCallback: { (progress) -> Void in
+                if let image = imageMap[selectedImage] {
+                    dataManager.performUpdates {
+                        image.uploadProgress = progress
+                    }
+                }
+                }, completionCallback: { (success: Bool, url: String?, width: Int?, height: Int?) -> Void in
+                    if success {
+                        // Fetch the Image object from the mapping
+                        if let image = imageMap[selectedImage], url = url {
+                            // Remove the original local image from the cache
+                            ImageCache.sharedInstance().removeImage(url: image.url, removeFromDisk: true)
+                            
+                            dataManager.performUpdates {
+                                // Image is now uploaded; mark it no longer local + update remote url
+                                image.url = url
+                                image.local = false
+                                image.uploadProgress = 1.0
+                            }
+                            
+                            let home = appstate.mostRecentlyOpenedHome
+                            dataManager.performUpdates({
+                                home?.localChanges = true
+                            })
+                            
+                            // Start fetching the (scaled) remote images
+                            ImageCache.sharedInstance().getImage(url: image.scaledUrl, loadPolicy: .Network)
+                        }
+                    }
+                })
         }
     }
     
@@ -253,20 +343,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     
     // MARK: Lifecycle
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if !editMode {
-            saveButton.hidden = true
-        }
-        
-        if appstate.mostRecentlyOpenedHome!.createdBy?.id != appstate.authUserId {
-            topBarHeightConstraint.constant = 0
-            closeButton.hidden = false
-        }
-        
-        toggleSettingsButtonVisibility()
-        
+    private func addSubviews() {
         for subview in stackView.arrangedSubviews {
             subview.removeFromSuperview()
             stackView.removeArrangedSubview(subview)
@@ -279,6 +356,25 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         addFeaturesView()
         addMapSection()
         
+        setSubviewEditModes()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !editMode {
+            saveButton.hidden = true
+        }
+        
+        if !appstate.mostRecentlyOpenedHome!.isMyHome() {
+            topBarHeightConstraint.constant = 0
+            closeButton.hidden = false
+        }
+        
+        toggleSettingsButtonVisibility()
+        
+        addSubviews()
+        
         neighborhoodButton.enabled = false
         if let openedHome = appstate.mostRecentlyOpenedHome {
             if openedHome.userNeighborhood?.storyBlocks.count > 0 || openedHome.isMyHome() {
@@ -286,10 +382,8 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
             }
         }
         
-        // Preload epc and floorplan when user opens home information????
+        // TODO Preload epc and floorplan when user opens home information????
         
-        
-        setSubviewEditModes()
     }
     
     override func viewDidLoad() {

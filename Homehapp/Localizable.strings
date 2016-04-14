@@ -50,6 +50,8 @@
 "homefeatures:services" = "SERVICES";
 "homefeatures:appliances" = "APPLIANCES";
 
+"gallerycell:home-images" = "HOME IMAGES";
+
 "tutorial:home-title" = "HI THERE!";
 "tutorial:home-label-1" = "This is where you can create your home and neighbourhood moments and stories.";
 "tutorial:home-label-2" = "Here you can freely express all the unique and lovely aspects of your home.";

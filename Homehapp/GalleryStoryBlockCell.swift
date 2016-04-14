@@ -81,12 +81,11 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
             titleBottomMarginConstraint.constant = 0;
             titleTopMarginConstraint.constant = margin;
         }
-        if images.count > 0 {
-            calculateImageSizes()
-        }
+        
+        calculateImageSizes()
         collectionView.reloadData()
         
-        // If home images, style titleLabel accordingly
+        // If displaying home images, style titleLabel accordingly
         if galleryType == .HomeInfo {
             titleLabel.text = titleLabel.text?.uppercaseString
             titleLabel.font = UIFont.fjallaOne(size: 34)
@@ -140,14 +139,15 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     
         imageSizes = []
         
-        // TODO remove and get collectionView width properly, not from screen!
-        let bounds = UIScreen.mainScreen().bounds
-        let collectionViewWidth = bounds.size.width - 2 * margin
-        
+        let collectionViewWidth = getCollectionViewWidth()
         var totalHeight: CGFloat = 0
         var imagesLeft = true
         var index = 0
         var imagesInLine = 0
+        
+        if images!.count == 0 {
+            imagesLeft = false
+        }
         
         while imagesLeft {
                 
@@ -218,7 +218,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                 toItem: nil,
                 attribute: NSLayoutAttribute.NotAnAttribute,
                 multiplier: 1,
-                constant: totalHeight + titleLabel.height + titleTopMarginConstraint.constant + titleBottomMarginConstraint.constant)
+                constant: max(totalHeight + titleLabel.height + titleTopMarginConstraint.constant + titleBottomMarginConstraint.constant, 100))
             
             NSLayoutConstraint.activateConstraints([heightConstraint])
             
@@ -267,7 +267,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     private func heightForImageRow(image: Image, imagesForLine: Int) -> CGFloat {
         
         if galleryType == .HomeInfo {
-            return self.width / 3
+            return getCollectionViewWidth() / 3
         }
         
         var index = 0
@@ -301,12 +301,15 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
         }
     }
     
+    private func getCollectionViewWidth() -> CGFloat {
+        let bounds = UIScreen.mainScreen().bounds
+        return bounds.size.width - 2 * margin
+    }
+    
     // MARK: Public methods
     
     override func setEditMode(editMode: Bool, animated: Bool) {
         super.setEditMode(editMode, animated: animated)
-        
-//        self.editMode = editMode
         
         for cell in collectionView.visibleCells() {
             if let galleryCell = cell as? GalleryImageCell {

@@ -197,7 +197,7 @@ class DataManager {
         home.slug = (json["slug"] as? String) ?? ""
         home.title = title // Change title for existing home if changed by user
         
-        // Home info images
+        // Home images
         if let homeImages = json["images"] as? NSArray {
             for homeImageJSON in homeImages {
                 if let homeImage = Image.fromJSON(homeImageJSON) {
