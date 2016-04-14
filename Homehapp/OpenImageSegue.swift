@@ -161,11 +161,11 @@ class OpenImageSegue: UIStoryboardSegue {
             window.addSubview(animationImageMaskView)
         
             // Calculate destination frame
-            let homeVC = dest as! HomeStoryViewController
-            if let destinationFrame = homeVC.getCurrentFrameForGalleryImage(currentImage!) {
-                destinationImageFrame = destinationFrame
+            if let homeVC = dest as? HomeStoryViewController {
+                if let destinationFrame = homeVC.getCurrentFrameForGalleryImage(currentImage!) {
+                    destinationImageFrame = destinationFrame
+                }
             }
-            
         }
     
         captureScreen()

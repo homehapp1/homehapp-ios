@@ -56,6 +56,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     private let segueIdHomeInfoToAddHomeLocation = "HomeInfoToAddHomeLocation"
     private let segueIdHomeInfoToAddHomeFeatures = "HomeInfoToAddHomeFeatures"
     private let segueIdHomeInfoToHomeInfoImage = "HomeInfoToHomeInfoImage"
+    private let segueIdHomeInfoToGalleryBrowser = "HomeInfoToGalleryBrowser"
     
     /// Height of the bottom bar, in units
     let bottomBarHeight: CGFloat = 48
@@ -70,6 +71,9 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     // Image Picker for EPC and floorplan
     var imagePicker = UIImagePickerController()
     var pickingMode: ImagePickingMode = .EPC
+    
+    /// Defines if image selection animation is started. Helps us to disable re-seletion during animation
+    var imageSelectionAnimationStarted = false
     
     // MARK: IBActions
     
@@ -198,6 +202,17 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
             
             homeImagesView.addImagesCallback = { [weak self] maxImages in
                 self?.openImagePicker(maxSelections: maxImages, galleryView: homeImagesView)
+            }
+            
+            homeImagesView.imageSelectedCallback = { [weak self] (imageIndex, imageView) in
+                if imageView.image != nil {
+                    if let strongSelf = self {
+                        if !strongSelf.imageSelectionAnimationStarted {
+                            strongSelf.imageSelectionAnimationStarted = true
+                            strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeInfoToGalleryBrowser, sender: GallerySegueData(images: Array(home.images), imageIndex: imageIndex, imageView: imageView))
+                        }
+                    }
+                }
             }
         }
     }
@@ -362,6 +377,8 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        imageSelectionAnimationStarted = false
+        
         if !editMode {
             saveButton.hidden = true
         }
@@ -416,6 +433,17 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
                     homeInfoImageViewController.image = appstate.mostRecentlyOpenedHome!.floorPlans[0]
                 }
             }
+        } else if segue.identifier == segueIdHomeInfoToGalleryBrowser {
+            let segueData = sender as! GallerySegueData
+            let galleryController = segue.destinationViewController as! GalleryBrowserViewController
+            let openImageSegue = segue as! OpenImageSegue
+            
+            if segueData.images.count > 0 {
+                galleryController.images = segueData.images
+            }
+            
+            galleryController.currentImageIndex = segueData.imageIndex
+            openImageSegue.openedImageView = segueData.imageView
         }
     }
     

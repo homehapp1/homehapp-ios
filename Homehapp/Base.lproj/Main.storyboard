@@ -1667,6 +1667,7 @@
                         <segue destination="ZHW-Do-5TK" kind="presentation" identifier="HomeInfoToAddHomeLocation" id="KB2-To-nEc"/>
                         <segue destination="udr-kT-xjX" kind="show" identifier="HomeInfoToAddHomeFeatures" id="9Ah-9k-dEr"/>
                         <segue destination="eo5-9X-1c7" kind="custom" identifier="HomeInfoToHomeInfoImage" customClass="FadeInSegue" customModule="Homehapp" customModuleProvider="target" id="2tT-XA-7x6"/>
+                        <segue destination="TKw-Fa-u3y" kind="custom" identifier="HomeInfoToGalleryBrowser" customClass="OpenImageSegue" customModule="Homehapp" animates="NO" id="eVb-sg-aKY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rup-3B-uUH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2562,11 +2563,11 @@
         <image name="tab_profile" width="22" height="26"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="I1G-aj-zTu"/>
-        <segue reference="xcZ-UC-jSK"/>
-        <segue reference="ZHq-AG-WSJ"/>
-        <segue reference="RfA-h3-Lwk"/>
         <segue reference="2oZ-Kv-ZPv"/>
-        <segue reference="1ZR-xE-oZE"/>
+        <segue reference="dGe-dO-Sax"/>
+        <segue reference="KB2-To-nEc"/>
+        <segue reference="eVb-sg-aKY"/>
+        <segue reference="nEd-vW-twW"/>
+        <segue reference="VaH-IM-T7w"/>
     </inferredMetricsTieBreakers>
 </document>

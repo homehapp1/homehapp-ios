@@ -12,6 +12,17 @@ import AVKit
 import MessageUI
 import RealmSwift
 
+class GallerySegueData {
+    let images: Array<Image>
+    let imageIndex: Int
+    let imageView: UIImageView
+    
+    init(images: Array<Image>, imageIndex: Int, imageView: UIImageView) {
+        self.images = images
+        self.imageIndex = imageIndex
+        self.imageView = imageView
+    }
+}
 
 /**
  Displays the home story for a home.
@@ -37,18 +48,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     private let segueIdUnwindHomesToHomeStory = "UnwindHomesToHomeStory"
     private let segueIdHomeStoryToNeighborhood = "HomeStoryToNeighborhood"
     private let segueIdHomeStoryToHomeSettings = "HomeStoryToHomeSettings"
-
-    class GallerySegueData {
-        let storyBlock: StoryBlock
-        let imageIndex: Int
-        let imageView: UIImageView
-        
-        init(storyBlock: StoryBlock, imageIndex: Int, imageView: UIImageView) {
-            self.storyBlock = storyBlock
-            self.imageIndex = imageIndex
-            self.imageView = imageView
-        }
-    }
 
     /// Back button
     @IBOutlet weak var backButton: UIButton!
@@ -1041,7 +1040,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                         if let strongSelf = self {
                             if !strongSelf.imageSelectionAnimationStarted {
                                 strongSelf.imageSelectionAnimationStarted = true
-                                strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeStoryToGalleryBrowser, sender: GallerySegueData(storyBlock: storyBlock, imageIndex: imageIndex, imageView: imageView))
+                                strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeStoryToGalleryBrowser, sender: GallerySegueData(images: Array(storyBlock.galleryImages), imageIndex: imageIndex, imageView: imageView))
                             }
                         }
                     }
@@ -1104,7 +1103,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                     if let strongSelf = self {
                         if !strongSelf.imageSelectionAnimationStarted {
                             strongSelf.imageSelectionAnimationStarted = true
-                            strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeStoryToGalleryBrowser, sender: GallerySegueData(storyBlock: storyBlock, imageIndex: imageIndex, imageView: imageView))
+                            strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeStoryToGalleryBrowser, sender: GallerySegueData(images: Array(arrayLiteral: storyBlock.image!), imageIndex: imageIndex, imageView: imageView))
                         }
                     }
                 }
@@ -1147,10 +1146,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             let galleryController = segue.destinationViewController as! GalleryBrowserViewController
             let openImageSegue = segue as! OpenImageSegue
             
-            if segueData.storyBlock.galleryImages.count > 0 {
-                galleryController.images = Array(segueData.storyBlock.galleryImages)
-            } else {
-                galleryController.images = [segueData.storyBlock.image!]
+            if segueData.images.count > 0 {
+                galleryController.images = segueData.images
             }
             
             galleryController.currentImageIndex = segueData.imageIndex

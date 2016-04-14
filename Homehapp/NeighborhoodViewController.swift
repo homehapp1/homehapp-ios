@@ -145,10 +145,8 @@ class NeighborhoodViewController: HomeStoryViewController {
             let galleryController = segue.destinationViewController as! GalleryBrowserViewController
             let openImageSegue = segue as! OpenImageSegue
         
-            if segueData.storyBlock.galleryImages.count > 0 {
-                galleryController.images = Array(segueData.storyBlock.galleryImages)
-            } else {
-                galleryController.images = [segueData.storyBlock.image!]
+            if segueData.images.count > 0 {
+                galleryController.images = segueData.images
             }
         
             galleryController.currentImageIndex = segueData.imageIndex
