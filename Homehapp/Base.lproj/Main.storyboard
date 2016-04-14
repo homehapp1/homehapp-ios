@@ -1067,6 +1067,7 @@
                         <outlet property="collectionView" destination="t8I-Hc-H2r" id="RwH-jC-pPp"/>
                         <segue destination="8Gj-2x-aY3" kind="unwind" identifier="CloseGallery" customClass="OpenImageSegue" customModule="Homehapp" customModuleProvider="target" unwindAction="prepareForUnwind:" id="wXx-F4-Wym"/>
                         <segue destination="8Gj-2x-aY3" kind="unwind" identifier="UnwindHomeStoryToGalleryBrowser" customClass="OpenImageSegue" customModule="Homehapp" customModuleProvider="target" unwindAction="prepareForUnwind:" id="c3y-RZ-haK"/>
+                        <segue destination="8Gj-2x-aY3" kind="unwind" identifier="UnwindHomeInfoToGalleryBrowser" customClass="OpenImageSegue" customModule="Homehapp" customModuleProvider="target" unwindAction="prepareForUnwind:" id="YHp-KK-pI9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gP-Dd-6rD" userLabel="First Responder" sceneMemberID="firstResponder"/>

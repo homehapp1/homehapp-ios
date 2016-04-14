@@ -901,7 +901,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         performSegueWithIdentifier(sequeIdHomeStoryToHomeInfo, sender: self)
     }
     
-    /// Do not remove?
+    /// Do not remove
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {}
 
     // MARK: Notification handlers

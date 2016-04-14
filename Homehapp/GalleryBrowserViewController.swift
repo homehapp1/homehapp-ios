@@ -9,6 +9,7 @@
 import UIKit
 
 let segueIdUnwindHomeStoryToGalleryBrowser = "UnwindHomeStoryToGalleryBrowser"
+let segueIdUnwindHomeInfoToGalleryBrowser = "UnwindHomeInfoToGalleryBrowser"
 
 /**
 Displays story block images in horizontal browsable scrollview
@@ -31,6 +32,8 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     
     /// Margin between images and View boundaries when image not opened / enlarged
     private let imageMargin: CGFloat = 3
+    
+    var galleryType: GalleryType = .Story
     
     func isCurrentImageOpened() -> Bool {
         if selectedImage != nil {
@@ -105,10 +108,15 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
         if scrollView.contentSize.width > 0 &&
             (scrollView.contentOffset.x < -scrollClosingDistance || scrollView.contentOffset.x >
                 scrollView.contentSize.width - scrollView.bounds.size.width + scrollClosingDistance) {
-                    closeButton.enabled = false
-                    performSegueWithIdentifier(segueIdUnwindHomeStoryToGalleryBrowser, sender: self)
-                    self.willClose = true
-                    closingOffset = scrollView.contentOffset.x
+            closeButton.enabled = false
+            if galleryType == .Story {
+                performSegueWithIdentifier(segueIdUnwindHomeStoryToGalleryBrowser, sender: self)
+            } else {
+                performSegueWithIdentifier(segueIdUnwindHomeInfoToGalleryBrowser, sender: self)
+            }
+            
+            self.willClose = true
+            closingOffset = scrollView.contentOffset.x
         }
     }
     
@@ -168,13 +176,17 @@ class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSour
     // MARK: IBAction handlers
     
     @IBAction func closeButtonPressed(button: UIButton) {
-        performSegueWithIdentifier(segueIdUnwindHomeStoryToGalleryBrowser, sender: self)
+        if galleryType == .Story {
+            performSegueWithIdentifier(segueIdUnwindHomeStoryToGalleryBrowser, sender: self)
+        } else {
+            performSegueWithIdentifier(segueIdUnwindHomeInfoToGalleryBrowser, sender: self)
+        }
     }
     
     // MARK: From UIViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == segueIdUnwindHomeStoryToGalleryBrowser {
+        if segue.identifier == segueIdUnwindHomeStoryToGalleryBrowser || segue.identifier == segueIdUnwindHomeInfoToGalleryBrowser {
             let openImageSegue = segue as! OpenImageSegue
             let cell = self.collectionView.cellForItemAtIndexPath(NSIndexPath(forRow: currentImageIndex, inSection: 0)) as! GalleryImageCell
             openImageSegue.openedImageView = cell.imageView

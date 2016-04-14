@@ -117,6 +117,9 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     @IBAction func backButtonPressed(button: UIButton) {
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    /// Do not remove
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {}
         
     // MARK: Private methods
     
@@ -352,6 +355,25 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         bottomBarView.transform = CGAffineTransformMakeTranslation(0, translation)
     }
     
+    func getCurrentFrameForGalleryImage(image: Image) -> CGRect? {
+        let window = UIApplication.sharedApplication().keyWindow
+        for subview in stackView.arrangedSubviews {
+            
+            // If image is in gallery get it's current frame
+            if let galleryCell = subview as? GalleryStoryBlockCell {
+                if galleryCell.hasImage(image) {
+                    let imageFrameInGallery = galleryCell.frameForImage(image)
+                    let galleryFrameInParentView = galleryCell.superview?.convertRect(galleryCell.frame, toView: window)
+                    let frame = CGRectMake(imageFrameInGallery.origin.x + galleryFrameInParentView!.origin.x, galleryFrameInParentView!.origin.y + imageFrameInGallery.origin.y, imageFrameInGallery.width, imageFrameInGallery.height)
+                    return frame
+                }
+            }
+            
+        }
+        
+        return nil
+    }
+    
     dynamic private func applicationWillResignActive(notification: NSNotification){
         self.saveButtonPressed(saveButton)
     }
@@ -444,6 +466,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
             
             galleryController.currentImageIndex = segueData.imageIndex
             openImageSegue.openedImageView = segueData.imageView
+            galleryController.galleryType = .HomeInfo
         }
     }
     

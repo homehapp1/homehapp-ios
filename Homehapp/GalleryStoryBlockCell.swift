@@ -9,15 +9,15 @@
 import UIKit
 import RealmSwift
 
+enum GalleryType {
+    case Story
+    case HomeInfo
+}
+
 /**
  Displays a list of images.
  */
 class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    enum GalleryType {
-        case Story
-        case HomeInfo
-    }
     
     /// Where we are displaying this gallery
     var galleryType: GalleryType = .Story

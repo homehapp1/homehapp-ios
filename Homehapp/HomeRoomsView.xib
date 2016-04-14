@@ -28,7 +28,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZM-6q-Mwb">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="280"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diQ-HA-7jf">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="diQ-HA-7jf">
                             <rect key="frame" x="103" y="36" width="34" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="34" id="OCh-JR-fz2"/>
@@ -37,13 +37,13 @@
                             <color key="textColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEDROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMP-SN-niL">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BEDROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMP-SN-niL">
                             <rect key="frame" x="89" y="88" width="62.5" height="19"/>
                             <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="15"/>
                             <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pz4-B1-RkM">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pz4-B1-RkM">
                             <rect key="frame" x="68" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Itr-TG-pVg"/>
@@ -54,7 +54,7 @@
                                 <action selector="removeBedroomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="LRC-It-sNP"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPu-E6-1Yv">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPu-E6-1Yv">
                             <rect key="frame" x="132" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="FTG-ZJ-wHi"/>
@@ -65,7 +65,7 @@
                                 <action selector="addBedroomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="h5Y-XV-gvH"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rt8-1K-uOS">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rt8-1K-uOS">
                             <rect key="frame" x="283" y="36" width="34" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="34" id="p1e-oO-mjB"/>
@@ -74,13 +74,13 @@
                             <color key="textColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BATHROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmt-GS-6pG">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BATHROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmt-GS-6pG">
                             <rect key="frame" x="265" y="88" width="70" height="19"/>
                             <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="15"/>
                             <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ojl-lh-Jd6">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ojl-lh-Jd6">
                             <rect key="frame" x="248" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="gfe-UI-5eG"/>
@@ -91,7 +91,7 @@
                                 <action selector="removeBathroomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="mfO-vK-hrd"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT7-Nd-ZvH">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nT7-Nd-ZvH">
                             <rect key="frame" x="312" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="g2h-cq-6Ec"/>
@@ -102,7 +102,7 @@
                                 <action selector="addBathroomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="PRO-Hp-enG"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-eY-njm">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-eY-njm">
                             <rect key="frame" x="463" y="36" width="34" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="34" id="GxH-8g-w7F"/>
@@ -111,13 +111,13 @@
                             <color key="textColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OTHER ROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zs5-Bd-65N">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="OTHER ROOMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zs5-Bd-65N">
                             <rect key="frame" x="440" y="88" width="80" height="19"/>
                             <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="15"/>
                             <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9M-go-cvd">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9M-go-cvd">
                             <rect key="frame" x="428" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="ZH8-NJ-QYL"/>
@@ -128,7 +128,7 @@
                                 <action selector="removeOtherRoomButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="tTZ-QO-PMn"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLP-Xf-Uze">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLP-Xf-Uze">
                             <rect key="frame" x="492" y="38" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="a1x-9Q-VXG"/>

@@ -166,6 +166,12 @@ class OpenImageSegue: UIStoryboardSegue {
                     destinationImageFrame = destinationFrame
                 }
             }
+            
+            if let homeInfoVC = dest as? HomeInfoViewController {
+                if let destinationFrame = homeInfoVC.getCurrentFrameForGalleryImage(currentImage!) {
+                    destinationImageFrame = destinationFrame
+                }
+            }
         }
     
         captureScreen()
