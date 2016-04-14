@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FjallaOne-Regular.ttf">
@@ -31,10 +31,10 @@
                                 <constraint firstAttribute="width" constant="100" id="lWy-BM-hyL"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltJ-de-AKs">
-                            <rect key="frame" x="10" y="140" width="580" height="43"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ltJ-de-AKs">
+                            <rect key="frame" x="30" y="140" width="540" height="43"/>
                             <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="34"/>
-                            <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZM1-Rh-pgL">
@@ -53,7 +53,7 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="mtz-Wo-EAT" firstAttribute="centerX" secondItem="nRe-yW-1RF" secondAttribute="centerX" id="9KT-rv-TnP"/>
-                        <constraint firstItem="ltJ-de-AKs" firstAttribute="leading" secondItem="nRe-yW-1RF" secondAttribute="leading" constant="10" id="BJl-34-bgf"/>
+                        <constraint firstItem="ltJ-de-AKs" firstAttribute="leading" secondItem="nRe-yW-1RF" secondAttribute="leading" constant="30" id="BJl-34-bgf"/>
                         <constraint firstItem="ZM1-Rh-pgL" firstAttribute="centerX" secondItem="nRe-yW-1RF" secondAttribute="centerX" id="BQN-n1-gBy"/>
                         <constraint firstAttribute="height" constant="300" id="FAz-b2-wGE"/>
                         <constraint firstItem="mtz-Wo-EAT" firstAttribute="top" secondItem="ZM1-Rh-pgL" secondAttribute="bottom" constant="2" id="eZa-Os-vtu"/>
@@ -61,7 +61,7 @@
                         <constraint firstItem="yZ4-An-VSp" firstAttribute="centerX" secondItem="nRe-yW-1RF" secondAttribute="centerX" id="ov4-Cx-bR4"/>
                         <constraint firstItem="ltJ-de-AKs" firstAttribute="top" secondItem="yZ4-An-VSp" secondAttribute="bottom" constant="10" id="uDI-OK-Uf4"/>
                         <constraint firstItem="ZM1-Rh-pgL" firstAttribute="top" secondItem="ltJ-de-AKs" secondAttribute="bottom" constant="8" id="uGU-ym-Lr0"/>
-                        <constraint firstAttribute="trailing" secondItem="ltJ-de-AKs" secondAttribute="trailing" constant="10" id="uLT-pf-bD7"/>
+                        <constraint firstAttribute="trailing" secondItem="ltJ-de-AKs" secondAttribute="trailing" constant="30" id="uLT-pf-bD7"/>
                     </constraints>
                 </view>
             </subviews>

@@ -190,11 +190,9 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     /// Home info images
     private func addHomeImagesView() {
         let home = appstate.mostRecentlyOpenedHome!
-        if home.isMyHome() || home.images.count == 0 {
-            
+        if home.isMyHome() || home.images.count == 0 { // TODO change 0 when ready
             let homeImagesView = GalleryStoryBlockCell.instanceFromNib() as! GalleryStoryBlockCell
-            
-            stackView.addArrangedSubview(homeImagesView.contentView)
+            stackView.addArrangedSubview(homeImagesView)
             
             // TODO remove just for testing
             var gallery = List<Image>()
@@ -205,14 +203,8 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
                 }
             }
                 
-            homeImagesView.show(.HomeInfo, images: gallery, title: "asdasd")
+            homeImagesView.show(.HomeInfo, images: gallery, title: "Home images")
             
-            
-            
-            
-            
-            // print("moi")
-            // TODO Lari
         }
     }
     
@@ -282,7 +274,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         
         addHeaderView()
         addRoomsView()
-        //addHomeImagesView()
+        addHomeImagesView()
         addDescriptionView()
         addFeaturesView()
         addMapSection()

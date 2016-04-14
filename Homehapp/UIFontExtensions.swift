@@ -17,4 +17,8 @@ extension UIFont {
     static func robotoBold(size size: CGFloat) -> UIFont? {
         return UIFont(name: "Roboto-Bold", size: size)
     }
+    
+    static func fjallaOne(size size: CGFloat) -> UIFont? {
+        return UIFont(name: "Fjalla One", size: size)
+    }
 }

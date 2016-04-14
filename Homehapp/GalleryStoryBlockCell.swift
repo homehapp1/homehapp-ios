@@ -79,12 +79,18 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
         } else {
             titleLabel.text = ""
             titleBottomMarginConstraint.constant = 0;
-            titleTopMarginConstraint.constant = 3;
+            titleTopMarginConstraint.constant = margin;
         }
         if images.count > 0 {
             calculateImageSizes()
         }
         collectionView.reloadData()
+        
+        // If home images, style titleLabel accordingly
+        if galleryType == .HomeInfo {
+            titleLabel.text = titleLabel.text?.uppercaseString
+            titleLabel.font = UIFont.fjallaOne(size: 34)
+        }
     }
     
     // MARK: Private methods
@@ -200,19 +206,20 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
         }
         
         collectionViewHeightConstraint.constant = totalHeight
+        
+        // If gallery type is home info we need to set height explicitly.
         if galleryType == .HomeInfo {
             
             // Add height constraint for content view
             let heightConstraint = NSLayoutConstraint(
-                item: contentView,
+                item: self,
                 attribute: NSLayoutAttribute.Height,
                 relatedBy: NSLayoutRelation.Equal,
                 toItem: nil,
                 attribute: NSLayoutAttribute.NotAnAttribute,
                 multiplier: 1,
-                constant: totalHeight)
+                constant: totalHeight + titleLabel.height + titleTopMarginConstraint.constant + titleBottomMarginConstraint.constant)
             
-            //contentView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activateConstraints([heightConstraint])
             
         }
