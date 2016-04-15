@@ -151,7 +151,6 @@ class ProfileViewController: BaseViewController, UIImagePickerControllerDelegate
                     })
                 }
             }
-            profileImage.imageFadeInDuration = 0.4
             profileImage.fadeInColor = UIColor.whiteColor()
             if let fadeInColor = user.profileImage!.backgroundColor {
                 profileImage.fadeInColor = UIColor(hexString: fadeInColor)

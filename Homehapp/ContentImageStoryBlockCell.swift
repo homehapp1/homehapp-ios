@@ -41,10 +41,14 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             editTitleTextView.text = storyBlock?.title
 
             mainImageView.imageUrl = storyBlock?.image?.mediumScaledUrl
-            mainImageView.thumbnailData = storyBlock?.image?.thumbnailData
+            if let thumbnailData = storyBlock?.image?.thumbnailData {
+                mainImageView.thumbnailData = thumbnailData
+            }
             
             if let fadeInColor = storyBlock?.image?.backgroundColor {
                 mainImageView.fadeInColor = UIColor(hexString: fadeInColor)
+            } else {
+                mainImageView.fadeInColor = UIColor.lightGrayColor()
             }
             
             if let image = storyBlock?.image where image.uploadProgress < 1.0 {

@@ -65,31 +65,22 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
         }
     }
     
-    func show(galleryType: GalleryType, images: List<Image>, title: String?) {
-        self.galleryType = galleryType
-        self.images = images
-        if let title = title where title.length > 0 {
-            titleLabel.text = title
-            titleBottomMarginConstraint.constant = 40;
-            if removeTopMargin {
-                titleTopMarginConstraint.constant = 0;
-            } else {
-                titleTopMarginConstraint.constant = 40;
+    override func setEditMode(editMode: Bool, animated: Bool) {
+        super.setEditMode(editMode, animated: animated)
+        
+        for cell in collectionView.visibleCells() {
+            if let galleryCell = cell as? GalleryImageCell {
+                if editMode {
+                    galleryCell.deleteCallback = { [weak self] in
+                        self?.handleImageDeletion(galleryCell.image!)
+                    }
+                } else {
+                    galleryCell.deleteCallback = nil
+                }
             }
-        } else {
-            titleLabel.text = ""
-            titleBottomMarginConstraint.constant = 0;
-            titleTopMarginConstraint.constant = margin;
         }
         
-        calculateImageSizes()
-        collectionView.reloadData()
-        
-        // If displaying home images, style titleLabel accordingly
-        if galleryType == .HomeInfo {
-            titleLabel.text = titleLabel.text?.uppercaseString
-            titleLabel.font = UIFont.fjallaOne(size: 34)
-        }
+        addImageButton.hidden = !editMode
     }
     
     // MARK: Private methods
@@ -121,10 +112,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                 calculateImageSizes()
                 resizeCallback?()
                 
-                //collectionView.performBatchUpdates({ [weak self] in
-                    collectionView.deleteItemsAtIndexPaths([NSIndexPath(forRow: myIndex, inSection: 0)])
-                //    }, completion: { success in
-                //})
+                collectionView.deleteItemsAtIndexPaths([NSIndexPath(forRow: myIndex, inSection: 0)])
             }
         } else {
             // Delete entire block with the remaining single image
@@ -308,22 +296,31 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     
     // MARK: Public methods
     
-    override func setEditMode(editMode: Bool, animated: Bool) {
-        super.setEditMode(editMode, animated: animated)
-        
-        for cell in collectionView.visibleCells() {
-            if let galleryCell = cell as? GalleryImageCell {
-                if editMode {
-                    galleryCell.deleteCallback = { [weak self] in
-                        self?.handleImageDeletion(galleryCell.image!)
-                    }
-                } else {
-                    galleryCell.deleteCallback = nil
-                }
+    func show(galleryType: GalleryType, images: List<Image>, title: String?) {
+        self.galleryType = galleryType
+        self.images = images
+        if let title = title where title.length > 0 {
+            titleLabel.text = title
+            titleBottomMarginConstraint.constant = 40;
+            if removeTopMargin {
+                titleTopMarginConstraint.constant = 0;
+            } else {
+                titleTopMarginConstraint.constant = 40;
             }
+        } else {
+            titleLabel.text = ""
+            titleBottomMarginConstraint.constant = 0;
+            titleTopMarginConstraint.constant = margin;
         }
         
-        addImageButton.hidden = !editMode
+        calculateImageSizes()
+        collectionView.reloadData()
+        
+        // If displaying home images, style titleLabel accordingly
+        if galleryType == .HomeInfo {
+            titleLabel.text = titleLabel.text?.uppercaseString
+            titleLabel.font = UIFont.fjallaOne(size: 34)
+        }
     }
     
     /// Returns imageView of index if exists
@@ -400,10 +397,6 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
         imageSelectedCallback?(imageIndex: indexPath.row, imageView: cell.imageView)
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
     // MARK: From UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -411,6 +404,10 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     }
     
     // MARK: Lifecycle etc.
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

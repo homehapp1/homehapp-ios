@@ -195,11 +195,11 @@ public class CachedImageView: QvikImageView {
                 if fadeInView == nil {
                     // No thumbnail data set; show a colored fade-in view
                     fadeInView = UIView(frame: self.bounds)
-                    fadeInView!.backgroundColor = fadeInColor
                     insertSubview(fadeInView!, atIndex: 0)
                 } else {
                     fadeInView!.frame = self.frame
                 }
+                fadeInView!.backgroundColor = fadeInColor
             }
         }
     }

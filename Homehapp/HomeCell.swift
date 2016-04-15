@@ -106,7 +106,7 @@ class HomeCell: UICollectionViewCell {
                         mainImageView.image = UIImage(named: "home_default_background")
                     }
                     
-                    if let backgroundColor = home!.image?.backgroundColor {
+                    if let backgroundColor = home!.image!.backgroundColor {
                         mainImageView.fadeInColor = UIColor(hexString: backgroundColor)
                     }
                 } else {

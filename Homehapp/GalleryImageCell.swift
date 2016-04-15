@@ -62,9 +62,13 @@ class GalleryImageCell: UICollectionViewCell {
             imageView.placeholderImage = nil
             imageView.imageUrl = image.smallScaledUrl
         case .Medium:
-            // Using medium image; use a smaller image as a placeholder if one is available in the in-memory cache
-            imageView.placeholderImage = ImageCache.sharedInstance().getImage(url: image.smallScaledUrl, loadPolicy: .Memory)
             imageView.imageUrl = image.scaledUrl
+            
+            // Using medium image; use a smaller image as a placeholder if one is available in the in-memory cache
+            if imageView.image == nil {
+                imageView.placeholderImage = ImageCache.sharedInstance().getImage(url: image.smallScaledUrl, loadPolicy: .Memory)
+            }
+            
         case .Large:
             // Using large image; use a smaller image as a placeholder if one is available in the in-memory cache
             imageView.imageUrl = image.scaledUrl
@@ -79,10 +83,9 @@ class GalleryImageCell: UICollectionViewCell {
         
         if imageView.image == nil && imageView.placeholderImage == nil {
             imageView.thumbnailData = image.thumbnailData
-            imageView.fadeInColor = image.backgroundColor != nil ? UIColor(hexString: image.backgroundColor!) : UIColor.whiteColor()
+            imageView.fadeInColor = image.backgroundColor != nil ? UIColor(hexString: image.backgroundColor!) : UIColor.lightGrayColor()
         }
 
-        imageView.imageFadeInDuration = 0.5
         imageView.contentMode = contentMode
         
         if image.uploadProgress < 1.0 {
