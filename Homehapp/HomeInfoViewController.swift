@@ -204,7 +204,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
             homeImagesView.show(.HomeInfo, images: home.images, title: NSLocalizedString("gallerycell:home-images", comment: ""))
             
             homeImagesView.addImagesCallback = { [weak self] maxImages in
-                self?.openImagePicker(maxSelections: maxImages, galleryView: homeImagesView)
+                self?.openImagePicker(maxSelections: 10, galleryView: homeImagesView)
             }
             
             homeImagesView.imageSelectedCallback = { [weak self] (imageIndex, imageView) in

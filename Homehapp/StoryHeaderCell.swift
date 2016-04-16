@@ -58,7 +58,7 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
 
             if let image = storyObject?.image {
                 
-                // TODO remove image url check when london-view removed from server
+                // TODO remove image url check when london-view removed from server in the future
                 if !image.url.contains("london-view") {
                     
                     //Start loading proper image for header

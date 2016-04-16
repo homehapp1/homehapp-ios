@@ -32,7 +32,7 @@
                                 </connections>
                             </button>
                             <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="tgT-Ig-lko">
-                                <rect key="frame" x="40" y="248" width="278" height="2"/>
+                                <rect key="frame" x="30" y="248" width="298" height="2"/>
                                 <color key="progressTintColor" red="0.87843137250000003" green="0.67450980390000004" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="trackTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
@@ -45,11 +45,11 @@
                             <constraint firstItem="Eo0-gA-hvl" firstAttribute="leading" secondItem="hsN-Ha-i6m" secondAttribute="leading" id="Tex-tD-LwK"/>
                             <constraint firstAttribute="bottom" secondItem="tgT-Ig-lko" secondAttribute="bottom" constant="74" id="XsP-hf-OZa"/>
                             <constraint firstItem="tUc-82-thg" firstAttribute="top" secondItem="hsN-Ha-i6m" secondAttribute="top" constant="5" id="fGd-d8-r1L"/>
-                            <constraint firstItem="tgT-Ig-lko" firstAttribute="leading" secondItem="hsN-Ha-i6m" secondAttribute="leading" constant="40" id="jBg-Ki-uIT"/>
+                            <constraint firstItem="tgT-Ig-lko" firstAttribute="leading" secondItem="hsN-Ha-i6m" secondAttribute="leading" constant="30" id="jBg-Ki-uIT"/>
                             <constraint firstAttribute="bottom" secondItem="Eo0-gA-hvl" secondAttribute="bottom" id="kH2-iS-C08"/>
                             <constraint firstAttribute="trailing" secondItem="Eo0-gA-hvl" secondAttribute="trailing" id="pkD-3P-vaB"/>
                             <constraint firstItem="tgT-Ig-lko" firstAttribute="centerX" secondItem="hsN-Ha-i6m" secondAttribute="centerX" id="qEc-r1-kwk"/>
-                            <constraint firstAttribute="trailing" secondItem="tgT-Ig-lko" secondAttribute="trailing" constant="40" id="wrg-bk-a2X"/>
+                            <constraint firstAttribute="trailing" secondItem="tgT-Ig-lko" secondAttribute="trailing" constant="30" id="wrg-bk-a2X"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

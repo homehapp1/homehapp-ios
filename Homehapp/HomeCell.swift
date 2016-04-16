@@ -82,7 +82,6 @@ class HomeCell: UICollectionViewCell {
             
             if isMyHomeCell {
                 if home!.image != nil {
-                   // mainImageView.imageUrl = home!.image?.scaledCoverImageUrl
                     mainImageView.imageUrl = home?.image?.smallScaledUrl
                     mainImageView.thumbnailData = home!.image?.thumbnailData
                     if let fadeInColor = home!.image?.backgroundColor {
