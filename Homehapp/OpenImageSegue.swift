@@ -199,10 +199,9 @@ class OpenImageSegue: UIStoryboardSegue {
                 }
         }
         
+        openedImageView?.hidden = true
         if self.unwinding {
             src.dismissViewControllerAnimated(false, completion: nil)
-        } else {
-            openedImageView?.hidden = true
         }
     }
 }
