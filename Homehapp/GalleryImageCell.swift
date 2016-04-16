@@ -97,6 +97,7 @@ class GalleryImageCell: UICollectionViewCell {
     func setImageMargin(margin: CGFloat) {
         leadingConstraint.constant = margin
         trailingConstraint.constant = margin
+        self.imageView.setNeedsLayout()
         self.layoutIfNeeded()
     }
     
