@@ -20,7 +20,17 @@ class HomeInfoHeaderView: UIView, EditableHomeInfoView {
         super.awakeFromNib()
         
         let home = appstate.mostRecentlyOpenedHome!
-        titleLabel.text = home.title.uppercaseString
+        
+        if home.title.length > 0 {
+            titleLabel.text = home.title.uppercaseString
+        } else {
+            if home.createdBy != nil {
+                if let firstName = home.createdBy!.firstName?.uppercaseString {
+                    titleLabel.text =  "\(firstName)\(NSLocalizedString("homestorycell:someones-home", comment: ""))"
+                }
+            }
+        }
+        
         if home.addressStreet.length > 0 {
             if home.addressCity.length > 0 {
                 if home.addressZipcode.length > 0 {

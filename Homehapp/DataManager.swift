@@ -574,9 +574,9 @@ class DataManager {
         let realm = try Realm()
 
         if let currentUser = findCurrentUser() {
-            return realm.objects(Home).filter("createdBy != %@ AND deleted != true AND (image != nil OR coverImage != nil)", currentUser)
+            return realm.objects(Home).filter("createdBy != %@ AND deleted != true AND (image != nil OR coverImage != nil)", currentUser).sorted("updatedAt", ascending: false)
         } else {
-            return realm.objects(Home).filter("deleted != true AND (image != nil OR coverImage != nil)")
+            return realm.objects(Home).filter("deleted != true AND (image != nil OR coverImage != nil)").sorted("updatedAt", ascending: false)
         }
     }
 

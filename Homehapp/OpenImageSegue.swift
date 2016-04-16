@@ -174,7 +174,9 @@ class OpenImageSegue: UIStoryboardSegue {
             }
         }
     
-        captureScreen()
+        if !unwinding {
+            captureScreen()
+        }
         
         UIView.animateWithDuration(0.4, animations: {
             emptyView.alpha = self.unwinding ? 0.0 : 1.0
