@@ -1100,10 +1100,12 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 }
                 
                 contentImageCell.imageSelectedCallback = { [weak self] (imageIndex, imageView) in
-                    if let strongSelf = self {
-                        if !strongSelf.imageSelectionAnimationStarted {
-                            strongSelf.imageSelectionAnimationStarted = true
-                            strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeStoryToGalleryBrowser, sender: GallerySegueData(images: Array(arrayLiteral: storyBlock.image!), imageIndex: imageIndex, imageView: imageView))
+                    if imageView.image != nil {
+                            if let strongSelf = self {
+                                if !strongSelf.imageSelectionAnimationStarted {
+                                    strongSelf.imageSelectionAnimationStarted = true
+                                    strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomeStoryToGalleryBrowser, sender: GallerySegueData(images: Array(arrayLiteral: storyBlock.image!), imageIndex: imageIndex, imageView: imageView))
+                                }
                         }
                     }
                 }

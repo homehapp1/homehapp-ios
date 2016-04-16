@@ -97,6 +97,7 @@ class GalleryImageCell: UICollectionViewCell {
     func setImageMargin(margin: CGFloat) {
         leadingConstraint.constant = margin
         trailingConstraint.constant = margin
+        self.imageView.fadeInFrame = calculateFadeInImageFrame()
         self.imageView.setNeedsLayout()
         self.layoutIfNeeded()
     }
@@ -119,6 +120,24 @@ class GalleryImageCell: UICollectionViewCell {
     }
     
     // MARK: Private methods
+    
+    // Calculate image frame for cachedImage fadeinView for fade in color view to be of correct size
+    private func calculateFadeInImageFrame() -> CGRect {
+        if let image = image {
+            let imageAspectRatio = CGFloat(image.width) / CGFloat(image.height)
+            let viewAspectRatio = width / height
+            if imageAspectRatio >= viewAspectRatio {
+                let resultWidth = min(width - 2 * imageMargin, CGFloat(image.width))
+                let resultHeight = resultWidth / imageAspectRatio
+                return CGRectMake(0, (height - resultHeight) / 2, resultWidth, resultHeight)
+            } else {
+                let resultHeight = min(height - 2 * imageMargin, CGFloat(image.height))
+                let resultWidth = resultHeight * imageAspectRatio
+                return CGRectMake(0, (height - resultHeight) / 2, resultWidth, resultHeight)
+            }
+        }
+        return CGRectZero
+    }
     
     private func updateProgressBar() {
         if let image = image where image.uploadProgress < 1.0 {

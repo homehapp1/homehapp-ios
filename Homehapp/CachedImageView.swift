@@ -33,6 +33,9 @@ public class CachedImageView: QvikImageView {
     /// Single-color placeholder view in case there is no placeholder image
     private var fadeInView: UIView? = nil
     
+    /// Frame for fade in color
+    public var fadeInFrame: CGRect = CGRectZero
+    
     /// Duration for fading in the loaded image, in case it is asynchronously loaded.
     @IBInspectable
     public var imageFadeInDuration: NSTimeInterval = 0.3
@@ -194,10 +197,12 @@ public class CachedImageView: QvikImageView {
             } else if let fadeInColor = fadeInColor where placeholderImageView == nil {
                 if fadeInView == nil {
                     // No thumbnail data set; show a colored fade-in view
-                    fadeInView = UIView(frame: self.bounds)
+                    let frame = fadeInFrame != CGRectZero ? fadeInFrame : self.frame
+                    fadeInView = UIView(frame: frame)
                     insertSubview(fadeInView!, atIndex: 0)
                 } else {
-                    fadeInView!.frame = self.frame
+                    let frame = fadeInFrame != CGRectZero ? fadeInFrame : self.frame
+                    fadeInView!.frame = frame
                 }
                 fadeInView!.backgroundColor = fadeInColor
             }
