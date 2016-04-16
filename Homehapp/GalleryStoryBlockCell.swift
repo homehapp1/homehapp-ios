@@ -144,21 +144,26 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
             // Maximum number of images in line
             var imageAmount = defineImagesInLine(images!, index: index)
                 
-            // lets be careful on the overflow
+            // lets be careful with the overflow
             if imageAmount > images!.count - index {
                 imageAmount = images!.count - index
             }
                 
             // Two subsequent lines should not have same amount of images (if enough images left)
-            if imageAmount != imagesInLine {
-                imagesInLine = imageAmount
-            } else {
-                if imageAmount != 1 {
-                    imagesInLine = imageAmount - 1
+            // Home information section is exception where we have 3 images in every line
+            if galleryType != .HomeInfo {
+                if imageAmount != imagesInLine {
+                    imagesInLine = imageAmount
+                } else {
+                    if imageAmount != 1 {
+                        imagesInLine = imageAmount - 1
+                    }
                 }
+            } else {
+                imagesInLine = imageAmount
             }
-                
-            // Define row height
+            
+            // Calculate row height
             let imageRowHeight = heightForImageRow(image, imagesForLine: imagesInLine)
             if totalHeight > 0 {
                 totalHeight += imageRowHeight + margin
@@ -166,7 +171,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                 totalHeight += imageRowHeight
             }
                 
-            //Divide images for line based on proportional widths
+            // Divide images for line based on their proportional widths
             var widthSumForLine: CGFloat = 0
             for i in 0...imagesInLine - 1 {
                 let aspectRatio = CGFloat(images![index + i].width) / CGFloat(images![index + i].height)
