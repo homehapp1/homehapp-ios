@@ -74,6 +74,8 @@ class BigVideoStoryBlockCell: BaseStoryBlockCell {
             snapshotImageView.imageUrl = video.scaledThumbnailUrl
             snapshotImageView.thumbnailData = video.thumbnailData
             snapshotImageView.fadeInColor = UIColor.lightGrayColor()
+            snapshotImageView.backgroundColor = UIColor.lightGrayColor()
+            videoView.backgroundColor = UIColor.lightGrayColor()
             playPauseImageView.alpha = playPauseImageViewInitialAlpha
             fullScreenButton.alpha = 0.0
             videoView.hidden = true

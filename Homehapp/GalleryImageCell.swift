@@ -83,8 +83,9 @@ class GalleryImageCell: UICollectionViewCell {
         
         if imageView.image == nil && imageView.placeholderImage == nil {
             imageView.thumbnailData = image.thumbnailData
-            imageView.fadeInColor = image.backgroundColor != nil ? UIColor(hexString: image.backgroundColor!) : UIColor.lightGrayColor()
         }
+        
+        imageView.fadeInColor = image.backgroundColor != nil ? UIColor(hexString: image.backgroundColor!) : UIColor.lightGrayColor()
 
         imageView.contentMode = contentMode
         
