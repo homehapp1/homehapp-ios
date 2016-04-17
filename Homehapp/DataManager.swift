@@ -370,20 +370,6 @@ class DataManager {
             
             neighborhood.image = Image.fromJSON(mainImage)
             neighborhood.title = title
-
-            if let locationJson = json["location"] as? [String: AnyObject] {
-                log.debug("locationJson = \(locationJson)")
-                
-                //TODO parse location data
-                
-//                    if let addressJson = locationJson["address"] as? NSDictionary {
-//                        home.addressApartment = (addressJson["apartment"] as? String) ?? ""
-//                        home.addressCity = (addressJson["city"] as? String) ?? ""
-//                        home.addressCountry = (addressJson["country"] as? String) ?? ""
-//                        home.addressStreet = (addressJson["street"] as? String) ?? ""
-//                        home.addressZipcode = (addressJson["zipcode"] as? String) ?? ""
-//                    }
-            }
             
             // Remove existing story blocks
             neighborhood.storyBlocks.forEach {
@@ -515,10 +501,14 @@ class DataManager {
                 self.storeAgents(realm: realm, agents: agents)
                 
                 for homeJson in homes {
-                    if let home = self.createHomeFromJson(homeJson, realm: realm) {
-                        realm.add(home, update: true)
-                    } else {
-                        log.error("Failed to parse objects from home json - ignoring this home.")
+                    if let createdByJson = homeJson["createdBy"] as? [String: AnyObject] {
+                        if createdByJson["id"] as? String != appstate.authUserId {
+                            if let home = self.createHomeFromJson(homeJson, realm: realm) {
+                                realm.add(home, update: true)
+                            } else {
+                                log.error("Failed to parse objects from home json - ignoring this home.")
+                            }
+                        }
                     }
                 }
                 try realm.commitWrite()
