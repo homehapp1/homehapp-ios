@@ -38,8 +38,9 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     override var storyBlock: StoryBlock? {
         didSet {
             titleLabel.text = storyBlock?.title
-            editTitleTextView.text = storyBlock?.title
-
+//            editTitleTextView.text = storyBlock?.title
+            editTitleTextView.text = nil
+            
             mainImageView.imageUrl = storyBlock?.image?.mediumScaledUrl
             if let thumbnailData = storyBlock?.image?.thumbnailData {
                 mainImageView.thumbnailData = thumbnailData
@@ -93,6 +94,13 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             
             editTitleTextView.hidden = !(allVisible || editMode)
             addImageButton.hidden = !editMode
+            
+            if !(allVisible || editMode) {
+                editTitleTextView.text = nil
+            } else {
+                editTitleTextView.text = titleLabel.text
+                editTitleTextView.textContainerInset = UIEdgeInsetsZero;
+            }
         }
         
         // Sets alpha attributes of the controls according to state

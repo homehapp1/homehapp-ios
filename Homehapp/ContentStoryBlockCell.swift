@@ -42,14 +42,14 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         didSet {
             if let title = storyBlock?.title {
                 titleLabel.text = title.uppercaseString
-                editTitleTextView.text = title
+                editTitleTextView.text = nil
             } else {
                 titleLabel.text = ""
-                editTitleTextView.text = ""
+                editTitleTextView.text = nil
             }
             
             mainTextLabel.text = storyBlock?.mainText
-            editMainTextView.text = storyBlock?.mainText
+            editMainTextView.text = nil
             
             // If content block is first cell, it should not have top margin
             if removeTopMargin {
@@ -93,6 +93,14 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
 
             editTitleTextView.hidden = !(allVisible || editMode)
             editMainTextView.hidden = !(allVisible || editMode)
+            if !(allVisible || editMode) {
+                editTitleTextView.text = nil
+                editMainTextView.text = nil
+            } else {
+                editTitleTextView.text = titleLabel.text
+                editMainTextView.text = mainTextLabel.text
+
+            }
         }
 
         // Sets alpha attributes of the controls according to state
