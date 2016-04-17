@@ -15,17 +15,14 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var mainTextLabel: UILabel!
     
-    @IBOutlet private weak var titleLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var titleLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var mainTextLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var editMainTextTopMarginConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var mainTextLabelTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet private weak var editTitleLabelTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var editTitleTextView: ExpandingTextView!
     @IBOutlet weak var editMainTextView: ExpandingTextView!
     
     var titleLabelOriginalTopMarginConstraint: CGFloat = 0
+    var editTitleLabelOriginalTopMarginConstraint: CGFloat = 0
     
     override var resizeCallback: (Void -> Void)? {
         didSet {
@@ -53,11 +50,11 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             
             // If content block is first cell, it should not have top margin
             if removeTopMargin {
-                titleLabelTopConstraint.constant = 0
+                titleLabelTopConstraint.constant = titleLabelOriginalTopMarginConstraint - editTitleLabelOriginalTopMarginConstraint
                 editTitleLabelTopConstraint.constant = 0
             } else {
                 titleLabelTopConstraint.constant = titleLabelOriginalTopMarginConstraint
-                editTitleLabelTopConstraint.constant = 30
+                editTitleLabelTopConstraint.constant = editTitleLabelOriginalTopMarginConstraint
             }
         }
     }
@@ -70,10 +67,10 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     - returns: The text view that should become the next first responder, or nil if first responder should not change.
     */
     private func updateLayoutState() -> ExpandingTextView? {
-        titleLabelHeightConstraint.active = false
-        mainTextLabelHeightConstraint.active = false
-        editMainTextTopMarginConstraint.constant = 0
-        mainTextLabelTopMarginConstraint.constant = 10
+//        titleLabelHeightConstraint.active = false
+//        mainTextLabelHeightConstraint.active = false
+//        editMainTextTopMarginConstraint.constant = 0
+//        mainTextLabelTopMarginConstraint.constant = 10
 
         editTitleTextView.shouldResize = true
         editMainTextView.shouldResize = true
@@ -90,12 +87,14 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         func setControlVisibility(allVisible allVisible: Bool = false) {
             titleLabel.hidden = !(allVisible || !editMode)
             mainTextLabel.hidden = !(allVisible || !editMode)
-
+                
             editTitleTextView.hidden = !(allVisible || editMode)
             editMainTextView.hidden = !(allVisible || editMode)
+            
             if !(allVisible || editMode) {
                 editTitleTextView.text = nil
                 editMainTextView.text = nil
+
             } else {
                 editTitleTextView.text = titleLabel.text
                 editMainTextView.text = mainTextLabel.text
@@ -112,8 +111,8 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             editMainTextView.alpha = editMode ? 1.0 : 0.0
         }
         
-        editTitleTextView.heightConstraint.active = editMode
-        editMainTextView.heightConstraint.active = editMode
+        editTitleLabelTopConstraint.active = editMode
+        titleLabelTopConstraint.active = !editMode
         
         updateLayoutState()
 
@@ -174,6 +173,7 @@ class ContentStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         editMainTextView.placeholderText = NSLocalizedString("edithomestory:content:maintext-placeholder", comment: "")
         
         titleLabelOriginalTopMarginConstraint = titleLabelTopConstraint.constant
+        editTitleLabelOriginalTopMarginConstraint = editTitleLabelTopConstraint.constant
         
         layer.shouldRasterize = true
         layer.rasterizationScale = 2.0
