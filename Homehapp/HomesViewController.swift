@@ -125,6 +125,7 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
         let loginController = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
         view.addSubview(loginController.view)
         addChildViewController(loginController)
+        cellSelected = false
     }
     
     // MARK: From UICollectionViewDataSource
@@ -145,6 +146,7 @@ class HomesViewController: BaseViewController, UICollectionViewDataSource, UICol
                 if !strongSelf.cellSelected {
                     strongSelf.cellSelected = true
                     if cell.isMyHomeCell && ((cell.home == nil) || !authService.isUserLoggedIn()) {
+                        AuthenticationService.sharedInstance().logoutUser()
                         strongSelf.showLoginRequested()
                     } else {
                         strongSelf.performSegueWithIdentifier(strongSelf.segueIdHomesToHomeStory, sender: cell)

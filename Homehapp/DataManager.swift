@@ -157,7 +157,6 @@ class DataManager {
         // Check for the presence of all mandatory params
         guard let id = json["id"] as? String,
             createdByJson = json["createdBy"] as? [String: AnyObject],
-            createdBy = createOrUpdateUserFromJson(createdByJson, realm: realm),
             createdAt = json["createdAt"] as? String,
             createdDate = dateFormatter.dateFromString(createdAt),
             updatedAt = json["updatedAt"] as? String,
@@ -187,7 +186,14 @@ class DataManager {
             existing.image?.deleted = true
             existing.agent?.deleted = true
         } else {
-            home = Home(id: id, createdBy: createdBy, createdAt: createdDate, updatedAt: updatedDate, title: title)
+            var createdBy: User? = nil
+            if createdByJson["id"] as? String == appstate.authUserId {
+                createdBy = dataManager.findCurrentUser()
+            }
+            if createdBy == nil || createdByJson["id"] as? String != appstate.authUserId {
+                createdBy = createOrUpdateUserFromJson(createdByJson, realm: realm)
+            }
+            home = Home(id: id, createdBy: createdBy!, createdAt: createdDate, updatedAt: updatedDate, title: title)
         }
 
         home.coverImage = Image.fromJSON(json["mainImage"])
@@ -501,14 +507,10 @@ class DataManager {
                 self.storeAgents(realm: realm, agents: agents)
                 
                 for homeJson in homes {
-                    if let createdByJson = homeJson["createdBy"] as? [String: AnyObject] {
-                        if createdByJson["id"] as? String != appstate.authUserId {
-                            if let home = self.createHomeFromJson(homeJson, realm: realm) {
-                                realm.add(home, update: true)
-                            } else {
-                                log.error("Failed to parse objects from home json - ignoring this home.")
-                            }
-                        }
+                   if let home = self.createHomeFromJson(homeJson, realm: realm) {
+                        realm.add(home, update: true)
+                    } else {
+                        log.error("Failed to parse objects from home json - ignoring this home.")
                     }
                 }
                 try realm.commitWrite()
