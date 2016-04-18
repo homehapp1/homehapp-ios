@@ -21,14 +21,14 @@
             <rect key="frame" x="0.0" y="0.0" width="591" height="305"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MmN-MS-zpa" id="bTG-dM-I2n">
-                <rect key="frame" x="0.0" y="0.0" width="591" height="304.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="591" height="304"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="3OI-xO-5J8" userLabel="Container view">
-                        <rect key="frame" x="0.0" y="0.0" width="591" height="304.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="591" height="304"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" text="HEADER TEXT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVR-gE-LN6">
-                                <rect key="frame" x="30" y="30" width="531" height="21.5"/>
+                                <rect key="frame" x="30" y="30" width="531" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="ssL-8a-eUA"/>
                                 </constraints>
@@ -42,7 +42,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="999" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zu2-7o-f0l">
-                                <rect key="frame" x="30" y="65" width="531" height="209.5"/>
+                                <rect key="frame" x="30" y="66" width="531" height="208"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="weK-CK-FNe"/>
                                 </constraints>
@@ -55,8 +55,8 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <textView opaque="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-b0-djd" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                <rect key="frame" x="25" y="30" width="541" height="56"/>
+                            <textView opaque="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-b0-djd" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
+                                <rect key="frame" x="25" y="22" width="541" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="999" constant="56" id="li6-iJ-CeO"/>
                                 </constraints>
@@ -78,7 +78,7 @@
                                 </connections>
                             </textView>
                             <textView opaque="NO" contentMode="left" verticalHuggingPriority="999" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NBz-86-1kG" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                <rect key="frame" x="25" y="59.5" width="541" height="223"/>
+                                <rect key="frame" x="25" y="59" width="541" height="225"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
@@ -104,9 +104,9 @@
                             <constraint firstItem="KVR-gE-LN6" firstAttribute="top" secondItem="3OI-xO-5J8" secondAttribute="top" constant="30" id="HU0-B5-Gl7"/>
                             <constraint firstItem="qRK-b0-djd" firstAttribute="top" secondItem="3OI-xO-5J8" secondAttribute="top" constant="22" id="RA0-l0-a99"/>
                             <constraint firstItem="KVR-gE-LN6" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="VN6-Jd-HHK"/>
-                            <constraint firstAttribute="bottom" secondItem="NBz-86-1kG" secondAttribute="bottom" constant="22" id="YAk-ei-uJj"/>
+                            <constraint firstAttribute="bottom" secondItem="NBz-86-1kG" secondAttribute="bottom" constant="20" id="YAk-ei-uJj"/>
                             <constraint firstAttribute="trailing" secondItem="qRK-b0-djd" secondAttribute="trailing" constant="25" id="Zv3-uy-NkS"/>
-                            <constraint firstItem="NBz-86-1kG" firstAttribute="top" secondItem="qRK-b0-djd" secondAttribute="bottom" id="dcU-Jy-vRL"/>
+                            <constraint firstItem="NBz-86-1kG" firstAttribute="top" secondItem="qRK-b0-djd" secondAttribute="bottom" constant="-1" id="dcU-Jy-vRL"/>
                             <constraint firstAttribute="trailing" secondItem="zu2-7o-f0l" secondAttribute="trailing" constant="30" id="dhC-Ek-aKd"/>
                             <constraint firstAttribute="trailing" secondItem="NBz-86-1kG" secondAttribute="trailing" constant="25" id="hiR-82-wzG"/>
                             <constraint firstItem="zu2-7o-f0l" firstAttribute="top" secondItem="KVR-gE-LN6" secondAttribute="bottom" constant="9.5" id="iGY-q1-y6W"/>
@@ -117,9 +117,9 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="iGY-q1-y6W"/>
                                 <exclude reference="kyb-mJ-DiC"/>
                                 <exclude reference="vMw-D4-OHU"/>
+                                <exclude reference="iGY-q1-y6W"/>
                             </mask>
                         </variation>
                     </view>
