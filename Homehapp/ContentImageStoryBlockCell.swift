@@ -7,18 +7,22 @@
 //
 
 import UIKit
+import KMPlaceholderTextView
 
 /**
  Used to display 'ContentImage' layout style story block.
  */
-class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
+class ContentImageStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate {
     let imageMargin: CGFloat = 3.0
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet private weak var editTitleTextView: ExpandingTextView!
+    @IBOutlet private weak var editTitleTextView: KMPlaceholderTextView!
     @IBOutlet private weak var mainImageView: CachedImageView!
     
-    @IBOutlet private var titleContainerViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private var titleLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var titleLabelBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private var editTitleTextViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet private var editTitleTextViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var addImageButton: UIButton!
@@ -28,18 +32,12 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     
     /// Image selected -callback; can be used to open a full screen view
     var imageSelectedCallback: ((imageIndex: Int, imageView: UIImageView) -> Void)?
-    
-    override var resizeCallback: (Void -> Void)? {
-        didSet {
-            editTitleTextView.resizeCallback = resizeCallback
-         }
-    }
 
     override var storyBlock: StoryBlock? {
         didSet {
             titleLabel.text = storyBlock?.title
-//            editTitleTextView.text = storyBlock?.title
-            editTitleTextView.text = nil
+            editTitleTextView.text = ""
+            editTitleTextView.scrollEnabled = true
             
             mainImageView.imageUrl = storyBlock?.image?.mediumScaledUrl
             if let thumbnailData = storyBlock?.image?.thumbnailData {
@@ -73,58 +71,51 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         }
     }
     
-    private func updateUI(editMode editMode: Bool) {
-        if (storyBlock?.title?.length > 0) || editMode {
-            titleContainerViewHeightConstraint.active = false
-        } else {
-             titleContainerViewHeightConstraint.active = true
-        }
-    }
-    
     // MARK: Public methods
     
     override func setEditMode(editMode: Bool, animated: Bool) {
         super.setEditMode(editMode, animated: animated)
         
-        updateUI(editMode: editMode)
+        editTitleTextView.scrollEnabled = !editMode
+        
+        if !editMode && (titleLabel.text == nil || titleLabel.text?.length == 0) {
+            titleLabelTopConstraint.active = true
+            titleLabelBottomConstraint.active = true
+            titleLabelTopConstraint.constant = 0
+            titleLabelBottomConstraint.constant = 0
+            editTitleTextViewTopConstraint.active = false
+            editTitleTextViewBottomConstraint.active = false
+        } else {
+            titleLabelTopConstraint.constant = 30
+            titleLabelBottomConstraint.constant = 30
+            titleLabelTopConstraint.active = !editMode
+            titleLabelBottomConstraint.active = !editMode
+            editTitleTextViewTopConstraint.active = editMode
+            editTitleTextViewBottomConstraint.active = editMode
+            editTitleTextView.text = editMode ? titleLabel.text : ""
+        }
+        
+        if editMode {
+            let size = editTitleTextView.sizeThatFits(CGSizeMake(editTitleTextView.width, 10000000))
+            editTitleTextView.contentSize = size
+            editTitleTextView.frame.size.height = size.height
+            updateBorder(editTitleTextView.bounds)
+        }
         
         // Sets hidden attributes of the controls according to state
         func setControlVisibility(allVisible allVisible: Bool = false) {
             titleLabel.hidden = !(allVisible || !editMode)
-            
             editTitleTextView.hidden = !(allVisible || editMode)
-            addImageButton.hidden = !editMode
-            
-            if !(allVisible || editMode) {
-                editTitleTextView.text = nil
-            } else {
-                editTitleTextView.text = titleLabel.text
-                editTitleTextView.textContainerInset = UIEdgeInsetsZero;
-            }
         }
         
-        // Sets alpha attributes of the controls according to state
-        func setControlAlphas() {
-            titleLabel.alpha = editMode ? 0.0 : 1.0
-            
-            editTitleTextView.alpha = editMode ? 1.0 : 0.0
-            addImageButton.alpha = editMode ? 1.0 : 0.0
-        }
-        
-        editTitleTextView.heightConstraint.active = editMode
+        addImageButton.hidden = !editMode
         
         if !animated {
             setControlVisibility()
-            setControlAlphas()
         } else {
-            setControlVisibility(allVisible: true)
-            
-            UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
-                setControlAlphas()
-                self.layoutIfNeeded()
-                }, completion: { finished in
-                    setControlVisibility()
-            })
+            layoutIfNeeded()
+            updateBorder(editTitleTextView.bounds)
+            setControlVisibility()
         }
     }
     
@@ -158,6 +149,7 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
             }
             
             updateCallback?()
+            resizeCallback?()
         }
     }
     
@@ -168,6 +160,34 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
         }
         return true
     }
+    
+    func textViewDidChange(textView: UITextView) {
+    
+        let startHeight = textView.frame.size.height
+        let calcHeight = textView.sizeThatFits(textView.frame.size).height
+        
+        if round(startHeight) != round(calcHeight) {
+            
+            UIView.setAnimationsEnabled(false) // Disable animations
+            
+            var tableView = self.superview
+            while tableView as? UITableView == nil {
+                tableView = tableView?.superview
+            }
+            
+            let tv = tableView as! UITableView
+            tv.beginUpdates()
+            tv.endUpdates()
+            
+            let textViewFrameInTableView = tv.convertRect(textView.frame, fromView:textView.superview)
+            tv.setContentOffset(CGPointMake(0, textViewFrameInTableView.y - tableView!.height + keyboardHeight + calcHeight), animated: false)
+            
+            updateBorder(editTitleTextView.bounds)
+            
+            UIView.setAnimationsEnabled(true)
+        }
+    }
+    
     
     // MARK: IBAction handlers
     
@@ -184,12 +204,14 @@ class ContentImageStoryBlockCell: BaseStoryBlockCell, UITextViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        editTitleTextView.placeholderText = NSLocalizedString("edithomestory:content:image-title-placeholder", comment: "")
         
+        editTitleTextView.layer.addSublayer(borderLayer)
+
         let singleTap = UITapGestureRecognizer(target: self, action:#selector(ContentImageStoryBlockCell.tapDetected))
         mainImageView.userInteractionEnabled = true
         mainImageView.addGestureRecognizer(singleTap)
+        
+        updateBorder(titleLabel.bounds)
         
     }
 }

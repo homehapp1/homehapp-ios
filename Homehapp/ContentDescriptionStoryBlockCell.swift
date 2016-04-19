@@ -74,8 +74,8 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
         if !animated {
             setControlVisibility()
         } else {
-            self.layoutIfNeeded()
-            self.updateBorder(self.descriptionTextView.bounds)
+            layoutIfNeeded()
+            updateBorder(descriptionTextView.bounds)
             setControlVisibility()
         }
     }
