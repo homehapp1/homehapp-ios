@@ -21,74 +21,43 @@
             <rect key="frame" x="0.0" y="0.0" width="591" height="305"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MmN-MS-zpa" id="bTG-dM-I2n">
-                <rect key="frame" x="0.0" y="0.0" width="591" height="304"/>
+                <rect key="frame" x="0.0" y="0.0" width="591" height="304.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="3OI-xO-5J8" userLabel="Container view">
-                        <rect key="frame" x="0.0" y="0.0" width="591" height="304"/>
+                        <rect key="frame" x="8" y="8" width="575" height="288.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="1000" verticalCompressionResistancePriority="999" text="HEADER TEXT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVR-gE-LN6">
-                                <rect key="frame" x="30" y="30" width="531" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="ssL-8a-eUA"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVR-gE-LN6">
+                                <rect key="frame" x="30" y="30" width="515" height="0.0"/>
                                 <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="17"/>
                                 <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="ssL-8a-eUA"/>
-                                    </mask>
-                                </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="999" verticalHuggingPriority="999" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zu2-7o-f0l">
-                                <rect key="frame" x="30" y="66" width="531" height="208"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="weK-CK-FNe"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zu2-7o-f0l">
+                                <rect key="frame" x="30" y="51" width="515" height="207.5"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="weK-CK-FNe"/>
-                                    </mask>
-                                </variation>
                             </label>
-                            <textView opaque="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-b0-djd" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                <rect key="frame" x="25" y="22" width="541" height="38"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="999" constant="56" id="li6-iJ-CeO"/>
-                                </constraints>
+                            <textView opaque="NO" contentMode="left" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-b0-djd" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
+                                <rect key="frame" x="25" y="22" width="525" height="30"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="next"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="dottedBorderColor">
-                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Title for your post"/>
                                 </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="li6-iJ-CeO"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="MmN-MS-zpa" id="Ac4-30-LXb"/>
                                 </connections>
                             </textView>
-                            <textView opaque="NO" contentMode="left" verticalHuggingPriority="999" verticalCompressionResistancePriority="1000" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NBz-86-1kG" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                <rect key="frame" x="25" y="59" width="541" height="225"/>
+                            <textView opaque="NO" contentMode="left" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NBz-86-1kG" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
+                                <rect key="frame" x="25" y="49" width="525" height="219"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="dottedBorderColor">
-                                        <color key="value" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="minimumHeight">
-                                        <real key="value" value="60"/>
-                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Write something about your home..."/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="MmN-MS-zpa" id="5ep-2H-bBc"/>
@@ -97,7 +66,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.97647064920000004" green="0.10588236149999999" blue="0.47843140360000003" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="zu2-7o-f0l" firstAttribute="top" secondItem="KVR-gE-LN6" secondAttribute="bottom" constant="14" id="0nQ-Mn-P5b"/>
+                            <constraint firstItem="zu2-7o-f0l" firstAttribute="top" secondItem="KVR-gE-LN6" secondAttribute="bottom" constant="21" id="0nQ-Mn-P5b"/>
                             <constraint firstAttribute="trailing" secondItem="KVR-gE-LN6" secondAttribute="trailing" constant="30" id="3n4-Hr-Ehq"/>
                             <constraint firstItem="zu2-7o-f0l" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="5pE-Ha-E92"/>
                             <constraint firstAttribute="bottom" secondItem="zu2-7o-f0l" secondAttribute="bottom" constant="30" id="DOo-UF-s0f"/>
@@ -106,37 +75,31 @@
                             <constraint firstItem="KVR-gE-LN6" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="VN6-Jd-HHK"/>
                             <constraint firstAttribute="bottom" secondItem="NBz-86-1kG" secondAttribute="bottom" constant="20" id="YAk-ei-uJj"/>
                             <constraint firstAttribute="trailing" secondItem="qRK-b0-djd" secondAttribute="trailing" constant="25" id="Zv3-uy-NkS"/>
-                            <constraint firstItem="NBz-86-1kG" firstAttribute="top" secondItem="qRK-b0-djd" secondAttribute="bottom" constant="-1" id="dcU-Jy-vRL"/>
+                            <constraint firstItem="NBz-86-1kG" firstAttribute="top" secondItem="qRK-b0-djd" secondAttribute="bottom" constant="5" id="dcU-Jy-vRL"/>
                             <constraint firstAttribute="trailing" secondItem="zu2-7o-f0l" secondAttribute="trailing" constant="30" id="dhC-Ek-aKd"/>
                             <constraint firstAttribute="trailing" secondItem="NBz-86-1kG" secondAttribute="trailing" constant="25" id="hiR-82-wzG"/>
-                            <constraint firstItem="zu2-7o-f0l" firstAttribute="top" secondItem="KVR-gE-LN6" secondAttribute="bottom" constant="9.5" id="iGY-q1-y6W"/>
                             <constraint firstItem="qRK-b0-djd" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="25" id="kcG-fj-y21"/>
                             <constraint firstItem="NBz-86-1kG" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="25" id="kep-Ud-b0a"/>
-                            <constraint firstItem="NBz-86-1kG" firstAttribute="top" secondItem="qRK-b0-djd" secondAttribute="bottom" id="kyb-mJ-DiC"/>
-                            <constraint firstItem="NBz-86-1kG" firstAttribute="top" secondItem="qRK-b0-djd" secondAttribute="bottom" id="vMw-D4-OHU"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="kyb-mJ-DiC"/>
-                                <exclude reference="vMw-D4-OHU"/>
-                                <exclude reference="iGY-q1-y6W"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="3OI-xO-5J8" secondAttribute="trailing" constant="-8" id="03t-bv-ihR"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="3OI-xO-5J8" secondAttribute="bottom" constant="-8" id="K8o-tN-vu8"/>
-                    <constraint firstItem="3OI-xO-5J8" firstAttribute="top" secondItem="bTG-dM-I2n" secondAttribute="topMargin" constant="-8" id="dCc-Kb-hUw"/>
-                    <constraint firstItem="3OI-xO-5J8" firstAttribute="leading" secondItem="bTG-dM-I2n" secondAttribute="leadingMargin" constant="-8" id="pBi-TC-yQg"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="3OI-xO-5J8" secondAttribute="trailing" id="03t-bv-ihR"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="3OI-xO-5J8" secondAttribute="bottom" id="K8o-tN-vu8"/>
+                    <constraint firstItem="3OI-xO-5J8" firstAttribute="top" secondItem="bTG-dM-I2n" secondAttribute="topMargin" id="dCc-Kb-hUw"/>
+                    <constraint firstItem="3OI-xO-5J8" firstAttribute="leading" secondItem="bTG-dM-I2n" secondAttribute="leadingMargin" id="pBi-TC-yQg"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="editMainTextView" destination="NBz-86-1kG" id="xya-Pd-4KO"/>
+                <outlet property="editMainTextBottomConstraint" destination="YAk-ei-uJj" id="B4A-UY-lT0"/>
+                <outlet property="editMainTextView" destination="NBz-86-1kG" id="nmF-1D-iDx"/>
+                <outlet property="editTitleLabelBottomConstraint" destination="dcU-Jy-vRL" id="ObR-DX-GIh"/>
                 <outlet property="editTitleLabelTopConstraint" destination="RA0-l0-a99" id="Ss2-yS-YRx"/>
-                <outlet property="editTitleTextView" destination="qRK-b0-djd" id="9YM-zL-b3V"/>
+                <outlet property="editTitleTextView" destination="qRK-b0-djd" id="3EF-lP-91v"/>
+                <outlet property="mainTextBottomConstraint" destination="DOo-UF-s0f" id="IdD-hA-Pyd"/>
                 <outlet property="mainTextLabel" destination="zu2-7o-f0l" id="zBA-AB-YHV"/>
                 <outlet property="titleLabel" destination="KVR-gE-LN6" id="Q7B-Jc-i6q"/>
+                <outlet property="titleLabelBottomConstraint" destination="0nQ-Mn-P5b" id="DNo-VG-sli"/>
                 <outlet property="titleLabelTopConstraint" destination="HU0-B5-Gl7" id="qjY-kD-RF2"/>
             </connections>
             <point key="canvasLocation" x="509.5" y="361.5"/>

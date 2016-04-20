@@ -22,55 +22,34 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QML-WX-BEy" userLabel="Container view">
                         <rect key="frame" x="0.0" y="0.0" width="574" height="329.5"/>
                         <subviews>
-                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="J3m-PF-MpH" userLabel="Title container view">
-                                <rect key="frame" x="0.0" y="0.0" width="574" height="3"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Editable story block title" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3Vf-WX-F6P" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="0.0" width="524" height="3"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="26"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="bPi-c0-IHZ" id="y2A-y3-MK1"/>
-                                        </connections>
-                                    </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="1000" text="Story block title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWI-EZ-ol4">
-                                        <rect key="frame" x="30" y="0.0" width="514" height="3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="31" id="5Br-68-zsl"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="26"/>
-                                        <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="5Br-68-zsl"/>
-                                            </mask>
-                                        </variation>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="3Vf-WX-F6P" firstAttribute="top" secondItem="J3m-PF-MpH" secondAttribute="top" id="3km-y5-xZD"/>
-                                    <constraint firstItem="cWI-EZ-ol4" firstAttribute="top" secondItem="J3m-PF-MpH" secondAttribute="top" id="Dhc-lX-TZa"/>
-                                    <constraint firstAttribute="height" constant="3" id="Guq-gS-Ngd"/>
-                                    <constraint firstAttribute="bottom" secondItem="cWI-EZ-ol4" secondAttribute="bottom" id="MKE-jh-FEp"/>
-                                    <constraint firstAttribute="trailing" secondItem="3Vf-WX-F6P" secondAttribute="trailing" constant="25" id="UTT-hV-O0b"/>
-                                    <constraint firstAttribute="bottom" secondItem="3Vf-WX-F6P" secondAttribute="bottom" id="ncn-SW-kiP"/>
-                                    <constraint firstItem="cWI-EZ-ol4" firstAttribute="leading" secondItem="J3m-PF-MpH" secondAttribute="leading" constant="30" id="uhr-OQ-tTW"/>
-                                    <constraint firstItem="3Vf-WX-F6P" firstAttribute="leading" secondItem="J3m-PF-MpH" secondAttribute="leading" constant="25" id="wBp-Mb-JMd"/>
-                                    <constraint firstAttribute="trailing" secondItem="cWI-EZ-ol4" secondAttribute="trailing" constant="30" id="wpK-sb-fQr"/>
-                                </constraints>
-                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Editable story block title" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3Vf-WX-F6P" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
+                                <rect key="frame" x="25" y="22" width="524" height="85"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="26"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Title for your image"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="bPi-c0-IHZ" id="y2A-y3-MK1"/>
+                                </connections>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="Story block title" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWI-EZ-ol4">
+                                <rect key="frame" x="30" y="30" width="514" height="69"/>
+                                <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="26"/>
+                                <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="gEf-Dg-BQi" customClass="CachedImageView" customModule="Homehapp" customModuleProvider="target">
-                                <rect key="frame" x="3" y="3" width="568" height="326"/>
+                                <rect key="frame" x="3" y="129" width="568" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="999" constant="200" id="VB3-Py-Hdg"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GaE-fS-Fzg">
-                                <rect key="frame" x="536" y="294.5" width="30" height="30"/>
+                                <rect key="frame" x="536" y="294" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7p5-7a-TTy"/>
                                     <constraint firstAttribute="width" constant="30" id="JRM-S7-lp5"/>
@@ -88,28 +67,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="J3m-PF-MpH" firstAttribute="leading" secondItem="QML-WX-BEy" secondAttribute="leading" id="273-ZF-WZJ"/>
+                            <constraint firstItem="cWI-EZ-ol4" firstAttribute="top" secondItem="QML-WX-BEy" secondAttribute="top" constant="30" id="2ab-n1-Wss"/>
+                            <constraint firstItem="gEf-Dg-BQi" firstAttribute="top" secondItem="cWI-EZ-ol4" secondAttribute="bottom" constant="30" id="7Fd-IY-X7f"/>
                             <constraint firstAttribute="bottom" secondItem="fKV-eH-94K" secondAttribute="bottom" constant="74" id="83v-Of-6nk"/>
-                            <constraint firstItem="gEf-Dg-BQi" firstAttribute="top" secondItem="J3m-PF-MpH" secondAttribute="bottom" id="9rH-Y2-kX0"/>
                             <constraint firstItem="fKV-eH-94K" firstAttribute="centerX" secondItem="QML-WX-BEy" secondAttribute="centerX" id="D1I-jY-JOB"/>
-                            <constraint firstItem="fKV-eH-94K" firstAttribute="centerY" secondItem="QML-WX-BEy" secondAttribute="centerY" id="EIC-lt-c7d"/>
-                            <constraint firstItem="J3m-PF-MpH" firstAttribute="top" secondItem="QML-WX-BEy" secondAttribute="top" id="IFc-hi-vHN"/>
-                            <constraint firstAttribute="trailing" secondItem="J3m-PF-MpH" secondAttribute="trailing" id="Nnb-bR-QnT"/>
+                            <constraint firstItem="3Vf-WX-F6P" firstAttribute="top" secondItem="QML-WX-BEy" secondAttribute="top" constant="22" id="FhX-Zd-lMt"/>
                             <constraint firstAttribute="trailing" secondItem="fKV-eH-94K" secondAttribute="trailing" constant="74" id="PDA-EK-0ly"/>
                             <constraint firstItem="gEf-Dg-BQi" firstAttribute="leading" secondItem="QML-WX-BEy" secondAttribute="leading" constant="3" id="SkW-0n-p2j"/>
+                            <constraint firstItem="gEf-Dg-BQi" firstAttribute="top" secondItem="3Vf-WX-F6P" secondAttribute="bottom" constant="22" id="X3g-Gt-lEd"/>
+                            <constraint firstItem="cWI-EZ-ol4" firstAttribute="leading" secondItem="QML-WX-BEy" secondAttribute="leading" constant="30" id="Y8S-cm-J9l"/>
                             <constraint firstAttribute="trailing" secondItem="gEf-Dg-BQi" secondAttribute="trailing" constant="3" id="d2V-ir-Oob"/>
                             <constraint firstItem="GaE-fS-Fzg" firstAttribute="bottom" secondItem="QML-WX-BEy" secondAttribute="bottom" constant="-5" id="gB4-g6-9s2"/>
-                            <constraint firstItem="GaE-fS-Fzg" firstAttribute="centerX" secondItem="QML-WX-BEy" secondAttribute="centerX" id="mrZ-eJ-cOS"/>
+                            <constraint firstAttribute="trailing" secondItem="3Vf-WX-F6P" secondAttribute="trailing" constant="25" id="lgQ-9G-95M"/>
+                            <constraint firstItem="3Vf-WX-F6P" firstAttribute="leading" secondItem="QML-WX-BEy" secondAttribute="leading" constant="25" id="mDz-lZ-QTD"/>
+                            <constraint firstAttribute="trailing" secondItem="cWI-EZ-ol4" secondAttribute="trailing" constant="30" id="nBf-P6-yLy"/>
                             <constraint firstItem="fKV-eH-94K" firstAttribute="leading" secondItem="QML-WX-BEy" secondAttribute="leading" constant="74" id="p7e-7X-jAG"/>
                             <constraint firstAttribute="trailing" secondItem="GaE-fS-Fzg" secondAttribute="trailing" constant="8" id="pl6-F7-uBT"/>
                             <constraint firstAttribute="bottom" secondItem="gEf-Dg-BQi" secondAttribute="bottom" id="wEb-mk-vef"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="EIC-lt-c7d"/>
-                                <exclude reference="mrZ-eJ-cOS"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <constraints>
@@ -125,11 +100,14 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="addImageButton" destination="GaE-fS-Fzg" id="bf4-Vj-Swa"/>
-                <outlet property="editTitleTextView" destination="3Vf-WX-F6P" id="gBX-3A-m9M"/>
+                <outlet property="editTitleTextView" destination="3Vf-WX-F6P" id="Pya-bC-opf"/>
+                <outlet property="editTitleTextViewBottomConstraint" destination="X3g-Gt-lEd" id="Ub1-qU-YTt"/>
+                <outlet property="editTitleTextViewTopConstraint" destination="FhX-Zd-lMt" id="eKI-tU-Vu9"/>
                 <outlet property="imageHeightConstraint" destination="VB3-Py-Hdg" id="nyd-52-cCW"/>
                 <outlet property="mainImageView" destination="gEf-Dg-BQi" id="edT-Q8-kvX"/>
-                <outlet property="titleContainerViewHeightConstraint" destination="Guq-gS-Ngd" id="hV7-Es-XDb"/>
                 <outlet property="titleLabel" destination="cWI-EZ-ol4" id="rCF-47-4M6"/>
+                <outlet property="titleLabelBottomConstraint" destination="7Fd-IY-X7f" id="Fth-jD-8cc"/>
+                <outlet property="titleLabelTopConstraint" destination="2ab-n1-Wss" id="H7L-cU-w7S"/>
                 <outlet property="uploadProgressView" destination="fKV-eH-94K" id="wJH-O3-YdW"/>
             </connections>
             <point key="canvasLocation" x="404" y="285"/>
