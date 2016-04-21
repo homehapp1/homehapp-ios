@@ -838,15 +838,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Send updates to server
         sendStoryObjectToServer()
         
-        //UIView.setAnimationsEnabled(false)
         tableView.beginUpdates()
         tableView.endUpdates()
         tableView.contentSize = tableView.sizeThatFits(CGSize(width: tableView.bounds.width, height: CGFloat.max))
-        //UIView.setAnimationsEnabled(true)
-        
-        //if let textView = UIResponder.getCurrentFirstResponder() as? ExpandingTextView {
-        //    self.scrollTextViewIntoView(textView)
-        //}
+
     }
     
     @IBAction func backButtonPressed(button: UIButton) {
@@ -930,12 +925,14 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         log.debug("Keyboard will hide")
     }
     
+    /*
     func textViewEditingStarted(notification: NSNotification) {
         guard let textView = notification.object as? ExpandingTextView else {
             return
         }
         scrollTextViewIntoView(textView)
     }
+     */
 
     // MARK: From UIScrollViewDelegate
     
@@ -1059,16 +1056,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         if var editableCell = cell as? EditableStoryCell {
             editableCell.setEditMode(editMode, animated: false)
             
-            editableCell.resizeCallback = { [weak self] in
-                //UIView.setAnimationsEnabled(false)
+            editableCell.resizeCallback = {
                 tableView.beginUpdates()
                 tableView.endUpdates()
                 tableView.contentSize = tableView.sizeThatFits(CGSize(width: tableView.bounds.width, height: CGFloat.max))
-                //UIView.setAnimationsEnabled(true)
-                
-                if let textView = UIResponder.getCurrentFirstResponder() as? ExpandingTextView {
-                    self?.scrollTextViewIntoView(textView)
-                }
             }
             
             editableCell.updateCallback = { [weak self] in
@@ -1286,7 +1277,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeStoryViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeStoryViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeStoryViewController.textViewEditingStarted(_:)), name: UITextViewTextDidBeginEditingNotification, object: nil)
+        
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeStoryViewController.textViewEditingStarted(_:)), name: UITextViewTextDidBeginEditingNotification, object: nil)
 
         insertionCursorImageView = UIImageView(image: UIImage(named: "icon_add_here"))
         insertionCursorImageView.frame = CGRect(x: 0, y: 0, width: insertionCursorSize, height: insertionCursorSize)

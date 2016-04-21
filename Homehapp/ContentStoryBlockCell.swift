@@ -57,7 +57,7 @@ class ContentStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate {
             editMainTextView.scrollEnabled = true
             
             // If content block is first cell, it should have minimal top margin
-            // Titlelabel has 5px so that textview is a bit more down
+            // Titlelabel has 8px so that textview is a bit more down
             if removeTopMargin {
                 titleLabelTopConstraint.constant = 8
                 editTitleLabelTopConstraint.constant = 0
@@ -120,6 +120,7 @@ class ContentStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate {
         let editMainTextViewSize = editMainTextView.sizeThatFits(CGSizeMake(editMainTextView.width, 10000000))
         editMainTextView.contentSize = editMainTextViewSize
         editMainTextView.frame.size.height = editMainTextViewSize.height
+      
     }
     
     // MARK: From UITextViewDelegate

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="FjallaOne-Regular.ttf">
@@ -25,22 +24,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="999" translatesAutoresizingMaskIntoConstraints="NO" id="3OI-xO-5J8" userLabel="Container view">
-                        <rect key="frame" x="8" y="8" width="575" height="288.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="591" height="304.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVR-gE-LN6">
-                                <rect key="frame" x="30" y="30" width="515" height="0.0"/>
+                                <rect key="frame" x="30" y="30" width="531" height="0.0"/>
                                 <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="17"/>
                                 <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zu2-7o-f0l">
-                                <rect key="frame" x="30" y="51" width="515" height="207.5"/>
+                                <rect key="frame" x="30" y="51" width="531" height="223.5"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView opaque="NO" contentMode="left" verticalCompressionResistancePriority="1000" misplaced="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-b0-djd" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
-                                <rect key="frame" x="25" y="22" width="525" height="30"/>
+                            <textView opaque="NO" contentMode="left" verticalCompressionResistancePriority="1000" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qRK-b0-djd" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
+                                <rect key="frame" x="25" y="22" width="541" height="16"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="FjallaOne-Regular" family="Fjalla One" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="next"/>
@@ -51,8 +50,8 @@
                                     <outlet property="delegate" destination="MmN-MS-zpa" id="Ac4-30-LXb"/>
                                 </connections>
                             </textView>
-                            <textView opaque="NO" contentMode="left" verticalCompressionResistancePriority="1000" misplaced="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NBz-86-1kG" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
-                                <rect key="frame" x="25" y="49" width="525" height="219"/>
+                            <textView opaque="NO" contentMode="left" verticalCompressionResistancePriority="1000" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NBz-86-1kG" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
+                                <rect key="frame" x="25" y="43" width="541" height="241.5"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
@@ -85,10 +84,10 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="3OI-xO-5J8" secondAttribute="trailing" id="03t-bv-ihR"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="3OI-xO-5J8" secondAttribute="bottom" id="K8o-tN-vu8"/>
-                    <constraint firstItem="3OI-xO-5J8" firstAttribute="top" secondItem="bTG-dM-I2n" secondAttribute="topMargin" id="dCc-Kb-hUw"/>
-                    <constraint firstItem="3OI-xO-5J8" firstAttribute="leading" secondItem="bTG-dM-I2n" secondAttribute="leadingMargin" id="pBi-TC-yQg"/>
+                    <constraint firstAttribute="trailing" secondItem="3OI-xO-5J8" secondAttribute="trailing" id="03t-bv-ihR"/>
+                    <constraint firstAttribute="bottom" secondItem="3OI-xO-5J8" secondAttribute="bottom" id="K8o-tN-vu8"/>
+                    <constraint firstItem="3OI-xO-5J8" firstAttribute="top" secondItem="bTG-dM-I2n" secondAttribute="top" id="dCc-Kb-hUw"/>
+                    <constraint firstItem="3OI-xO-5J8" firstAttribute="leading" secondItem="bTG-dM-I2n" secondAttribute="leading" id="pBi-TC-yQg"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
