@@ -78,14 +78,23 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     // MARK: IBActions
     
     @IBAction func settingsButtonPressed(sender: UIButton) {
+        if editMode {
+            saveButtonPressed(saveButton)
+        }
         performSegueWithIdentifier(segueIdHomeInfoToHomeSettings, sender: self)
     }
     
     @IBAction func storyButtonPressed(sender: UIButton) {
+        if editMode {
+            saveButtonPressed(saveButton)
+        }
         performSegueWithIdentifier(segueIdHomeInfoToHomeStory, sender: self)
     }
     
     @IBAction func neighborhoodButtonPressed(sender: UIButton) {
+        if editMode {
+            saveButtonPressed(saveButton)
+        }
         performSegueWithIdentifier(segueIdHomeInfoToNeighborhood, sender: self)
     }
     
