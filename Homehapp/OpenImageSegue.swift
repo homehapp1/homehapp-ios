@@ -21,10 +21,12 @@ class OpenImageSegue: UIStoryboardSegue {
     var unwinding = false
     var backgroundImage: UIImageView?
     var blackBackgroundAlpha: CGFloat = 0.0
+    var bottomBarImage: UIImageView?
+    var bottomBarMask: UIView?
     
     // MARK: Private methods
     
-    /// Takes a screenshot of underlying view and adds it as background view
+    /// Takes a screenshot of underlying view
     private func captureScreen() {
         var window: UIWindow? = UIApplication.sharedApplication().keyWindow
         window = UIApplication.sharedApplication().windows[0]
@@ -38,6 +40,50 @@ class OpenImageSegue: UIStoryboardSegue {
         imageView.image = image
         imageView.clipsToBounds = true
         self.backgroundImage = imageView
+    }
+    
+    /// Takes screenshot of underlying view's bottom bar
+    private func captureBottomBar() {
+        var window: UIWindow? = UIApplication.sharedApplication().keyWindow
+        window = UIApplication.sharedApplication().windows[0]
+        
+        if let bottomBarView = findBottomBarView() {
+            if bottomBarView.transform.ty == 0 {
+            UIGraphicsBeginImageContextWithOptions(bottomBarView.frame.size, window!.opaque, 0.0)
+            
+            let imageView = UIImageView()
+            bottomBarView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+            imageView.frame = bottomBarView.frame
+            
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            imageView.image = image
+            imageView.clipsToBounds = true
+            
+            self.bottomBarImage = imageView
+            self.bottomBarImage?.frame = CGRectMake(0, self.sourceViewController.view.height - imageView.height, imageView.width, imageView.height)
+            
+            // Mask bottom bar with alpha layer as well
+            bottomBarMask = UIView()
+            bottomBarMask!.frame = self.bottomBarImage!.frame
+            bottomBarMask!.backgroundColor = UIColor.blackColor()
+            }
+        }
+        bottomBarMask?.alpha = blackBackgroundAlpha
+    }
+    
+    private func findBottomBarView() -> UIView? {
+        if let homeVC = self.destinationViewController as? HomeStoryViewController {
+            return homeVC.bottomBarView!
+        } else if let homeVC = self.sourceViewController as? HomeStoryViewController {
+            return homeVC.bottomBarView!
+        } else if let homeInfoVC = self.sourceViewController as? HomeInfoViewController {
+            return homeInfoVC.bottomBarView!
+        } else if let homeInfoVC = self.destinationViewController as? HomeInfoViewController {
+            return homeInfoVC.bottomBarView!
+        }
+        return nil
     }
     
     /// Creates a mask view for the image view for the animation
@@ -99,6 +145,8 @@ class OpenImageSegue: UIStoryboardSegue {
         
         if !unwinding {
         
+            captureScreen()
+            
             // Source image
             let sourceImageFrame = openedImageView!.superview!.convertRect(openedImageView!.frame, toView: src.view)
         
@@ -110,7 +158,15 @@ class OpenImageSegue: UIStoryboardSegue {
             animationImageMaskView.setNeedsLayout()
             animationImageMaskView.layoutIfNeeded()
             window.addSubview(animationImageMaskView)
-        
+            
+            // Take a screenshot of bottom bar and add it to the top to mask image properly when
+            // image moving "through" the bottom bar area
+            captureBottomBar()
+            if bottomBarImage != nil {
+                window.addSubview(bottomBarImage!)
+                window.addSubview(bottomBarMask!)
+            }
+            
             // Calculate destination image frame
             let destViewAspectRatio = (dest.view.width - 2 * imageMargin) / dest.view.height
             let imageAspectRatio = openedImageView!.image!.width / openedImageView!.image!.height
@@ -159,7 +215,15 @@ class OpenImageSegue: UIStoryboardSegue {
             animationImageMaskView.setNeedsLayout()
             animationImageMaskView.layoutIfNeeded()
             window.addSubview(animationImageMaskView)
-        
+            
+            // Take a screenshot of bottom bar and add it to the top to mask image properly when
+            // image moving "through" the bottom bar area
+            captureBottomBar()
+            if bottomBarImage != nil {
+                window.addSubview(bottomBarImage!)
+                window.addSubview(bottomBarMask!)
+            }
+            
             // Calculate destination frame
             if let homeVC = dest as? HomeStoryViewController {
                 if let destinationFrame = homeVC.getCurrentFrameForGalleryImage(currentImage!) {
@@ -174,26 +238,28 @@ class OpenImageSegue: UIStoryboardSegue {
             }
         }
     
-        if !unwinding {
-            captureScreen()
-        }
-        
         UIView.animateWithDuration(0.4, animations: {
             emptyView.alpha = self.unwinding ? 0.0 : 1.0
             
             animationImageMaskView.frame = destinationImageFrame
             animationImageMaskView.layoutIfNeeded()
+            
+            self.bottomBarMask?.alpha = self.unwinding ? 0.0 : 1.0
 
             }) { finished in
                 if self.unwinding {
                     animationImageMaskView.removeFromSuperview()
                     emptyView.removeFromSuperview()
                     self.backgroundImage?.removeFromSuperview()
+                    self.bottomBarImage?.removeFromSuperview()
+                    self.bottomBarMask?.removeFromSuperview()
                 } else {
                     src.presentViewController(dest, animated: false) {
                         animationImageMaskView.removeFromSuperview()
                         emptyView.removeFromSuperview()
                         dest.view.insertSubview(self.backgroundImage!, atIndex: 0)
+                        self.bottomBarImage?.removeFromSuperview()
+                        self.bottomBarMask?.removeFromSuperview()
                     }
                     self.openedImageView?.hidden = false
                 }

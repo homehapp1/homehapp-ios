@@ -24,7 +24,7 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
     @IBOutlet private weak var closeButton: UIButton!
     
     /// Bottom bar for changing between home story, home basic info, etc.
-    @IBOutlet private weak var bottomBarView: UIView!
+    @IBOutlet weak var bottomBarView: UIView!
     
     /// Top bar should only be shown for users own home
     @IBOutlet private weak var topBarView: UIView!
@@ -354,6 +354,33 @@ class HomeInfoViewController: BaseViewController, UIScrollViewDelegate {
         translation = max(0, min(bottomBarOriginalHeight, translation))
         bottomBarView.transform = CGAffineTransformMakeTranslation(0, translation)
     }
+    
+    // Manages the bottom bar visibility based on the table view scroll
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        guard let bottomBarLatestChange = bottomBarLatestChange else {
+            return
+        }
+        
+        let translation = (bottomBarLatestChange > 0) ? bottomBarOriginalHeight : 0
+        
+        UIView.animateWithDuration(0.2) {
+            self.bottomBarView.transform = CGAffineTransformMakeTranslation(0, translation)
+        }
+    }
+    
+    // Manages the top bar visibility based on the table view scroll
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        guard let bottomBarLatestChange = bottomBarLatestChange else {
+            return
+        }
+        
+        let translation = (bottomBarLatestChange > 0) ? bottomBarOriginalHeight : 0
+        
+        UIView.animateWithDuration(0.2) {
+            self.bottomBarView.transform = CGAffineTransformMakeTranslation(0, translation)
+        }
+    }
+    
     
     func getCurrentFrameForGalleryImage(image: Image) -> CGRect? {
         let window = UIApplication.sharedApplication().keyWindow

@@ -79,11 +79,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     private var addControlsContainerViewOriginalHeight: CGFloat = 0.0
     
     /// Bottom bar for changing between home story, home basic info, etc.
-    @IBOutlet private weak var bottomBarView: UIView!
+    @IBOutlet weak var bottomBarView: UIView!
     private var bottomBarOriginalHeight: CGFloat = 0.0
     
     /// Height constraint for the bottom bar view
-    @IBOutlet private weak var bottomBarViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomBarViewHeightConstraint: NSLayoutConstraint!
     private var bottomBarViewOriginalHeight: CGFloat = 0.0
     
     /// Settings button in bottom bar which is visible only in user's own home
@@ -936,7 +936,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
 
     // MARK: From UIScrollViewDelegate
     
-    // Manages the top bar visibility based on the table view scroll
+    // Manages the bottom bar visibility based on the table view scroll
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         guard let bottomBarLatestChange = bottomBarLatestChange else {
             return
@@ -949,7 +949,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         }
     }
     
-    // Manages the top bar visibility based on the table view scroll
+    // Manages the bottom bar visibility based on the table view scroll
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         guard let bottomBarLatestChange = bottomBarLatestChange else {
             return

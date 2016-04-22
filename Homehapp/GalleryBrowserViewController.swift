@@ -17,7 +17,7 @@ Displays story block images in horizontal browsable scrollview
 class GalleryBrowserViewController: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var backgroundView: UIView!
+    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet private weak var closeButton: UIButton!
     
     var images: [Image]? = nil
