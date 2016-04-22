@@ -87,7 +87,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
     
     /// Deletes one image from the gallery; if the last image is deleted, the block-level delete callback is called
     private func handleImageDeletion(image: Image) {
-        if images!.count > 1 {
+        if images!.count > 1 || deleteCallback == nil {
             // Find my index - we cannot use captured indexPath as its values are not necessarily correct any more
             if let myIndex = images!.indexOf(image) {
                 // Delete selected image
@@ -115,7 +115,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
                 collectionView.deleteItemsAtIndexPaths([NSIndexPath(forRow: myIndex, inSection: 0)])
             }
         } else {
-            // Delete entire block with the remaining single image
+            // Delete entire block with the remaining single image (if we are in home story)
             deleteCallback?()
         }
     }
