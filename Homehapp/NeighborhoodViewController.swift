@@ -84,6 +84,18 @@ class NeighborhoodViewController: HomeStoryViewController {
             }
         }
         
+        // Top margin should be removed if cell is first cell of the story or
+        // if there is two subsequent content blocks (from latter one top margin is removed)
+        if cell is ContentStoryBlockCell || cell is ContentImageStoryBlockCell || cell is GalleryStoryBlockCell || cell is ContentDescriptionStoryBlockCell || cell is ContentTitleStoryBlockCell {
+            if let marginCell = cell as? BaseStoryBlockCell {
+                if indexPath.row == 1 || ((storyObject.createdBy == nil || !storyObject.createdBy!.isMe()) && (indexPath.row > 1 && storyObject.storyBlocks[indexPath.row - 2].template == "ContentBlock")) {
+                    marginCell.removeTopMargin = true
+                } else {
+                    marginCell.removeTopMargin = false
+                }
+            }
+        }
+        
         assert(cell != nil, "Must have allocated a cell here")
         
         return cell!
@@ -160,6 +172,9 @@ class NeighborhoodViewController: HomeStoryViewController {
         super.viewDidLoad()
 
         storyObject = appstate.mostRecentlyOpenedHome!.userNeighborhood!
+        if storyObject.createdBy == nil {
+            dataManager.addUserForUserNeighborhood(storyObject as! Neighborhood)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

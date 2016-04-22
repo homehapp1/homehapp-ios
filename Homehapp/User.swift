@@ -104,4 +104,8 @@ class User: DeletableObject {
         }
         return nil
     }
+    
+    func isMe() -> Bool {
+        return id == appstate.authUserId
+    }
 }

@@ -259,6 +259,11 @@ class DataManager {
             neighborhoodId = userNeighborhoodJson["id"] as? String {
                 if let neighborhood = realm.objectForPrimaryKey(Neighborhood.self, key: neighborhoodId) {
                     home.userNeighborhood = neighborhood
+                    if home.createdBy != nil {
+                        if let user = realm.objectForPrimaryKey(User.self, key: home.createdBy!.id) {
+                            home.userNeighborhood?.createdBy = user
+                        }
+                    }
                 }
         }
         
@@ -699,6 +704,18 @@ class DataManager {
     func listUnsetImages() throws -> Results<Image> {
         let realm = try Realm()
         return realm.objects(Image).filter("local == true AND localUrl != nil")
+    }
+    
+    /// Adds user for given userNeighborhood if user is found
+    func addUserForUserNeighborhood(userNeighborhood: Neighborhood) {
+        if let home = findHomeForUserNeighborhood(userNeighborhood.id) {
+            if let user = home.createdBy {
+                performUpdates({
+                    userNeighborhood.createdBy = findUserById(user.id)
+                })
+            }
+        }
+        
     }
     
     /// Initializes resources of this class, including Realm

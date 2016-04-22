@@ -767,9 +767,9 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath)
         }
         
-        // Top margin should be removed if cell is first cell if the story or
-        // If there is two subsequent content blocks (from latter top margin is removed)
-        if cell is ContentStoryBlockCell || cell is ContentImageStoryBlockCell || cell is GalleryStoryBlockCell  || cell is ContentDescriptionStoryBlockCell || cell is ContentTitleStoryBlockCell {
+        // Top margin should be removed if cell is first cell of the story or
+        // if there is two subsequent content blocks (from latter one top margin is removed)
+        if cell is ContentStoryBlockCell || cell is ContentImageStoryBlockCell || cell is GalleryStoryBlockCell || cell is ContentDescriptionStoryBlockCell || cell is ContentTitleStoryBlockCell {
             if let marginCell = cell as? BaseStoryBlockCell {
                 if indexPath.row == 1 || (!home.isMyHome() && (indexPath.row > 1 && home.storyBlocks[indexPath.row - 2].template == "ContentBlock")) {
                     marginCell.removeTopMargin = true

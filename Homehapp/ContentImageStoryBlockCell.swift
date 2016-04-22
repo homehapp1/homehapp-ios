@@ -81,7 +81,7 @@ class ContentImageStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
         if !editMode && (titleLabel.text == nil || titleLabel.text?.length == 0) {
             titleLabelTopConstraint.active = true
             titleLabelBottomConstraint.active = true
-            titleLabelTopConstraint.constant = 0
+            titleLabelTopConstraint.constant = imageMargin
             titleLabelBottomConstraint.constant = 0
             editTitleTextViewTopConstraint.active = false
             editTitleTextViewBottomConstraint.active = false
