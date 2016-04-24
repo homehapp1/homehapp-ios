@@ -1066,6 +1066,14 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         }
     }
     
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.row == 0 || indexPath.row == storyObject.storyBlocks.count + 1 {
+            return 400
+        } else {
+            return 100
+        }
+    }
+    
     // MARK: From UIViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -1185,7 +1193,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         allowEditMode = (appstate.authUserId == appstate.mostRecentlyOpenedHome?.createdBy?.id)
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 100
+        //tableView.estimatedRowHeight = 100
         
         tableView.registerNib(UINib(nibName: "HomeOwnerInfoCell", bundle: nil), forCellReuseIdentifier: "HomeOwnerInfoCell")
         tableView.registerNib(UINib(nibName: "BigVideoStoryBlockCell", bundle: nil), forCellReuseIdentifier: "BigVideoStoryBlockCell")
