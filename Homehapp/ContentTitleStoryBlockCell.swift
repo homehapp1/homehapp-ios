@@ -34,7 +34,7 @@ class ContentTitleStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
             titleTextView.scrollEnabled = true
             
             if removeTopMargin && !editMode {
-                titleLabelTopConstraint.constant = 0
+                titleLabelTopConstraint.constant = 8
                 titleTextViewTopConstraint.constant = 0
             } else {
                 titleLabelTopConstraint.constant = titleLabelOriginalTopMarginConstraint

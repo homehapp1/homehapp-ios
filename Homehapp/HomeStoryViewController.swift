@@ -546,6 +546,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             if let editableCell = cell as? EditableStoryCell {
                 editableCell.setEditMode(editMode, animated: true)
             }
+            cell.setNeedsLayout()
+            cell.layoutIfNeeded()
         }
     }
     
@@ -781,10 +783,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Send updates to server
         sendStoryObjectToServer()
         
-        tableView.beginUpdates()
-        tableView.endUpdates()
-        tableView.contentSize = tableView.sizeThatFits(CGSize(width: tableView.bounds.width, height: CGFloat.max))
-
+        //tableView.beginUpdates()
+        //tableView.endUpdates()
+        //tableView.contentSize = tableView.sizeThatFits(CGSize(width: tableView.bounds.width, height: CGFloat.max))
+ 
     }
     
     @IBAction func backButtonPressed(button: UIButton) {

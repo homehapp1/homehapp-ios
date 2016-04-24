@@ -36,7 +36,7 @@ class ContentDescriptionStoryBlockCell: TextContentStoryBlockCell, UITextViewDel
             // If content block is first cell, it should not have top margin
             
             if removeTopMargin && !editMode {
-                descriptionLabelTopConstraint.constant = 0
+                descriptionLabelTopConstraint.constant = 8
                 descriptionTextViewTopConstraint.constant = 0
             } else {
                 descriptionLabelTopConstraint.constant = descriptionLabelOriginalTopMarginConstraint

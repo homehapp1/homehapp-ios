@@ -51,7 +51,7 @@
                                 </connections>
                             </textView>
                             <textView opaque="NO" contentMode="left" verticalCompressionResistancePriority="1000" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NBz-86-1kG" customClass="KMPlaceholderTextView" customModule="KMPlaceholderTextView">
-                                <rect key="frame" x="25" y="43" width="541" height="241.5"/>
+                                <rect key="frame" x="25" y="43" width="541" height="239.5"/>
                                 <color key="textColor" red="0.23137254900000001" green="0.18823529410000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
@@ -73,7 +73,7 @@
                             <constraint firstItem="qRK-b0-djd" firstAttribute="top" secondItem="3OI-xO-5J8" secondAttribute="top" constant="22" id="RA0-l0-a99"/>
                             <constraint firstItem="KVR-gE-LN6" firstAttribute="centerY" secondItem="qRK-b0-djd" secondAttribute="centerY" id="RAF-KQ-ghf"/>
                             <constraint firstItem="KVR-gE-LN6" firstAttribute="leading" secondItem="3OI-xO-5J8" secondAttribute="leading" constant="30" id="VN6-Jd-HHK"/>
-                            <constraint firstAttribute="bottom" secondItem="NBz-86-1kG" secondAttribute="bottom" constant="20" id="YAk-ei-uJj"/>
+                            <constraint firstAttribute="bottom" secondItem="NBz-86-1kG" secondAttribute="bottom" constant="22" id="YAk-ei-uJj"/>
                             <constraint firstAttribute="trailing" secondItem="qRK-b0-djd" secondAttribute="trailing" constant="25" id="Zv3-uy-NkS"/>
                             <constraint firstItem="NBz-86-1kG" firstAttribute="top" secondItem="qRK-b0-djd" secondAttribute="bottom" constant="5" id="dcU-Jy-vRL"/>
                             <constraint firstAttribute="trailing" secondItem="zu2-7o-f0l" secondAttribute="trailing" constant="30" id="dhC-Ek-aKd"/>

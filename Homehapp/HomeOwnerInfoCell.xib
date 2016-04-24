@@ -229,6 +229,7 @@
                             <constraint firstAttribute="trailing" secondItem="CuM-h0-Sq0" secondAttribute="trailing" id="S6O-GN-wLy"/>
                             <constraint firstAttribute="trailing" secondItem="EVO-M6-p4d" secondAttribute="trailing" id="SQW-BG-iq8"/>
                             <constraint firstAttribute="trailing" secondItem="9k1-9F-q2p" secondAttribute="trailing" id="Xau-yY-lLF"/>
+                            <constraint firstAttribute="height" constant="323.5" id="cwZ-Px-ZmC"/>
                             <constraint firstItem="EVO-M6-p4d" firstAttribute="top" secondItem="CuM-h0-Sq0" secondAttribute="bottom" id="oWi-u2-RvN"/>
                             <constraint firstItem="CuM-h0-Sq0" firstAttribute="top" secondItem="I7m-Tm-y8T" secondAttribute="top" id="rkK-gP-AkD"/>
                         </constraints>
