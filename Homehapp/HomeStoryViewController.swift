@@ -28,14 +28,9 @@ class GallerySegueData {
  Displays the home story for a home.
  */
 class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
+    
     /// Height of the top bar, in units
     private let topBarHeight: CGFloat = 65
-    
-    /// Width / height of the insertion cursor, in units
-    private let insertionCursorSize: CGFloat = 29
-    
-    /// Duration (in seconds) of insertion cursor fade in/out animation
-    private let insertionCursorAnimationDuration: NSTimeInterval = 0.3
 
     /// Height of the bottom bar, in units
     let bottomBarHeight: CGFloat = 48
@@ -74,9 +69,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     /// Add content -controls view (in edit mode)
     @IBOutlet private weak var addControlsContainerView : UIView!
     
-    /// Height constraint for the add content -controls view
-    @IBOutlet private weak var addControlsContainerViewHeightConstraint: NSLayoutConstraint!
-    private var addControlsContainerViewOriginalHeight: CGFloat = 0.0
+    /// Add content -controls background view (in edit mode)
+    @IBOutlet private weak var addControlsBackgroundView : UIView!
+    
+    /// Top constraint for the add content -controls view
+    @IBOutlet private weak var addControlsContainerViewTopConstraint: NSLayoutConstraint!
     
     /// Bottom bar for changing between home story, home basic info, etc.
     @IBOutlet weak var bottomBarView: UIView!
@@ -103,12 +100,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     /// Whether the view controller is currently in edit mode
     var editMode = false
-
-    /// Current position (as an index to the table view) of the insertion cursor (where new block cells are inserted)
-    private var insertionCursorPosition: Int? = 0
-    
-    /// Current insertion cursor image view 
-    private var insertionCursorImageView: UIImageView!
     
     /// Height of the keyboard + any text edit mode selection view, if they are showing.
     private var keyboardHeight: CGFloat? = nil
@@ -127,6 +118,9 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     /// Should we create thumbnail data from image or not. Currently client side generation not is use
     private var createThumbnailData = false
+    
+    /// Index where user pressed add content
+    private var selectedStoryBlockIndex: Int? = 0
     
     /// Returns the main home image view from the header, or nil if the header is not visible (enough)
     var headerMainImageView: CachedImageView? {
@@ -192,54 +186,59 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     private func findParentCell(forView view: UIView) -> EditableStoryCell? {
         var parent = view.superview
-        
         while parent != nil {
             if let editableCell = parent as? EditableStoryCell {
                 return editableCell
             }
-            
             parent = parent?.superview
         }
-        
         return nil
     }
     
-    /// Calculate to which position to insert cell that will be added
-    private func calculateCellInsertPosition() -> Int {
-        let tableViewPoint = tableView.convertPoint(CGPointMake(self.view.width / 2, self.view.height / 3), fromView: tableView.superview)
-        var newIndexPath = tableView.indexPathForRowAtPoint(tableViewPoint)
-        if newIndexPath == nil {
-            newIndexPath = NSIndexPath(forRow: storyObject.storyBlocks.count, inSection: 0)
-        }
-        
-        return min(newIndexPath!.row + 1, storyObject.storyBlocks.count + 1)
+    private func showAddControlsView(indexPath: NSIndexPath) {
+        let rectOfCellInTableView: CGRect = tableView.rectForRowAtIndexPath(indexPath)
+        let rectOfCellInSuperview: CGRect = tableView.convertRect(rectOfCellInTableView, toView: tableView.superview)
+        let height = rectOfCellInSuperview.y + rectOfCellInSuperview.height + 65 + 10
+        addControlsContainerView.alpha = 0.0
+        addControlsBackgroundView.alpha = 0.0
+        addControlsContainerView.hidden = false
+        addControlsBackgroundView.hidden = false
+        addControlsContainerViewTopConstraint.constant = height
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.addControlsBackgroundView.alpha = 0.4
+            self.addControlsContainerView.alpha = 1.0
+        })
     }
     
-    //Animatedly adds a row to the table view
+    private func hideAddControlsView() {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.addControlsContainerView.alpha = 0.0
+            self.addControlsBackgroundView.alpha = 0.0
+            }, completion: { finished in
+                self.addControlsContainerView.hidden = true
+                self.addControlsBackgroundView.hidden = true
+        })
+    }
+    
+    func addControlsBackgroundPressed(sender: UITapGestureRecognizer? = nil) {
+        hideAddControlsView()
+    }
+    
+    /// Animatedly adds a row to the table view
     private func addStoryBlockTableViewRow(position: Int) {
         let newIndexPath = NSIndexPath(forRow: position, inSection: 0)
-        insertionCursorImageView.alpha = 0
         tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
         tableView.scrollToRowAtIndexPath(newIndexPath, atScrollPosition: .Middle, animated: true)
         
         dataManager.performUpdates {
             storyObject.localChanges = true
         }
-        
-        runOnMainThreadAfter(delay: 0.5, task: {
-            self.manageInsertionCursor(true)
-        })
     }
     
     /// Animatedly removes a row from the table view
     private func removeStoryBlockTableViewRow(storyBlockIndex: Int) {
         let deletedIndexPath = NSIndexPath(forRow: storyBlockIndex + 1, inSection: 0)
-        
-        insertionCursorImageView.alpha = 0
         tableView.deleteRowsAtIndexPaths([deletedIndexPath], withRowAnimation: .Automatic)
-        runOnMainThreadAfter(delay: 0.5, task: {
-            self.manageInsertionCursor(true)
-        })
     }
     
     private func openImagePicker(maxSelections maxSelections: Int? = nil, editingCell: EditableStoryCell? = nil) {
@@ -340,24 +339,21 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 contentImageCell.storyBlock = storyBlock
         } else {
             
-            // Calculate position where to add new storyBlock
-            let position = calculateCellInsertPosition()
-            
             // Create a new StoryBlock with the local image
             dataManager.performUpdates {
                 if images.count > 1 {
                     let storyBlock = StoryBlock(template: .Gallery)
                     storyBlock.galleryImages.appendContentsOf(images)
-                    storyObject.storyBlocks.insert(storyBlock, atIndex: position - 1)
+                    storyObject.storyBlocks.insert(storyBlock, atIndex: selectedStoryBlockIndex! + 1)
                 } else {
                     let storyBlock = StoryBlock(template: .ContentImage)
                     storyBlock.image = images.first
-                    storyObject.storyBlocks.insert(storyBlock, atIndex: position - 1)
+                    storyObject.storyBlocks.insert(storyBlock, atIndex: selectedStoryBlockIndex! + 1)
                 }
             }
             
             // Animatedly add the new story block row
-            addStoryBlockTableViewRow(position)
+            addStoryBlockTableViewRow(selectedStoryBlockIndex! + 2)
         }
         
         for i in 0...selectedImages.count - 1 {
@@ -424,18 +420,15 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         // Insert a thumbnail image into the image cache by that url
         ImageCache.sharedInstance().putImage(image: snapshotImage, url: videoAssetUrl.absoluteString, storeOnDisk: true)
         
-        // Calculate position where to add new storyBlock
-        let position = calculateCellInsertPosition()
-        
         // Create a story block out of this video
         dataManager.performUpdates {
             let storyBlock = StoryBlock(template: .BigVideo)
             storyBlock.video = video
-            storyObject.storyBlocks.insert(storyBlock, atIndex: position - 1)
+            storyObject.storyBlocks.insert(storyBlock, atIndex: selectedStoryBlockIndex! + 1)
         }
         
         // Animatedly add the new table view row for the video
-        addStoryBlockTableViewRow(position)
+        addStoryBlockTableViewRow(selectedStoryBlockIndex! + 2)
         
         // Re-encode the local video into 720p and get access to the new video file
         requestVideoDataForAssetUrl(videoAssetUrl) { (videoFileUrl, error) in
@@ -516,7 +509,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             // Nothing to do!
             return
         }
-      
         
         // See how much of the table view's content there is left to scroll
         let leftToScroll = max(0, tableView.contentSize.height - (tableView.contentOffset.y + tableView.height))
@@ -555,34 +547,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 editableCell.setEditMode(editMode, animated: true)
             }
         }
-    
-        // Invalidate edit mode cursor
-        insertionCursorImageView.removeFromSuperview()
-        insertionCursorPosition = nil
-        if editMode {
-            manageInsertionCursor(false)
-        }
-    }
-    
-    private func toggleAddContentControls() {
-        if addControlsContainerViewHeightConstraint.constant == 0 {
-            // Show add content -controls, hide bottom bar
-            addControlsContainerViewHeightConstraint.constant = addControlsContainerViewOriginalHeight
-            bottomBarViewHeightConstraint.constant = 0
-        } else {
-            // Hide add content -controls, show bottom bar
-            bottomBarViewHeightConstraint.constant = bottomBarViewOriginalHeight
-            addControlsContainerViewHeightConstraint.constant = 0
-        }
-        
-        self.bottomBarLatestChange = 0
-        self.tableViewScrollPosition = self.tableView.contentOffset
-        
-        UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
-            self.view.layoutIfNeeded()
-            self.bottomBarView.transform = CGAffineTransformIdentity
-            }) { finished in
-        }
     }
     
     /// Displays AVPlayerViewController to display full screen video
@@ -596,6 +560,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         }
     }
     
+    /// Show home story tutorial to user
     private func showTutorial(firstTutorial: TutorialType) {
         let tutorialView = TutorialView.instanceFromNib() as! TutorialView
         tutorialView.frame = view.bounds
@@ -614,41 +579,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             if self?.storyObject is Neighborhood {
                 tutorialView.tutorialType = .CloseNeighborhoodTutorial
             }
-        }
-    }
-
-    /// Manages the position / visibility of the edit mode insertion cursor.
-    private func manageInsertionCursor(forceRefresh: Bool) {
-        
-        let currentInsertCursorPosition = calculateCellInsertPosition()
-        let initialInsertionCursorPosition = insertionCursorPosition
-        
-        if currentInsertCursorPosition != insertionCursorPosition || forceRefresh {
-            insertionCursorPosition = currentInsertCursorPosition
-            self.insertionCursorImageView.layer.removeAllAnimations()
-            
-            // Fade out current cursor
-            UIView.animateWithDuration(insertionCursorAnimationDuration, animations: {
-                    if initialInsertionCursorPosition != currentInsertCursorPosition {
-                        self.insertionCursorImageView.alpha = 0
-                    }
-                }, completion: { finished in
-                    if let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: currentInsertCursorPosition, inSection: 0)) {
-                        // Position insertion cursor in the middle of the top edge of the cell
-                        let cursorOrigin = CGPoint(x: (cell.bounds.width - self.insertionCursorSize) / 2, y: cell.frame.origin.y - (self.insertionCursorSize / 2))
-                        self.insertionCursorImageView.frame.origin = cursorOrigin
-                        cell.superview?.addSubview(self.insertionCursorImageView)
-                        
-                        UIView.animateWithDuration(self.insertionCursorAnimationDuration, animations: {
-                            self.insertionCursorImageView.alpha = 1
-                            }, completion: { finished in
-                                // No action
-                        })
-                    } else {
-                        // cell not in sight. clear insert position so that sign is drawn when cell appears
-                        self.insertionCursorPosition = 0
-                    }
-            })
         }
     }
     
@@ -670,6 +600,21 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 videoCell.clearPlayer()
             }
         }
+    }
+    
+    /// Add text block to current story
+    private func addTextBlock(layout: StoryBlock.Layout) {
+        UIResponder.resignCurrentFirstResponder()
+        
+        // Add new Content block
+        dataManager.performUpdates {
+            let storyBlock = StoryBlock(template: .ContentBlock)
+            storyBlock.layout = layout
+            storyObject.storyBlocks.insert(storyBlock, atIndex: selectedStoryBlockIndex! + 1)
+        }
+        
+        // Animate the addition of the new row in the table view
+        addStoryBlockTableViewRow(selectedStoryBlockIndex! + 2)
     }
     
     // MARK: Public Methods
@@ -825,12 +770,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     @IBAction func editButtonPressed(button: UIButton) {
         setEditMode(true)
-        toggleAddContentControls()
     }
     
     @IBAction func saveButtonPressed(button: UIButton) {
         setEditMode(false)
-        toggleAddContentControls()
         
         // Clear content blocks that have no content
         removeEmptyContentBlocks()
@@ -852,36 +795,23 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     @IBAction func addPictureButtonPressed(sender: UIButton) {
         UIResponder.resignCurrentFirstResponder()
+        hideAddControlsView()
         openImagePicker()
     }
     
     @IBAction func addTextTitleButtonPressed(sender: UIButton) {
+        hideAddControlsView()
         addTextBlock(.Title)
     }
     
     @IBAction func addTextTitleAndBodyButtonPressed(sender: UIButton) {
+        hideAddControlsView()
         addTextBlock(.TitleAndBody)
     }
     
     @IBAction func addTextBodyButtonPressed(sender: UIButton) {
+        hideAddControlsView()
         addTextBlock(.Body)
-    }
-    
-    private func addTextBlock(layout: StoryBlock.Layout) {
-        UIResponder.resignCurrentFirstResponder()
-        
-        // Calculate position where to add new storyBlock
-        let position = calculateCellInsertPosition()
-        
-        // Add new Content block
-        dataManager.performUpdates {
-            let storyBlock = StoryBlock(template: .ContentBlock)
-            storyBlock.layout = layout
-            storyObject.storyBlocks.insert(storyBlock, atIndex: position - 1)
-        }
-        
-        // Animate the addition of the new row in the table view
-        addStoryBlockTableViewRow(position)
     }
     
     @IBAction func neighborhoodButtonPressed(sender: UIButton) {
@@ -909,7 +839,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         log.debug("Keyboard will show; keyboardHeight = \(keyboardHeight)")
     }
     
-    
     func keyboardWillHide(notification: NSNotification) {
         keyboardHeight = 0
         
@@ -924,15 +853,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         }
         log.debug("Keyboard will hide")
     }
-    
-    /*
-    func textViewEditingStarted(notification: NSNotification) {
-        guard let textView = notification.object as? ExpandingTextView else {
-            return
-        }
-        scrollTextViewIntoView(textView)
-    }
-     */
 
     // MARK: From UIScrollViewDelegate
     
@@ -964,11 +884,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
     
     // Manages the bottom bar visibility based on the table view scroll
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if editMode {
-            // Manage the edit mode insertion cursor
-            manageInsertionCursor(false)
-        }
-        
         let diff = scrollView.contentOffset.y - tableViewScrollPosition.y
         tableViewScrollPosition = scrollView.contentOffset
         
@@ -1119,6 +1034,21 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                             self?.removeStoryBlockTableViewRow(storyBlockIndex)
                     }
                 }
+                
+                baseCell.addContentCallback = { [weak self] addButtonType in
+                    if let storyBlock = baseCell.storyBlock,
+                        storyBlockIndex = self?.storyObject.storyBlocks.indexOf(storyBlock) {
+                        var selectedIndexPath = indexPath
+                        // From bottom button we add below and top button above the cell
+                        if addButtonType == .AddContentButtonTypeBottom {
+                            self?.selectedStoryBlockIndex = storyBlockIndex
+                        } else {
+                            self?.selectedStoryBlockIndex = storyBlockIndex - 1
+                            selectedIndexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
+                        }
+                        self?.showAddControlsView(selectedIndexPath)
+                    }
+                }
             }
         }
         
@@ -1188,6 +1118,14 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         
         tableViewScrollPosition = tableView.contentOffset
         bottomBarLatestChange = 0.0
+        
+        addControlsContainerView.hidden = true
+        addControlsBackgroundView.hidden = true
+        
+        // Tap recognizer to hide add controls
+        let tap = UITapGestureRecognizer(target: self, action: #selector(HomeStoryViewController.addControlsBackgroundPressed(_:)))
+        tap.delegate = self
+        addControlsBackgroundView.addGestureRecognizer(tap)
 
         if navigationController == nil {
             // This is being called as part of the view being added into the transition
@@ -1254,7 +1192,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         tableView.registerNib(UINib(nibName: "ContentTitleStoryBlockCell", bundle: nil), forCellReuseIdentifier: "ContentTitleStoryBlockCell")
         tableView.registerNib(UINib(nibName: "ContentDescriptionStoryBlockCell", bundle: nil), forCellReuseIdentifier: "ContentDescriptionStoryBlockCell")
         
-        
         bottomBarOriginalHeight = bottomBarViewHeightConstraint.constant
         
         // Originally hide the bottom bar
@@ -1267,21 +1204,10 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         toggleSettingsButtonVisibility()
         
         topBarHeightConstraint.constant = allowEditMode ? topBarHeight : 0.0
-        
-        addControlsContainerViewOriginalHeight = addControlsContainerViewHeightConstraint.constant
         bottomBarViewOriginalHeight = bottomBarViewHeightConstraint.constant
-        if !editMode {
-            addControlsContainerViewHeightConstraint.constant = 0
-        }
-        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeStoryViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeStoryViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
-        
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeStoryViewController.textViewEditingStarted(_:)), name: UITextViewTextDidBeginEditingNotification, object: nil)
-
-        insertionCursorImageView = UIImageView(image: UIImage(named: "icon_add_here"))
-        insertionCursorImageView.frame = CGRect(x: 0, y: 0, width: insertionCursorSize, height: insertionCursorSize)
 
         // Add insets so that there is empty space on bottom of the table view to match the height of the bottom bar
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottomBarHeight, right: 0)

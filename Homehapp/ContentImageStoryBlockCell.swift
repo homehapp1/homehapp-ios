@@ -97,7 +97,7 @@ class ContentImageStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate 
         
         if editMode {
             let size = editTitleTextView.sizeThatFits(CGSizeMake(editTitleTextView.width, 10000000))
-            editTitleTextView.contentSize = size
+            editTitleTextView.contentSize.height = size.height
             editTitleTextView.frame.size.height = size.height
             updateBorder(editTitleTextView.bounds)
         }

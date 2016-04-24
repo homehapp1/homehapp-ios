@@ -9,7 +9,15 @@
 import UIKit
 
 private let deleteButtonSize : CGFloat = 30
-private let deleteButtonMargin : CGFloat = 8
+private let addContentButtonSize : CGFloat = 30
+private let deleteButtonTopMargin : CGFloat = 8
+private let deleteButtonRightMargin : CGFloat = 10
+private let addContentButtonMargin : CGFloat = 10
+
+enum AddContentButtonType: Int {
+    case AddContentButtonTypeBottom
+    case AddContentButtonTypeTop
+}
 
 /**
  Common base class for all story block cell.
@@ -21,9 +29,15 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
     
     var deleteButton: QvikButton?
     
+    var addContentTopButton: QvikButton?
+    
+    var addContentBottomButton: QvikButton?
+    
     var resizeCallback: (Void -> Void)? 
     
     var updateCallback: (Void -> Void)?
+    
+    var addContentCallback: (AddContentButtonType -> Void)?
 
     // Base class returns empty set by default. Override in subclasses.
     var supportedTextEditModes: [StoryTextEditMode] {
@@ -45,56 +59,136 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
     
     private(set) var editMode = false
     
-    /// Base class implementation manages adding the delete button.
+    /// Base class implementation manages adding the delete, etc. buttons
     func setEditMode(editMode: Bool, animated: Bool) {
         self.editMode = editMode
         
         if editMode {
-            deleteButton = QvikButton.button(frame: CGRect(x: 0, y: 0, width: deleteButtonSize, height: deleteButtonSize), type: .Custom) { [weak self] in
-                self?.deleteCallback?()
-            }
-            deleteButton!.setImage(UIImage(named: "icon_delete"), forState: .Normal)
-            deleteButton!.contentMode = .Center
-            deleteButton!.translatesAutoresizingMaskIntoConstraints = false
+            addDeleteButton(animated)
+            addAddContentButton(.AddContentButtonTypeBottom, animated: animated)
+            addAddContentButton(.AddContentButtonTypeTop, animated: animated)
+        } else {
+            removeDeleteButton(animated)
+            removeAddContentButtons(animated)
+        }
+    }
+    
+    /// Add delete button to cell
+    private func addDeleteButton(animated: Bool) {
+        deleteButton = QvikButton.button(frame: CGRect(x: 0, y: 0, width: deleteButtonSize, height: deleteButtonSize), type: .Custom) { [weak self] in
+            self?.deleteCallback?()
+        }
+        deleteButton!.setImage(UIImage(named: "icon_delete"), forState: .Normal)
+        deleteButton!.contentMode = .Center
+        deleteButton!.translatesAutoresizingMaskIntoConstraints = false
+        
+        if let _ = self as? GalleryStoryBlockCell {
+            // do not add cell level delete button to gallery cell
+        } else {
+            addSubview(deleteButton!)
             
-            if let _ = self as? GalleryStoryBlockCell {
-                // do not add cell level delete button to gallery cell 
-            } else {
-                addSubview(deleteButton!)
-                
-                deleteButton?.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-                
-                // Constrain the delete button so that it will stay in the upper right corner of the cell
-                let topConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: deleteButtonMargin)
-                let rightConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1, constant: -deleteButtonMargin)
-                let widthConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: deleteButtonSize)
-                let heightConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: deleteButtonSize)
-                
-                NSLayoutConstraint.activateConstraints([topConstraint, rightConstraint, widthConstraint, heightConstraint])
-                
-                // Layout once to put the close button already in its proper place
-                layoutIfNeeded()
-                
-                if animated {
-                    deleteButton!.alpha = 0.0
-                    UIView.animateWithDuration(toggleEditModeAnimationDuration) {
-                        self.deleteButton!.alpha = 1.0
-                    }
+            deleteButton?.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            
+            // Constrain the delete button so that it will stay in the upper right corner of the cell
+            let topConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: deleteButtonTopMargin)
+            let rightConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1, constant: -deleteButtonRightMargin)
+            let widthConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: deleteButtonSize)
+            let heightConstraint = NSLayoutConstraint(item: deleteButton!, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: deleteButtonSize)
+            
+            NSLayoutConstraint.activateConstraints([topConstraint, rightConstraint, widthConstraint, heightConstraint])
+            
+            // Layout once to put the close button already in its proper place
+            //layoutIfNeeded()
+            
+            if animated {
+                deleteButton!.alpha = 0.0
+                UIView.animateWithDuration(toggleEditModeAnimationDuration) {
+                    self.deleteButton!.alpha = 1.0
                 }
             }
+        }
+    }
+    
+    /// Remove delete button from cell
+    private func removeDeleteButton(animated: Bool) {
+        if animated {
+            deleteButton?.alpha = 1.0
+            UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
+                self.deleteButton?.alpha = 0.0
+                }, completion: { finished in
+                    self.deleteButton?.removeFromSuperview()
+                    self.deleteButton = nil
+            })
         } else {
-            if animated {
-                deleteButton?.alpha = 1.0
-                UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
-                    self.deleteButton?.alpha = 0.0
-                    }, completion: { finished in
-                        self.deleteButton?.removeFromSuperview()
-                        self.deleteButton = nil
-                })
-            } else {
-                self.deleteButton?.removeFromSuperview()
-                self.deleteButton = nil
+            self.deleteButton?.removeFromSuperview()
+            self.deleteButton = nil
+        }
+    }
+    
+    /// Add content addition button to cell
+    private func addAddContentButton(addContentButtonType: AddContentButtonType, animated: Bool) {
+        let addContentButton = QvikButton.button(frame: CGRect(x: 0, y: 0, width: addContentButtonSize, height: addContentButtonSize), type: .Custom) { [weak self] in
+            self?.addContentCallback?(addContentButtonType)
+        }
+        
+        addContentButton.setImage(UIImage(named: "icon_add_here"), forState: .Normal)
+        addContentButton.contentMode = .Center
+        addContentButton.translatesAutoresizingMaskIntoConstraints = false
+      
+        addSubview(addContentButton)
+        addContentButton.layer.zPosition = 2
+            
+        addContentButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            
+        // Constrain the delete button so that it will stay in the upper right corner of the cell
+        var yConstraint: NSLayoutConstraint? = nil
+        if addContentButtonType == .AddContentButtonTypeBottom {
+            yConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1, constant: addContentButtonSize / 2)
+        } else {
+            yConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: -addContentButtonSize / 2)
+        }
+        let horizontalConstraint = NSLayoutConstraint(item: addContentButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let widthConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: addContentButtonSize)
+        let heightConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: addContentButtonSize)
+            
+        NSLayoutConstraint.activateConstraints([yConstraint!, horizontalConstraint, widthConstraint, heightConstraint])
+            
+        // Layout once to put the add content button already in its proper place
+        //layoutIfNeeded()
+        
+        if addContentButtonType == .AddContentButtonTypeBottom {
+            self.addContentBottomButton = addContentButton
+        } else {
+            self.addContentTopButton = addContentButton
+        }
+            
+        if animated {
+            addContentButton.alpha = 0.0
+            UIView.animateWithDuration(toggleEditModeAnimationDuration) {
+                addContentButton.alpha = 1.0
             }
+        }
+    }
+    
+    /// Remove content addition button from cell
+    private func removeAddContentButtons(animated: Bool) {
+        if animated {
+            addContentBottomButton?.alpha = 1.0
+            addContentTopButton?.alpha = 1.0
+            UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
+                self.addContentBottomButton?.alpha = 0.0
+                self.addContentTopButton?.alpha = 0.0
+                }, completion: { finished in
+                    self.addContentBottomButton?.removeFromSuperview()
+                    self.addContentBottomButton = nil
+                    self.addContentTopButton?.removeFromSuperview()
+                    self.addContentTopButton = nil
+            })
+        } else {
+            addContentBottomButton?.removeFromSuperview()
+            addContentBottomButton = nil
+            addContentTopButton?.removeFromSuperview()
+            addContentTopButton = nil
         }
     }
     
@@ -123,6 +217,11 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
         
         deleteButton?.removeFromSuperview()
         deleteButton = nil
+        
+        addContentBottomButton?.removeFromSuperview()
+        addContentBottomButton = nil
+        addContentTopButton?.removeFromSuperview()
+        addContentTopButton = nil
     }
     
     override func awakeFromNib() {
@@ -133,7 +232,6 @@ class BaseStoryBlockCell: UITableViewCell, EditableStoryCell {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseStoryBlockCell.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseStoryBlockCell.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
 
-        clipsToBounds = true
         selectionStyle = .None
     }
     
