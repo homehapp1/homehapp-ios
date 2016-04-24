@@ -18,6 +18,17 @@ enum StoryTextEditMode: Int {
     case HeaderAndBodyText = 3
 }
 
+enum AddContentButtonType: Int {
+    case AddContentButtonTypeBottom
+    case AddContentButtonTypeTop
+}
+
+let deleteButtonSize : CGFloat = 30
+let addContentButtonSize : CGFloat = 30
+let deleteButtonTopMargin : CGFloat = 8
+let deleteButtonRightMargin : CGFloat = 10
+let addContentButtonMargin : CGFloat = 10
+
 /// Describes an editable cell in the home story table view
 protocol EditableStoryCell {
     var supportedTextEditModes: [StoryTextEditMode] { get }
@@ -25,6 +36,7 @@ protocol EditableStoryCell {
     var deleteCallback: (Void -> Void)? { get set }
     var updateCallback: (Void -> Void)? { get set }
     var addImagesCallback: (Int? -> Void)? { get set } // Parameter is max number of images to add; nil = unlimited
+    var addContentCallback: (AddContentButtonType -> Void)? { get set }
 
     func setEditMode(editMode: Bool, animated: Bool)
 }

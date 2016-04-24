@@ -987,6 +987,24 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                 self?.openImagePicker(maxSelections: maxImages, editingCell: editableCell)
             }
             
+            editableCell.addContentCallback = { [weak self] addButtonType in
+                if let storyBlock = (editableCell as? BaseStoryBlockCell)?.storyBlock,
+                    storyBlockIndex = self?.storyObject.storyBlocks.indexOf(storyBlock) {
+                    var selectedIndexPath = indexPath
+                    // From bottom button we add below and top button above the cell
+                    if addButtonType == .AddContentButtonTypeBottom {
+                        self?.selectedStoryBlockIndex = storyBlockIndex
+                    } else {
+                        self?.selectedStoryBlockIndex = storyBlockIndex - 1
+                        selectedIndexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
+                    }
+                    self?.showAddControlsView(selectedIndexPath)
+                } else {
+                    self?.selectedStoryBlockIndex = -1
+                    self?.showAddControlsView(NSIndexPath(forRow: 0, inSection: indexPath.section))
+                }
+            }
+            
             if let videoCell = editableCell as? BigVideoStoryBlockCell {
                 videoCell.playFullscreenCallback = { [weak self] in
                     if let videoUrl = videoCell.videoURL {
@@ -1032,21 +1050,6 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                             }
                             
                             self?.removeStoryBlockTableViewRow(storyBlockIndex)
-                    }
-                }
-                
-                baseCell.addContentCallback = { [weak self] addButtonType in
-                    if let storyBlock = baseCell.storyBlock,
-                        storyBlockIndex = self?.storyObject.storyBlocks.indexOf(storyBlock) {
-                        var selectedIndexPath = indexPath
-                        // From bottom button we add below and top button above the cell
-                        if addButtonType == .AddContentButtonTypeBottom {
-                            self?.selectedStoryBlockIndex = storyBlockIndex
-                        } else {
-                            self?.selectedStoryBlockIndex = storyBlockIndex - 1
-                            selectedIndexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
-                        }
-                        self?.showAddControlsView(selectedIndexPath)
                     }
                 }
             }

@@ -8,17 +8,6 @@
 
 import UIKit
 
-private let deleteButtonSize : CGFloat = 30
-private let addContentButtonSize : CGFloat = 30
-private let deleteButtonTopMargin : CGFloat = 8
-private let deleteButtonRightMargin : CGFloat = 10
-private let addContentButtonMargin : CGFloat = 10
-
-enum AddContentButtonType: Int {
-    case AddContentButtonTypeBottom
-    case AddContentButtonTypeTop
-}
-
 /**
  Common base class for all story block cell.
  */

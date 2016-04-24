@@ -30,9 +30,12 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
     @IBOutlet private weak var bottomPartContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topPartContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var titleTopMarginConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var titleTextViewTopMarginConstraint: NSLayoutConstraint!
     
     /// Progress indicator for image upload
     @IBOutlet private weak var uploadProgressView: UIProgressView!
+    
+    var addContentBottomButton: QvikButton?
     
     /// Action to be executed when share button is pressed
     var shareCallback: (Void -> Void)?
@@ -42,6 +45,8 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
     var deleteCallback: (Void -> Void)?
 
     var updateCallback: (Void -> Void)?
+    
+    var addContentCallback: (AddContentButtonType -> Void)?
 
     /// Called when cell indicates that an image should be added (or current one replaced)
     var addImagesCallback: (Int? -> Void)?
@@ -201,6 +206,7 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
         // Title top margin constraint depends on if we have location for home of not
         if !hasLocation {
             titleTopMarginConstraint.constant = margin // Move title up if story has no location
+            titleTextViewTopMarginConstraint.constant = margin - 8
         }
 
     }
@@ -225,11 +231,16 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
     }
     
     func setEditMode(editMode: Bool, animated: Bool) {
+        
+        if editMode {
+            addAddContentButton(.AddContentButtonTypeBottom, animated: animated)
+        } else {
+            removeAddContentButtons(animated)
+        }
+        
         // Sets hidden attributes of the controls according to state
         func setControlVisibility(allVisible allVisible: Bool = false) {
             titleLabel.hidden = !(allVisible || !editMode)
-            locationLabel.hidden = !(allVisible || !editMode)
-            
             cameraButton.hidden = !(allVisible || editMode)
             addCoverPhotoLabel.hidden = !(allVisible || editMode)
             titleTextView.hidden = !(allVisible || editMode)
@@ -238,8 +249,6 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
         // Sets alpha attributes of the controls according to state
         func setControlAlphas() {
             titleLabel.alpha = editMode ? 0.0 : 1.0
-            locationLabel.alpha = editMode ? 0.0 : 1.0
-            
             cameraButton.alpha = editMode ? 1.0 : 0.0
             addCoverPhotoLabel.alpha = editMode ? 1.0 : 0.0
             titleTextView.alpha = editMode ? 1.0 : 0.0
@@ -256,6 +265,62 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
                 }, completion: { finished in
                     setControlVisibility()                    
             })
+        }
+    }
+    
+    /// Add content addition button to cell
+    private func addAddContentButton(addContentButtonType: AddContentButtonType, animated: Bool) {
+        let addContentButton = QvikButton.button(frame: CGRect(x: 0, y: 0, width: addContentButtonSize, height: addContentButtonSize), type: .Custom) { [weak self] in
+            self?.addContentCallback?(addContentButtonType)
+        }
+        
+        addContentButton.setImage(UIImage(named: "icon_add_here"), forState: .Normal)
+        addContentButton.contentMode = .Center
+        addContentButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(addContentButton)
+        addContentButton.layer.zPosition = 2
+        
+        addContentButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        // Constrain the delete button so that it will stay in the upper right corner of the cell
+        var yConstraint: NSLayoutConstraint? = nil
+        if addContentButtonType == .AddContentButtonTypeBottom {
+            yConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1, constant: addContentButtonSize / 2)
+        } else {
+            yConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: -addContentButtonSize / 2)
+        }
+        let horizontalConstraint = NSLayoutConstraint(item: addContentButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let widthConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: addContentButtonSize)
+        let heightConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: addContentButtonSize)
+        
+        NSLayoutConstraint.activateConstraints([yConstraint!, horizontalConstraint, widthConstraint, heightConstraint])
+        
+        // Layout once to put the add content button already in its proper place
+        //layoutIfNeeded()
+        self.addContentBottomButton = addContentButton
+        
+        if animated {
+            addContentButton.alpha = 0.0
+            UIView.animateWithDuration(toggleEditModeAnimationDuration) {
+                addContentButton.alpha = 1.0
+            }
+        }
+    }
+    
+    /// Remove content addition button from cell
+    private func removeAddContentButtons(animated: Bool) {
+        if animated {
+            addContentBottomButton?.alpha = 1.0
+            UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
+                self.addContentBottomButton?.alpha = 0.0
+                }, completion: { finished in
+                    self.addContentBottomButton?.removeFromSuperview()
+                    self.addContentBottomButton = nil
+            })
+        } else {
+            addContentBottomButton?.removeFromSuperview()
+            addContentBottomButton = nil
         }
     }
     
@@ -312,6 +377,13 @@ class StoryHeaderCell: UITableViewCell, EditableStoryCell, UITextViewDelegate {
     
     override func didMoveToSuperview() {
         handleViewHierarchyChange()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+   
+        addContentBottomButton?.removeFromSuperview()
+        addContentBottomButton = nil
     }
     
     // MARK: Lifecycle etc

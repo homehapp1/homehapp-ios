@@ -122,7 +122,7 @@
                                         </variation>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AuU-k0-vsV" customClass="ExpandingTextView" customModule="Homehapp" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="15" width="400" height="185"/>
+                                        <rect key="frame" x="15" y="36" width="400" height="175"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="999" constant="175" id="Nej-gh-eU6"/>
@@ -172,7 +172,7 @@
                                     <constraint firstItem="fbJ-T0-Ro0" firstAttribute="leading" secondItem="wfy-KW-pkl" secondAttribute="leading" constant="17" id="AGE-xk-ySe"/>
                                     <constraint firstAttribute="trailing" secondItem="Wru-jp-P7A" secondAttribute="trailing" constant="20" id="EF1-3x-xrA"/>
                                     <constraint firstItem="MlF-G9-cnP" firstAttribute="trailing" secondItem="Wru-jp-P7A" secondAttribute="trailing" id="RrO-Ba-dgS"/>
-                                    <constraint firstItem="AuU-k0-vsV" firstAttribute="top" secondItem="wfy-KW-pkl" secondAttribute="top" constant="15" id="TlL-29-jfP"/>
+                                    <constraint firstItem="AuU-k0-vsV" firstAttribute="top" secondItem="wfy-KW-pkl" secondAttribute="top" constant="36" id="TlL-29-jfP"/>
                                     <constraint firstAttribute="height" constant="220" identifier="Bottom part height" id="Vaq-ip-ca6"/>
                                     <constraint firstItem="Wru-jp-P7A" firstAttribute="leading" secondItem="wfy-KW-pkl" secondAttribute="leading" constant="20" id="aP7-Ie-xlb"/>
                                     <constraint firstItem="Wru-jp-P7A" firstAttribute="top" secondItem="wfy-KW-pkl" secondAttribute="top" constant="16" id="ag6-Ao-1g0"/>
@@ -213,6 +213,7 @@
                 <outlet property="mainImageView" destination="vlE-au-jVH" id="yHh-Vc-XDe"/>
                 <outlet property="titleLabel" destination="fbJ-T0-Ro0" id="fy1-sY-fcr"/>
                 <outlet property="titleTextView" destination="AuU-k0-vsV" id="RoS-Vn-jiQ"/>
+                <outlet property="titleTextViewTopMarginConstraint" destination="TlL-29-jfP" id="J4U-3h-cbp"/>
                 <outlet property="titleTopMarginConstraint" destination="hfP-Fx-5lM" id="E8K-tI-QbQ"/>
                 <outlet property="topPartContainerHeightConstraint" destination="W9Y-eF-9AQ" id="xvg-vt-4uw"/>
                 <outlet property="uploadProgressView" destination="lgQ-HO-ZUZ" id="KhO-2V-g9H"/>

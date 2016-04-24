@@ -58,7 +58,7 @@ class ContentStoryBlockCell: TextContentStoryBlockCell, UITextViewDelegate {
             
             // If content block is first cell, it should have minimal top margin
             // Titlelabel has 8px so that textview is a bit more down
-            if removeTopMargin {
+            if removeTopMargin && !editMode {
                 titleLabelTopConstraint.constant = 8
                 editTitleLabelTopConstraint.constant = 0
             } else {

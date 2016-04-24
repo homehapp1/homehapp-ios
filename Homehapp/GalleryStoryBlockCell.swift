@@ -307,7 +307,7 @@ class GalleryStoryBlockCell: BaseStoryBlockCell, UICollectionViewDataSource, UIC
         if let title = title where title.length > 0 {
             titleLabel.text = title
             titleBottomMarginConstraint.constant = 40;
-            if removeTopMargin {
+            if removeTopMargin && !editMode {
                 titleTopMarginConstraint.constant = 0;
             } else {
                 titleTopMarginConstraint.constant = 40;
