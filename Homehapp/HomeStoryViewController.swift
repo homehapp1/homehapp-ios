@@ -293,8 +293,11 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             let width = Int(selectedImage.width * selectedImage.scale)
             let height = Int(selectedImage.height * selectedImage.scale)
             var localUrl: String? = nil
-            if originalURLs != nil {
-                localUrl = originalURLs![selectedImages.indexOf(selectedImage)!]
+            
+            if originalURLs != nil && originalURLs?.count > 0 {
+                if let index = selectedImages.indexOf(selectedImage) where index < originalURLs!.count {
+                    localUrl = originalURLs![index]
+                }
             }
 
             let image = Image(url: fakeUrl, width: width, height: height, local: true, localUrl: localUrl, backgroundColor: selectedImage.averageColor().hexColor())

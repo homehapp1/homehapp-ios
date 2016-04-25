@@ -14,7 +14,10 @@ class ReplaceSegue: UIStoryboardSegue {
         let navigationController: UINavigationController = sourceViewController.navigationController!;
         
         var controllerStack = navigationController.viewControllers;
-        let index = controllerStack.indexOf(sourceViewController);
+        var index = controllerStack.indexOf(sourceViewController);
+        if index == nil {
+            index = navigationController.viewControllers.count - 1
+        }
         controllerStack[index!] = destinationViewController
         
         navigationController.setViewControllers(controllerStack, animated: false);
