@@ -995,13 +995,13 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             editableCell.addContentCallback = { [weak self] addButtonType in
                 if let storyBlock = (editableCell as? BaseStoryBlockCell)?.storyBlock,
                     storyBlockIndex = self?.storyObject.storyBlocks.indexOf(storyBlock) {
-                    var selectedIndexPath = indexPath
+                    var selectedIndexPath = NSIndexPath(forRow: storyBlockIndex + 1, inSection: indexPath.section)
                     // From bottom button we add below and top button above the cell
                     if addButtonType == .AddContentButtonTypeBottom {
                         self?.selectedStoryBlockIndex = storyBlockIndex
                     } else {
                         self?.selectedStoryBlockIndex = storyBlockIndex - 1
-                        selectedIndexPath = NSIndexPath(forRow: indexPath.row - 1, inSection: indexPath.section)
+                        selectedIndexPath = NSIndexPath(forRow: storyBlockIndex, inSection: indexPath.section)
                     }
                     self?.showAddControlsView(selectedIndexPath)
                 } else {
