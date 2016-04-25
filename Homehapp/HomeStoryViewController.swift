@@ -548,6 +548,8 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
         for cell in tableView.visibleCells {
             if let editableCell = cell as? EditableStoryCell {
                 editableCell.setEditMode(editMode, animated: true)
+            } else if let homeOwnerInfoCell = cell as? HomeOwnerInfoCell {
+                homeOwnerInfoCell.setEditMode(editMode, animated: false)
             }
             cell.setNeedsLayout()
             cell.layoutIfNeeded()
@@ -972,6 +974,16 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
             }
         }
         
+        if let homeOwnerCell = cell as? HomeOwnerInfoCell {
+            homeOwnerCell.setEditMode(editMode, animated: false)
+            homeOwnerCell.addContentCallback = { [weak self] addButtonType in
+                if let index = self?.storyObject.storyBlocks.count {
+                    self?.selectedStoryBlockIndex = index - 1
+                    self?.showAddControlsView(NSIndexPath(forRow: index, inSection: indexPath.section))
+                }
+            }
+        }
+        
         // Adds functionality to any editable cells
         if var editableCell = cell as? EditableStoryCell {
             editableCell.setEditMode(editMode, animated: false)
@@ -1005,6 +1017,7 @@ class HomeStoryViewController: BaseViewController, UITableViewDataSource, UITabl
                     }
                     self?.showAddControlsView(selectedIndexPath)
                 } else {
+                    // Header cell
                     self?.selectedStoryBlockIndex = -1
                     self?.showAddControlsView(NSIndexPath(forRow: 0, inSection: indexPath.section))
                 }

@@ -35,6 +35,11 @@ class HomeOwnerInfoCell: UITableViewCell {
     
     /// Action to be executed when email message button is pressed
     var emailPressedCallback: (Void -> Void)?
+    
+    /// Action to be executec when add content button is pressed
+    var addContentCallback: (AddContentButtonType -> Void)?
+    
+    var addContentTopButton: QvikButton?
 
     var creator: User? {
         didSet {
@@ -95,6 +100,14 @@ class HomeOwnerInfoCell: UITableViewCell {
             likeImageViewActive.alpha = iHaveLiked ? 1 : 0
         }
     }
+    
+    func setEditMode(editMode: Bool, animated: Bool) {
+        if editMode {
+            addAddContentButton(.AddContentButtonTypeTop, animated: animated)
+        } else {
+            removeAddContentButtons(animated)
+        }
+    }
 
     @IBAction func shareButtonPressed(button: UIButton) {
         shareCallback?()
@@ -136,11 +149,72 @@ class HomeOwnerInfoCell: UITableViewCell {
         }
     }
     
+    /// Add content addition button to cell
+    private func addAddContentButton(addContentButtonType: AddContentButtonType, animated: Bool) {
+        let addContentButton = QvikButton.button(frame: CGRect(x: 0, y: 0, width: addContentButtonSize, height: addContentButtonSize), type: .Custom) { [weak self] in
+            self?.addContentCallback?(addContentButtonType)
+        }
+        
+        addContentButton.setImage(UIImage(named: "icon_add_here"), forState: .Normal)
+        addContentButton.contentMode = .Center
+        addContentButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(addContentButton)
+        addContentButton.layer.zPosition = 2
+        
+        addContentButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
+        // Constrain the delete button so that it will stay in the upper right corner of the cell
+        var yConstraint: NSLayoutConstraint? = nil
+        if addContentButtonType == .AddContentButtonTypeBottom {
+            yConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1, constant: addContentButtonSize / 2)
+        } else {
+            yConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: -addContentButtonSize / 2)
+        }
+        let horizontalConstraint = NSLayoutConstraint(item: addContentButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        let widthConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: addContentButtonSize)
+        let heightConstraint = NSLayoutConstraint(item: addContentButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: addContentButtonSize)
+        
+        NSLayoutConstraint.activateConstraints([yConstraint!, horizontalConstraint, widthConstraint, heightConstraint])
+        
+        self.addContentTopButton = addContentButton
+        
+        if animated {
+            addContentButton.alpha = 0.0
+            UIView.animateWithDuration(toggleEditModeAnimationDuration) {
+                addContentButton.alpha = 1.0
+            }
+        }
+    }
+    
+    /// Remove content addition button from cell
+    private func removeAddContentButtons(animated: Bool) {
+        if animated {
+            addContentTopButton?.alpha = 1.0
+            UIView.animateWithDuration(toggleEditModeAnimationDuration, animations: {
+                self.addContentTopButton?.alpha = 0.0
+                }, completion: { finished in
+                    self.addContentTopButton?.removeFromSuperview()
+                    self.addContentTopButton = nil
+            })
+        } else {
+            addContentTopButton?.removeFromSuperview()
+            addContentTopButton = nil
+        }
+    }
+    
     // MARK: Lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
 
         creatorContainerView.backgroundColor = UIColor.lightBackgroundPatternColor()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        addContentTopButton?.removeFromSuperview()
+        addContentTopButton = nil
     }
 }
